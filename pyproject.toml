@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "alfontal-com"
+name = "alfontal.com"
 version = "0.1.0"
 description = "Alejandro Fontal's personal website. This environment is for the helper code that renders the site."
 authors = ["Alejandro Fontal <alejandrofontal92@gmail.com>"]

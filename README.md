@@ -1,3 +1,3 @@
-# alfontal.github.io <img src="site/media/logo_alejandro.png" align="right" width="120" />
+# alfontal.com <img src="site/media/logo_alejandro.png" align="right" width="120" />
 
-This is the repository for my personal website [alfontal.github.io](https://alfontal.github.io/), which was built using Quarto.
+This is the repository for my personal website [alfontal.com](https://alfontal.github.io/alfontal.com), which was built using Quarto.

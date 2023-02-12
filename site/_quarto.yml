@@ -1,0 +1,75 @@
+project:
+  type: website
+  pre-render:
+    - publications.R
+
+website:
+  title: "Alejandro Fontal"
+  description: "A personal blog and portfolio by Alejandro Fontal"
+  favicon: /media/logo_alejandro.svg
+  image: /media/logo_alejandro.png
+  site-url: https://alfontal.github.io
+  repo-url: https://github.com/alfontal/alfontal.github.io
+  repo-actions: [edit, issue]
+  open-graph:
+    title: "Alejandro Fontal"
+    description: "A personal blog and portfolio by Alejandro Fontal"
+    image: /media/logo_alejandro.png
+  twitter-card:
+    title: "Alejandro Fontal"
+    description: "A personal blog and portfolio by Alejandro Fontal"
+    image: /media/logo_alejandro.png
+    site: "@alefontal"
+    creator: "@alefontal"
+    card-style: summary_large_image
+  google-analytics: G-DC18W62KP8
+  page-navigation: true
+  page-footer:
+    left: |
+      Powered by [Quarto](https://quarto.org).
+    center: |
+      &copy; 2023 Alejandro Fontal.
+    right: |
+      License: [MIT](https://mit-license.org/).
+    border: true
+  navbar:
+    title: "Alejandro Fontal"
+    search: true
+    logo: media/logo_alejandro.png
+    right:
+      - text: About
+        href: index.qmd
+      - text: Blog
+        href: blog.qmd
+      - text: Projects
+        href: projects.qmd
+      - text: Publications
+        href: publications.qmd
+      - text: "{{< iconify fa6-brands linkedin >}}"
+        href: 'https://www.linkedin.com/in/alfontal'
+      - text: "{{< iconify fa6-brands github >}}"
+        href: 'https://github.com/AlFontal'
+      - text: "{{< iconify fa6-brands gitlab >}}"
+        href: 'https://gitlab.com/AlFontal'
+      - text: "{{< iconify material-symbols code >}}"
+        href: 'https://github.com/AlFontal/alfontal.github.io'
+
+format:
+  html:
+    theme:
+      - cyborg
+      - style.scss
+    mainfont: 'Georgia'
+    lang: en
+    date-format: 'dddd[, the] D [of] MMMM, YYYY'
+    highlight-style: github-dark
+    code-copy: true
+    code-link: true
+    anchor-sections: true
+    email-obfuscation: javascript
+    link-external-newwindow: true
+    fig-align: center
+    code-tools:
+      source: false
+      toggle: false
+      caption: none

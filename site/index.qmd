@@ -1,0 +1,127 @@
+---
+title: "Alejandro Fontal"
+subtitle: Research Data Scientist
+image: /media/alejandro_square.jpg
+template-partials:
+ - title-block.html
+id: edu-exp
+image-width: 9em
+image-shape: round
+links:
+  - text: "{{< iconify fa6-solid envelope >}}"
+    href: "mailto:alejandro.fontal.92@gmail.com"
+    aria-label: "envelope logo for email"
+  - text: "{{< iconify fa6-brands orcid >}}"
+    href: "https://orcid.org/0000-0003-1138-2158"
+    aria-label: "ORCID logo linking to ORCID account"
+  - text: "{{< iconify fa6-brands twitter >}}"
+    href: "https://twitter.com/alefontal"
+    aria-label: "Twitter logo linking to alefontal account"
+  - text: "{{< iconify fa6-brands linkedin >}}"
+    href: "https://www.linkedin.com/in/alfontal"
+    aria-label: "LinkedIn logo linking to alfontal account"
+  - text: "{{< iconify fa6-brands github >}}"
+    href: "https://github.com/AlFontal"
+    aria-label: "GitHub logo linking to AlFontal account"
+  - text: "{{< iconify fa6-brands gitlab >}}"
+    href: "https://gitlab.com/AlFontal"
+    aria-label: "Gitlab logo linking to AlFontal account"
+  - text: "{{< iconify simple-icons letterboxd >}}"
+    href: "https://letterboxd.com/AlFontal"
+    aria-label: "Letterboxd logo linking to AlFontal account"
+  - text: "{{< iconify fa6-brands instagram >}}"
+    href: "https://www.instagram.com/afontal/"
+    aria-label: "Instagram logo linking to afontal account"
+---
+
+
+:::{layout="[20, 30, 20]" .profile-text}
+
+
+![](media/alejandro_square.jpg){.about-image}
+
+<div class="about-header">
+<h1 class="about-title">Alejandro Fontal</h1>
+<p class="about-subtitle">Research Data Scientist</p>
+---
+<div class="about-links">
+<a href=mailto:alejandro.fontal.92@gmail.com> {{< iconify fa6-solid envelope >}}</a> 
+<a href=https://github.com/AlFontal>{{< iconify fa6-brands github >}}</a>
+<a href=https://gitlab.com/AlFontal>{{< iconify fa6-brands gitlab >}}</a>
+<a href=https://linkedin.com/in/AlFontal>{{< iconify fa6-brands linkedin >}}</a>
+<a href=https://orcid.org/0000-0003-1138-2158>{{< iconify fa6-brands orcid >}}</a>
+<a href=https://twitter.com/alefontal>{{< iconify fa6-brands twitter >}}</a>
+<a href=https://letterboxd.com/AlFontal>{{< iconify simple-icons letterboxd >}}</a>
+<a href=https://www.instagram.com/afontal>{{< iconify fa6-brands instagram >}}</a>
+</div>
+</div>
+
+![](media/logo_alejandro.svg){.about-logo}
+
+::: 
+
+Welcome to my personal website. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine.
+
+I am particularly passionate about data mining, automation, machine learning, open source software, and reproducible research.
+
+<details>
+<summary style='color: #4C3F2E'>Current Role</summary>
+
+Presently, I am engaged in research at the Barcelona Institute for Global Health (ISGlobal) as I pursue my PhD in Biotechnology at the University of Barcelona (UB). My work is supported by a Marie Skłodowska-Curie Actions Fellowship under the [HELICAL Innovative Training Network](https://helical-itn.eu).
+
+In my research project, I am utilizing a combination of time series analysis, GIS, metagenomics sequencing, and epidemiology to study the underlying causes of Kawasaki Disease, a pediatric syndrome that affects thousands of children each year, and whose etiology is still a mystery after over 50 years of being studied.
+
+</details>
+<details>
+<summary style='color: #4C3F2E'>Background</summary>
+
+
+I hold a BSc in Molecular Biotechnology from the University of Barcelona and a MSc in Bioinformatics with a specialization in Data Science from the Wageningen University & Research. 
+
+I have previously worked on designing and implementing online courses on the EdX platform for the Educational Staff Development department in WUR, and as a Data Scientist in the R&D department of Dupont Nutrition & Biosciences, where we applied novel machine learning techniques to optimize the protein engineering process.
+
+You can check my detailed CV for a more comprehensive overview of my professional experience.
+
+</details>
+
+<details>
+<summary style='color: #4C3F2E'>This Site </summary>
+
+This website is built using [Quarto](https://quarto.org), a new open source project that allows you to create documents, websites, and books using a combination of Markdown, R, Python and HTML. 
+
+I took a lot of inspiration from [Mickael Canouil's personal website](https://mickael.canouil.fr/), also built with Quarto. 
+
+You can check the source code of the site in [GitHub](https://github.com/AlFontal/alfontal.github.io).
+
+</details>
+
+:::: {.grid}
+
+::: {.g-col-12 .g-col-md-8 style="text-align: left;"}
+## Education
+
+- **_Ph.D._ in Biotechnology**, **2019-**  
+  *Universitat de Barcelona, Spain*
+
+- **_M.Sc._ in Bioinformatics**, **2016-2018** <br>
+  *Wageningen University & Research, The Netherlands*
+
+- **_B.Sc._ in Biotechnology**, **2011-2015**  
+  *Universitat de Barcelona, Spain*
+:::
+
+::: {.g-col-12 .g-col-md-4 style="text-align: left;"}
+## Interests
+
+- Automation
+- Open Science
+- Reproducible Research
+- Data Visualisation
+- Knowledge Sharing
+- Machine Learning
+- Geographic Information Systems
+- Epidemiology
+
+:::
+
+::::

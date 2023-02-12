@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "alfontal-com"
+version = "0.1.0"
+description = "Alejandro Fontal's personal website. This environment is for the helper code that renders the site."
+authors = ["Alejandro Fontal <alejandrofontal92@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "alfontal"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+bs4 = "^0.0.1"
+pandas = "^1.5.3"
+plotnine = "^0.10.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

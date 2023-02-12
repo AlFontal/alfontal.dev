@@ -1,0 +1,23 @@
+# options specified here will apply to all posts in this folder
+
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: true
+
+# Enable banner style title blocks
+title-block-banner: true
+
+author: Alejandro Fontal
+
+toc: true
+number-sections: false
+
+comments:
+  giscus: 
+    repo: alfontal/alfontal.github.io
+    category: "Blog posts"
+
+
+execute: 
+  warning: false
+  message: false

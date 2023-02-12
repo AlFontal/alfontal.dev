@@ -1,0 +1,35 @@
+```{=html}
+<ul class="pub-list list">
+<% for (const item of items) { %>
+  <li class="pub-list-item" <%= metadataAttrs(item) %>>
+    <span class="listing-title lead"><%= item.title %></span><br />
+    <span class="listing-author">
+        <% item.authors.forEach(function(author) { %>
+          <%= author.name %><% if (author !== item.authors[item.authors.length - 1]) { %>, <% } %>
+        <% }); %>
+      </span><br />
+    <span class="listing-publication fst-italic "><%= item.publication %></span>
+    <span class="listing-year">(<%= item.year %>)</span><br />
+    <a href="<%- item.path %>" class="btn btn-primary">
+      Details
+    </a>
+    <% if (item.doi) { %>
+    <a href="<%- item.doi %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+      DOI
+    </a>
+    <% } %>
+    <% if (item.pdf) { %>
+    <a href="<%- item.pdf %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+      <i class="bi bi-file-earmark-text"></i> PDF
+    </a>
+    <% } %>
+    <% if (item.code) { %>
+    <a href="<%- item.code %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-github"></i> Code
+    </a>
+    <% } %>
+  </li>
+<% } %>
+</ul>
+
+```

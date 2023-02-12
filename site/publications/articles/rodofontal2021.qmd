@@ -1,0 +1,33 @@
+---
+title: "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease"
+type: "article"
+authors:
+  - name: "Xavier Rodó"
+    orcid: 0000-0003-4843-6180
+    email: "xavier.rodo@isglobal.org"
+  - name: "Alejandro Fontal"
+    email: "alejandro.fontal.92@gmail.com"
+    url: "https://alfontal.github.io"
+    orcid: 0000-0003-1138-2158
+date: '2021-04-06'
+
+year: "2021"
+publication: "JAMA Network Open"
+pdf: "https://jamanetwork.com/journals/jamanetworkopen/articlepdf/2778186/rod_2021_ic_210055_1617035383.10445.pdf"
+doi: "https://doi.org/10.1001/jamanetworkopen.2021.4624"
+toc: false
+categories:
+  - COVID-19
+  - Kawasaki Disease
+  - Epidemiology
+  - Infectious Diseases
+  - Pediatrics
+---
+
+## Citation (APA)
+
+> Rodó, X., & Fontal, A. (2021). COVID-19 pandemic sets new clues on the transmission pathways in Kawasaki disease. JAMA network open, 4(4), e214624-e214624.
+
+## Abstract
+
+Many theories have been formulated through decades regarding the causes of the mysterious syndrome known as Kawasaki disease (KD). This pediatric self-limited vasculitis has been escaping full characterization since Tomizaku Kawasaki, PhD, identified the disease that was then named after him. In many of the clinical histories, the role of external factors seems already clear, because the appearance of respiratory symptoms is reported to occur a few days before KD symptoms emerge (eg, an abnormal immune response characterized by increased levels of inflammatory cytokines and chemokines during the acute phase). However, the many attempts to characterize a unique agent have been unsuccessful so far. Whether this is an indication of a multiplicity of agents (ie, multiple-agent disease) or a complex interplay of factors interacting with the immune system of children who are genetically predisposed still remains an open question. However, in this race against time, a study by Hara and colleagues4 takes advantage of the unique epidemiological situation caused by the COVID-19 pandemic in Japan to perform a natural experiment that sheds new light on the hidden etiological processes of KD. 

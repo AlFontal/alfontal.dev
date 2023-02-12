@@ -1,0 +1,33 @@
+---
+title: "Neural Networks for Subcellular Localization Prediction"
+type: "article"
+authors:
+  - name: "Alejandro Fontal"
+    email: "alejandro.fontal.92@gmail.com"
+    url: "https://alfontal.github.io"
+    orcid: 0000-0003-1138-2158
+date: '2017-12-15'
+
+year: "2017"
+pdf: "https://edepot.wur.nl/429151"
+publication: Wageningen University & Research Thesis Repository
+toc: false
+categories:
+  - Bioinformatics
+  - Proteomics
+  - Machine Learning
+---
+
+## Citation (APA)
+
+> Fontal, A. (2017). Neural Networks for Subcellular Localization Prediction.
+
+## Abstract
+
+
+The continuously decreasing cost of sequencing genomes is promoting the generation
+of vast amounts of sequence data. In consequence, the need to develop automated
+methods of analysis for this kind of data is on the rise. A first step towards inferring
+a protein’s function is to know its subcellular location. In this thesis we explore the
+capabilities of modern machine learning techniques, and more specifically deep learning models
+to predict the subcellular location of proteins only using their amino acid sequence as predictor.

@@ -1,0 +1,27 @@
+---
+title: "Projects"
+page-layout: full
+title-block-banner: false
+listing:
+  sort: "date desc"
+  type: grid
+  categories: true
+  sort-ui: true
+  filter-ui: true
+  max-description-length: 300
+  fields: [image, title, description, categories]
+  contents:
+    - path: https://github.com/AlFontal/aqi-stations-scraper
+      image: /posts/japan-trip/featured.jpg
+      title: Environmental Data Japan
+      description: "Repository collecting, processing and organizing environmental data sources for Japan "
+      date: "2022-09-01"
+      categories: [GIS, Data Mining]
+    - path: https://github.com/AlFontal/environmental-data-japan
+      image: /projects/pyseleniumbot.jpg
+      title: AQI Stations Scraper
+      description: "A Selenium-based web scraper that uses Github Actions to scrape AQI stations historical data"
+      date: "2021-07-01"
+      categories: [Selenium, Scraping, Data Mining]
+
+---

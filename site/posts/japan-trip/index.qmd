@@ -1,0 +1,17 @@
+---
+title: "New site and Japan trip"
+description: The start of this blog, and the story of why I came to Japan to study the winter air conditions in Japan and how it might relate or not to Kawasaki Disease
+date: "2023-01-27"
+categories: [Trip, Quarto, Kawasaki Disease]
+image: featured.jpg
+author: Alejandro Fontal
+---
+
+## Introduction
+
+This post will have two main purposes. The first is to introduce this blog/website, and the second is to use it as a way to introduce the plan and first impressions of my trip in Japan as part of my final project for my PhD.
+
+
+### The site 
+
+Work in progress...

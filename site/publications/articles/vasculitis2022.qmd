@@ -1,0 +1,39 @@
+---
+title: "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers"
+type: "article"
+authors:
+  - name: Alejandro Fontal
+    email: alejandro.fontal.92@gmail.com
+    url: "https://alfontal.github.io"
+    orcid: 0000-0003-1138-2158
+  - name: Sofya Pozdniakova
+  - name: Sílvia Borràs
+  - name: Lídia Cañas
+  - name: Roger Curcoll
+  - name: Josep-Anton Morguí
+  - name: Atsushi Matsuki
+  - name: Xavier Rodó
+    orcid: 0000-0003-4843-6180
+    email: xavier.rodo@isglobal.org
+date: 2022-04-06
+
+year: 2022
+publication: International Vasculitis and ANCA Workshop
+doi: "https://alfontal.github.io/vasculitis2022-conference/summary.html"
+code: "https://alfontal.github.io/vasculitis2022-conference/kd_tokyo_air_sources.html"
+toc: false
+categories:
+  - Kawasaki Disease
+  - Time Series Analysis
+  - Atmospheric Processes
+  - Infectious Diseases
+  - Conference
+---
+
+## Citation (APA)
+
+> Fontal, A., Pozdniakova, S., Borras, S., Cañas, L., Curcoll, R., Morgui, J., Matsuki, A., & Rodó, X. (2022). Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers. International Vasculitis and ANCA Workshop 2022.
+
+## Abstract
+
+Kawasaki Disease (KD) is a systemic vasculitis that mainly affects children younger than 5 years old. Although KD cases have been registered in over 60 countries across several continents, its incidence is highest in East Asia, particularly in Japan, where the highest annual incidence rate was recorded in 2018: 359 cases per 100 000 children aged 0-4 years [1]. After more than five decades since its discovery, the etiology of KD is yet to be elucidated. Past studies have analyzed the association between KD and diverse environmental factors, with some advances pointing towards a relevant role of the atmospheric transport of a wind-borne agent as trigger of KD [2, 3]. The epidemiological records of KD in Japan show an increasing incidence trend and a marked seasonality, prompting questions about the nature of the drivers of these changes in incidence. In this work, we focus on updated records from Tokyo prefecture (2011-2018) to find an association with specific air source locations and higher incidence seasons.

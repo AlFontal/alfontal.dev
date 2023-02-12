@@ -1,0 +1,38 @@
+---
+title: "Climatic signatures in the different COVID-19 pandemic waves across both hemispheres"
+type: "article"
+authors:
+  - name: "Alejandro Fontal"
+    email: "alejandro.fontal.92@gmail.com"
+    url: "https://alfontal.github.io"
+    orcid: 0000-0003-1138-2158
+  - name: Menno J. Bouma
+  - name: Adrià San José
+  - name: Leonardo López
+  - name: Mercedes Pascual
+  - name: "Xavier Rodó"
+    orcid: 0000-0003-4843-6180
+    email: "xavier.rodo@isglobal.org"
+date: '2021-10-21'
+
+year: "2021"
+publication: "Nature Computational Science"
+pdf: "https://www.nature.com/articles/s43588-021-00136-6.pdf"
+doi: "https://doi.org/10.1038/s43588-021-00136-6"
+code: "https://github.com/AlFontal/covid-climate-signatures"
+toc: false
+categories:
+  - COVID-19
+  - Time Series Analysis
+  - Climate & Health
+  - Infectious Diseases
+  - Journal Article
+---
+
+## Citation (APA)
+
+> Fontal, A., Bouma, M. J., San-José, A., López, L., Pascual, M., & Rodó, X. (2021). Climatic signatures in the different COVID-19 pandemic waves across both hemispheres. Nature Computational Science, 1(10), 655-665.
+
+## Abstract
+
+The roles of climate and true seasonal signatures in the epidemiology of emergent pathogens, and that of SARS-CoV-2 in particular, remain poorly understood. With a statistical method designed to detect transitory associations, we show, for COVID-19 cases, strong consistent negative effects of both temperature and absolute humidity at large spatial scales. At finer spatial resolutions, we substantiate these connections during the seasonal rise and fall of COVID-19. Strong disease responses are identified in the first two waves, suggesting clear ranges for temperature and absolute humidity that are similar to those formerly described for seasonal influenza. For COVID-19, in all studied regions and pandemic waves, a process-based model that incorporates a temperature-dependent transmission rate outperforms baseline formulations with no driver or a sinusoidal seasonality. Our results, so far, classify COVID-19 as a seasonal low-temperature infection and suggest an important contribution of the airborne pathway in the transmission of SARS-CoV-2, with implications for the control measures we discuss.

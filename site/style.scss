@@ -35,6 +35,12 @@ a {
   padding-left: 1rem;
 }
 
+@media (max-width: 450px) { 
+  .navbar-title {
+           display: none !important; 
+      }       
+  }
+
 img.about-image {
   border-radius: 50%;
   border-style: solid;

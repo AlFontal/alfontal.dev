@@ -7,17 +7,17 @@ website:
   description: "A personal blog and portfolio by Alejandro Fontal"
   favicon: /media/logo_alejandro.svg
   image: /media/logo_alejandro.png
-  site-url: https://alfontal.github.io
-  repo-url: https://github.com/alfontal/alfontal.github.io
+  site-url: https://alfontal.dev
+  repo-url: https://github.com/alfontal/alfontal.dev
   repo-actions: [edit, issue]
   open-graph:
     title: "Alejandro Fontal"
-    description: "A personal blog and portfolio by Alejandro Fontal"
-    image: /media/logo_alejandro.png
+    description: "A personal website, blog and portfolio about research, data science, development and more by Alejandro Fontal."
+    image: /media/og_image.png
   twitter-card:
     title: "Alejandro Fontal"
-    description: "A personal blog and portfolio by Alejandro Fontal"
-    image: /media/logo_alejandro.png
+    description: "A personal website, blog and portfolio about research, data science, development and more by Alejandro Fontal."
+    image: /media/og_image.png
     site: "@alefontal"
     creator: "@alefontal"
     card-style: summary_large_image
@@ -51,7 +51,7 @@ website:
       - text: "{{< iconify fa6-brands gitlab >}}"
         href: 'https://gitlab.com/AlFontal'
       - text: "{{< iconify material-symbols code >}}"
-        href: 'https://github.com/AlFontal/alfontal.github.io'
+        href: 'https://github.com/AlFontal/alfontal.dev
 
 format:
   html:

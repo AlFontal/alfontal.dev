@@ -23,7 +23,7 @@
   {
     "objectID": "publications.html",
     "href": "publications.html",
-    "title": "Publications",
+    "title": "Alejandro Fontal",
     "section": "",
     "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n         \n          Publication\n        \n         \n          Year\n        \n     \n  \n    \n      \n      \n    \n\n\n  \n    Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers\n    \n          Alejandro Fontal, \n          Sofya Pozdniakova, \n          Sílvia Borràs, \n          Lídia Cañas, \n          Roger Curcoll, \n          Josep-Anton Morguí, \n          Atsushi Matsuki, \n          Xavier Rodó\n      \n    International Vasculitis and ANCA Workshop\n    (2022)\n    \n      Details\n    \n    \n      DOI\n    \n    \n         Code\n    \n  \n  \n    COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease\n    \n          Xavier Rodó, \n          Alejandro Fontal\n      \n    JAMA Network Open\n    (2021)\n    \n      Details\n    \n    \n      DOI\n    \n    \n       PDF\n    \n  \n  \n    Climatic signatures in the different COVID-19 pandemic waves across both hemispheres\n    \n          Alejandro Fontal, \n          Menno J. Bouma, \n          Adrià San José, \n          Leonardo López, \n          Mercedes Pascual, \n          Xavier Rodó\n      \n    Nature Computational Science\n    (2021)\n    \n      Details\n    \n    \n      DOI\n    \n    \n       PDF\n    \n    \n         Code\n    \n  \n  \n    Neural Networks for Subcellular Localization Prediction\n    \n          Alejandro Fontal\n      \n    Wageningen University & Research Thesis Repository\n    (2017)\n    \n      Details\n    \n    \n       PDF\n    \n  \n\n\nNo matching items"
   },
@@ -95,7 +95,7 @@
     "href": "posts/japan-trip/index.html",
     "title": "New site and Japan trip",
     "section": "",
-    "text": "This post will have two main purposes. The first is to introduce this blog/website, and the second is to use it as a way to introduce the plan and first impressions of my trip in Japan as part of my final project for my PhD.\n\n\nWork in progress…"
+    "text": "This post will have two main purposes. The first is to introduce this blog/website, and the second is to use it as a way to introduce the plan and first impressions of my trip in Japan as part of my final project for my PhD.\n\n\nWork in progress…\nx = 2 * np.sin(5)\nplt.show()"
   },
   {
     "objectID": "projects.html",

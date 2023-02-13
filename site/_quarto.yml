@@ -1,7 +1,6 @@
 project:
   type: website
-  pre-render:
-    - publications.R
+
 
 website:
   title: "Alejandro Fontal"
@@ -62,7 +61,7 @@ format:
     mainfont: 'Georgia'
     lang: en
     date-format: 'dddd[, the] D [of] MMMM, YYYY'
-    highlight-style: github-dark
+    highlight-style: gruvbox-light
     code-copy: true
     code-link: true
     anchor-sections: true

@@ -15,3 +15,9 @@ This post will have two main purposes. The first is to introduce this blog/websi
 ### The site 
 
 Work in progress...
+
+
+```python
+x = 2 * np.sin(5)
+plt.show()
+```

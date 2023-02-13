@@ -1,6 +1,5 @@
 ---
 pagetitle: "Publications | Alejandro Fontal"
-title: "Publications"
 toc: false
 listing:
   - id: articles

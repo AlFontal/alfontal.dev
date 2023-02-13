@@ -3,6 +3,7 @@
 /*-- scss:defaults --*/
 $primary: #4C3F2E !default;
 $secondary: #eee8d5 !default;
+$secondary-shadow: #dbd1b6 !default;
 $body-bg: $secondary !default;
 $body-color: $primary !default;
 $link-color: #786246d5 !default;
@@ -12,6 +13,8 @@ $medium: #4c3f2ea8 !default;
 $card-color: $body-color !default;
 $card-bg: $body-bg !default;
 $card-border-color: $body-color !default;
+$code-block-bg: $secondary-shadow !default;
+$code-block-color: $body-bg !default;
 
 /*-- scss:rules --*/
 h1, h2, h3, h4, h5, h6 {
@@ -39,7 +42,6 @@ img.about-image {
   height: 10rem;
   width: 10rem;
 }
-
 
 
 img.about-image:hover {
@@ -231,14 +233,15 @@ summary .test {
   color: $primary;
 }
 
-code { 
-  color: $body-bg;
-  background-color: $body-color;
-}
 
-p code:not(.sourceCode), li code:not(.sourceCode) {
-  background-color: $body-color;
-}
+// pre .sourceCode { 
+//   background-color: #cdb38a;
+// }
+
+
+// p code:not(.sourceCode), li code:not(.sourceCode) {
+//   background-color: $body-color;
+// }
 
 // code span {
 //   color: $body-bg;
@@ -280,4 +283,13 @@ div.profile-text {
   margin: 10px;
   padding: 20px;
   font-size: 30px;
+}
+
+details[open] summary ~ * {
+  animation: sweep .5s ease-in-out;
+}
+
+@keyframes sweep {
+  0%    {opacity: 0; margin-left: 0px}
+  100%  {opacity: 1; margin-left: 0px}
 }

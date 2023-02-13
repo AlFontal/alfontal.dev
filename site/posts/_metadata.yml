@@ -13,9 +13,8 @@ toc: true
 number-sections: false
 
 comments:
-  giscus: 
-    repo: alfontal/alfontal.github.io
-    category: "Blog posts"
+  utterances: 
+    repo: alfontal/alfontal.com
 
 
 execute: 

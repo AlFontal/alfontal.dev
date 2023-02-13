@@ -1,1 +1,1 @@
-Sitemap: https://alfontal.github.io/sitemap.xml
+Sitemap: https://alfontal.dev/sitemap.xml

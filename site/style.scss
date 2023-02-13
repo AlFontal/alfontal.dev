@@ -32,6 +32,7 @@ a {
 
 .navbar-logo {
   max-height: 3em;
+  padding-left: 1rem;
 }
 
 img.about-image {
@@ -47,6 +48,17 @@ img.about-image {
 img.about-image:hover {
   transition: all .35s ease;
   filter: drop-shadow(0 0 10px $primary);
+}
+
+img.navbar-logo:hover {
+  transition: all .35s ease;
+  filter: drop-shadow(0 0 3px $primary);
+}
+
+.navbar-title:hover {
+  transition: all .35s ease;
+  filter: drop-shadow(0 0 2px #4c3f2e);
+  color: $body-bg;
 }
 
 img.about-logo {

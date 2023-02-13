@@ -1,6 +1,4 @@
 ---
-title: "Alejandro Fontal"
-subtitle: Research Data Scientist
 image: /media/alejandro_square.jpg
 template-partials:
  - title-block.html
@@ -67,7 +65,7 @@ I am particularly passionate about data mining, automation, machine learning, op
 <details>
 <summary style='color: #4C3F2E'>Current Role</summary>
 
-Presently, I am engaged in research at the Barcelona Institute for Global Health (ISGlobal) as I pursue my PhD in Biotechnology at the University of Barcelona (UB). My work is supported by a Marie Skłodowska-Curie Actions Fellowship under the [HELICAL Innovative Training Network](https://helical-itn.eu).
+Currently, I am engaged in research at the Barcelona Institute for Global Health (ISGlobal) as I pursue my PhD in Biotechnology at the University of Barcelona (UB). My work is supported by a Marie Skłodowska-Curie Actions Fellowship under the [HELICAL Innovative Training Network](https://helical-itn.eu).
 
 In my research project, I am utilizing a combination of time series analysis, GIS, metagenomics sequencing, and epidemiology to study the underlying causes of Kawasaki Disease, a pediatric syndrome that affects thousands of children each year, and whose etiology is still a mystery after over 50 years of being studied.
 
@@ -91,7 +89,7 @@ This website is built using [Quarto](https://quarto.org), a new open source proj
 
 I took a lot of inspiration from [Mickael Canouil's personal website](https://mickael.canouil.fr/), also built with Quarto. 
 
-You can check the source code of the site in [GitHub](https://github.com/AlFontal/alfontal.github.io).
+You can check the source code of the site in [GitHub](https://github.com/AlFontal/alfontal.com).
 
 </details>
 

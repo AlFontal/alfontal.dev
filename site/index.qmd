@@ -37,26 +37,29 @@ links:
 var counterVal = 0;
 function openTab(evt, tabName) {
   ++counterVal;
-  if (counterVal == 0) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
+  tablinks = document.getElementsByClassName("tablinks");
+
+  if (counterVal == 0) {
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
 }
-else {}
   
-  if (document.getElementById(tabName).style.display == "block") {
+  if (document.getElementById(tabName).style.display == "block") 
+  {
       document.getElementById(tabName).style.display = "none";
       evt.currentTarget.className = evt.currentTarget.className.replace(" active", "");
-}
+  }
   else {
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
+    for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    tabcontent[i].style.display = "none";
+    }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
   }
 }
 </script>

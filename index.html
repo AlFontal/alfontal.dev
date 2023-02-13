@@ -140,6 +140,35 @@ gtag('config', 'G-DC18W62KP8', { 'anonymize_ip': true});
 <!-- margin-sidebar -->
 <!-- main -->
 <main class="content" id="quarto-document-content">
+<script>
+var counterVal = 0;
+function openTab(evt, tabName) {
+  
+    document.getElementById("counter-label").innerHTML = ++counterVal;
+
+  if (counterVal == 0) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+}
+else {}
+  
+  if (document.getElementById(tabName).style.display == "block") {
+      document.getElementById(tabName).style.display = "none";
+      evt.currentTarget.className = evt.currentTarget.className.replace(" active", "");
+}
+  else {
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+}
+</script>
 <div class="profile-text quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 28.6%;justify-content: center;">
@@ -164,29 +193,28 @@ Research Data Scientist
 </div>
 <p>Welcome to my personal website. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine.</p>
 <p>I am particularly passionate about data mining, automation, machine learning, open source software, and reproducible research.</p>
-<details>
-<summary style="color: #4C3F2E">
-Current Role
-</summary>
-<p>Currently, I am engaged in research at the Barcelona Institute for Global Health (ISGlobal) as I pursue my PhD in Biotechnology at the University of Barcelona (UB). My work is supported by a Marie Skłodowska-Curie Actions Fellowship under the <a href="https://helical-itn.eu">HELICAL Innovative Training Network</a>.</p>
+<div class="tab">
+<p><button class="tablinks btn btn-primary" onclick="openTab(event, 'CR')"> Current Role </button> <button class="tablinks btn btn-primary" onclick="openTab(event, 'background-content')"> Background </button> <button class="tablinks btn btn-primary" onclick="openTab(event, 'TS')"> This site </button></p>
+</div>
+<div class="tabcontent" id="CR">
+<p>Currently, I am a predoctoral researcher at the Barcelona Institute for Global Health (ISGlobal) while I pursue my PhD in Biotechnology at the University of Barcelona (UB). My work is supported by a Marie Skłodowska-Curie Actions Fellowship under the <a href="https://helical-itn.eu">HELICAL Innovative Training Network</a>.</p>
 <p>In my research project, I am utilizing a combination of time series analysis, GIS, metagenomics sequencing, and epidemiology to study the underlying causes of Kawasaki Disease, a pediatric syndrome that affects thousands of children each year, and whose etiology is still a mystery after over 50 years of being studied.</p>
-</details>
-<details>
-<summary style="color: #4C3F2E">
-Background
-</summary>
+</div>
+<div class="tabcontent" id="background-content">
 <p>I hold a BSc in Molecular Biotechnology from the University of Barcelona and a MSc in Bioinformatics with a specialization in Data Science from the Wageningen University &amp; Research.</p>
 <p>I have previously worked on designing and implementing online courses on the EdX platform for the Educational Staff Development department in WUR, and as a Data Scientist in the R&amp;D department of Dupont Nutrition &amp; Biosciences, where we applied novel machine learning techniques to optimize the protein engineering process.</p>
 <p>You can check my detailed CV for a more comprehensive overview of my professional experience.</p>
-</details>
-<details>
-<summary style="color: #4C3F2E">
-This Site
-</summary>
-<p>This website is built using <a href="https://quarto.org">Quarto</a>, a new open source project that allows you to create documents, websites, and books using a combination of Markdown, R, Python and HTML.</p>
-<p>I took a lot of inspiration from <a href="https://mickael.canouil.fr/">Mickael Canouil’s personal website</a>, also built with Quarto.</p>
-<p>You can check the source code of the site in <a href="https://github.com/AlFontal/alfontal.com">GitHub</a>.</p>
-</details>
+</div>
+<div class="tabcontent" id="TS">
+<p>I made this site using <a href="https://quarto.org">Quarto</a>, an open source project that allows you to create documents, websites, and books using a combination of Markdown, R, Python and HTML.</p>
+<p>I took it as a chance to improve my web development skills and tinker around with HTML/CSS and a tiny bit of JavaScript.</p>
+<p>A lot of inspiration from other Quarto websites was taken to make this site. Mainly:</p>
+<ul>
+<li><a href="https://mickael.canouil.fr/">Mickael Canouil’s personal website</a>: I started from his SCSS and index files and worked from there.</li>
+<li>I copied the <code>article.ejs</code> script to automatically list publications by <a href="https://github.com/jmgirard/">Jeffrey Girard</a> in his <a href="https://affcom.ku.edu/">AffComLab website</a> and slightly modified it to suit my needs.</li>
+</ul>
+<p>To check the source code, you can do so in <a href="https://github.com/AlFontal">Github</a>. Please raise an issue if you notice something is wrong or not working as intended.</p>
+</div>
 <div class="grid">
 <section class="level2 g-col-12 g-col-md-8" id="education" style="text-align: left;">
 <h2 class="anchored" data-anchor-id="education">Education</h2>

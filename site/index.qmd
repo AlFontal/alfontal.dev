@@ -33,6 +33,37 @@ links:
 ---
 
 
+<script>
+var counterVal = 0;
+function openTab(evt, tabName) {
+  
+    document.getElementById("counter-label").innerHTML = ++counterVal;
+
+  if (counterVal == 0) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+}
+else {}
+  
+  if (document.getElementById(tabName).style.display == "block") {
+      document.getElementById(tabName).style.display = "none";
+      evt.currentTarget.className = evt.currentTarget.className.replace(" active", "");
+}
+  else {
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+}
+</script>
+
+
 :::{layout="[20, 30, 20]" .profile-text}
 
 
@@ -62,16 +93,27 @@ Welcome to my personal website. My name is Alejandro and I am a researcher from 
 
 I am particularly passionate about data mining, automation, machine learning, open source software, and reproducible research.
 
-<details>
-<summary style='color: #4C3F2E'>Current Role</summary>
+<div class="tab">
+  <button class="tablinks btn btn-primary" onclick="openTab(event, 'CR')">
+  Current Role
+  </button>
+  <button class="tablinks btn btn-primary" onclick="openTab(event, 'background-content')">
+  Background
+  </button>
+  <button class="tablinks btn btn-primary" onclick="openTab(event, 'TS')">
+  This site
+  </button>
+</div>
 
-Currently, I am engaged in research at the Barcelona Institute for Global Health (ISGlobal) as I pursue my PhD in Biotechnology at the University of Barcelona (UB). My work is supported by a Marie Skłodowska-Curie Actions Fellowship under the [HELICAL Innovative Training Network](https://helical-itn.eu).
+<div id="CR" class="tabcontent">
+
+Currently, I am a predoctoral researcher at the Barcelona Institute for Global Health (ISGlobal) while I pursue my PhD in Biotechnology at the University of Barcelona (UB). My work is supported by a Marie Skłodowska-Curie Actions Fellowship under the [HELICAL Innovative Training Network](https://helical-itn.eu).
 
 In my research project, I am utilizing a combination of time series analysis, GIS, metagenomics sequencing, and epidemiology to study the underlying causes of Kawasaki Disease, a pediatric syndrome that affects thousands of children each year, and whose etiology is still a mystery after over 50 years of being studied.
 
-</details>
-<details>
-<summary style='color: #4C3F2E'>Background</summary>
+</div>
+
+<div id="background-content" class="tabcontent">
 
 
 I hold a BSc in Molecular Biotechnology from the University of Barcelona and a MSc in Bioinformatics with a specialization in Data Science from the Wageningen University & Research. 
@@ -80,18 +122,26 @@ I have previously worked on designing and implementing online courses on the EdX
 
 You can check my detailed CV for a more comprehensive overview of my professional experience.
 
-</details>
+</div>
 
-<details>
-<summary style='color: #4C3F2E'>This Site </summary>
+<div id="TS" class="tabcontent">
 
-This website is built using [Quarto](https://quarto.org), a new open source project that allows you to create documents, websites, and books using a combination of Markdown, R, Python and HTML. 
+I made this site using [Quarto](https://quarto.org), an open source project that allows you to create documents, websites, and books using a combination of Markdown, R, Python and HTML.
 
-I took a lot of inspiration from [Mickael Canouil's personal website](https://mickael.canouil.fr/), also built with Quarto. 
+I took it as a chance to improve my web development skills and tinker around with HTML/CSS 
+and a tiny bit of JavaScript.
 
-You can check the source code of the site in [GitHub](https://github.com/AlFontal/alfontal.com).
+A lot of inspiration from other Quarto websites was taken to make this site. Mainly:
 
-</details>
++ [Mickael Canouil's personal website](https://mickael.canouil.fr/): I started from 
+his SCSS and index files and worked from there.
++ I copied the `article.ejs` script to automatically list publications by [Jeffrey Girard](https://github.com/jmgirard/) in his [AffComLab website](https://affcom.ku.edu/) and 
+slightly modified it to suit my needs.
+
+To check the source code, you can do so in [Github](https://github.com/AlFontal). Please
+raise an issue if you notice something is wrong or not working as intended.
+
+</div>
 
 :::: {.grid}
 
@@ -123,3 +173,5 @@ You can check the source code of the site in [GitHub](https://github.com/AlFonta
 :::
 
 ::::
+
+

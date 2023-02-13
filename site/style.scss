@@ -16,6 +16,12 @@ $card-border-color: $body-color !default;
 $code-block-bg: $secondary-shadow !default;
 $code-block-color: $body-bg !default;
 
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
 /*-- scss:rules --*/
 h1, h2, h3, h4, h5, h6 {
   color: $body-color;
@@ -35,6 +41,7 @@ a {
   padding-left: 1rem;
 }
 
+/* We hide the title if width is under 450px to not clash with logo*/
 @media (max-width: 450px) { 
   .navbar-title {
            display: none !important; 
@@ -251,20 +258,6 @@ summary .test {
   color: $primary;
 }
 
-
-// pre .sourceCode { 
-//   background-color: #cdb38a;
-// }
-
-
-// p code:not(.sourceCode), li code:not(.sourceCode) {
-//   background-color: $body-color;
-// }
-
-// code span {
-//   color: $body-bg;
-// }
-
 div.quarto-post .listing-categories .listing-category {
   color: $link-color;
   border: solid 1px $body-color;
@@ -307,7 +300,37 @@ details[open] summary ~ * {
   animation: sweep .5s ease-in-out;
 }
 
-@keyframes sweep {
-  0%    {opacity: 0; margin-left: 0px}
-  100%  {opacity: 1; margin-left: 0px}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  float: center;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #eee8d5;
+  background-color: $link-color;
+  font-family: monospace;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: $primary;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: $primary;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+  animation: fadeEffect 1s; 
 }

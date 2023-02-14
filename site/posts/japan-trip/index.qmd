@@ -1,10 +1,13 @@
 ---
-title: "New site and Japan trip"
-description: The start of this blog, and the story of why I came to Japan to study the winter air conditions in Japan and how it might relate or not to Kawasaki Disease
+title: "Starting the blog"
+description: First post of the blog, introducing the site
 date: "2023-01-27"
 categories: [Trip, Quarto, Kawasaki Disease]
 image: featured.jpg
 author: Alejandro Fontal
+comments:
+  giscus:
+    repo: alfontal/alfontal.dev
 ---
 
 ## Introduction

@@ -11,17 +11,41 @@ listing:
   max-description-length: 300
   fields: [image, title, description, categories]
   contents:
-    - path: https://github.com/AlFontal/aqi-stations-scraper
+    - path: https://github.com/AlFontal/environmental-data-japan
       image: /posts/japan-trip/featured.jpg
-      title: Environmental Data Japan
+      title: Env. Data Japan
       description: "Repository collecting, processing and organizing environmental data sources for Japan "
       date: "2022-09-01"
-      categories: [GIS, Data Mining]
-    - path: https://github.com/AlFontal/environmental-data-japan
-      image: /projects/pyseleniumbot.jpg
+      categories: [Python, GIS, Data Mining]
+    - path: https://github.com/AlFontal/aqi-stations-scraper
+      image: /projects/aqi_stations_scraper.png
       title: AQI Stations Scraper
       description: "A Selenium-based web scraper that uses Github Actions to scrape AQI stations historical data"
       date: "2021-07-01"
-      categories: [Selenium, Scraping, Data Mining]
-
+      categories: [Python, Selenium, Scraping, Data Mining]
+    - path: https://github.com/AlFontal/sdcpy
+      image: /projects/sdcpy.png
+      title: SDCpy
+      description: "A Python library to perform Scale Dependent Correlation Analysis (SDC)"
+      date: "2021-04-01"
+      categories: [Python, Time-Series Analysis]
+    - path: https://github.com/AlFontal/sdcpy-app
+      image: /projects/sdcpy_app.png
+      title: SDCpy App
+      description: "A Dash web app deployed with Heroku to perform Scale Dependent Correlation Analysis (SDC)"
+      date: "2021-06-01"
+      categories: [Python, Time-Series Analysis, Dash, Heroku]
+    - path: https://github.com/AlFontal/sugarboard
+      image: /projects/sugarboard.png
+      title: Sugarboard
+      description: "A Streamlit Dashboard to visualize Nightscout's Continuous Glucose Monitor (CGM) data"
+      date: "2022-03-01"
+      categories: [Python, Streamlit, API, Data Visualisation, Dashboard]
+    - path: https://github.com/AlFontal/argos-extensions
+      image: /projects/argos_extensions.png
+      title: Argos Extensions
+      description: "A series of extensions for the Argos GNOME Shell extension that add
+      functionality to the GNOME Shell Top Bar (and `xbar` in MacOS, WIP)"
+      date: "2022-06-01"
+      categories: [Python, Argos, xbar, API, Linux, MacOS]
 ---

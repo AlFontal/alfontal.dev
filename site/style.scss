@@ -334,3 +334,18 @@ details[open] summary ~ * {
   border-top: none;
   animation: fadeEffect 1s; 
 }
+
+.card-title {
+  text-align: center;
+  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  letter-spacing: -1px;
+  padding-bottom: 5%;
+}
+
+.listing-category {
+  color: $body-bg !important;
+  background-color: $primary !important;
+  border: solid 1px $primary !important;
+}

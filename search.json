@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Alejandro Fontal",
     "section": "",
-    "text": "Research Data Scientist\nWelcome to my personal website. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine.\nI am particularly passionate about data mining, automation, machine learning, open source software, and reproducible research."
+    "text": "Research Data Scientist\nWelcome to my personal website. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine."
   },
   {
     "objectID": "index.html#education",
@@ -18,7 +18,7 @@
     "href": "index.html#interests",
     "title": "Alejandro Fontal",
     "section": "Interests",
-    "text": "Interests\n\nAutomation\nOpen Science\nReproducible Research\nData Visualisation\nKnowledge Sharing\nMachine Learning\nGeographic Information Systems\nEpidemiology"
+    "text": "Interests\n\nAutomation\nOpen Science\nReproducible Research\nData Visualisation\nMachine Learning\nEpidemiology\nGIS"
   },
   {
     "objectID": "publications.html",
@@ -88,12 +88,12 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "New site and Japan trip\n\n\n\n\n\n\n\nTrip\n\n\nQuarto\n\n\nKawasaki Disease\n\n\n\n\nThe start of this blog, and the story of why I came to Japan to study the winter air conditions in Japan and how it might relate or not to Kawasaki Disease\n\n\n\n\n\n\nFriday, the 27 of January, 2023\n\n\nAlejandro Fontal\n\n\n\n\n\n\nNo matching items"
+    "text": "Starting the blog\n\n\n\n\n\n\n\nTrip\n\n\nQuarto\n\n\nKawasaki Disease\n\n\n\n\nFirst post of the blog, introducing the site\n\n\n\n\n\n\nFriday, the 27 of January, 2023\n\n\nAlejandro Fontal\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/japan-trip/index.html",
     "href": "posts/japan-trip/index.html",
-    "title": "New site and Japan trip",
+    "title": "Starting the blog",
     "section": "",
     "text": "This post will have two main purposes. The first is to introduce this blog/website, and the second is to use it as a way to introduce the plan and first impressions of my trip in Japan as part of my final project for my PhD.\n\n\nWork in progress…\nx = 2 * np.sin(5)\nplt.show()"
   },
@@ -102,6 +102,6 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nEnvironmental Data Japan\n\n\n\nGIS\n\n\nData Mining\n\n\n\nRepository collecting, processing and organizing environmental data sources for Japan\n\n\n\n\n\n\n\n\n\n\n\n\n\nAQI Stations Scraper\n\n\n\nSelenium\n\n\nScraping\n\n\nData Mining\n\n\n\nA Selenium-based web scraper that uses Github Actions to scrape AQI stations historical data\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nEnv. Data Japan\n\n\n\nPython\n\n\nGIS\n\n\nData Mining\n\n\n\nRepository collecting, processing and organizing environmental data sources for Japan\n\n\n\n\n\n\n\n\n\n\n\n\n\nArgos Extensions\n\n\n\nPython\n\n\nArgos\n\n\nxbar\n\n\nAPI\n\n\nLinux\n\n\nMacOS\n\n\n\nA series of extensions for the Argos GNOME Shell extension that add functionality to the GNOME Shell Top Bar (and xbar in MacOS, WIP)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSugarboard\n\n\n\nPython\n\n\nStreamlit\n\n\nAPI\n\n\nData Visualisation\n\n\nDashboard\n\n\n\nA Streamlit Dashboard to visualize Nightscout’s Continuous Glucose Monitor (CGM) data\n\n\n\n\n\n\n\n\n\n\n\n\n\nAQI Stations Scraper\n\n\n\nPython\n\n\nSelenium\n\n\nScraping\n\n\nData Mining\n\n\n\nA Selenium-based web scraper that uses Github Actions to scrape AQI stations historical data\n\n\n\n\n\n\n\n\n\n\n\n\n\nSDCpy App\n\n\n\nPython\n\n\nTime-Series Analysis\n\n\nDash\n\n\nHeroku\n\n\n\nA Dash web app deployed with Heroku to perform Scale Dependent Correlation Analysis (SDC)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSDCpy\n\n\n\nPython\n\n\nTime-Series Analysis\n\n\n\nA Python library to perform Scale Dependent Correlation Analysis (SDC)\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

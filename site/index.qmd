@@ -92,8 +92,6 @@ function openTab(evt, tabName) {
 
 Welcome to my personal website. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine.
 
-I am particularly passionate about data mining, automation, machine learning, open source software, and reproducible research.
-
 <div class="tab">
   <button class="tablinks btn btn-primary" onclick="openTab(event, 'CR')">
   Current Role
@@ -166,10 +164,9 @@ raise an issue if you notice something is wrong or not working as intended.
 - Open Science
 - Reproducible Research
 - Data Visualisation
-- Knowledge Sharing
 - Machine Learning
-- Geographic Information Systems
 - Epidemiology
+- GIS
 
 :::
 

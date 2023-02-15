@@ -12,7 +12,7 @@ listing:
   fields: [image, title, description, categories]
   contents:
     - path: https://github.com/AlFontal/environmental-data-japan
-      image: /posts/japan-trip/featured.jpg
+      image: /projects/tokyo_skyline.jpg
       title: Env. Data Japan
       description: "Repository collecting, processing and organizing environmental data sources for Japan "
       date: "2022-09-01"

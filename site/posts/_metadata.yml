@@ -10,11 +10,13 @@ title-block-banner: true
 author: Alejandro Fontal
 
 toc: true
+toc-location: left
+toc-depth: 4
 number-sections: false
 
 comments:
-  utterances: 
-    repo: alfontal/alfontal.com
+  giscus:
+    repo: alfontal/alfontal.dev
 
 
 execute: 

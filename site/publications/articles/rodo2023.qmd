@@ -1,0 +1,38 @@
+---
+title: "Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease"
+type: "article"
+authors:
+  - name: "Xavier Rodó"
+    orcid: 0000-0003-4843-6180
+    email: "xavier.rodo@isglobal.org"
+  - name: Albert Navarro-Gallinad
+  - name: Tomoko Kojima
+  - name: Josep-Anton Morguí
+  - name: Sílvia Borràs
+  - name: "Alejandro Fontal"
+    email: "alejandro.fontal.92@gmail.com"
+    url: "https://alfontal.dev"
+    orcid: 0000-0003-1138-2158
+date: '2021-10-21'
+
+year: "2023"
+publication: "Environmental Research Letters"
+pdf: "https://iopscience.iop.org/article/10.1088/1748-9326/acd798/pdf"
+doi: "https://doi.org/10.1088/1748-9326/acd798"
+code: "https://github.com/AlFontal/kd-metals-swc"
+toc: false
+categories:
+  - Kawasaki Disease
+  - Time Series Analysis
+  - Air Pollution & Health
+  - Journal Article
+---
+
+## Citation (APA)
+
+> Rodó, X., Navarro-Gallinad, A., Kojima, T., Morguí, J. A., Borràs, S., & Fontal, A. (2023). Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease. Environmental Research Letters, 18(7), 074011.
+
+## Abstract
+
+
+Air pollution (urban, industrial or rural) has been linked to a myriad of human ailments despite clear mechanistic associations that are often not thoroughly established. Daily variability of fine aerosols in a surveillance campaign in south Japan shows a striking coevolution between their trace elements (metal and metalloid, MM) content and Kawasaki disease (KD) admissions, suggesting a strong dynamical link. These aerosol MM could instigate an immune response that, along with genetic susceptibility, would lead to KD development. This association may account for over 40% of the total variability in the disease, being dominated by a clear sub-weekly cycle (SWC1). Thanks to both an unprecedented daily KD epidemiological record going back to 1970, light detection and ranging (LIDAR) atmospheric backscattering profiles for the interval 2010–2016 and HYSPLIT simulations with numerous sensitivity analyses, we can trace this SWC1 variability to occur concomitantly from sub-seasonal to interannual timescales in both KD and aerosols. This SWC1 appears to connect or disconnect Japan to air intrusions from above the planetary boundary layer (PBL), having their source in industrial and agricultural areas in NE Asia and points to a stronger case for an agricultural source for the exposure as opposed to urban pollution. The KD maxima always occur in full synchrony with the arrival of very small (<1 µm; PM1) particles showing that ultrafine aerosols appear as a necessary cofactor in the occurrence of KD and sets the field to associate other similar human diseases. Our study shows how signal-detection approaches can be useful to uncover hidden associations between the environment and human health, otherwise unnoticed and help set new early-warning systems for disease prevention.

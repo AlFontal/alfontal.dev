@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://alfontal.dev/index.html</loc>
-    <lastmod>2023-02-15T08:56:37.816Z</lastmod>
+    <loc>https://alfontal.dev/publications/articles/thesis2017.html</loc>
+    <lastmod>2023-07-20T08:49:53.023Z</lastmod>
   </url>
   <url>
-    <loc>https://alfontal.dev/publications.html</loc>
-    <lastmod>2023-02-15T08:56:38.572Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/fontal2021.html</loc>
-    <lastmod>2023-02-15T08:56:38.936Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/vasculitis2022.html</loc>
-    <lastmod>2023-02-15T08:56:39.304Z</lastmod>
+    <loc>https://alfontal.dev/publications/articles/rodo2023.html</loc>
+    <lastmod>2023-07-20T08:49:52.051Z</lastmod>
   </url>
   <url>
     <loc>https://alfontal.dev/publications/articles/rodofontal2021.html</loc>
-    <lastmod>2023-02-15T08:56:39.640Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/thesis2017.html</loc>
-    <lastmod>2023-02-15T08:56:39.964Z</lastmod>
+    <lastmod>2023-07-20T08:49:51.067Z</lastmod>
   </url>
   <url>
     <loc>https://alfontal.dev/blog.html</loc>
-    <lastmod>2023-02-15T08:56:40.288Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/posts/first-post/index.html</loc>
-    <lastmod>2023-02-15T08:56:41.272Z</lastmod>
+    <lastmod>2023-07-20T08:49:49.359Z</lastmod>
   </url>
   <url>
     <loc>https://alfontal.dev/projects.html</loc>
-    <lastmod>2023-02-15T08:56:41.744Z</lastmod>
+    <lastmod>2023-07-20T08:49:48.051Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/index.html</loc>
+    <lastmod>2023-07-20T08:49:46.503Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications.html</loc>
+    <lastmod>2023-07-20T08:49:48.803Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/posts/first-post/index.html</loc>
+    <lastmod>2023-07-20T08:49:50.599Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/fontal2021.html</loc>
+    <lastmod>2023-07-20T08:49:51.527Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/vasculitis2022.html</loc>
+    <lastmod>2023-07-20T08:49:52.555Z</lastmod>
   </url>
 </urlset>

@@ -1,14 +1,5 @@
 [
   {
-    "listing": "/publications.html",
-    "items": [
-      "/publications/articles/vasculitis2022.html",
-      "/publications/articles/rodofontal2021.html",
-      "/publications/articles/fontal2021.html",
-      "/publications/articles/thesis2017.html"
-    ]
-  },
-  {
     "listing": "/blog.html",
     "items": [
       "/posts/first-post/index.html"
@@ -17,5 +8,15 @@
   {
     "listing": "/projects.html",
     "items": []
+  },
+  {
+    "listing": "/publications.html",
+    "items": [
+      "/publications/articles/rodo2023.html",
+      "/publications/articles/vasculitis2022.html",
+      "/publications/articles/rodofontal2021.html",
+      "/publications/articles/fontal2021.html",
+      "/publications/articles/thesis2017.html"
+    ]
   }
 ]

@@ -30,6 +30,10 @@ links:
   - text: "{{< iconify fa6-brands instagram >}}"
     href: "https://www.instagram.com/afontal/"
     aria-label: "Instagram logo linking to afontal account"
+  - text: "{{< iconify fa6-brands strava >}}"
+    href: "https://www.strava.com/athletes/24896086"
+    aria-label: "Strava logo linking to my athlete account"
+
 ---
 
 

@@ -1,0 +1,52 @@
+---
+title: "Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens"
+type: "article"
+authors:
+  - name: "Xavier Rodó"
+    orcid: 0000-0003-4843-6180
+    email: "xavier.rodo@isglobal.org"
+  - name: Sofya Pozdniakova
+  - name: Sílvia Borràs
+  - name: Atsushi Matsuki
+  - name: Hiroshi Tanimoto
+  - name: Maria-Pilar Armengol
+  - name: Irina Pey
+  - name: Laura Muñoz
+  - name: Samuel Santamaría
+  - name: Lidia Cañas
+  - name: Josep-Anton Morguí
+  - name: "Alejandro Fontal"
+    email: "alejandro.fontal.92@gmail.com"
+    url: "https://alfontal.dev"
+    orcid: 0000-0003-1138-2158
+  - name: Roger Curcoll
+
+date: '2024-09-09'
+
+year: "2024"
+publication: "Proceedings of the National Academy of Sciences"
+pdf: "https://www.pnas.org/doi/pdf/10.1073/pnas.2404191121"
+doi: "https://doi.org/10.1073/pnas.2404191121"
+code: "https://github.com/AlFontal/microbial-richness-troposphere"
+toc: false
+categories:
+  - Microbiology
+  - Metagenomics
+  - Aerobiology
+  - Infectious Diseases
+  - Journal Article
+---
+
+## Citation (APA)
+
+> Rodó, X., Pozdniakova, S., Borràs, S., Matsuki, A., Tanimoto, H., Armengol, M. P., ... & Curcoll, R. (2024). Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens. Proceedings of the National Academy of Sciences, 121(38), e2404191121.
+
+## Abstract
+
+### Significance
+
+Atmospheric aircraft monitoring with 10 tropospheric flights over the planetary boundary layer in Japan (between 1,000 m and 3,000 m above sea-level) demonstrate the presence of viable bacteria and fungi harmful to humans. Long-distance transport for over 2,000 km is possible in the free troposphere for air masses originating in agricultural regions enriched in fertilizers and pesticides.
+
+### Abstract
+
+The existence of viable human pathogens in bioaerosols which can cause infection or affect human health has been the subject of little research. In this study, data provided by 10 tropospheric aircraft surveys over Japan in 2014 confirm the existence of a vast diversity of microbial species up to 3,000 m height, which can be dispersed above the planetary boundary layer over distances of up to 2,000 km, thanks to strong winds from an area covered with massive cereal croplands in Northeast (NE) Asia. Microbes attached to aerosols reveal the presence of diverse bacterial and fungal taxa, including potential human pathogens, originating from sewage, pesticides, or fertilizers. Over 266 different fungal and 305 bacterial genera appeared in the 10 aircraft transects. Actinobacteria, Bacillota, Proteobacteria, and Bacteroidetes phyla dominated the bacteria composition and, for fungi, Ascomycota prevailed over Basidiomycota. Among the pathogenic species identified, human pathogens include bacteria such as Escherichia coli, Serratia marcescens, Prevotella melaninogenica, Staphylococcus epidermidis, Staphylococcus haemolyticus, Staphylococcus saprophyticus, Cutibacterium acnes, Clostridium difficile, Clostridium botulinum, Stenotrophomonas maltophilia, Shigella sonnei, Haemophillus parainfluenzae and Acinetobacter baumannii and health-relevant fungi such as Malassezia restricta, Malassezia globosa, Candida parapsilosis and Candida zeylanoides, Sarocladium kiliense, Cladosporium halotolerans, and Cladosporium herbarum. Diversity estimates were similar at heights and surface when entrainment of air from high altitudes occurred. Natural antimicrobial-resistant bacteria (ARB) cultured from air samples were found indicating long-distance spread of ARB and microbial viability. This would represent a novel way to disperse both viable human pathogens and resistance genes among distant geographical regions.

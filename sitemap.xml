@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://alfontal.dev/publications/articles/thesis2017.html</loc>
-    <lastmod>2023-07-20T08:49:53.023Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/rodo2023.html</loc>
-    <lastmod>2023-07-20T08:49:52.051Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/rodofontal2021.html</loc>
-    <lastmod>2023-07-20T08:49:51.067Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/blog.html</loc>
-    <lastmod>2023-07-20T08:49:49.359Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/projects.html</loc>
-    <lastmod>2023-07-20T08:49:48.051Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/index.html</loc>
-    <lastmod>2023-07-20T08:49:46.503Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications.html</loc>
-    <lastmod>2023-07-20T08:49:48.803Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/posts/first-post/index.html</loc>
-    <lastmod>2023-07-20T08:49:50.599Z</lastmod>
+    <loc>https://alfontal.dev/publications/articles/vasculitis2022.html</loc>
+    <lastmod>2025-05-03T13:24:46.411Z</lastmod>
   </url>
   <url>
     <loc>https://alfontal.dev/publications/articles/fontal2021.html</loc>
-    <lastmod>2023-07-20T08:49:51.527Z</lastmod>
+    <lastmod>2025-05-03T13:24:46.411Z</lastmod>
   </url>
   <url>
-    <loc>https://alfontal.dev/publications/articles/vasculitis2022.html</loc>
-    <lastmod>2023-07-20T08:49:52.555Z</lastmod>
+    <loc>https://alfontal.dev/publications/articles/rodo2024.html</loc>
+    <lastmod>2025-05-03T13:24:46.411Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/blog.html</loc>
+    <lastmod>2025-05-03T13:24:46.384Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/index.html</loc>
+    <lastmod>2025-05-03T13:24:46.385Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/posts/first-post/index.html</loc>
+    <lastmod>2025-05-03T13:24:46.392Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications.html</loc>
+    <lastmod>2025-05-03T13:24:46.411Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/projects.html</loc>
+    <lastmod>2025-05-03T13:24:46.397Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/thesis2017.html</loc>
+    <lastmod>2025-05-03T13:24:46.411Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/rodofontal2021.html</loc>
+    <lastmod>2025-05-03T13:24:46.411Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/rodo2023.html</loc>
+    <lastmod>2025-05-03T13:24:46.411Z</lastmod>
   </url>
 </urlset>

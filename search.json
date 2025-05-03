@@ -1,80 +1,73 @@
 [
   {
-    "objectID": "publications/articles/thesis2017.html",
-    "href": "publications/articles/thesis2017.html",
-    "title": "Neural Networks for Subcellular Localization Prediction",
+    "objectID": "publications/articles/vasculitis2022.html",
+    "href": "publications/articles/vasculitis2022.html",
+    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
     "section": "",
-    "text": "Fontal, A. (2017). Neural Networks for Subcellular Localization Prediction."
+    "text": "Fontal, A., Pozdniakova, S., Borras, S., Cañas, L., Curcoll, R., Morgui, J., Matsuki, A., & Rodó, X. (2022). Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers. International Vasculitis and ANCA Workshop 2022."
   },
   {
-    "objectID": "publications/articles/thesis2017.html#citation-apa",
-    "href": "publications/articles/thesis2017.html#citation-apa",
-    "title": "Neural Networks for Subcellular Localization Prediction",
+    "objectID": "publications/articles/vasculitis2022.html#citation-apa",
+    "href": "publications/articles/vasculitis2022.html#citation-apa",
+    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
     "section": "",
-    "text": "Fontal, A. (2017). Neural Networks for Subcellular Localization Prediction."
+    "text": "Fontal, A., Pozdniakova, S., Borras, S., Cañas, L., Curcoll, R., Morgui, J., Matsuki, A., & Rodó, X. (2022). Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers. International Vasculitis and ANCA Workshop 2022."
   },
   {
-    "objectID": "publications/articles/thesis2017.html#abstract",
-    "href": "publications/articles/thesis2017.html#abstract",
-    "title": "Neural Networks for Subcellular Localization Prediction",
+    "objectID": "publications/articles/vasculitis2022.html#abstract",
+    "href": "publications/articles/vasculitis2022.html#abstract",
+    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
     "section": "Abstract",
-    "text": "Abstract\nThe continuously decreasing cost of sequencing genomes is promoting the generation of vast amounts of sequence data. In consequence, the need to develop automated methods of analysis for this kind of data is on the rise. A first step towards inferring a protein’s function is to know its subcellular location. In this thesis we explore the capabilities of modern machine learning techniques, and more specifically deep learning models to predict the subcellular location of proteins only using their amino acid sequence as predictor."
+    "text": "Abstract\nKawasaki Disease (KD) is a systemic vasculitis that mainly affects children younger than 5 years old. Although KD cases have been registered in over 60 countries across several continents, its incidence is highest in East Asia, particularly in Japan, where the highest annual incidence rate was recorded in 2018: 359 cases per 100 000 children aged 0-4 years [1]. After more than five decades since its discovery, the etiology of KD is yet to be elucidated. Past studies have analyzed the association between KD and diverse environmental factors, with some advances pointing towards a relevant role of the atmospheric transport of a wind-borne agent as trigger of KD [2, 3]. The epidemiological records of KD in Japan show an increasing incidence trend and a marked seasonality, prompting questions about the nature of the drivers of these changes in incidence. In this work, we focus on updated records from Tokyo prefecture (2011-2018) to find an association with specific air source locations and higher incidence seasons."
   },
   {
-    "objectID": "publications/articles/rodo2023.html",
-    "href": "publications/articles/rodo2023.html",
-    "title": "Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease",
+    "objectID": "publications/articles/fontal2021.html",
+    "href": "publications/articles/fontal2021.html",
+    "title": "Climatic signatures in the different COVID-19 pandemic waves across both hemispheres",
     "section": "",
-    "text": "Rodó, X., Navarro-Gallinad, A., Kojima, T., Morguí, J. A., Borràs, S., & Fontal, A. (2023). Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease. Environmental Research Letters, 18(7), 074011."
+    "text": "Fontal, A., Bouma, M. J., San-José, A., López, L., Pascual, M., & Rodó, X. (2021). Climatic signatures in the different COVID-19 pandemic waves across both hemispheres. Nature Computational Science, 1(10), 655-665."
   },
   {
-    "objectID": "publications/articles/rodo2023.html#citation-apa",
-    "href": "publications/articles/rodo2023.html#citation-apa",
-    "title": "Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease",
+    "objectID": "publications/articles/fontal2021.html#citation-apa",
+    "href": "publications/articles/fontal2021.html#citation-apa",
+    "title": "Climatic signatures in the different COVID-19 pandemic waves across both hemispheres",
     "section": "",
-    "text": "Rodó, X., Navarro-Gallinad, A., Kojima, T., Morguí, J. A., Borràs, S., & Fontal, A. (2023). Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease. Environmental Research Letters, 18(7), 074011."
+    "text": "Fontal, A., Bouma, M. J., San-José, A., López, L., Pascual, M., & Rodó, X. (2021). Climatic signatures in the different COVID-19 pandemic waves across both hemispheres. Nature Computational Science, 1(10), 655-665."
   },
   {
-    "objectID": "publications/articles/rodo2023.html#abstract",
-    "href": "publications/articles/rodo2023.html#abstract",
-    "title": "Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease",
+    "objectID": "publications/articles/fontal2021.html#abstract",
+    "href": "publications/articles/fontal2021.html#abstract",
+    "title": "Climatic signatures in the different COVID-19 pandemic waves across both hemispheres",
     "section": "Abstract",
-    "text": "Abstract\nAir pollution (urban, industrial or rural) has been linked to a myriad of human ailments despite clear mechanistic associations that are often not thoroughly established. Daily variability of fine aerosols in a surveillance campaign in south Japan shows a striking coevolution between their trace elements (metal and metalloid, MM) content and Kawasaki disease (KD) admissions, suggesting a strong dynamical link. These aerosol MM could instigate an immune response that, along with genetic susceptibility, would lead to KD development. This association may account for over 40% of the total variability in the disease, being dominated by a clear sub-weekly cycle (SWC1). Thanks to both an unprecedented daily KD epidemiological record going back to 1970, light detection and ranging (LIDAR) atmospheric backscattering profiles for the interval 2010–2016 and HYSPLIT simulations with numerous sensitivity analyses, we can trace this SWC1 variability to occur concomitantly from sub-seasonal to interannual timescales in both KD and aerosols. This SWC1 appears to connect or disconnect Japan to air intrusions from above the planetary boundary layer (PBL), having their source in industrial and agricultural areas in NE Asia and points to a stronger case for an agricultural source for the exposure as opposed to urban pollution. The KD maxima always occur in full synchrony with the arrival of very small (&lt;1 µm; PM1) particles showing that ultrafine aerosols appear as a necessary cofactor in the occurrence of KD and sets the field to associate other similar human diseases. Our study shows how signal-detection approaches can be useful to uncover hidden associations between the environment and human health, otherwise unnoticed and help set new early-warning systems for disease prevention."
+    "text": "Abstract\nThe roles of climate and true seasonal signatures in the epidemiology of emergent pathogens, and that of SARS-CoV-2 in particular, remain poorly understood. With a statistical method designed to detect transitory associations, we show, for COVID-19 cases, strong consistent negative effects of both temperature and absolute humidity at large spatial scales. At finer spatial resolutions, we substantiate these connections during the seasonal rise and fall of COVID-19. Strong disease responses are identified in the first two waves, suggesting clear ranges for temperature and absolute humidity that are similar to those formerly described for seasonal influenza. For COVID-19, in all studied regions and pandemic waves, a process-based model that incorporates a temperature-dependent transmission rate outperforms baseline formulations with no driver or a sinusoidal seasonality. Our results, so far, classify COVID-19 as a seasonal low-temperature infection and suggest an important contribution of the airborne pathway in the transmission of SARS-CoV-2, with implications for the control measures we discuss."
   },
   {
-    "objectID": "publications/articles/rodofontal2021.html",
-    "href": "publications/articles/rodofontal2021.html",
-    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
+    "objectID": "publications/articles/rodo2024.html",
+    "href": "publications/articles/rodo2024.html",
+    "title": "Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens",
     "section": "",
-    "text": "Rodó, X., & Fontal, A. (2021). COVID-19 pandemic sets new clues on the transmission pathways in Kawasaki disease. JAMA network open, 4(4), e214624-e214624."
+    "text": "Rodó, X., Pozdniakova, S., Borràs, S., Matsuki, A., Tanimoto, H., Armengol, M. P., … & Curcoll, R. (2024). Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens. Proceedings of the National Academy of Sciences, 121(38), e2404191121."
   },
   {
-    "objectID": "publications/articles/rodofontal2021.html#citation-apa",
-    "href": "publications/articles/rodofontal2021.html#citation-apa",
-    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
+    "objectID": "publications/articles/rodo2024.html#citation-apa",
+    "href": "publications/articles/rodo2024.html#citation-apa",
+    "title": "Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens",
     "section": "",
-    "text": "Rodó, X., & Fontal, A. (2021). COVID-19 pandemic sets new clues on the transmission pathways in Kawasaki disease. JAMA network open, 4(4), e214624-e214624."
+    "text": "Rodó, X., Pozdniakova, S., Borràs, S., Matsuki, A., Tanimoto, H., Armengol, M. P., … & Curcoll, R. (2024). Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens. Proceedings of the National Academy of Sciences, 121(38), e2404191121."
   },
   {
-    "objectID": "publications/articles/rodofontal2021.html#abstract",
-    "href": "publications/articles/rodofontal2021.html#abstract",
-    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
+    "objectID": "publications/articles/rodo2024.html#abstract",
+    "href": "publications/articles/rodo2024.html#abstract",
+    "title": "Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens",
     "section": "Abstract",
-    "text": "Abstract\nMany theories have been formulated through decades regarding the causes of the mysterious syndrome known as Kawasaki disease (KD). This pediatric self-limited vasculitis has been escaping full characterization since Tomizaku Kawasaki, PhD, identified the disease that was then named after him. In many of the clinical histories, the role of external factors seems already clear, because the appearance of respiratory symptoms is reported to occur a few days before KD symptoms emerge (eg, an abnormal immune response characterized by increased levels of inflammatory cytokines and chemokines during the acute phase). However, the many attempts to characterize a unique agent have been unsuccessful so far. Whether this is an indication of a multiplicity of agents (ie, multiple-agent disease) or a complex interplay of factors interacting with the immune system of children who are genetically predisposed still remains an open question. However, in this race against time, a study by Hara and colleagues4 takes advantage of the unique epidemiological situation caused by the COVID-19 pandemic in Japan to perform a natural experiment that sheds new light on the hidden etiological processes of KD."
+    "text": "Abstract\n\nSignificance\nAtmospheric aircraft monitoring with 10 tropospheric flights over the planetary boundary layer in Japan (between 1,000 m and 3,000 m above sea-level) demonstrate the presence of viable bacteria and fungi harmful to humans. Long-distance transport for over 2,000 km is possible in the free troposphere for air masses originating in agricultural regions enriched in fertilizers and pesticides.\n\n\nAbstract\nThe existence of viable human pathogens in bioaerosols which can cause infection or affect human health has been the subject of little research. In this study, data provided by 10 tropospheric aircraft surveys over Japan in 2014 confirm the existence of a vast diversity of microbial species up to 3,000 m height, which can be dispersed above the planetary boundary layer over distances of up to 2,000 km, thanks to strong winds from an area covered with massive cereal croplands in Northeast (NE) Asia. Microbes attached to aerosols reveal the presence of diverse bacterial and fungal taxa, including potential human pathogens, originating from sewage, pesticides, or fertilizers. Over 266 different fungal and 305 bacterial genera appeared in the 10 aircraft transects. Actinobacteria, Bacillota, Proteobacteria, and Bacteroidetes phyla dominated the bacteria composition and, for fungi, Ascomycota prevailed over Basidiomycota. Among the pathogenic species identified, human pathogens include bacteria such as Escherichia coli, Serratia marcescens, Prevotella melaninogenica, Staphylococcus epidermidis, Staphylococcus haemolyticus, Staphylococcus saprophyticus, Cutibacterium acnes, Clostridium difficile, Clostridium botulinum, Stenotrophomonas maltophilia, Shigella sonnei, Haemophillus parainfluenzae and Acinetobacter baumannii and health-relevant fungi such as Malassezia restricta, Malassezia globosa, Candida parapsilosis and Candida zeylanoides, Sarocladium kiliense, Cladosporium halotolerans, and Cladosporium herbarum. Diversity estimates were similar at heights and surface when entrainment of air from high altitudes occurred. Natural antimicrobial-resistant bacteria (ARB) cultured from air samples were found indicating long-distance spread of ARB and microbial viability. This would represent a novel way to disperse both viable human pathogens and resistance genes among distant geographical regions."
   },
   {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "First post on the blog\n\n\n\n\n\n\n\nQuarto\n\n\nBlog\n\n\n\n\nIntroducing the site and the blog.\n\n\n\n\n\n\nMonday, the 20 of February, 2023\n\n\nAlejandro Fontal\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "projects.html",
-    "href": "projects.html",
-    "title": "Projects",
-    "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nEnv. Data Japan\n\n\n\nPython\n\n\nGIS\n\n\nData Mining\n\n\n\nRepository collecting, processing and organizing environmental data sources for Japan\n\n\n\n\n\n\n\n\n\n\n\n\n\nArgos Extensions\n\n\n\nPython\n\n\nArgos\n\n\nxbar\n\n\nAPI\n\n\nLinux\n\n\nMacOS\n\n\n\nA series of extensions for the Argos GNOME Shell extension that add functionality to the GNOME Shell Top Bar (and xbar in MacOS, WIP)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSugarboard\n\n\n\nPython\n\n\nStreamlit\n\n\nAPI\n\n\nData Visualisation\n\n\nDashboard\n\n\n\nA Streamlit Dashboard to visualize Nightscout’s Continuous Glucose Monitor (CGM) data\n\n\n\n\n\n\n\n\n\n\n\n\n\nAQI Stations Scraper\n\n\n\nPython\n\n\nSelenium\n\n\nScraping\n\n\nData Mining\n\n\n\nA Selenium-based web scraper that uses Github Actions to scrape AQI stations historical data\n\n\n\n\n\n\n\n\n\n\n\n\n\nSDCpy App\n\n\n\nPython\n\n\nTime-Series Analysis\n\n\nDash\n\n\nHeroku\n\n\n\nA Dash web app deployed with Heroku to perform Scale Dependent Correlation Analysis (SDC)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSDCpy\n\n\n\nPython\n\n\nTime-Series Analysis\n\n\n\nA Python library to perform Scale Dependent Correlation Analysis (SDC)\n\n\n\n\n\n\n\nNo matching items"
+    "text": "First post on the blog\n\n\n\nQuarto\n\nBlog\n\n\n\nIntroducing the site and the blog.\n\n\n\n\n\nMonday, the 20 of February, 2023\n\n\nAlejandro Fontal\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -88,7 +81,7 @@
     "href": "index.html#education",
     "title": "\nAlejandro Fontal\n",
     "section": "Education",
-    "text": "Education\n\nPh.D. in Biotechnology, 2019-\nUniversitat de Barcelona, Spain\nM.Sc. in Bioinformatics, 2016-2018  Wageningen University & Research, The Netherlands\nB.Sc. in Biotechnology, 2011-2015\nUniversitat de Barcelona, Spain"
+    "text": "Education\n\nPh.D. in Biotechnology, 2019-2024\nUniversitat de Barcelona, Spain\nM.Sc. in Bioinformatics, 2016-2018  Wageningen University & Research, The Netherlands\nB.Sc. in Biotechnology, 2011-2015\nUniversitat de Barcelona, Spain"
   },
   {
     "objectID": "index.html#interests",
@@ -96,13 +89,6 @@
     "title": "\nAlejandro Fontal\n",
     "section": "Interests",
     "text": "Interests\n\nAutomation\nOpen Science\nReproducible Research\nData Visualisation\nMachine Learning\nEpidemiology\nGIS"
-  },
-  {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Alejandro Fontal",
-    "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n         \n          Publication\n        \n         \n          Year\n        \n     \n  \n    \n      \n      \n    \n\n\n  \n    Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease\n    \n          Xavier Rodó, \n          Albert Navarro-Gallinad, \n          Tomoko Kojima, \n          Josep-Anton Morguí, \n          Sílvia Borràs, \n          Alejandro Fontal\n      \n    Environmental Research Letters\n    (2023)\n    \n      Details\n    \n    \n      DOI\n    \n    \n       PDF\n    \n    \n         Code\n    \n  \n  \n    Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers\n    \n          Alejandro Fontal, \n          Sofya Pozdniakova, \n          Sílvia Borràs, \n          Lídia Cañas, \n          Roger Curcoll, \n          Josep-Anton Morguí, \n          Atsushi Matsuki, \n          Xavier Rodó\n      \n    International Vasculitis and ANCA Workshop\n    (2022)\n    \n      Details\n    \n    \n      DOI\n    \n    \n         Code\n    \n  \n  \n    COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease\n    \n          Xavier Rodó, \n          Alejandro Fontal\n      \n    JAMA Network Open\n    (2021)\n    \n      Details\n    \n    \n      DOI\n    \n    \n       PDF\n    \n  \n  \n    Climatic signatures in the different COVID-19 pandemic waves across both hemispheres\n    \n          Alejandro Fontal, \n          Menno J. Bouma, \n          Adrià San José, \n          Leonardo López, \n          Mercedes Pascual, \n          Xavier Rodó\n      \n    Nature Computational Science\n    (2021)\n    \n      Details\n    \n    \n      DOI\n    \n    \n       PDF\n    \n    \n         Code\n    \n  \n  \n    Neural Networks for Subcellular Localization Prediction\n    \n          Alejandro Fontal\n      \n    Wageningen University & Research Thesis Repository\n    (2017)\n    \n      Details\n    \n    \n       PDF\n    \n  \n\n\nNo matching items"
   },
   {
     "objectID": "posts/first-post/index.html",
@@ -140,45 +126,80 @@
     "text": "Conclusion\nThat is all for now. I have several other posts in mind, but I’ll leave them for another day."
   },
   {
-    "objectID": "publications/articles/fontal2021.html",
-    "href": "publications/articles/fontal2021.html",
-    "title": "Climatic signatures in the different COVID-19 pandemic waves across both hemispheres",
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Alejandro Fontal",
     "section": "",
-    "text": "Fontal, A., Bouma, M. J., San-José, A., López, L., Pascual, M., & Rodó, X. (2021). Climatic signatures in the different COVID-19 pandemic waves across both hemispheres. Nature Computational Science, 1(10), 655-665."
+    "text": "Order By\n      Default\n      \n        Title\n      \n      \n        Author\n      \n      \n        Publication\n      \n      \n        Year\n      \n    \n  \n    \n      \n      \n    \n\n\n\n  \n    Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens\n    \n        \n          Xavier Rodó, \n        \n          Sofya Pozdniakova, \n        \n          Sílvia Borràs, \n        \n          Atsushi Matsuki, \n        \n          Hiroshi Tanimoto, \n        \n          Maria-Pilar Armengol, \n        \n          Irina Pey, \n        \n          Laura Muñoz, \n        \n          Samuel Santamaría, \n        \n          Lidia Cañas, \n        \n          Josep-Anton Morguí, \n        \n          Alejandro Fontal, \n        \n          Roger Curcoll\n        \n      \n    Proceedings of the National Academy of Sciences\n    (2024)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease\n    \n        \n          Xavier Rodó, \n        \n          Albert Navarro-Gallinad, \n        \n          Tomoko Kojima, \n        \n          Josep-Anton Morguí, \n        \n          Sílvia Borràs, \n        \n          Alejandro Fontal\n        \n      \n    Environmental Research Letters\n    (2023)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers\n    \n        \n          Alejandro Fontal, \n        \n          Sofya Pozdniakova, \n        \n          Sílvia Borràs, \n        \n          Lídia Cañas, \n        \n          Roger Curcoll, \n        \n          Josep-Anton Morguí, \n        \n          Atsushi Matsuki, \n        \n          Xavier Rodó\n        \n      \n    International Vasculitis and ANCA Workshop\n    (2022)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease\n    \n        \n          Xavier Rodó, \n        \n          Alejandro Fontal\n        \n      \n    JAMA Network Open\n    (2021)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n  \n\n  \n    Climatic signatures in the different COVID-19 pandemic waves across both hemispheres\n    \n        \n          Alejandro Fontal, \n        \n          Menno J. Bouma, \n        \n          Adrià San José, \n        \n          Leonardo López, \n        \n          Mercedes Pascual, \n        \n          Xavier Rodó\n        \n      \n    Nature Computational Science\n    (2021)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Neural Networks for Subcellular Localization Prediction\n    \n        \n          Alejandro Fontal\n        \n      \n    Wageningen University & Research Thesis Repository\n    (2017)\n    \n      Details\n    \n    \n    \n    \n       PDF\n    \n    \n    \n  \n\n\n\nNo matching items"
   },
   {
-    "objectID": "publications/articles/fontal2021.html#citation-apa",
-    "href": "publications/articles/fontal2021.html#citation-apa",
-    "title": "Climatic signatures in the different COVID-19 pandemic waves across both hemispheres",
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
     "section": "",
-    "text": "Fontal, A., Bouma, M. J., San-José, A., López, L., Pascual, M., & Rodó, X. (2021). Climatic signatures in the different COVID-19 pandemic waves across both hemispheres. Nature Computational Science, 1(10), 655-665."
+    "text": "Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nEnv. Data Japan\n\n\n\nPython\n\nGIS\n\nData Mining\n\n\n\nRepository collecting, processing and organizing environmental data sources for Japan\n\n\n\n\n\n\n\n\n\n\n\n\nArgos Extensions\n\n\n\nPython\n\nArgos\n\nxbar\n\nAPI\n\nLinux\n\nMacOS\n\n\n\nA series of extensions for the Argos GNOME Shell extension that add functionality to the GNOME Shell Top Bar (and xbar in MacOS, WIP)\n\n\n\n\n\n\n\n\n\n\n\n\nSugarboard\n\n\n\nPython\n\nStreamlit\n\nAPI\n\nData Visualisation\n\nDashboard\n\n\n\nA Streamlit Dashboard to visualize Nightscout’s Continuous Glucose Monitor (CGM) data\n\n\n\n\n\n\n\n\n\n\n\n\nAQI Stations Scraper\n\n\n\nPython\n\nSelenium\n\nScraping\n\nData Mining\n\n\n\nA Selenium-based web scraper that uses Github Actions to scrape AQI stations historical data\n\n\n\n\n\n\n\n\n\n\n\n\nSDCpy App\n\n\n\nPython\n\nTime-Series Analysis\n\nDash\n\nHeroku\n\n\n\nA Dash web app deployed with Heroku to perform Scale Dependent Correlation Analysis (SDC)\n\n\n\n\n\n\n\n\n\n\n\n\nSDCpy\n\n\n\nPython\n\nTime-Series Analysis\n\n\n\nA Python library to perform Scale Dependent Correlation Analysis (SDC)\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "publications/articles/fontal2021.html#abstract",
-    "href": "publications/articles/fontal2021.html#abstract",
-    "title": "Climatic signatures in the different COVID-19 pandemic waves across both hemispheres",
+    "objectID": "publications/articles/thesis2017.html",
+    "href": "publications/articles/thesis2017.html",
+    "title": "Neural Networks for Subcellular Localization Prediction",
+    "section": "",
+    "text": "Fontal, A. (2017). Neural Networks for Subcellular Localization Prediction."
+  },
+  {
+    "objectID": "publications/articles/thesis2017.html#citation-apa",
+    "href": "publications/articles/thesis2017.html#citation-apa",
+    "title": "Neural Networks for Subcellular Localization Prediction",
+    "section": "",
+    "text": "Fontal, A. (2017). Neural Networks for Subcellular Localization Prediction."
+  },
+  {
+    "objectID": "publications/articles/thesis2017.html#abstract",
+    "href": "publications/articles/thesis2017.html#abstract",
+    "title": "Neural Networks for Subcellular Localization Prediction",
     "section": "Abstract",
-    "text": "Abstract\nThe roles of climate and true seasonal signatures in the epidemiology of emergent pathogens, and that of SARS-CoV-2 in particular, remain poorly understood. With a statistical method designed to detect transitory associations, we show, for COVID-19 cases, strong consistent negative effects of both temperature and absolute humidity at large spatial scales. At finer spatial resolutions, we substantiate these connections during the seasonal rise and fall of COVID-19. Strong disease responses are identified in the first two waves, suggesting clear ranges for temperature and absolute humidity that are similar to those formerly described for seasonal influenza. For COVID-19, in all studied regions and pandemic waves, a process-based model that incorporates a temperature-dependent transmission rate outperforms baseline formulations with no driver or a sinusoidal seasonality. Our results, so far, classify COVID-19 as a seasonal low-temperature infection and suggest an important contribution of the airborne pathway in the transmission of SARS-CoV-2, with implications for the control measures we discuss."
+    "text": "Abstract\nThe continuously decreasing cost of sequencing genomes is promoting the generation of vast amounts of sequence data. In consequence, the need to develop automated methods of analysis for this kind of data is on the rise. A first step towards inferring a protein’s function is to know its subcellular location. In this thesis we explore the capabilities of modern machine learning techniques, and more specifically deep learning models to predict the subcellular location of proteins only using their amino acid sequence as predictor."
   },
   {
-    "objectID": "publications/articles/vasculitis2022.html",
-    "href": "publications/articles/vasculitis2022.html",
-    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
+    "objectID": "publications/articles/rodofontal2021.html",
+    "href": "publications/articles/rodofontal2021.html",
+    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
     "section": "",
-    "text": "Fontal, A., Pozdniakova, S., Borras, S., Cañas, L., Curcoll, R., Morgui, J., Matsuki, A., & Rodó, X. (2022). Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers. International Vasculitis and ANCA Workshop 2022."
+    "text": "Rodó, X., & Fontal, A. (2021). COVID-19 pandemic sets new clues on the transmission pathways in Kawasaki disease. JAMA network open, 4(4), e214624-e214624."
   },
   {
-    "objectID": "publications/articles/vasculitis2022.html#citation-apa",
-    "href": "publications/articles/vasculitis2022.html#citation-apa",
-    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
+    "objectID": "publications/articles/rodofontal2021.html#citation-apa",
+    "href": "publications/articles/rodofontal2021.html#citation-apa",
+    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
     "section": "",
-    "text": "Fontal, A., Pozdniakova, S., Borras, S., Cañas, L., Curcoll, R., Morgui, J., Matsuki, A., & Rodó, X. (2022). Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers. International Vasculitis and ANCA Workshop 2022."
+    "text": "Rodó, X., & Fontal, A. (2021). COVID-19 pandemic sets new clues on the transmission pathways in Kawasaki disease. JAMA network open, 4(4), e214624-e214624."
   },
   {
-    "objectID": "publications/articles/vasculitis2022.html#abstract",
-    "href": "publications/articles/vasculitis2022.html#abstract",
-    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
+    "objectID": "publications/articles/rodofontal2021.html#abstract",
+    "href": "publications/articles/rodofontal2021.html#abstract",
+    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
     "section": "Abstract",
-    "text": "Abstract\nKawasaki Disease (KD) is a systemic vasculitis that mainly affects children younger than 5 years old. Although KD cases have been registered in over 60 countries across several continents, its incidence is highest in East Asia, particularly in Japan, where the highest annual incidence rate was recorded in 2018: 359 cases per 100 000 children aged 0-4 years [1]. After more than five decades since its discovery, the etiology of KD is yet to be elucidated. Past studies have analyzed the association between KD and diverse environmental factors, with some advances pointing towards a relevant role of the atmospheric transport of a wind-borne agent as trigger of KD [2, 3]. The epidemiological records of KD in Japan show an increasing incidence trend and a marked seasonality, prompting questions about the nature of the drivers of these changes in incidence. In this work, we focus on updated records from Tokyo prefecture (2011-2018) to find an association with specific air source locations and higher incidence seasons."
+    "text": "Abstract\nMany theories have been formulated through decades regarding the causes of the mysterious syndrome known as Kawasaki disease (KD). This pediatric self-limited vasculitis has been escaping full characterization since Tomizaku Kawasaki, PhD, identified the disease that was then named after him. In many of the clinical histories, the role of external factors seems already clear, because the appearance of respiratory symptoms is reported to occur a few days before KD symptoms emerge (eg, an abnormal immune response characterized by increased levels of inflammatory cytokines and chemokines during the acute phase). However, the many attempts to characterize a unique agent have been unsuccessful so far. Whether this is an indication of a multiplicity of agents (ie, multiple-agent disease) or a complex interplay of factors interacting with the immune system of children who are genetically predisposed still remains an open question. However, in this race against time, a study by Hara and colleagues4 takes advantage of the unique epidemiological situation caused by the COVID-19 pandemic in Japan to perform a natural experiment that sheds new light on the hidden etiological processes of KD."
+  },
+  {
+    "objectID": "publications/articles/rodo2023.html",
+    "href": "publications/articles/rodo2023.html",
+    "title": "Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease",
+    "section": "",
+    "text": "Rodó, X., Navarro-Gallinad, A., Kojima, T., Morguí, J. A., Borràs, S., & Fontal, A. (2023). Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease. Environmental Research Letters, 18(7), 074011."
+  },
+  {
+    "objectID": "publications/articles/rodo2023.html#citation-apa",
+    "href": "publications/articles/rodo2023.html#citation-apa",
+    "title": "Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease",
+    "section": "",
+    "text": "Rodó, X., Navarro-Gallinad, A., Kojima, T., Morguí, J. A., Borràs, S., & Fontal, A. (2023). Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease. Environmental Research Letters, 18(7), 074011."
+  },
+  {
+    "objectID": "publications/articles/rodo2023.html#abstract",
+    "href": "publications/articles/rodo2023.html#abstract",
+    "title": "Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease",
+    "section": "Abstract",
+    "text": "Abstract\nAir pollution (urban, industrial or rural) has been linked to a myriad of human ailments despite clear mechanistic associations that are often not thoroughly established. Daily variability of fine aerosols in a surveillance campaign in south Japan shows a striking coevolution between their trace elements (metal and metalloid, MM) content and Kawasaki disease (KD) admissions, suggesting a strong dynamical link. These aerosol MM could instigate an immune response that, along with genetic susceptibility, would lead to KD development. This association may account for over 40% of the total variability in the disease, being dominated by a clear sub-weekly cycle (SWC1). Thanks to both an unprecedented daily KD epidemiological record going back to 1970, light detection and ranging (LIDAR) atmospheric backscattering profiles for the interval 2010–2016 and HYSPLIT simulations with numerous sensitivity analyses, we can trace this SWC1 variability to occur concomitantly from sub-seasonal to interannual timescales in both KD and aerosols. This SWC1 appears to connect or disconnect Japan to air intrusions from above the planetary boundary layer (PBL), having their source in industrial and agricultural areas in NE Asia and points to a stronger case for an agricultural source for the exposure as opposed to urban pollution. The KD maxima always occur in full synchrony with the arrival of very small (&lt;1 µm; PM1) particles showing that ultrafine aerosols appear as a necessary cofactor in the occurrence of KD and sets the field to associate other similar human diseases. Our study shows how signal-detection approaches can be useful to uncover hidden associations between the environment and human health, otherwise unnoticed and help set new early-warning systems for disease prevention."
   }
 ]

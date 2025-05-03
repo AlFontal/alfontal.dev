@@ -16,6 +16,7 @@ $card-border-color: $body-color !default;
 $code-block-bg: $secondary-shadow !default;
 $code-block-color: $body-bg !default;
 
+
 /* Go from zero to full opacity */
 @keyframes fadeEffect {
   from {opacity: 0;}
@@ -34,6 +35,10 @@ a {
 
 .nav-footer-center {
   min-height: unset;
+}
+
+.footer {
+  border-top: 1px solid $primary;
 }
 
 .navbar-logo {
@@ -92,11 +97,18 @@ div.quarto-title-banner {
 
 div.about-header {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 h1.about-title {
-  margin-bottom: -.4rem;
+  margin-bottom: -1rem;
   font-weight: 400;
+  text-align: center;
 }
 h1.about-title:hover {
   text-shadow: 0 0 5px $primary;
@@ -104,11 +116,31 @@ h1.about-title:hover {
 
 p.about-subtitle {
   font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 0.5rem;
+
  }
 
 div.about-links {
   font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
 }
+
+div.about-links a {
+  margin: 0 0.2rem;
+  color: $link-color;
+}
+
+.navbar {
+  background-color: $body-bg;
+}
+
+
+
 .navbar-nav a.nav-link,
 .navbar-nav a.nav-link:after,
 .navbar-nav a.nav-link:before {
@@ -144,14 +176,28 @@ li.pub-list-item {
 
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link:focus,
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link:focus {
+.navbar-nav a.nav-link:hover,
+.navbar-nav a.nav-link:focus {
+  color: $component-active-color;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+  color: $component-active-color;
+}
+
+svg.aa-SubmitIcon {
+  color: $component-active-color;
+}
+
+.navbar #quarto-search.type-overlay .aa-Autocomplete svg.aa-SubmitIcon {
   color: $component-active-color;
 }
 
 .navbar-nav a.nav-link:hover:after {
   width: 80%;
 }
+
 
 .navbar-nav a.nav-link.active:after {
   border-top: .2em solid $component-active-color;
@@ -226,6 +272,22 @@ a {
 
 .quarto-title-banner .quarto-title .title {
   color: $component-active-color;
+}
+
+.navbar-brand {
+  color: $body-color;
+}
+
+.menu-item {
+  color: $body-color;
+}
+
+.nav-link {
+  color: $primary;
+ }
+
+.nav-link .active {
+  color: $primary;
 }
 
 .navbar-brand:hover,
@@ -324,7 +386,7 @@ details[open] summary ~ * {
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: $primary;
+  background-color: $link-color;
 }
 
 /* Style the tab content */
@@ -348,4 +410,8 @@ details[open] summary ~ * {
   color: $body-bg !important;
   background-color: $primary !important;
   border: solid 1px $primary !important;
+}
+
+.index-anchor .anchored {
+  border-bottom: 1px solid $primary;
 }

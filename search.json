@@ -60,14 +60,14 @@
     "href": "publications/articles/rodo2024.html#abstract",
     "title": "Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens",
     "section": "Abstract",
-    "text": "Abstract\n\nSignificance\nAtmospheric aircraft monitoring with 10 tropospheric flights over the planetary boundary layer in Japan (between 1,000 m and 3,000 m above sea-level) demonstrate the presence of viable bacteria and fungi harmful to humans. Long-distance transport for over 2,000 km is possible in the free troposphere for air masses originating in agricultural regions enriched in fertilizers and pesticides.\n\n\nAbstract\nThe existence of viable human pathogens in bioaerosols which can cause infection or affect human health has been the subject of little research. In this study, data provided by 10 tropospheric aircraft surveys over Japan in 2014 confirm the existence of a vast diversity of microbial species up to 3,000 m height, which can be dispersed above the planetary boundary layer over distances of up to 2,000 km, thanks to strong winds from an area covered with massive cereal croplands in Northeast (NE) Asia. Microbes attached to aerosols reveal the presence of diverse bacterial and fungal taxa, including potential human pathogens, originating from sewage, pesticides, or fertilizers. Over 266 different fungal and 305 bacterial genera appeared in the 10 aircraft transects. Actinobacteria, Bacillota, Proteobacteria, and Bacteroidetes phyla dominated the bacteria composition and, for fungi, Ascomycota prevailed over Basidiomycota. Among the pathogenic species identified, human pathogens include bacteria such as Escherichia coli, Serratia marcescens, Prevotella melaninogenica, Staphylococcus epidermidis, Staphylococcus haemolyticus, Staphylococcus saprophyticus, Cutibacterium acnes, Clostridium difficile, Clostridium botulinum, Stenotrophomonas maltophilia, Shigella sonnei, Haemophillus parainfluenzae and Acinetobacter baumannii and health-relevant fungi such as Malassezia restricta, Malassezia globosa, Candida parapsilosis and Candida zeylanoides, Sarocladium kiliense, Cladosporium halotolerans, and Cladosporium herbarum. Diversity estimates were similar at heights and surface when entrainment of air from high altitudes occurred. Natural antimicrobial-resistant bacteria (ARB) cultured from air samples were found indicating long-distance spread of ARB and microbial viability. This would represent a novel way to disperse both viable human pathogens and resistance genes among distant geographical regions."
+    "text": "Abstract\n\nSignificance\nAtmospheric aircraft monitoring with 10 tropospheric flights over the planetary boundary layer in Japan (between 1,000 m and 3,000 m above sea-level) demonstrate the presence of viable bacteria and fungi harmful to humans. Long-distance transport for over 2,000 km is possible in the free troposphere for air masses originating in agricultural regions enriched in fertilizers and pesticides.\n\n\nAbstract\nThe existence of viable human pathogens in bioaerosols which can cause infection or affect human health has been the subject of little research. In this study, data provided by 10 tropospheric aircraft surveys over Japan in 2014 confirm the existence of a vast diversity of microbial species up to 3,000 m height, which can be dispersed above the planetary boundary layer over distances of up to 2,000 km, thanks to strong winds from an area covered with massive cereal croplands in Northeast (NE) Asia.\nMicrobes attached to aerosols reveal the presence of diverse bacterial and fungal taxa, including potential human pathogens, originating from sewage, pesticides, or fertilizers. Over 266 different fungal and 305 bacterial genera appeared in the 10 aircraft transects. Actinobacteria, Bacillota, Proteobacteria, and Bacteroidetes phyla dominated the bacteria composition and, for fungi, Ascomycota prevailed over Basidiomycota.\nAmong the pathogenic species identified, human pathogens include bacteria such as Escherichia coli, Serratia marcescens, Prevotella melaninogenica, Staphylococcus epidermidis, Staphylococcus haemolyticus, Staphylococcus saprophyticus, Cutibacterium acnes, Clostridium difficile, Clostridium botulinum, Stenotrophomonas maltophilia, Shigella sonnei, Haemophillus parainfluenzae and Acinetobacter baumannii and health-relevant fungi such as Malassezia restricta, Malassezia globosa, Candida parapsilosis and Candida zeylanoides, Sarocladium kiliense, Cladosporium halotolerans, and Cladosporium herbarum.\nDiversity estimates were similar at heights and surface when entrainment of air from high altitudes occurred. Natural antimicrobial-resistant bacteria (ARB) cultured from air samples were found indicating long-distance spread of ARB and microbial viability. This would represent a novel way to disperse both viable human pathogens and resistance genes among distant geographical regions."
   },
   {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "First post on the blog\n\n\n\nQuarto\n\nBlog\n\n\n\nIntroducing the site and the blog.\n\n\n\n\n\nMonday, the 20 of February, 2023\n\n\nAlejandro Fontal\n\n\n\n\n\nNo matching items"
+    "text": "Guess Who?\n\n\n\nGame Theory\n\nPython\n\n\n\nSimulating game scenarios in Guess Who?\n\n\n\n\n\n2025-05-04\n\n\nAlejandro Fontal\n\n\n\n\n\n\n\n\n\n\n\n\nFirst post on the blog\n\n\n\nQuarto\n\nBlog\n\n\n\nIntroducing the site and the blog.\n\n\n\n\n\n2023-02-20\n\n\nAlejandro Fontal\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -81,7 +81,7 @@
     "href": "index.html#education",
     "title": "\nAlejandro Fontal\n",
     "section": "Education",
-    "text": "Education\n\nPh.D. in Biotechnology, 2019-2024\nUniversitat de Barcelona, Spain\nM.Sc. in Bioinformatics, 2016-2018  Wageningen University & Research, The Netherlands\nB.Sc. in Biotechnology, 2011-2015\nUniversitat de Barcelona, Spain"
+    "text": "Education\n\n\nPhD in Biotechnology, 2019-2024\n\n\nUniversitat de Barcelona, Spain\n\n\nWhile the institution that awarded me the PhD in Biotechnology was Universitat de Barcelona, most of the research was done at ISGlobal, as part of the Climate and Health research group in the Parc de Recerca Biomèdica de Barcelona (PRBB). I was funded by a Marie Skłodowska-Curie Actions doctoral grant under the HELICAL project focused on a transdisciplinary training programme on the use of computational tools to study the factors driving vasculitis onset.\nThe PhD thesis was titled “Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset”.\n\n\n\nMSc in Bioinformatics, 2016-2018 \n\nWageningen University & Research, The Netherlands\n\n\n\n\n\nBSc. in Biotechnology, 2011-2015\n\n\nUniversitat de Barcelona, Spain"
   },
   {
     "objectID": "index.html#interests",
@@ -89,6 +89,20 @@
     "title": "\nAlejandro Fontal\n",
     "section": "Interests",
     "text": "Interests\n\nAutomation\nOpen Science\nReproducible Research\nData Visualisation\nMachine Learning\nEpidemiology\nGIS"
+  },
+  {
+    "objectID": "posts/guess_who/guess_who.html",
+    "href": "posts/guess_who/guess_who.html",
+    "title": "Guess Who?",
+    "section": "",
+    "text": "In this blog post we will implement a Guess who? game simulation in Python and play around with potential strategies to (if possible), increase winning chances.\n\n\n\n\n\nimport numpy as np\nimport pandas as pd\nimport plotnine as p9"
+  },
+  {
+    "objectID": "posts/guess_who/guess_who.html#introduction",
+    "href": "posts/guess_who/guess_who.html#introduction",
+    "title": "Guess Who?",
+    "section": "",
+    "text": "In this blog post we will implement a Guess who? game simulation in Python and play around with potential strategies to (if possible), increase winning chances.\n\n\n\n\n\nimport numpy as np\nimport pandas as pd\nimport plotnine as p9"
   },
   {
     "objectID": "posts/first-post/index.html",

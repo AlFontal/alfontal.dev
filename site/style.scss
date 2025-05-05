@@ -6,7 +6,7 @@ $primary: #4C3F2E !default;
 $secondary: #eee8d5 !default;
 $secondary-shadow: #dbd1b6 !default;
 $medium: #4c3f2ea8 !default;
-$link-color: #786246d5 !default;
+$link-color: #9b8b75d5 !default;
 
 // Base variables
 $body-bg: $secondary !default;
@@ -287,6 +287,38 @@ div.about-links a {
   margin: 0 0.2rem;
   color: $link-color;
 }
+
+div.about-links a:hover {
+  transition: all .25s ease;
+  filter: drop-shadow(0 0 7px $link-color);
+}
+
+
+.about-links a {
+  transition: transform 0.25s ease, color 0.25s ease, filter 0.25s ease;
+  filter: drop-shadow(0 0 0 transparent);
+}
+
+/* Social Links Hover Effects */
+$hover-colors: (
+  "mailto": #bb001b,
+  "github": #333,
+  "gitlab": #fc6d26,
+  "linkedin": #0a66c2,
+  "orcid": #a6ce39,
+  "twitter": #1da1f2,
+  "letterboxd": #00d735,
+  "instagram": #e1306c,
+  "strava": #fc4c02
+);
+
+@each $key, $color in $hover-colors {
+  .about-links a[href*="#{$key}"]:hover {
+    color: $color;
+    filter: drop-shadow(0 0 7px $color);
+  }
+}
+
 
 /*------------------------------------------------
   5. TABBED CONTENT

@@ -56,15 +56,15 @@ website:
 format:
   html:
     theme:
-      - flatly
+      - default
       - style.scss
-    mainfont: 'Georgia'
     lang: en
-    date-format: 'dddd[, the] D [of] MMMM, YYYY'
+    date-format: 'YYYY-MM-DD'
     highlight-style: gruvbox-light
     code-copy: true
     code-link: true
     anchor-sections: true
+    fontcolor: "#4C3F2E"
     email-obfuscation: javascript
     link-external-newwindow: true
     fig-align: center

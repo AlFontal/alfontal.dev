@@ -90,7 +90,7 @@ function openTab(evt, tabName) {
 
 :::
 
-Welcome to my personal website. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine.
+Welcome to my personal site and portfolio. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine.
 
 ```{=html}
 <div class="tab">
@@ -116,7 +116,7 @@ In my research, I use a combination of time series analysis, GIS, metagenomics s
 As a big part of my work performed during my PhD and postdoc has been focused on Kawasaki Disease, a pediatric syndrome that affects thousands of children each year, and whose etiology is still a mystery after over 50 years of being studied.
 </p>
 <p>
-Apart from this, I also work together with our colleagues in the <a href="https://github.com/AirLabBcn">AIRLAB</a> on the <em>aerobiome</em>, studying the microbial diversity that lives in the air, both indoors, outdoors (in the urban aerobiome but also in rural areas and in the atmosphere).
+Apart from this, I also work together with our colleagues in the <a href="https://github.com/AirLabBcn">AIRLAB</a> on the <em>aerobiome</em>, studying the microbial diversity that inhabits the air, both indoors and outdoors (in the urban aerobiome but also in rural areas and up in the atmosphere).
 </p>
 </div>
 
@@ -147,7 +147,7 @@ A lot of inspiration from other Quarto websites was taken to make this site. Mai
 <li>I copied the <code>article.ejs</code> script to automatically list publications by <a href="https://github.com/jmgirard/">Jeffrey Girard</a> in his <a href="https://affcom.ku.edu/">AffComLab website</a> and slightly modified it to suit my needs.</li>
 </ul>
 <p>
-To check the source code, you can do so in <a href="https://github.com/AlFontal">Github</a>. Please raise an issue if you notice something is wrong or not working as intended.
+To check the source code, you can do so in <a href="https://github.com/AlFontal">Github</a>. Please raise an issue if you notice something is wrong or not working as intended, as I might have overdone it with the CSS/JavaScript tinkering.
 </p>
 </div>
 ```
@@ -161,9 +161,10 @@ To check the source code, you can do so in <a href="https://github.com/AlFontal"
 <summary>**PhD in Biotechnology**, **2019-2024**  
   <p class="temporary-hidden"> *Universitat de Barcelona, Spain* </p>
 </summary>
-While the institution that awarded me the PhD in Biotechnology was Universitat de Barcelona, most of the research was done at [ISGlobal](https://isglobal.org), as part of the Climate and Health research group in the Parc de Recerca Biomèdica de Barcelona ([PRBB]([prbb.org](https://www.prbb.org/))). I was funded by a Marie Skłodowska-Curie Actions doctoral grant under the [HELICAL](https://helical-itn.github.io) project focused on a transdisciplinary training programme on the use of computational tools to study the factors driving vasculitis onset.
+<p> </p>
+My doctoral programme and PhD title were awarded by the [Universitat de Barcelona](https://web.ub.edu/en/web/ub/), but my daily research was done at [ISGlobal](https://isglobal.org), as part of the Climate and Health research group in the Parc de Recerca Biomèdica de Barcelona ([PRBB]([prbb.org](https://www.prbb.org/))). I was funded by a Marie Skłodowska-Curie Actions doctoral grant under the [HELICAL](https://helical-itn.github.io) project, which was a consortium of over 15 institutions all over the EU that focused on the use of computational tools to study the factors driving vasculitis onset.
 
-The PhD thesis was titled _"Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset"_.
+The thesis was titled _"Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset"_ and can be found [here](https://archive.org/download/thesis_AF_final/thesis_AF_final.pdf).
 
 </details>
 
@@ -171,11 +172,10 @@ The PhD thesis was titled _"Atmospheric characterization and time-series analysi
 <summary>**MSc in Bioinformatics**, **2016-2018** <br>
   <p class="temporary-hidden"> *Wageningen University & Research, The Netherlands* </p>
 </summary>
-
 </details>
 
 <details>
-<summary>**_BSc._ in Biotechnology**, **2011-2015**  
+<summary>**BSc in Biotechnology**, **2011-2015**  
   <p class="temporary-hidden"> *Universitat de Barcelona, Spain* </p>
 </summary>
 

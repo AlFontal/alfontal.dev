@@ -1,44 +1,92 @@
 @import url('https://fonts.googleapis.com/css2?family=Charmonman:wght@700&display=swap');
 
 /*-- scss:defaults --*/
+// Color definitions
 $primary: #4C3F2E !default;
 $secondary: #eee8d5 !default;
 $secondary-shadow: #dbd1b6 !default;
+$medium: #4c3f2ea8 !default;
+$link-color: #786246d5 !default;
+
+// Base variables
 $body-bg: $secondary !default;
 $body-color: $primary !default;
-$link-color: #786246d5 !default;
 $link-hover-color: $primary !default;
 $component-active-color: $primary !default;
-$medium: #4c3f2ea8 !default;
+
+// Component variables
 $card-color: $body-color !default;
 $card-bg: $body-bg !default;
 $card-border-color: $body-color !default;
 $code-block-bg: $secondary-shadow !default;
 $code-block-color: $body-bg !default;
 
+// Border variables
+$border-color: $body-color !default;
+$input-border-color: $body-color !default;
+$dropdown-border-color: $body-color !default;
+$table-border-color: $body-color !default;
 
-/* Go from zero to full opacity */
+/*-- Animations --*/
 @keyframes fadeEffect {
   from {opacity: 0;}
   to {opacity: 1;}
 }
 
 /*-- scss:rules --*/
+/*------------------------------------------------
+  1. TYPOGRAPHY AND BASE STYLES
+-------------------------------------------------*/
+body {
+  font-family: "Georgia", serif;
+  font-size: 1rem;
+}
+
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-weight: 600;
   color: $body-color;
 }
 
+h2 {
+  border-bottom: 1px solid $primary;
+}
 
 a {
   transition: all .35s ease;
+  text-decoration: none;
 }
+
+blockquote {
+  border-left: .25rem solid $link-color;
+}
+
+summary {
+  color: $body-color !important;
+}
+
+details[open] .temporary-hidden {
+  display: none;
+}
+
+/*------------------------------------------------
+  2. LAYOUT AND STRUCTURAL ELEMENTS
+-------------------------------------------------*/
 
 .nav-footer-center {
   min-height: unset;
 }
 
-.footer {
-  border-top: 1px solid $primary;
+.hcenter {
+  text-align: center;
+}
+
+/*------------------------------------------------
+  3. NAVIGATION AND HEADER
+-------------------------------------------------*/
+/* Navbar */
+.navbar {
+  background-color: $body-bg;
 }
 
 .navbar-logo {
@@ -46,12 +94,135 @@ a {
   padding-left: 1rem;
 }
 
-/* We hide the title if width is under 450px to not clash with logo*/
+.navbar-logo:hover {
+  transition: all .35s ease;
+  filter: drop-shadow(0 0 3px $primary);
+}
+
+/* Hide title on small screens */
 @media (max-width: 450px) { 
   .navbar-title {
-           display: none !important; 
-      }       
-  }
+    display: none !important; 
+  }       
+}
+
+.navbar-title {
+  transition: all .35s ease;
+  display: inline-block;
+  padding: .25em .4em;
+  position: relative;
+  font-weight: bolder;
+  font-size: 1.2em;
+  font-family: 'Charmonman', cursive;
+}
+
+.navbar-title:hover {
+  filter: drop-shadow(0 0 2px #4c3f2e);
+  color: $body-bg;
+}
+
+/* Navbar title decorative elements */
+.navbar-title::before,
+.navbar-title::after {
+  content: '';
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  transition: all .35s ease;
+  opacity: 0;
+}
+
+.navbar-title::before {
+  right: 0;
+  top: 0;
+  border-top: 3px solid $component-active-color;
+  border-right: 3px solid $component-active-color;
+  transform: translate(-100%, 50%);
+}
+
+.navbar-title:after {
+  left: 0;
+  bottom: 0;
+  border-bottom: 3px solid $component-active-color;
+  border-left: 3px solid $component-active-color;
+  transform: translate(100%, -50%)
+}
+
+.navbar-title:hover:before,
+.navbar-title:hover:after {
+  transform: translate(0,0);
+  opacity: 1;
+}
+
+/* Nav links */
+.nav-link {
+  color: $primary;
+}
+
+.navbar-nav a.nav-link {
+  position: relative;
+  transition: all .75s;
+}
+
+.navbar-nav a.nav-link:after {
+  position: absolute;
+  border-top: .1em solid $component-active-color;
+  content: "";
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  transition: all .75s;
+}
+
+.navbar-nav a.nav-link:hover:after {
+  width: 80%;
+  border-top: .1em solid $component-active-color;
+}
+
+.navbar-nav a.nav-link.active:after {
+  border-top: .2em solid $component-active-color;
+  width: 80%;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show,
+.navbar-nav .show>.nav-link,
+.navbar-nav .active>.nav-link,
+.navbar-nav .nav-link.active {
+  color: $component-active-color;
+  font-weight: bolder;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-nav a.nav-link:hover,
+.navbar-nav a.nav-link:focus {
+  color: $component-active-color;
+}
+
+.navbar-brand {
+  color: $body-color;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+  color: $component-active-color;
+}
+
+/* Search icon */
+svg.aa-SubmitIcon,
+.navbar #quarto-search.type-overlay .aa-Autocomplete svg.aa-SubmitIcon {
+  color: $component-active-color;
+}
+
+/*------------------------------------------------
+  4. PROFILE/ABOUT SECTION
+-------------------------------------------------*/
+div.profile-text {
+  text-align: center;
+}
 
 img.about-image {
   border-radius: 50%;
@@ -62,21 +233,9 @@ img.about-image {
   width: 10rem;
 }
 
-
 img.about-image:hover {
   transition: all .35s ease;
   filter: drop-shadow(0 0 10px $primary);
-}
-
-img.navbar-logo:hover {
-  transition: all .35s ease;
-  filter: drop-shadow(0 0 3px $primary);
-}
-
-.navbar-title:hover {
-  transition: all .35s ease;
-  filter: drop-shadow(0 0 2px #4c3f2e);
-  color: $body-bg;
 }
 
 img.about-logo {
@@ -86,13 +245,6 @@ img.about-logo {
 img.about-logo:hover {
   transition: all .35s ease;
   filter: drop-shadow(0 0 10px $primary);
-}
-.about-entity #title-block-header.quarto-title-block.default .quarto-title .title:hover {
-  color: $primary;
-}
-
-div.quarto-title-banner {
-  background: none;
 }
 
 div.about-header {
@@ -106,10 +258,12 @@ div.about-header {
 }
 
 h1.about-title {
+  font-family: "Georgia", serif;
   margin-bottom: -1rem;
   font-weight: 400;
   text-align: center;
 }
+
 h1.about-title:hover {
   text-shadow: 0 0 5px $primary;
 }
@@ -118,8 +272,7 @@ p.about-subtitle {
   font-size: 1.2em;
   text-align: center;
   margin-bottom: 0.5rem;
-
- }
+}
 
 div.about-links {
   font-size: 1.4rem;
@@ -135,174 +288,82 @@ div.about-links a {
   color: $link-color;
 }
 
-.navbar {
-  background-color: $body-bg;
+/*------------------------------------------------
+  5. TABBED CONTENT
+-------------------------------------------------*/
+/* Tab container */
+.tab {
+  overflow: hidden;
+  text-align: center;
 }
 
-
-
-.navbar-nav a.nav-link,
-.navbar-nav a.nav-link:after,
-.navbar-nav a.nav-link:before {
-  transition: all .75s;
+/* Tab buttons */
+.tab button {
+  cursor: pointer;
+  transition: 0.3s;
+  color: $secondary;
+  background-color: $link-color;
+  font-family: monospace;
+  float: center;
 }
 
-.navbar-nav a.nav-link {
-  position: relative;
+.tab button:hover {
+  background-color: $primary;
 }
 
-li.pub-list-item {
-  padding-bottom: 1rem;
+.tab button.active {
+  background-color: $link-color;
 }
 
-.navbar-nav a.nav-link:after {
-  position: absolute;
-  border-top: .1em solid $nav-link-disabled-color;
-  content: "";
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 0%;
+/* Tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+  animation: fadeEffect 1s;
 }
 
-.navbar-nav a.nav-link:after {
-  border-top: .1em solid $component-active-color;
+/*------------------------------------------------
+  6. TABLE OF CONTENTS
+-------------------------------------------------*/
+#TOC .nav-link {
+  border-left: 1px solid $link-color;
 }
 
-.navbar-nav a.nav-link:hover:after {
-  border-top: .1em solid $component-active-color;
+#TOC .nav-link.active {
+  border-left: 2px solid $primary;
+  background-color: #d3bda1;
 }
 
-.navbar-dark .navbar-nav .nav-link:hover,
-.navbar-dark .navbar-nav .nav-link:focus,
-.navbar-nav a.nav-link:hover,
-.navbar-nav a.nav-link:focus {
-  color: $component-active-color;
+/*------------------------------------------------
+  7. COMPONENTS & UI ELEMENTS
+-------------------------------------------------*/
+/* Cards */
+.card-title {
+  text-align: center;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  letter-spacing: -1px;
+  padding-bottom: 5%;
 }
 
-.navbar-nav .nav-link.active,
-.navbar-nav .nav-link.show {
-  color: $component-active-color;
+// Thumbnail images
+
+ .thumbnail-image {
+  border: solid 2px $primary;
 }
 
-svg.aa-SubmitIcon {
-  color: $component-active-color;
-}
-
-.navbar #quarto-search.type-overlay .aa-Autocomplete svg.aa-SubmitIcon {
-  color: $component-active-color;
-}
-
-.navbar-nav a.nav-link:hover:after {
-  width: 80%;
-}
-
-
-.navbar-nav a.nav-link.active:after {
-  border-top: .2em solid $component-active-color;
-}
-.navbar-nav a.nav-link.active:hover:after {
-  border-top: .2em solid $component-active-color;
-}
-
-.navbar-nav .show>.nav-link,
-.navbar-nav .active>.nav-link,
-.navbar-nav .nav-link.active {
-  font-weight: bolder;
-}
-
-.navbar-dark .navbar-nav .show>.nav-link,
-.navbar-dark .navbar-nav .active>.nav-link,
-.navbar-dark .navbar-nav .nav-link.active {
-  color: $component-active-color;
-}
-
-a {
-  text-decoration: none;
-  -webkit-text-decoration: none;
-  -moz-text-decoration: none;
-  -ms-text-decoration: none;
-  -o-text-decoration: none;
-}
-
-.navbar-title {
+.thumbnail-image:hover {
   transition: all .35s ease;
-  display: inline-block;
-  padding: .25em .4em;
-  position: relative;
-  font-weight: bolder;
-  font-size: 1.2em;
-  font-family: 'Charmonman', cursive;
+  filter: drop-shadow(0 0 10px $primary);
 }
 
-.navbar-title::before,
-.navbar-title::after {
-  content: '';
-  height: 14px;
-  width: 14px;
-  position: absolute;
-  transition: all .35s ease;
-  opacity: 0;
-}
-
-.navbar-title::before {
-  content: '';
-  right: 0;
-  top: 0;
-  border-top: 3px solid $component-active-color;
-  border-right: 3px solid $component-active-color;
-  transform: translate(-100%, 50%);
-}
-
-.navbar-title:after {
-  content: '';
-  left: 0;
-  bottom: 0;
-  border-bottom: 3px solid $component-active-color;
-  border-left: 3px solid $component-active-color;
-  transform: translate(100%, -50%)
-}
-
-.navbar-title:hover:before,
-.navbar-title:hover:after{
-  transform: translate(0,0);
-  opacity: 1;
-}
-
-.quarto-title-banner .quarto-title .title {
-  color: $component-active-color;
-}
-
-.navbar-brand {
-  color: $body-color;
-}
-
-.menu-item {
-  color: $body-color;
-}
-
-.nav-link {
-  color: $primary;
- }
-
-.nav-link .active {
-  color: $primary;
-}
-
-.navbar-brand:hover,
-.navbar-brand:focus {
-  color: $component-active-color;
-}
-
-.quarto-title-banner {
-  margin-bottom: 1em;
-  color: $body-color;
-  background: $medium;
-}
-
-.listing-description {
-  color: $link-color;
+/* Forms */
+.form-control, 
+.form-select, 
+.input-group-text {
+  border: 1px solid $primary;
 }
 
 .input-group-text {
@@ -310,21 +371,15 @@ a {
   color: $secondary;
 }
 
+/* Buttons */
 .btn-primary {
   margin-right: .2rem;
   margin-top: .5rem;
   font-family: monospace;
   font-size: small;
 }
-summary .test {
-  color: $primary;
-}
 
-div.quarto-post .listing-categories .listing-category {
-  color: $link-color;
-  border: solid 1px $body-color;
-}
-
+/* Pagination */
 .page-item.active .page-link {
   color: $body-bg;
 }
@@ -337,81 +392,46 @@ div.quarto-post .listing-categories .listing-category {
   color: $body-bg;
 }
 
-
-div.profile-text {
-  text-align: center;
-}
-
-.hcenter {
-  text-align: center;
-}
-
-.flex-container {
-  display: flex;
-  background-color: DodgerBlue;
-}
-
-.flex-container > div {
-  background-color: #f1f1f1;
-  margin: 10px;
-  padding: 20px;
-  font-size: 30px;
-}
-
-details[open] summary ~ * {
-  animation: sweep .5s ease-in-out;
-}
-
-
-/* Style the tab */
-.tab {
-  overflow: hidden;
-  text-align: center;
-}
-
-/* Style the buttons inside the tab */
-.tab button {
-  float: center;
-  cursor: pointer;
-  transition: 0.3s;
-  color: #eee8d5;
-  background-color: $link-color;
-  font-family: monospace;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: $primary;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: $link-color;
-}
-
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border-top: none;
-  animation: fadeEffect 1s; 
-}
-
-.card-title {
-  text-align: center;
-  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  letter-spacing: -1px;
-  padding-bottom: 5%;
-}
-
+/* Listings */
 .listing-category {
   color: $body-bg !important;
   background-color: $primary !important;
   border: solid 1px $primary !important;
 }
 
-.index-anchor .anchored {
+.listing-description {
+  color: $link-color;
+}
+
+li.pub-list-item {
+  padding-bottom: 1rem;
+}
+
+div .quarto-post {
   border-bottom: 1px solid $primary;
+  padding-bottom: 1rem;
+}
+
+/* Title banner */
+div.quarto-title-banner {
+  background: none;
+  margin-bottom: 1em;
+  color: $body-color;
+}
+
+.quarto-title-banner .quarto-title .title {
+  color: $component-active-color;
+}
+
+.about-entity #title-block-header.quarto-title-block.default .quarto-title .title:hover {
+  color: $primary;
+}
+
+/* Details element */
+details[open] summary ~ * {
+  animation: sweep .5s ease-in-out;
+}
+
+.menu-item {
+  color: $body-color;
 }

@@ -157,14 +157,29 @@ To check the source code, you can do so in <a href="https://github.com/AlFontal"
 ::: {.g-col-12 .g-col-md-8 style="text-align: left;"}
 ## Education {.index-anchor}
 
-- **_Ph.D._ in Biotechnology**, **2019-2024**  
-  *Universitat de Barcelona, Spain*
+<details>
+<summary>**PhD in Biotechnology**, **2019-2024**  
+  <p class="temporary-hidden"> *Universitat de Barcelona, Spain* </p>
+</summary>
+While the institution that awarded me the PhD in Biotechnology was Universitat de Barcelona, most of the research was done at [ISGlobal](https://isglobal.org), as part of the Climate and Health research group in the Parc de Recerca Biomèdica de Barcelona ([PRBB]([prbb.org](https://www.prbb.org/))). I was funded by a Marie Skłodowska-Curie Actions doctoral grant under the [HELICAL](https://helical-itn.github.io) project focused on a transdisciplinary training programme on the use of computational tools to study the factors driving vasculitis onset.
 
-- **_M.Sc._ in Bioinformatics**, **2016-2018** <br>
-  *Wageningen University & Research, The Netherlands*
+The PhD thesis was titled _"Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset"_.
 
-- **_B.Sc._ in Biotechnology**, **2011-2015**  
-  *Universitat de Barcelona, Spain*
+</details>
+
+<details>
+<summary>**MSc in Bioinformatics**, **2016-2018** <br>
+  <p class="temporary-hidden"> *Wageningen University & Research, The Netherlands* </p>
+</summary>
+
+</details>
+
+<details>
+<summary>**_BSc._ in Biotechnology**, **2011-2015**  
+  <p class="temporary-hidden"> *Universitat de Barcelona, Spain* </p>
+</summary>
+
+</details>
 :::
 
 ::: {.g-col-12 .g-col-md-4 style="text-align: left;"}

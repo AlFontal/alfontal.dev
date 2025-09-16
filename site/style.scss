@@ -69,6 +69,10 @@ details[open] .temporary-hidden {
   display: none;
 }
 
+pre code {
+  font-size: 0.85em
+}
+
 /*------------------------------------------------
   2. LAYOUT AND STRUCTURAL ELEMENTS
 -------------------------------------------------*/
@@ -467,3 +471,25 @@ details[open] summary ~ * {
 .menu-item {
   color: $body-color;
 }
+
+/* Blog posts and notebooks */
+
+.quarto-title-banner {
+  padding-bottom: 0em;
+  margin-bottom: 0em;
+}
+
+.figure-img {
+  width: 100%;
+  height: auto;
+  }
+
+.dataframe {
+    width: auto;
+    text-align: center;  
+    }
+    
+table tr:hover {
+    background: $link-color;
+    // transition: background-color .3s ease;
+    }

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -35,14 +35,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ddd4c9f83ef2e7750b8fb31ca6a71aee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-daa61cdf0a0f2a7b7769a5faa9ec7e5c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fbc40a222013dfce25a36ae3f7c0adac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-05223a4c700e494bd675f744c8ef1a15.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/iconify-1.0.0-beta.2/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -124,7 +125,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -164,7 +165,8 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./media/logo_alejandro.png" alt="" class="navbar-logo">
+    <img src="./media/logo_alejandro.png" alt="" class="navbar-logo light-content">
+    <img src="./media/logo_alejandro.png" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Alejandro Fontal</span>
@@ -220,7 +222,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="QWVyb2Jpb2xvZ3k=">Aerobiology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QWlyJTIwUG9sbHV0aW9uJTIwJTI2JTIwSGVhbHRo">Air Pollution &amp; Health <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QXRtb3NwaGVyaWMlMjBQcm9jZXNzZXM=">Atmospheric Processes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QmlvaW5mb3JtYXRpY3M=">Bioinformatics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2xpbWF0ZSUyMCUyNiUyMEhlYWx0aA==">Climate &amp; Health <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29uZmVyZW5jZQ==">Conference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q09WSUQtMTk=">COVID-19 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RXBpZGVtaW9sb2d5">Epidemiology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SW5mZWN0aW91cyUyMERpc2Vhc2Vz">Infectious Diseases <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Sm91cm5hbCUyMEFydGljbGU=">Journal Article <span class="quarto-category-count">(3)</span></div><div class="category" data-category="S2F3YXNha2klMjBEaXNlYXNl">Kawasaki Disease <span class="quarto-category-count">(3)</span></div><div class="category" data-category="TWFjaGluZSUyMExlYXJuaW5n">Machine Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWV0YWdlbm9taWNz">Metagenomics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWljcm9iaW9sb2d5">Microbiology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UGVkaWF0cmljcw==">Pediatrics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHJvdGVvbWljcw==">Proteomics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGltZSUyMFNlcmllcyUyMEFuYWx5c2lz">Time Series Analysis <span class="quarto-category-count">(3)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(8)</span></div><div class="category" data-category="QWVyb2Jpb2xvZ3k=">Aerobiology <span class="quarto-category-count">(3)</span></div><div class="category" data-category="QWlyJTIwUG9sbHV0aW9uJTIwJTI2JTIwSGVhbHRo">Air Pollution &amp; Health <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QXRtb3NwaGVyaWMlMjBQcm9jZXNzZXM=">Atmospheric Processes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QmlvaW5mb3JtYXRpY3M=">Bioinformatics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2xpbWF0ZSUyMCUyNiUyMEhlYWx0aA==">Climate &amp; Health <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29uZmVyZW5jZQ==">Conference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q09WSUQtMTk=">COVID-19 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RW52aXJvbm1lbnRhbCUyMG1vbml0b3Jpbmc=">Environmental monitoring <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RXBpZGVtaW9sb2d5">Epidemiology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SW5mZWN0aW91cyUyMERpc2Vhc2Vz">Infectious Diseases <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Sm91cm5hbCUyMEFydGljbGU=">Journal Article <span class="quarto-category-count">(3)</span></div><div class="category" data-category="S2F3YXNha2klMjBEaXNlYXNl">Kawasaki Disease <span class="quarto-category-count">(3)</span></div><div class="category" data-category="TGFzZXItSW5kdWNlZCUyMEZsdW9yZXNjZW5jZQ==">Laser-Induced Fluorescence <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWFjaGluZSUyMExlYXJuaW5n">Machine Learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TWV0YWdlbm9taWNz">Metagenomics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWljcm9iaW9sb2d5">Microbiology <span class="quarto-category-count">(3)</span></div><div class="category" data-category="TWljcm9iaW9tZQ==">Microbiome <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UGVkaWF0cmljcw==">Pediatrics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHJvdGVvbWljcw==">Proteomics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGltZSUyMFNlcmllcyUyMEFuYWx5c2lz">Time Series Analysis <span class="quarto-category-count">(3)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
@@ -255,7 +257,91 @@ window.Quarto = {
 </div>
 <ul class="pub-list list">
 
-  <li class="pub-list-item" data-index="0" data-categories="TWljcm9iaW9sb2d5JTJDTWV0YWdlbm9taWNzJTJDQWVyb2Jpb2xvZ3klMkNJbmZlY3Rpb3VzJTIwRGlzZWFzZXMlMkNKb3VybmFsJTIwQXJ0aWNsZQ==" data-listing-date-sort="1725840000000" data-listing-file-modified-sort="1746452513713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="354">
+  <li class="pub-list-item" data-index="0" data-categories="TWljcm9iaW9sb2d5JTJDTWFjaGluZSUyMExlYXJuaW5nJTJDTGFzZXItSW5kdWNlZCUyMEZsdW9yZXNjZW5jZSUyQ0Flcm9iaW9sb2d5" data-listing-date-sort="1754352000000" data-listing-file-modified-sort="1758057205391" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="283">
+    <span class="listing-title lead">Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols</span><br>
+    <span class="listing-author">
+        
+          Alejandro Fontal, 
+        
+          Sílvia Borràs, 
+        
+          Sofya Pozdniakova, 
+        
+          Lidia Cañas, 
+        
+          Xavier Rodó
+        
+      </span><br>
+    <span class="listing-publication fst-italic ">EGUsphere (preprint)</span>
+    <span class="listing-year">(2025)</span><br>
+    <a href="./publications/articles/fontal2025.html" class="btn btn-primary">
+      Details
+    </a>
+    
+    <a href="https://doi.org/10.5194/egusphere-2025-2484" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+      DOI
+    </a>
+    
+    
+    <a href="https://egusphere.copernicus.org/preprints/2025/egusphere-2025-2484/egusphere-2025-2484.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+      <i class="bi bi-file-earmark-text"></i> PDF
+    </a>
+    
+    
+    <a href="https://github.com/AlFontal/lif-bacteria-aerosols-ms" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-github"></i> Code
+    </a>
+    
+  </li>
+
+  <li class="pub-list-item" data-index="1" data-categories="TWljcm9iaW9sb2d5JTJDTWljcm9iaW9tZSUyQ0Flcm9iaW9sb2d5JTJDRW52aXJvbm1lbnRhbCUyMG1vbml0b3Jpbmc=" data-listing-date-sort="1737072000000" data-listing-file-modified-sort="1758057205391" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="231">
+    <span class="listing-title lead">Integrating air microbiome for comprehensive air quality analysis</span><br>
+    <span class="listing-author">
+        
+          Sofya Pozdniakova, 
+        
+          Akira Uchida, 
+        
+          Alejandro Fontal, 
+        
+          Lidia Cañas, 
+        
+          Samuel Santamaría, 
+        
+          Lim Yee Hui, 
+        
+          Irvan Luhung, 
+        
+          Stephan C. Schuster, 
+        
+          Xavier Rodó, 
+        
+          Sílvia Borràs
+        
+      </span><br>
+    <span class="listing-publication fst-italic ">iScience</span>
+    <span class="listing-year">(2025)</span><br>
+    <a href="./publications/articles/pozdniakova2025.html" class="btn btn-primary">
+      Details
+    </a>
+    
+    <a href="https://doi.org/10.1016/j.isci.2025.113015" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+      DOI
+    </a>
+    
+    
+    <a href="https://www.cell.com/action/showPdf?pii=S2589-0042%2825%2901276-3" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+      <i class="bi bi-file-earmark-text"></i> PDF
+    </a>
+    
+    
+    <a href="https://github.com/AirLabBcn/aerobiome-integration-AQ" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-github"></i> Code
+    </a>
+    
+  </li>
+
+  <li class="pub-list-item" data-index="2" data-categories="TWljcm9iaW9sb2d5JTJDTWV0YWdlbm9taWNzJTJDQWVyb2Jpb2xvZ3klMkNJbmZlY3Rpb3VzJTIwRGlzZWFzZXMlMkNKb3VybmFsJTIwQXJ0aWNsZQ==" data-listing-date-sort="1725840000000" data-listing-file-modified-sort="1758057205392" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="354">
     <span class="listing-title lead">Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens</span><br>
     <span class="listing-author">
         
@@ -308,7 +394,7 @@ window.Quarto = {
     
   </li>
 
-  <li class="pub-list-item" data-index="1" data-categories="S2F3YXNha2klMjBEaXNlYXNlJTJDVGltZSUyMFNlcmllcyUyMEFuYWx5c2lzJTJDQWlyJTIwUG9sbHV0aW9uJTIwJTI2JTIwSGVhbHRoJTJDSm91cm5hbCUyMEFydGljbGU=" data-listing-date-sort="1634774400000" data-listing-file-modified-sort="1746452513713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="308">
+  <li class="pub-list-item" data-index="3" data-categories="S2F3YXNha2klMjBEaXNlYXNlJTJDVGltZSUyMFNlcmllcyUyMEFuYWx5c2lzJTJDQWlyJTIwUG9sbHV0aW9uJTIwJTI2JTIwSGVhbHRoJTJDSm91cm5hbCUyMEFydGljbGU=" data-listing-date-sort="1634774400000" data-listing-file-modified-sort="1758057205391" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="308">
     <span class="listing-title lead">Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease</span><br>
     <span class="listing-author">
         
@@ -347,7 +433,7 @@ window.Quarto = {
     
   </li>
 
-  <li class="pub-list-item" data-index="2" data-categories="S2F3YXNha2klMjBEaXNlYXNlJTJDVGltZSUyMFNlcmllcyUyMEFuYWx5c2lzJTJDQXRtb3NwaGVyaWMlMjBQcm9jZXNzZXMlMkNJbmZlY3Rpb3VzJTIwRGlzZWFzZXMlMkNDb25mZXJlbmNl" data-listing-date-sort="1649203200000" data-listing-file-modified-sort="1746452513713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="199">
+  <li class="pub-list-item" data-index="4" data-categories="S2F3YXNha2klMjBEaXNlYXNlJTJDVGltZSUyMFNlcmllcyUyMEFuYWx5c2lzJTJDQXRtb3NwaGVyaWMlMjBQcm9jZXNzZXMlMkNJbmZlY3Rpb3VzJTIwRGlzZWFzZXMlMkNDb25mZXJlbmNl" data-listing-date-sort="1649203200000" data-listing-file-modified-sort="1758057205392" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="199">
     <span class="listing-title lead">Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers</span><br>
     <span class="listing-author">
         
@@ -386,7 +472,7 @@ window.Quarto = {
     
   </li>
 
-  <li class="pub-list-item" data-index="3" data-categories="Q09WSUQtMTklMkNLYXdhc2FraSUyMERpc2Vhc2UlMkNFcGlkZW1pb2xvZ3klMkNJbmZlY3Rpb3VzJTIwRGlzZWFzZXMlMkNQZWRpYXRyaWNz" data-listing-date-sort="1617667200000" data-listing-file-modified-sort="1746452513713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="206">
+  <li class="pub-list-item" data-index="5" data-categories="Q09WSUQtMTklMkNLYXdhc2FraSUyMERpc2Vhc2UlMkNFcGlkZW1pb2xvZ3klMkNJbmZlY3Rpb3VzJTIwRGlzZWFzZXMlMkNQZWRpYXRyaWNz" data-listing-date-sort="1617667200000" data-listing-file-modified-sort="1758057205392" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="206">
     <span class="listing-title lead">COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease</span><br>
     <span class="listing-author">
         
@@ -413,7 +499,7 @@ window.Quarto = {
     
   </li>
 
-  <li class="pub-list-item" data-index="4" data-categories="Q09WSUQtMTklMkNUaW1lJTIwU2VyaWVzJTIwQW5hbHlzaXMlMkNDbGltYXRlJTIwJTI2JTIwSGVhbHRoJTJDSW5mZWN0aW91cyUyMERpc2Vhc2VzJTJDSm91cm5hbCUyMEFydGljbGU=" data-listing-date-sort="1634774400000" data-listing-file-modified-sort="1746452513712" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="188">
+  <li class="pub-list-item" data-index="6" data-categories="Q09WSUQtMTklMkNUaW1lJTIwU2VyaWVzJTIwQW5hbHlzaXMlMkNDbGltYXRlJTIwJTI2JTIwSGVhbHRoJTJDSW5mZWN0aW91cyUyMERpc2Vhc2VzJTJDSm91cm5hbCUyMEFydGljbGU=" data-listing-date-sort="1634774400000" data-listing-file-modified-sort="1758057205391" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="188">
     <span class="listing-title lead">Climatic signatures in the different COVID-19 pandemic waves across both hemispheres</span><br>
     <span class="listing-author">
         
@@ -452,7 +538,7 @@ window.Quarto = {
     
   </li>
 
-  <li class="pub-list-item" data-index="5" data-categories="QmlvaW5mb3JtYXRpY3MlMkNQcm90ZW9taWNzJTJDTWFjaGluZSUyMExlYXJuaW5n" data-listing-date-sort="1513296000000" data-listing-file-modified-sort="1746452513713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="88">
+  <li class="pub-list-item" data-index="7" data-categories="QmlvaW5mb3JtYXRpY3MlMkNQcm90ZW9taWNzJTJDTWFjaGluZSUyMExlYXJuaW5n" data-listing-date-sort="1513296000000" data-listing-file-modified-sort="1758057205392" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="88">
     <span class="listing-title lead">Neural Networks for Subcellular Localization Prediction</span><br>
     <span class="listing-author">
         
@@ -533,13 +619,14 @@ window.Quarto = {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

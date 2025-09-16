@@ -1,26 +1,5 @@
 [
   {
-    "objectID": "publications/articles/vasculitis2022.html",
-    "href": "publications/articles/vasculitis2022.html",
-    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
-    "section": "",
-    "text": "Fontal, A., Pozdniakova, S., Borras, S., Cañas, L., Curcoll, R., Morgui, J., Matsuki, A., & Rodó, X. (2022). Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers. International Vasculitis and ANCA Workshop 2022."
-  },
-  {
-    "objectID": "publications/articles/vasculitis2022.html#citation-apa",
-    "href": "publications/articles/vasculitis2022.html#citation-apa",
-    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
-    "section": "",
-    "text": "Fontal, A., Pozdniakova, S., Borras, S., Cañas, L., Curcoll, R., Morgui, J., Matsuki, A., & Rodó, X. (2022). Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers. International Vasculitis and ANCA Workshop 2022."
-  },
-  {
-    "objectID": "publications/articles/vasculitis2022.html#abstract",
-    "href": "publications/articles/vasculitis2022.html#abstract",
-    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
-    "section": "Abstract",
-    "text": "Abstract\nKawasaki Disease (KD) is a systemic vasculitis that mainly affects children younger than 5 years old. Although KD cases have been registered in over 60 countries across several continents, its incidence is highest in East Asia, particularly in Japan, where the highest annual incidence rate was recorded in 2018: 359 cases per 100 000 children aged 0-4 years [1]. After more than five decades since its discovery, the etiology of KD is yet to be elucidated. Past studies have analyzed the association between KD and diverse environmental factors, with some advances pointing towards a relevant role of the atmospheric transport of a wind-borne agent as trigger of KD [2, 3]. The epidemiological records of KD in Japan show an increasing incidence trend and a marked seasonality, prompting questions about the nature of the drivers of these changes in incidence. In this work, we focus on updated records from Tokyo prefecture (2011-2018) to find an association with specific air source locations and higher incidence seasons."
-  },
-  {
     "objectID": "publications/articles/fontal2021.html",
     "href": "publications/articles/fontal2021.html",
     "title": "Climatic signatures in the different COVID-19 pandemic waves across both hemispheres",
@@ -40,6 +19,48 @@
     "title": "Climatic signatures in the different COVID-19 pandemic waves across both hemispheres",
     "section": "Abstract",
     "text": "Abstract\nThe roles of climate and true seasonal signatures in the epidemiology of emergent pathogens, and that of SARS-CoV-2 in particular, remain poorly understood. With a statistical method designed to detect transitory associations, we show, for COVID-19 cases, strong consistent negative effects of both temperature and absolute humidity at large spatial scales. At finer spatial resolutions, we substantiate these connections during the seasonal rise and fall of COVID-19. Strong disease responses are identified in the first two waves, suggesting clear ranges for temperature and absolute humidity that are similar to those formerly described for seasonal influenza. For COVID-19, in all studied regions and pandemic waves, a process-based model that incorporates a temperature-dependent transmission rate outperforms baseline formulations with no driver or a sinusoidal seasonality. Our results, so far, classify COVID-19 as a seasonal low-temperature infection and suggest an important contribution of the airborne pathway in the transmission of SARS-CoV-2, with implications for the control measures we discuss."
+  },
+  {
+    "objectID": "publications/articles/thesis2017.html",
+    "href": "publications/articles/thesis2017.html",
+    "title": "Neural Networks for Subcellular Localization Prediction",
+    "section": "",
+    "text": "Fontal, A. (2017). Neural Networks for Subcellular Localization Prediction."
+  },
+  {
+    "objectID": "publications/articles/thesis2017.html#citation-apa",
+    "href": "publications/articles/thesis2017.html#citation-apa",
+    "title": "Neural Networks for Subcellular Localization Prediction",
+    "section": "",
+    "text": "Fontal, A. (2017). Neural Networks for Subcellular Localization Prediction."
+  },
+  {
+    "objectID": "publications/articles/thesis2017.html#abstract",
+    "href": "publications/articles/thesis2017.html#abstract",
+    "title": "Neural Networks for Subcellular Localization Prediction",
+    "section": "Abstract",
+    "text": "Abstract\nThe continuously decreasing cost of sequencing genomes is promoting the generation of vast amounts of sequence data. In consequence, the need to develop automated methods of analysis for this kind of data is on the rise. A first step towards inferring a protein’s function is to know its subcellular location. In this thesis we explore the capabilities of modern machine learning techniques, and more specifically deep learning models to predict the subcellular location of proteins only using their amino acid sequence as predictor."
+  },
+  {
+    "objectID": "publications/articles/vasculitis2022.html",
+    "href": "publications/articles/vasculitis2022.html",
+    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
+    "section": "",
+    "text": "Fontal, A., Pozdniakova, S., Borras, S., Cañas, L., Curcoll, R., Morgui, J., Matsuki, A., & Rodó, X. (2022). Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers. International Vasculitis and ANCA Workshop 2022."
+  },
+  {
+    "objectID": "publications/articles/vasculitis2022.html#citation-apa",
+    "href": "publications/articles/vasculitis2022.html#citation-apa",
+    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
+    "section": "",
+    "text": "Fontal, A., Pozdniakova, S., Borras, S., Cañas, L., Curcoll, R., Morgui, J., Matsuki, A., & Rodó, X. (2022). Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers. International Vasculitis and ANCA Workshop 2022."
+  },
+  {
+    "objectID": "publications/articles/vasculitis2022.html#abstract",
+    "href": "publications/articles/vasculitis2022.html#abstract",
+    "title": "Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers",
+    "section": "Abstract",
+    "text": "Abstract\nKawasaki Disease (KD) is a systemic vasculitis that mainly affects children younger than 5 years old. Although KD cases have been registered in over 60 countries across several continents, its incidence is highest in East Asia, particularly in Japan, where the highest annual incidence rate was recorded in 2018: 359 cases per 100 000 children aged 0-4 years [1]. After more than five decades since its discovery, the etiology of KD is yet to be elucidated. Past studies have analyzed the association between KD and diverse environmental factors, with some advances pointing towards a relevant role of the atmospheric transport of a wind-borne agent as trigger of KD [2, 3]. The epidemiological records of KD in Japan show an increasing incidence trend and a marked seasonality, prompting questions about the nature of the drivers of these changes in incidence. In this work, we focus on updated records from Tokyo prefecture (2011-2018) to find an association with specific air source locations and higher incidence seasons."
   },
   {
     "objectID": "publications/articles/rodo2024.html",
@@ -67,7 +88,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Guess Who?\n\n\n\nGame Theory\n\nPython\n\n\n\nSimulating game scenarios in Guess Who?\n\n\n\n\n\n2025-05-04\n\n\nAlejandro Fontal\n\n\n\n\n\n\n\n\n\n\n\n\nFirst post on the blog\n\n\n\nQuarto\n\nBlog\n\n\n\nIntroducing the site and the blog.\n\n\n\n\n\n2023-02-20\n\n\nAlejandro Fontal\n\n\n\n\n\nNo matching items"
+    "text": "Guess Who?\n\n\n\nGame Theory\n\nPython\n\n\n\nSimulating game scenarios with Python in Guess Who?\n\n\n\n\n\n2025-05-04\n\n\nAlejandro Fontal\n\n\n\n\n\n\n\n\n\n\n\n\nFirst post on the blog\n\n\n\nQuarto\n\nBlog\n\n\n\nIntroducing the site and the blog.\n\n\n\n\n\n2023-02-20\n\n\nAlejandro Fontal\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -81,7 +102,7 @@
     "href": "index.html#education",
     "title": "\nAlejandro Fontal\n",
     "section": "Education",
-    "text": "Education\n\n\nPhD in Biotechnology, 2019-2024\n\n\nUniversitat de Barcelona, Spain\n\n\n\n\nMy doctoral programme and PhD title were awarded by the Universitat de Barcelona, but my daily research was done at ISGlobal, as part of the Climate and Health research group in the Parc de Recerca Biomèdica de Barcelona (PRBB). I was funded by a Marie Skłodowska-Curie Actions doctoral grant under the HELICAL project, which was a consortium of over 15 institutions all over the EU that focused on the use of computational tools to study the factors driving vasculitis onset.\nThe thesis was titled “Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset” and can be found here.\n\n\n\nMSc in Bioinformatics, 2016-2018 \n\nWageningen University & Research, The Netherlands\n\n\n\n\n\nBSc in Biotechnology, 2011-2015\n\n\nUniversitat de Barcelona, Spain"
+    "text": "Education\n\n\nPhD in Biotechnology, 2019-2024\n\n\nUniversitat de Barcelona, Spain\n\n\n\n\nI did my PhD through the Universitat de Barcelona, but carried out my daily research at ISGlobal, within the Climate and Health group at the PRBB. I was funded by a Marie Skłodowska-Curie Actions doctoral grant under the HELICAL project, a European network of more than 15 institutions focused on computational approaches to study vasculitis onset.\nMy thesis was titled “Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset” and can be found here.\n\n\n\nMSc in Bioinformatics, 2016-2018\n\n\nWageningen University & Research, The Netherlands\n\n\n\n\nDuring my MSc in Bioinformatics at Wageningen University & Research, I explored a wide range of computational biology topics: from R and (especially) Python programming, to systems biology, multiple omics fields, and data science subjects like machine learning, algorithmic development, and the usage of High Performance Computing (HPC).\nFor my thesis, I developed deep learning models to predict the subcellular localization of proteins, with an emphasis on making these models less of a black box. The thesis can be found here.\n\n\n\nBSc in Biotechnology, 2011-2015\n\n\nUniversitat de Barcelona, Spain\n\n\n\n\nI studied Biotechnology at Universitat de Barcelona, where I built a strong base in molecular biology, microbiology, and biochemistry, along with lab experience. By my final year I was already leaning toward the computational side of biology.\nMy thesis focused on transcriptomics, carrying out a meta-analysis of differential expression methods for microarray data."
   },
   {
     "objectID": "index.html#interests",
@@ -95,14 +116,28 @@
     "href": "posts/guess_who/guess_who.html",
     "title": "Guess Who?",
     "section": "",
-    "text": "In this blog post we will implement a Guess who? game simulation in Python and play around with potential strategies to (if possible), increase winning chances.\n\n\n\n\n\nimport numpy as np\nimport pandas as pd\nimport plotnine as p9"
+    "text": "During a lunch conversation with some friends, the discussion brought us to reminisce about a childhood game we all used to play: “Guess Who?” (or “¿Quién es quién?” in Spanish). We then argued about the rules of the game and wondered wether a winning strategy could be made or if it was just a matter of luck.\n\n\n\nCover of the Spanish version of the game from 1982. Source: todocoleccion.net\n\n\nThis game is a classic board game where players ask yes/no questions to guess the identity of a character chosen by their opponent. The game is played with a set of characters, each with distinct features, and players take turns asking questions to narrow down the possibilities.\nGiven this simple setup, a computational implementation of the game seemed like a fairly straightforward task, so I decided to give it a try and here we are.\nThe goal is to be able to run many simulations of the game with different parameters and strategies and from there infer the best way to play the game. We could try to make some informed guesses and we will elucidate them later, but for now let’s just focus on the implementation of the game and the simulation of the different strategies.\n\n\n\n\n\nimport numpy as np\nimport pandas as pd\nimport plotnine as p9\nfrom dataclasses import dataclass\n\n\n\n\n\n# Theme for plotnine matching color scheme and font of the website\n\nbody_color = '#4C3F2E'\nlinks_color = '#9b8b75d5'\n\np9.theme_set(\n    p9.theme_bw() +\n    p9.theme(\n        panel_grid_major=p9.element_line(\n        size=0.5, \n        color=body_color, \n        linetype='dashed'),\n        panel_grid_minor=p9.element_blank(),\n        legend_background=p9.element_blank(),\n        plot_background=p9.element_blank(),\n        panel_background=p9.element_rect(fill=\"#DBD1B6\"),\n        panel_border=p9.element_rect(color=body_color),\n        text=p9.element_text(family='Georgia', color=body_color),\n))\n\n&lt;plotnine.themes.theme.theme at 0x161383e80&gt;"
   },
   {
     "objectID": "posts/guess_who/guess_who.html#introduction",
     "href": "posts/guess_who/guess_who.html#introduction",
     "title": "Guess Who?",
     "section": "",
-    "text": "In this blog post we will implement a Guess who? game simulation in Python and play around with potential strategies to (if possible), increase winning chances.\n\n\n\n\n\nimport numpy as np\nimport pandas as pd\nimport plotnine as p9"
+    "text": "During a lunch conversation with some friends, the discussion brought us to reminisce about a childhood game we all used to play: “Guess Who?” (or “¿Quién es quién?” in Spanish). We then argued about the rules of the game and wondered wether a winning strategy could be made or if it was just a matter of luck.\n\n\n\nCover of the Spanish version of the game from 1982. Source: todocoleccion.net\n\n\nThis game is a classic board game where players ask yes/no questions to guess the identity of a character chosen by their opponent. The game is played with a set of characters, each with distinct features, and players take turns asking questions to narrow down the possibilities.\nGiven this simple setup, a computational implementation of the game seemed like a fairly straightforward task, so I decided to give it a try and here we are.\nThe goal is to be able to run many simulations of the game with different parameters and strategies and from there infer the best way to play the game. We could try to make some informed guesses and we will elucidate them later, but for now let’s just focus on the implementation of the game and the simulation of the different strategies.\n\n\n\n\n\nimport numpy as np\nimport pandas as pd\nimport plotnine as p9\nfrom dataclasses import dataclass\n\n\n\n\n\n# Theme for plotnine matching color scheme and font of the website\n\nbody_color = '#4C3F2E'\nlinks_color = '#9b8b75d5'\n\np9.theme_set(\n    p9.theme_bw() +\n    p9.theme(\n        panel_grid_major=p9.element_line(\n        size=0.5, \n        color=body_color, \n        linetype='dashed'),\n        panel_grid_minor=p9.element_blank(),\n        legend_background=p9.element_blank(),\n        plot_background=p9.element_blank(),\n        panel_background=p9.element_rect(fill=\"#DBD1B6\"),\n        panel_border=p9.element_rect(color=body_color),\n        text=p9.element_text(family='Georgia', color=body_color),\n))\n\n&lt;plotnine.themes.theme.theme at 0x161383e80&gt;"
+  },
+  {
+    "objectID": "posts/guess_who/guess_who.html#game-implementation",
+    "href": "posts/guess_who/guess_who.html#game-implementation",
+    "title": "Guess Who?",
+    "section": "Game Implementation",
+    "text": "Game Implementation\n\n@dataclass\nclass Character:\n    name: str\n    hair_color: str\n    eye_color: str\n    wears_glasses: bool\n    has_beard: bool\n    has_hat: bool\n    has_scarf: bool\n\n    def __repr__(self):\n        return f\"Character(name={self.name}, hair={self.hair_color}, eye_color={self.eye_color}, wears_glasses={self.wears_glasses}, has_beard={self.has_beard}, has_hat={self.has_hat}, has_scarf={self.has_scarf})\"\n    def __str__(self):\n        return f\"{self.name} ({self.hair_color}, {self.eye_color}, {self.wears_glasses}, {self.has_beard}, {self.has_hat}, {self.has_scarf})\"\n\n\nCharacter(\n    name=\"Alice\",\n    hair_color=\"brown\",\n    eye_color=\"blue\",\n    wears_glasses=True,\n    has_beard=False,\n    has_hat=False,\n    has_scarf=False\n)\n\nCharacter(name=Alice, hair=brown, eye_color=blue, wears_glasses=True, has_beard=False, has_hat=False, has_scarf=False)"
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Alejandro Fontal",
+    "section": "",
+    "text": "Order By\n      Default\n      \n        Title\n      \n      \n        Author\n      \n      \n        Publication\n      \n      \n        Year\n      \n    \n  \n    \n      \n      \n    \n\n\n\n  \n    Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols\n    \n        \n          Alejandro Fontal, \n        \n          Sílvia Borràs, \n        \n          Sofya Pozdniakova, \n        \n          Lidia Cañas, \n        \n          Xavier Rodó\n        \n      \n    EGUsphere (preprint)\n    (2025)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Integrating air microbiome for comprehensive air quality analysis\n    \n        \n          Sofya Pozdniakova, \n        \n          Akira Uchida, \n        \n          Alejandro Fontal, \n        \n          Lidia Cañas, \n        \n          Samuel Santamaría, \n        \n          Lim Yee Hui, \n        \n          Irvan Luhung, \n        \n          Stephan C. Schuster, \n        \n          Xavier Rodó, \n        \n          Sílvia Borràs\n        \n      \n    iScience\n    (2025)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens\n    \n        \n          Xavier Rodó, \n        \n          Sofya Pozdniakova, \n        \n          Sílvia Borràs, \n        \n          Atsushi Matsuki, \n        \n          Hiroshi Tanimoto, \n        \n          Maria-Pilar Armengol, \n        \n          Irina Pey, \n        \n          Laura Muñoz, \n        \n          Samuel Santamaría, \n        \n          Lidia Cañas, \n        \n          Josep-Anton Morguí, \n        \n          Alejandro Fontal, \n        \n          Roger Curcoll\n        \n      \n    Proceedings of the National Academy of Sciences\n    (2024)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease\n    \n        \n          Xavier Rodó, \n        \n          Albert Navarro-Gallinad, \n        \n          Tomoko Kojima, \n        \n          Josep-Anton Morguí, \n        \n          Sílvia Borràs, \n        \n          Alejandro Fontal\n        \n      \n    Environmental Research Letters\n    (2023)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers\n    \n        \n          Alejandro Fontal, \n        \n          Sofya Pozdniakova, \n        \n          Sílvia Borràs, \n        \n          Lídia Cañas, \n        \n          Roger Curcoll, \n        \n          Josep-Anton Morguí, \n        \n          Atsushi Matsuki, \n        \n          Xavier Rodó\n        \n      \n    International Vasculitis and ANCA Workshop\n    (2022)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease\n    \n        \n          Xavier Rodó, \n        \n          Alejandro Fontal\n        \n      \n    JAMA Network Open\n    (2021)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n  \n\n  \n    Climatic signatures in the different COVID-19 pandemic waves across both hemispheres\n    \n        \n          Alejandro Fontal, \n        \n          Menno J. Bouma, \n        \n          Adrià San José, \n        \n          Leonardo López, \n        \n          Mercedes Pascual, \n        \n          Xavier Rodó\n        \n      \n    Nature Computational Science\n    (2021)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Neural Networks for Subcellular Localization Prediction\n    \n        \n          Alejandro Fontal\n        \n      \n    Wageningen University & Research Thesis Repository\n    (2017)\n    \n      Details\n    \n    \n    \n    \n       PDF\n    \n    \n    \n  \n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/first-post/index.html",
@@ -140,13 +175,6 @@
     "text": "Conclusion\nThat is all for now. I have several other posts in mind, but I’ll leave them for another day."
   },
   {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Alejandro Fontal",
-    "section": "",
-    "text": "Order By\n      Default\n      \n        Title\n      \n      \n        Author\n      \n      \n        Publication\n      \n      \n        Year\n      \n    \n  \n    \n      \n      \n    \n\n\n\n  \n    Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens\n    \n        \n          Xavier Rodó, \n        \n          Sofya Pozdniakova, \n        \n          Sílvia Borràs, \n        \n          Atsushi Matsuki, \n        \n          Hiroshi Tanimoto, \n        \n          Maria-Pilar Armengol, \n        \n          Irina Pey, \n        \n          Laura Muñoz, \n        \n          Samuel Santamaría, \n        \n          Lidia Cañas, \n        \n          Josep-Anton Morguí, \n        \n          Alejandro Fontal, \n        \n          Roger Curcoll\n        \n      \n    Proceedings of the National Academy of Sciences\n    (2024)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease\n    \n        \n          Xavier Rodó, \n        \n          Albert Navarro-Gallinad, \n        \n          Tomoko Kojima, \n        \n          Josep-Anton Morguí, \n        \n          Sílvia Borràs, \n        \n          Alejandro Fontal\n        \n      \n    Environmental Research Letters\n    (2023)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers\n    \n        \n          Alejandro Fontal, \n        \n          Sofya Pozdniakova, \n        \n          Sílvia Borràs, \n        \n          Lídia Cañas, \n        \n          Roger Curcoll, \n        \n          Josep-Anton Morguí, \n        \n          Atsushi Matsuki, \n        \n          Xavier Rodó\n        \n      \n    International Vasculitis and ANCA Workshop\n    (2022)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease\n    \n        \n          Xavier Rodó, \n        \n          Alejandro Fontal\n        \n      \n    JAMA Network Open\n    (2021)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n  \n\n  \n    Climatic signatures in the different COVID-19 pandemic waves across both hemispheres\n    \n        \n          Alejandro Fontal, \n        \n          Menno J. Bouma, \n        \n          Adrià San José, \n        \n          Leonardo López, \n        \n          Mercedes Pascual, \n        \n          Xavier Rodó\n        \n      \n    Nature Computational Science\n    (2021)\n    \n      Details\n    \n    \n    \n      DOI\n    \n    \n    \n    \n       PDF\n    \n    \n    \n    \n         Code\n    \n    \n  \n\n  \n    Neural Networks for Subcellular Localization Prediction\n    \n        \n          Alejandro Fontal\n        \n      \n    Wageningen University & Research Thesis Repository\n    (2017)\n    \n      Details\n    \n    \n    \n    \n       PDF\n    \n    \n    \n  \n\n\n\nNo matching items"
-  },
-  {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "Projects",
@@ -154,46 +182,46 @@
     "text": "Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nEnv. Data Japan\n\n\n\nPython\n\nGIS\n\nData Mining\n\n\n\nRepository collecting, processing and organizing environmental data sources for Japan\n\n\n\n\n\n\n\n\n\n\n\n\nArgos Extensions\n\n\n\nPython\n\nArgos\n\nxbar\n\nAPI\n\nLinux\n\nMacOS\n\n\n\nA series of extensions for the Argos GNOME Shell extension that add functionality to the GNOME Shell Top Bar (and xbar in MacOS, WIP)\n\n\n\n\n\n\n\n\n\n\n\n\nSugarboard\n\n\n\nPython\n\nStreamlit\n\nAPI\n\nData Visualisation\n\nDashboard\n\n\n\nA Streamlit Dashboard to visualize Nightscout’s Continuous Glucose Monitor (CGM) data\n\n\n\n\n\n\n\n\n\n\n\n\nAQI Stations Scraper\n\n\n\nPython\n\nSelenium\n\nScraping\n\nData Mining\n\n\n\nA Selenium-based web scraper that uses Github Actions to scrape AQI stations historical data\n\n\n\n\n\n\n\n\n\n\n\n\nSDCpy App\n\n\n\nPython\n\nTime-Series Analysis\n\nDash\n\nHeroku\n\n\n\nA Dash web app deployed with Heroku to perform Scale Dependent Correlation Analysis (SDC)\n\n\n\n\n\n\n\n\n\n\n\n\nSDCpy\n\n\n\nPython\n\nTime-Series Analysis\n\n\n\nA Python library to perform Scale Dependent Correlation Analysis (SDC)\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "publications/articles/thesis2017.html",
-    "href": "publications/articles/thesis2017.html",
-    "title": "Neural Networks for Subcellular Localization Prediction",
+    "objectID": "publications/articles/pozdniakova2025.html",
+    "href": "publications/articles/pozdniakova2025.html",
+    "title": "Integrating air microbiome for comprehensive air quality analysis",
     "section": "",
-    "text": "Fontal, A. (2017). Neural Networks for Subcellular Localization Prediction."
+    "text": "Pozdniakova, S., Uchida, A., Fontal, A., Cañas, L., Santamaría, S., Hui, L. Y., Luhung, I., Schuster, S. C., Rodó, X., & Borràs, S. (2025). Integrating air microbiome for comprehensive air quality analysis. iScience, 28(7), 113015."
   },
   {
-    "objectID": "publications/articles/thesis2017.html#citation-apa",
-    "href": "publications/articles/thesis2017.html#citation-apa",
-    "title": "Neural Networks for Subcellular Localization Prediction",
+    "objectID": "publications/articles/pozdniakova2025.html#citation-apa",
+    "href": "publications/articles/pozdniakova2025.html#citation-apa",
+    "title": "Integrating air microbiome for comprehensive air quality analysis",
     "section": "",
-    "text": "Fontal, A. (2017). Neural Networks for Subcellular Localization Prediction."
+    "text": "Pozdniakova, S., Uchida, A., Fontal, A., Cañas, L., Santamaría, S., Hui, L. Y., Luhung, I., Schuster, S. C., Rodó, X., & Borràs, S. (2025). Integrating air microbiome for comprehensive air quality analysis. iScience, 28(7), 113015."
   },
   {
-    "objectID": "publications/articles/thesis2017.html#abstract",
-    "href": "publications/articles/thesis2017.html#abstract",
-    "title": "Neural Networks for Subcellular Localization Prediction",
+    "objectID": "publications/articles/pozdniakova2025.html#abstract",
+    "href": "publications/articles/pozdniakova2025.html#abstract",
+    "title": "Integrating air microbiome for comprehensive air quality analysis",
     "section": "Abstract",
-    "text": "Abstract\nThe continuously decreasing cost of sequencing genomes is promoting the generation of vast amounts of sequence data. In consequence, the need to develop automated methods of analysis for this kind of data is on the rise. A first step towards inferring a protein’s function is to know its subcellular location. In this thesis we explore the capabilities of modern machine learning techniques, and more specifically deep learning models to predict the subcellular location of proteins only using their amino acid sequence as predictor."
+    "text": "Abstract\n\nHighlights\n\nQuartz filters from HVS enable the metagenomic profiling of airborne organisms\nHVS captures diversity comparable to specialized samplers such as the SASS 3100\nRoutine air filters can integrate biological data into air monitoring efforts\nHVS-based analysis adds health-relevant insights to air quality assessment\n\n\n\nSummary\nAir quality monitoring typically overlooks the biological composition of airborne particles, despite its relevance to human health. This study evaluated the feasibility of using filters from high-volume air samplers, widely employed in air quality networks, to analyze bioaerosol content through shotgun metagenomic sequencing. We developed a DNA extraction method for ultra-low biomass samples and assessed the impact of sampling duration, particle size selection, and filter material on microbial diversity. Our findings show that prolonged continuous sampling reduces species detection, while larger particle size selectors capture a broader range of microbial content, particularly fungi. Comparisons with a dedicated bioaerosol sampler confirmed that these filters can yield comparable results. This work demonstrates that existing air quality infrastructure can be leveraged for airborne microbiome monitoring, offering a practical and cost-effective approach to integrate biological data into routine assessments and support a more comprehensive understanding of air quality and its implications for public health."
   },
   {
-    "objectID": "publications/articles/rodofontal2021.html",
-    "href": "publications/articles/rodofontal2021.html",
-    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
+    "objectID": "publications/articles/fontal2025.html",
+    "href": "publications/articles/fontal2025.html",
+    "title": "Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols",
     "section": "",
-    "text": "Rodó, X., & Fontal, A. (2021). COVID-19 pandemic sets new clues on the transmission pathways in Kawasaki disease. JAMA network open, 4(4), e214624-e214624."
+    "text": "Fontal, A., Borràs, S., Cañas, L., Pozdniakova, S., & Rodó, X. (2025). Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols. EGUsphere, 2025, 1-25."
   },
   {
-    "objectID": "publications/articles/rodofontal2021.html#citation-apa",
-    "href": "publications/articles/rodofontal2021.html#citation-apa",
-    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
+    "objectID": "publications/articles/fontal2025.html#citation-apa",
+    "href": "publications/articles/fontal2025.html#citation-apa",
+    "title": "Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols",
     "section": "",
-    "text": "Rodó, X., & Fontal, A. (2021). COVID-19 pandemic sets new clues on the transmission pathways in Kawasaki disease. JAMA network open, 4(4), e214624-e214624."
+    "text": "Fontal, A., Borràs, S., Cañas, L., Pozdniakova, S., & Rodó, X. (2025). Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols. EGUsphere, 2025, 1-25."
   },
   {
-    "objectID": "publications/articles/rodofontal2021.html#abstract",
-    "href": "publications/articles/rodofontal2021.html#abstract",
-    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
+    "objectID": "publications/articles/fontal2025.html#abstract",
+    "href": "publications/articles/fontal2025.html#abstract",
+    "title": "Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols",
     "section": "Abstract",
-    "text": "Abstract\nMany theories have been formulated through decades regarding the causes of the mysterious syndrome known as Kawasaki disease (KD). This pediatric self-limited vasculitis has been escaping full characterization since Tomizaku Kawasaki, PhD, identified the disease that was then named after him. In many of the clinical histories, the role of external factors seems already clear, because the appearance of respiratory symptoms is reported to occur a few days before KD symptoms emerge (eg, an abnormal immune response characterized by increased levels of inflammatory cytokines and chemokines during the acute phase). However, the many attempts to characterize a unique agent have been unsuccessful so far. Whether this is an indication of a multiplicity of agents (ie, multiple-agent disease) or a complex interplay of factors interacting with the immune system of children who are genetically predisposed still remains an open question. However, in this race against time, a study by Hara and colleagues4 takes advantage of the unique epidemiological situation caused by the COVID-19 pandemic in Japan to perform a natural experiment that sheds new light on the hidden etiological processes of KD."
+    "text": "Abstract\nMicroorganisms are ubiquitous in the environment, playing key roles in all ecosystems, including the atmosphere, with airborne dissemination via particulate matter being essential for many microorganisms’ life cycles. However, the atmosphere as a microbial ecosystem has been severely understudied, mostly due to the challenging technical difficulties in sampling and characterizing it and the presumed irrelevance of the atmospheric environment for microbes. So far, most recent studies use metagenomic sequencing to assess aerobiome diversity, which can be biased and hurdled due to the inherent ultra-low DNA yield of air samples.\nPrevious research has already demonstrated the potential use of Laser-Induced Fluorescence (LIF) and machine learning (ML) to characterize the vegetal fraction of bioaerosols, by classifying pollen particles using the Rapid-E bioaerosol detector (Plair SA) and neural network classifiers. In this study, we present a new methodology for near real-time (NRT) automatic recognition of microbial particles in the air: first by replacing Rapid-E’s visible and ultraviolet (UV) laser (337 nm) with another laser (266 nm) optimized to excite fluorophores in bacterial and fungal cell membranes.\nWe tested this new setup with artificially generated aerosols enriched with five distinct bacterial species. Employing Random Forest classifiers, we were able to: (a) detect bacterial particles (96.74 % class-balanced accuracy), and (b) discriminate between the different species (69.24 % class-balanced accuracy across the different species in the validation set). This innovative approach sets a new range of possibilities for the rapid and precise monitoring of airborne microbial communities, offering a valuable tool for both ecological studies and public health surveillance."
   },
   {
     "objectID": "publications/articles/rodo2023.html",
@@ -215,5 +243,26 @@
     "title": "Sub-weekly signatures relate ultrafine aerosols enriched in metals from intensive farming and urban pollution to Kawasaki disease",
     "section": "Abstract",
     "text": "Abstract\nAir pollution (urban, industrial or rural) has been linked to a myriad of human ailments despite clear mechanistic associations that are often not thoroughly established. Daily variability of fine aerosols in a surveillance campaign in south Japan shows a striking coevolution between their trace elements (metal and metalloid, MM) content and Kawasaki disease (KD) admissions, suggesting a strong dynamical link. These aerosol MM could instigate an immune response that, along with genetic susceptibility, would lead to KD development. This association may account for over 40% of the total variability in the disease, being dominated by a clear sub-weekly cycle (SWC1). Thanks to both an unprecedented daily KD epidemiological record going back to 1970, light detection and ranging (LIDAR) atmospheric backscattering profiles for the interval 2010–2016 and HYSPLIT simulations with numerous sensitivity analyses, we can trace this SWC1 variability to occur concomitantly from sub-seasonal to interannual timescales in both KD and aerosols. This SWC1 appears to connect or disconnect Japan to air intrusions from above the planetary boundary layer (PBL), having their source in industrial and agricultural areas in NE Asia and points to a stronger case for an agricultural source for the exposure as opposed to urban pollution. The KD maxima always occur in full synchrony with the arrival of very small (&lt;1 µm; PM1) particles showing that ultrafine aerosols appear as a necessary cofactor in the occurrence of KD and sets the field to associate other similar human diseases. Our study shows how signal-detection approaches can be useful to uncover hidden associations between the environment and human health, otherwise unnoticed and help set new early-warning systems for disease prevention."
+  },
+  {
+    "objectID": "publications/articles/rodofontal2021.html",
+    "href": "publications/articles/rodofontal2021.html",
+    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
+    "section": "",
+    "text": "Rodó, X., & Fontal, A. (2021). COVID-19 pandemic sets new clues on the transmission pathways in Kawasaki disease. JAMA network open, 4(4), e214624-e214624."
+  },
+  {
+    "objectID": "publications/articles/rodofontal2021.html#citation-apa",
+    "href": "publications/articles/rodofontal2021.html#citation-apa",
+    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
+    "section": "",
+    "text": "Rodó, X., & Fontal, A. (2021). COVID-19 pandemic sets new clues on the transmission pathways in Kawasaki disease. JAMA network open, 4(4), e214624-e214624."
+  },
+  {
+    "objectID": "publications/articles/rodofontal2021.html#abstract",
+    "href": "publications/articles/rodofontal2021.html#abstract",
+    "title": "COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease",
+    "section": "Abstract",
+    "text": "Abstract\nMany theories have been formulated through decades regarding the causes of the mysterious syndrome known as Kawasaki disease (KD). This pediatric self-limited vasculitis has been escaping full characterization since Tomizaku Kawasaki, PhD, identified the disease that was then named after him. In many of the clinical histories, the role of external factors seems already clear, because the appearance of respiratory symptoms is reported to occur a few days before KD symptoms emerge (eg, an abnormal immune response characterized by increased levels of inflammatory cytokines and chemokines during the acute phase). However, the many attempts to characterize a unique agent have been unsuccessful so far. Whether this is an indication of a multiplicity of agents (ie, multiple-agent disease) or a complex interplay of factors interacting with the immune system of children who are genetically predisposed still remains an open question. However, in this race against time, a study by Hara and colleagues4 takes advantage of the unique epidemiological situation caused by the COVID-19 pandemic in Japan to perform a natural experiment that sheds new light on the hidden etiological processes of KD."
   }
 ]

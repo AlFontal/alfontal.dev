@@ -1,0 +1,45 @@
+---
+title: "Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols"
+type: "article"
+authors:
+  - name: "Alejandro Fontal"
+    email: "alejandro.fontal.92@gmail.com"
+    url: "https://alfontal.dev"
+    orcid: 0000-0003-1138-2158
+  - name: Sílvia Borràs
+    orcid: 0000-0002-0331-0720
+  - name: Sofya Pozdniakova
+    orcid: 0000-0001-5849-1787
+  - name: Lidia Cañas
+    orcid: 0000-0002-1101-2694
+  - name: "Xavier Rodó"
+    orcid: 0000-0003-4843-6180
+    email: "xavier.rodo@isglobal.org"
+
+date: '2025-08-05'
+
+year: "2025"
+publication: "EGUsphere (preprint)"
+pdf: "https://egusphere.copernicus.org/preprints/2025/egusphere-2025-2484/egusphere-2025-2484.pdf"
+doi: "https://doi.org/10.5194/egusphere-2025-2484"
+code: "https://github.com/AlFontal/lif-bacteria-aerosols-ms"
+toc: false
+categories:
+  - Microbiology
+  - Machine Learning
+  - Laser-Induced Fluorescence
+  - Aerobiology
+
+---
+
+## Citation (APA)
+
+> Fontal, A., Borràs, S., Cañas, L., Pozdniakova, S., & Rodó, X. (2025). Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols. EGUsphere, 2025, 1-25.
+
+## Abstract
+
+Microorganisms are ubiquitous in the environment, playing key roles in all ecosystems, including the atmosphere, with airborne dissemination via particulate matter being essential for many microorganisms’ life cycles. However, the atmosphere as a microbial ecosystem has been severely understudied, mostly due to the challenging technical difficulties in sampling and characterizing it and the presumed irrelevance of the atmospheric environment for microbes. So far, most recent studies use metagenomic sequencing to assess aerobiome diversity, which can be biased and hurdled due to the inherent ultra-low DNA yield of air samples. 
+
+Previous research has already demonstrated the potential use of Laser-Induced Fluorescence (LIF) and machine learning (ML) to characterize the vegetal fraction of bioaerosols, by classifying pollen particles using the Rapid-E bioaerosol detector (Plair SA) and neural network classifiers. In this study, we present a new methodology for near real-time (NRT) automatic recognition of microbial particles in the air: first by replacing Rapid-E’s visible and ultraviolet (UV) laser (337 nm) with another laser (266 nm) optimized to excite fluorophores in bacterial and fungal cell membranes. 
+
+We tested this new setup with artificially generated aerosols enriched with five distinct bacterial species. Employing Random Forest classifiers, we were able to: (a) detect bacterial particles (96.74 % class-balanced accuracy), and (b) discriminate between the different species (69.24 % class-balanced accuracy across the different species in the validation set). This innovative approach sets a new range of possibilities for the rapid and precise monitoring of airborne microbial communities, offering a valuable tool for both ecological studies and public health surveillance.

@@ -1,0 +1,56 @@
+---
+title: "Integrating air microbiome for comprehensive air quality analysis"
+type: "article"
+authors:
+  - name: Sofya Pozdniakova
+    orcid: 0000-0001-5849-1787
+  - name: Akira Uchida
+  - name: Alejandro Fontal
+    email: alejandro.fontal.92@gmail.com
+    url: https://alfontal.dev
+    orcid: 0000-0003-1138-2158
+  - name: Lidia Cañas
+    orcid: 0000-0002-1101-2694
+  - name: Samuel Santamaría
+  - name: Lim Yee Hui
+  - name: Irvan Luhung
+  - name: Stephan C. Schuster
+  - name: Xavier Rodó
+    orcid: 0000-0003-4843-6180
+    email: xavier.rodo@isglobal.org
+  - name: Sílvia Borràs
+    orcid: 0000-0002-0331-0720
+
+date: '2025-01-17'
+
+year: "2025"
+publication: "iScience"
+pdf: "https://www.cell.com/action/showPdf?pii=S2589-0042%2825%2901276-3"
+doi: "https://doi.org/10.1016/j.isci.2025.113015"
+code: "https://github.com/AirLabBcn/aerobiome-integration-AQ"
+toc: false
+categories:
+  - Microbiology
+  - Microbiome
+  - Aerobiology
+  - Environmental monitoring
+
+---
+
+## Citation (APA)
+
+> Pozdniakova, S., Uchida, A., Fontal, A., Cañas, L., Santamaría, S., Hui, L. Y., Luhung, I., Schuster, S. C., Rodó, X., & Borràs, S. (2025). Integrating air microbiome for comprehensive air quality analysis. iScience, 28(7), 113015.
+
+## Abstract
+
+### Highlights
+
+- Quartz filters from HVS enable the metagenomic profiling of airborne organisms
+- HVS captures diversity comparable to specialized samplers such as the SASS 3100
+- Routine air filters can integrate biological data into air monitoring efforts
+- HVS-based analysis adds health-relevant insights to air quality assessment
+
+### Summary
+
+Air quality monitoring typically overlooks the biological composition of airborne particles, despite its relevance to human health. This study evaluated the feasibility of using filters from high-volume air samplers, widely employed in air quality networks, to analyze bioaerosol content through shotgun metagenomic sequencing. We developed a DNA extraction method for ultra-low biomass samples and assessed the impact of sampling duration, particle size selection, and filter material on microbial diversity. Our findings show that prolonged continuous sampling reduces species detection, while larger particle size selectors capture a broader range of microbial content, particularly fungi. Comparisons with a dedicated bioaerosol sampler confirmed that these filters can yield comparable results. This work demonstrates that existing air quality infrastructure can be leveraged for airborne microbiome monitoring, offering a practical and cost-effective approach to integrate biological data into routine assessments and support a more comprehensive understanding of air quality and its implications for public health.
+

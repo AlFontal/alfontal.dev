@@ -161,24 +161,30 @@ To check the source code, you can do so in <a href="https://github.com/AlFontal"
 <summary>**PhD in Biotechnology**, **2019-2024**  
   <p class="temporary-hidden"> *Universitat de Barcelona, Spain* </p>
 </summary>
-<p> </p>
-My doctoral programme and PhD title were awarded by the [Universitat de Barcelona](https://web.ub.edu/en/web/ub/), but my daily research was done at [ISGlobal](https://isglobal.org), as part of the Climate and Health research group in the Parc de Recerca Biomèdica de Barcelona ([PRBB]([prbb.org](https://www.prbb.org/))). I was funded by a Marie Skłodowska-Curie Actions doctoral grant under the [HELICAL](https://helical-itn.github.io) project, which was a consortium of over 15 institutions all over the EU that focused on the use of computational tools to study the factors driving vasculitis onset.
+<p></p>
+I did my PhD through the [Universitat de Barcelona](https://web.ub.edu/en/web/ub/), but carried out my daily research at [ISGlobal](https://isglobal.org), within the Climate and Health group at the [PRBB](https://www.prbb.org/). I was funded by a Marie Skłodowska-Curie Actions doctoral grant under the [HELICAL](https://helical-itn.github.io) project, a European network of more than 15 institutions focused on computational approaches to study vasculitis onset.
 
-The thesis was titled _"Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset"_ and can be found [here](https://archive.org/download/thesis_AF_final/thesis_AF_final.pdf).
-
+My thesis was titled _"Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset"_ and can be found [here](https://archive.org/download/thesis_AF_final/thesis_AF_final.pdf).
 </details>
 
 <details>
-<summary>**MSc in Bioinformatics**, **2016-2018** <br>
+<summary>**MSc in Bioinformatics**, **2016-2018**  
   <p class="temporary-hidden"> *Wageningen University & Research, The Netherlands* </p>
 </summary>
+<p></p>
+During my MSc in Bioinformatics at [Wageningen University & Research](https://www.wur.nl/en.htm), I explored a wide range of computational biology topics: from R and (especially) Python programming, to systems biology, multiple omics fields, and data science subjects like machine learning, algorithmic development, and the usage of High Performance Computing (HPC).  
+
+For my thesis, I developed deep learning models to predict the subcellular localization of proteins, with an emphasis on making these models less of a black box. The thesis can be found [here](https://edepot.wur.nl/429151).
 </details>
 
 <details>
 <summary>**BSc in Biotechnology**, **2011-2015**  
   <p class="temporary-hidden"> *Universitat de Barcelona, Spain* </p>
 </summary>
+<p></p>
+I studied Biotechnology at [Universitat de Barcelona](https://www.ub.edu/), where I built a strong base in molecular biology, microbiology, and biochemistry, along with lab experience. By my final year I was already leaning toward the computational side of biology.  
 
+My thesis focused on transcriptomics, carrying out a meta-analysis of differential expression methods for microarray data.
 </details>
 :::
 

@@ -121,6 +121,7 @@ Apart from this, I also work together with our colleagues in the <a href="https:
 </div>
 
 <div id="background-content" class="tabcontent">
+<p><p>
 <p>
 I hold a BSc in Molecular Biotechnology from the University of Barcelona and a MSc in Bioinformatics with a specialization in Data Science from the Wageningen University & Research and a PhD in Biotechnology from the University of Barcelona. 
 </p>
@@ -133,6 +134,7 @@ You can check my detailed CV for a more comprehensive overview of my professiona
 </div>
 
 <div id="TS" class="tabcontent">
+<p><p>
 <p>
 I made this site using <a href="https://quarto.org">Quarto</a>, an open source project that allows you to create documents, websites, and books using a combination of Markdown, R, Python and HTML.
 </p>

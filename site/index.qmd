@@ -270,6 +270,68 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     });
+
+    document.querySelectorAll('.education-card').forEach(function (card) {
+      const toggle = card.querySelector('.education-card__toggle');
+      const details = card.querySelector('.education-card__details');
+
+      if (!toggle || !details) {
+        return;
+      }
+
+      const open = function () {
+        details.hidden = false;
+        toggle.setAttribute('aria-expanded', 'true');
+        card.classList.add('is-open');
+      };
+
+      const close = function () {
+        details.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        card.classList.remove('is-open');
+      };
+
+      close();
+
+      toggle.addEventListener('click', function () {
+        if (details.hidden) {
+          open();
+        } else {
+          close();
+        }
+      });
+
+      toggle.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          const prev = card.previousElementSibling;
+          if (prev) {
+            const prevToggle = prev.querySelector('.education-card__toggle');
+            if (prevToggle) {
+              prevToggle.focus();
+            }
+          }
+          return;
+        }
+
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+          event.preventDefault();
+          const next = card.nextElementSibling;
+          if (next) {
+            const nextToggle = next.querySelector('.education-card__toggle');
+            if (nextToggle) {
+              nextToggle.focus();
+            }
+          }
+          return;
+        }
+
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggle.click();
+        }
+      });
+    });
   });
 });
 </script>
@@ -285,49 +347,69 @@ document.addEventListener('DOMContentLoaded', function () {
 :::: {.grid}
 
 ::: {.g-col-12 .g-col-md-8 style="text-align: left;"}
-## Education {.index-anchor}
+## Education {.index-anchor .index-header}
 
-<details>
-<summary>**PhD in Biotechnology**, **2019-2024**  
-  <p class="temporary-hidden"> *Universitat de Barcelona, Spain* </p>
-</summary>
-<p></p>
-I did my PhD through the [Universitat de Barcelona](https://web.ub.edu/en/web/ub/), but carried out my daily research at [ISGlobal](https://isglobal.org), within the Climate and Health group at the [PRBB](https://www.prbb.org/). I was funded by a Marie Skłodowska-Curie Actions doctoral grant under the [HELICAL](https://helical-itn.github.io) project, a European network of more than 15 institutions focused on computational approaches to study vasculitis onset.
+```{=html}
+<div class="education-section" role="list">
+  <article class="education-card" role="listitem">
+    <button type="button" class="education-card__toggle" aria-expanded="false" aria-controls="education-details-phd" id="education-card-phd">
+      <span class="education-card__header">
+        <span class="education-card__degree">PhD in Biotechnology</span>
+        <span class="education-card__years">2019&#8211;2024</span>
+      </span>
+      <span class="education-card__meta">ISGlobal & Universitat de Barcelona &middot; Barcelona, ES</span>
+    </button>
+    <div class="education-card__details" id="education-details-phd" role="region" aria-labelledby="education-card-phd" hidden>
+      <p class="education-card__summary">Doctoral research carried out at <a href="https://isglobal.org">ISGlobal</a> within the Climate and Health group at the <a href="https://www.prbb.org/">PRBB</a>, funded by a Marie Skłodowska-Curie Actions grant through the <a href="https://helical-itn.github.io">HELICAL</a> network.</p>
+      <p class="education-card__summary">Thesis: <em>Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset</em>. <a href="https://archive.org/download/thesis_AF_final/thesis_AF_final.pdf">Read the dissertation</a>.</p>
+    </div>
+  </article>
 
-My thesis was titled _"Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset"_ and can be found [here](https://archive.org/download/thesis_AF_final/thesis_AF_final.pdf).
-</details>
+  <article class="education-card" role="listitem">
+    <button type="button" class="education-card__toggle" aria-expanded="false" aria-controls="education-details-msc" id="education-card-msc">
+      <span class="education-card__header">
+        <span class="education-card__degree">MSc in Bioinformatics</span>
+        <span class="education-card__years">2016&#8211;2018</span>
+      </span>
+      <span class="education-card__meta">Wageningen University &amp; Research &middot; Wageningen, NL</span>
+    </button>
+    <div class="education-card__details" id="education-details-msc" role="region" aria-labelledby="education-card-msc" hidden>
+      <p class="education-card__summary">During my MSc in Bioinformatics at Wageningen University & Research, I explored a wide range of computational biology topics: from R and (especially) Python programming, to systems biology, multiple omics fields, and data science subjects like machine learning, algorithmic development, and the usage of High Performance Computing (HPC).</p>
+      <p class="education-card__summary">For my thesis, I developed deep learning models to predict the subcellular localization of proteins, with an emphasis on making these models less of a black box. The thesis can be found <a href="https://edepot.wur.nl/429151">here</a>, and the GitHub repo is available <a href="https://github.com/AlFontal/thesis-protloc">here</a>.</p>
+    </div>
+  </article>
 
-<details>
-<summary>**MSc in Bioinformatics**, **2016-2018**  
-  <p class="temporary-hidden"> *Wageningen University & Research, The Netherlands* </p>
-</summary>
-<p></p>
-During my MSc in Bioinformatics at [Wageningen University & Research](https://www.wur.nl/en.htm), I explored a wide range of computational biology topics: from R and (especially) Python programming, to systems biology, multiple omics fields, and data science subjects like machine learning, algorithmic development, and the usage of High Performance Computing (HPC).  
-
-For my thesis, I developed deep learning models to predict the subcellular localization of proteins, with an emphasis on making these models less of a black box. The thesis can be found [here](https://edepot.wur.nl/429151).
-</details>
-
-<details>
-<summary>**BSc in Biotechnology**, **2011-2015**  
-  <p class="temporary-hidden"> *Universitat de Barcelona, Spain* </p>
-</summary>
-<p></p>
-I studied Biotechnology at [Universitat de Barcelona](https://www.ub.edu/), where I built a strong base in molecular biology, microbiology, and biochemistry, along with lab experience. By my final year I was already leaning toward the computational side of biology.  
-
-My thesis focused on transcriptomics, carrying out a meta-analysis of differential expression methods for microarray data.
-</details>
+  <article class="education-card" role="listitem">
+    <button type="button" class="education-card__toggle" aria-expanded="false" aria-controls="education-details-bsc" id="education-card-bsc">
+      <span class="education-card__header">
+        <span class="education-card__degree">BSc in Biotechnology</span>
+        <span class="education-card__years">2011&#8211;2015</span>
+      </span>
+      <span class="education-card__meta">Universitat de Barcelona &middot; Barcelona, ES</span>
+    </button>
+    <div class="education-card__details" id="education-details-bsc" role="region" aria-labelledby="education-card-bsc" hidden>
+      <p class="education-card__summary">I studied Biotechnology at Universitat de Barcelona, where I built a strong base in molecular biology, microbiology, and biochemistry, along with lab experience. By my final year I was already leaning toward the computational side of biology.</p>
+      <p class="education-card__summary">My thesis focused on transcriptomics, carrying out a meta-analysis of differential expression methods for microarray data. </p>
+    </div>
+  </article>
+</div>
+```
 :::
 
 ::: {.g-col-12 .g-col-md-4 style="text-align: left;"}
-## Interests {.index-anchor}
+## Interests {.index-anchor .index-header}
 
-- Automation
-- Open Science
-- Reproducible Research
-- Data Visualisation
-- Machine Learning
-- Epidemiology
-- GIS
+```{=html}
+<ul class="interest-tags">
+  <li class="interest-tag">Automation</li>
+  <li class="interest-tag">Open Science</li>
+  <li class="interest-tag">Reproducible Research</li>
+  <li class="interest-tag">Data Visualisation</li>
+  <li class="interest-tag">Machine Learning</li>
+  <li class="interest-tag">Epidemiology</li>
+  <li class="interest-tag">GIS</li>
+</ul>
+```
 :::
 
 ::::

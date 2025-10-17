@@ -27,6 +27,61 @@ $input-border-color: $body-color !default;
 $dropdown-border-color: $body-color !default;
 $table-border-color: $body-color !default;
 
+:root {
+  --aa-primary-color-rgb: 95, 74, 42;
+  --aa-text-color-rgb: 76, 63, 46;
+  --aa-muted-color-rgb: 143, 132, 117;
+  --aa-input-background-color-rgb: 255, 248, 235;
+  --aa-selected-color-rgb: 225, 210, 186;
+  --aa-panel-border-color: rgba(95, 74, 42, 0.25);
+}
+
+.aa-DetachedOverlay .search-result-text,
+.aa-DetachedOverlay .search-result-title,
+.aa-DetachedOverlay .aa-Item .search-result-text,
+.aa-DetachedOverlay .aa-Item .search-result-title,
+#quarto-search-results .search-result-text,
+#quarto-search-results .search-result-title,
+#quarto-search .search-result-text,
+#quarto-search .search-result-title {
+  color: $primary !important;
+  background: transparent !important;
+}
+
+.aa-DetachedOverlay li.aa-Item[aria-selected="true"],
+.aa-DetachedOverlay li.aa-Item.aa-Item--active,
+#quarto-search-results li.aa-Item[aria-selected="true"],
+#quarto-search-results li.aa-Item.aa-Item--active,
+#quarto-search li.aa-Item[aria-selected="true"],
+#quarto-search li.aa-Item.aa-Item--active {
+  background-color: rgba(95, 74, 42, 0.14) !important;
+}
+
+.aa-DetachedOverlay li.aa-Item[aria-selected="true"] .search-result-text,
+.aa-DetachedOverlay li.aa-Item[aria-selected="true"] .search-result-title,
+#quarto-search-results li.aa-Item[aria-selected="true"] .search-result-text,
+#quarto-search-results li.aa-Item[aria-selected="true"] .search-result-title,
+#quarto-search li.aa-Item[aria-selected="true"] .search-result-text,
+#quarto-search li.aa-Item[aria-selected="true"] .search-result-title {
+  color: $primary !important;
+  background: transparent !important;
+}
+
+.aa-DetachedOverlay li.aa-Item[aria-selected="true"] .search-result-text-container,
+.aa-DetachedOverlay li.aa-Item[aria-selected="true"] .search-result-section,
+.aa-DetachedOverlay li.aa-Item[aria-selected="true"] .search-item,
+.aa-DetachedOverlay li.aa-Item[aria-selected="true"] .search-result-title-container,
+#quarto-search-results li.aa-Item[aria-selected="true"] .search-result-text-container {
+#quarto-search-results li.aa-Item[aria-selected="true"] .search-result-section,
+#quarto-search-results li.aa-Item[aria-selected="true"] .search-item,
+#quarto-search-results li.aa-Item[aria-selected="true"] .search-result-title-container,
+#quarto-search li.aa-Item[aria-selected="true"] .search-result-text-container {
+#quarto-search li.aa-Item[aria-selected="true"] .search-result-section,
+#quarto-search li.aa-Item[aria-selected="true"] .search-item,
+#quarto-search li.aa-Item[aria-selected="true"] .search-result-title-container {
+  background: rgba(95, 74, 42, 0.06) !important;
+}
+
 /*-- Animations --*/
 @keyframes fadeEffect {
   from {opacity: 0;}
@@ -229,6 +284,50 @@ pre code {
 svg.aa-SubmitIcon,
 .navbar #quarto-search.type-overlay .aa-Autocomplete svg.aa-SubmitIcon {
   color: $component-active-color;
+}
+
+.aa-Panel,
+.aa-Panel .aa-PanelLayout,
+.aa-Panel .aa-Source,
+#quarto-search-results,
+#quarto-search-results .aa-PanelLayout,
+#quarto-search .aa-PanelLayout {
+  background-color: rgba(255, 248, 235, 0.96) !important;
+  color: $primary !important;
+  border-color: rgba(95, 74, 42, 0.18) !important;
+}
+
+.aa-Panel .aa-Item,
+#quarto-search-results .aa-Item,
+#quarto-search .aa-Item {
+  background: transparent !important;
+  color: $primary !important;
+}
+
+.aa-Panel .aa-Item[aria-selected="true"],
+.aa-Panel .aa-Item.aa-Item--active,
+#quarto-search-results .aa-Item[aria-selected="true"],
+#quarto-search-results .aa-Item.aa-Item--active,
+#quarto-search .aa-Item[aria-selected="true"],
+#quarto-search .aa-Item.aa-Item--active {
+  background-color: rgba(246, 231, 208, 0.371) !important;
+  color: $primary !important;
+}
+
+.aa-Panel .aa-Item[aria-selected="true"] .aa-ItemContentTitle,
+.aa-Panel .aa-Item.aa-Item--active .aa-ItemContentTitle,
+#quarto-search-results .aa-Item[aria-selected="true"] .aa-ItemContentTitle,
+#quarto-search-results .aa-Item.aa-Item--active .aa-ItemContentTitle,
+#quarto-search .aa-Item[aria-selected="true"] .aa-ItemContentTitle,
+#quarto-search .aa-Item.aa-Item--active .aa-ItemContentTitle {
+  color: $primary !important;
+}
+
+.aa-Panel .aa-Item mark,
+#quarto-search-results .aa-Item mark,
+#quarto-search .aa-Item mark {
+  background-color: rgba(95, 74, 42, 0.18) !important;
+  color: $primary !important;
 }
 
 /*------------------------------------------------

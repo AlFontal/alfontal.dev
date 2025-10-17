@@ -33,42 +33,9 @@ links:
     aria-label: "Strava logo linking to my athlete account"
 ---
 
-```{=html}
-<script>
-var counterVal = 0;
-function openTab(evt, tabName) {
-  ++counterVal;
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  tablinks = document.getElementsByClassName("tablinks");
-
-  if (counterVal == 0) {
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-}
-  
-  if (document.getElementById(tabName).style.display == "block") 
-  {
-      document.getElementById(tabName).style.display = "none";
-      evt.currentTarget.className = evt.currentTarget.className.replace(" active", "");
-  }
-  else {
-    for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-    tabcontent[i].style.display = "none";
-    }
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
-  }
-}
-</script>
-```
-
 ::: {layout="[20, 35, 20]" .profile-text}
 
-![](media/alejandro_square.jpg){.about-image}
+![](media/alejandro_square.jpg){.about-image loading=lazy}
 
 <div class="about-header">
 <h1 class="about-title">Alejandro Fontal</h1>
@@ -86,73 +53,40 @@ function openTab(evt, tabName) {
 </div>
 </div>
 
-![](media/logo_alejandro.svg){.about-logo}
+![](media/logo_alejandro.svg){.about-logo loading=lazy}
 
 :::
 
 Welcome to my personal site and portfolio. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine.
 
-```{=html}
-<div class="tab">
-  <button class="tablinks btn btn-primary" onclick="openTab(event, 'CR')">
-  Current Role
-  </button>
-  <button class="tablinks btn btn-primary" onclick="openTab(event, 'background-content')">
-  Background
-  </button>
-  <button class="tablinks btn btn-primary" onclick="openTab(event, 'TS')">
-  This site
-  </button>
-</div>
+::: {.panel-tabset}
+## Current Role
 
-<div id="CR" class="tabcontent">
-<p><p>
-<p>
 Currently, I am a postdoctoral researcher at the Barcelona Institute for Global Health (ISGlobal).
-</p>
-<p>
-In my research, I use a combination of time series analysis, GIS, metagenomics sequencing, and epidemiology to study the underlying drivers of diseases burdening public health systems.
 
-As a big part of my work performed during my PhD and postdoc has been focused on Kawasaki Disease, a pediatric syndrome that affects thousands of children each year, and whose etiology is still a mystery after over 50 years of being studied.
-</p>
-<p>
-Apart from this, I also work together with our colleagues in the <a href="https://github.com/AirLabBcn">AIRLAB</a> on the <em>aerobiome</em>, studying the microbial diversity that inhabits the air, both indoors and outdoors (in the urban aerobiome but also in rural areas and up in the atmosphere).
-</p>
-</div>
+In my research, I use a combination of time series analysis, GIS, metagenomics sequencing, and epidemiology to study the underlying drivers of diseases burdening public health systems. A big part of my work performed during my PhD and postdoc has focused on Kawasaki Disease, a pediatric syndrome that affects thousands of children each year and whose etiology is still a mystery after more than 50 years of study.
 
-<div id="background-content" class="tabcontent">
-<p><p>
-<p>
-I hold a BSc in Molecular Biotechnology from the University of Barcelona and a MSc in Bioinformatics with a specialization in Data Science from the Wageningen University & Research and a PhD in Biotechnology from the University of Barcelona. 
-</p>
-<p>
+Apart from this, I also work together with our colleagues in the [AIRLAB](https://github.com/AirLabBcn) on the *aerobiome*, studying the microbial diversity that inhabits the air, both indoors and outdoors (in the urban aerobiome but also in rural areas and up in the atmosphere).
+
+## Background
+
+I hold a BSc in Molecular Biotechnology from the University of Barcelona, an MSc in Bioinformatics with a specialization in Data Science from Wageningen University & Research, and a PhD in Biotechnology from the University of Barcelona.
+
 I have previously worked on designing and implementing online courses on the EdX platform for the Educational Staff Development department in WUR, and as a Data Scientist in the R&D department of Dupont Nutrition & Biosciences, where we applied novel machine learning techniques to optimize the protein engineering process.
-</p>
-<p>
-You can check my detailed CV for a more comprehensive overview of my professional experience.
-</p>
-</div>
 
-<div id="TS" class="tabcontent">
-<p><p>
-<p>
-I made this site using <a href="https://quarto.org">Quarto</a>, an open source project that allows you to create documents, websites, and books using a combination of Markdown, R, Python and HTML.
-</p>
-<p>
-I took it as a chance to improve my web development skills and tinker around with HTML/CSS and a tiny bit of JavaScript.
-</p>
-<p>
-A lot of inspiration from other Quarto websites was taken to make this site. Mainly:
-</p>
-<ul>
-<li><a href="https://mickael.canouil.fr/">Mickael Canouil's personal website</a>: I started from his SCSS and index files and worked from there.</li>
-<li>I copied the <code>article.ejs</code> script to automatically list publications by <a href="https://github.com/jmgirard/">Jeffrey Girard</a> in his <a href="https://affcom.ku.edu/">AffComLab website</a> and slightly modified it to suit my needs.</li>
-</ul>
-<p>
-To check the source code, you can do so in <a href="https://github.com/AlFontal">Github</a>. Please raise an issue if you notice something is wrong or not working as intended, as I might have overdone it with the CSS/JavaScript tinkering.
-</p>
-</div>
-```
+For a comprehensive overview of my professional experience you can explore my detailed CV.
+
+## This site
+
+I built this site with [Quarto](https://quarto.org), an open-source project that lets you create documents, websites, and books using Markdown, R, Python, and HTML.
+
+I treated it as an opportunity to practice modern web development and experiment with HTML/CSS and a bit of JavaScript. A lot of inspiration came from other Quarto websites:
+
+- [Mickael Canouil's personal website](https://mickael.canouil.fr/): I started from his SCSS and index files and worked from there.
+- Jeffrey Girard's [AffComLab website](https://affcom.ku.edu/): I adapted his `article.ejs` script to automatically list publications.
+
+You can check the source code on [GitHub](https://github.com/AlFontal). Feel free to open an issue if you spot anything broken—I may have overdone it with the CSS/JavaScript tweaks.
+:::
 
 :::: {.grid}
 

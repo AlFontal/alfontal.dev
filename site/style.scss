@@ -6,7 +6,7 @@ $primary: #4C3F2E !default;
 $secondary: #eee8d5 !default;
 $secondary-shadow: #dbd1b6 !default;
 $medium: #4c3f2ea8 !default;
-$link-color: #9b8b75d5 !default;
+$link-color: #5f4a2a !default;
 
 // Base variables
 $body-bg: $secondary !default;
@@ -39,7 +39,8 @@ $table-border-color: $body-color !default;
 -------------------------------------------------*/
 body {
   font-family: "Georgia", serif;
-  font-size: 1rem;
+  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.1rem);
+  line-height: 1.7;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -48,8 +49,17 @@ h1, h2, h3, h4, h5, h6 {
   color: $body-color;
 }
 
+h1 {
+  font-size: clamp(2.1rem, 1.7rem + 0.9vw, 2.6rem);
+}
+
 h2 {
+  font-size: clamp(1.8rem, 1.5rem + 0.8vw, 2.4rem);
   border-bottom: 1px solid $primary;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 1.3rem + 0.5vw, 1.8rem);
 }
 
 a {
@@ -262,8 +272,9 @@ div.about-header {
 }
 
 h1.about-title {
+  font-size: 2rem;
   font-family: "Georgia", serif;
-  margin-bottom: -1rem;
+  margin-bottom: -1.5rem;
   font-weight: 400;
   text-align: center;
 }
@@ -294,7 +305,7 @@ div.about-links a {
 
 div.about-links a:hover {
   transition: all .25s ease;
-  filter: drop-shadow(0 0 7px $link-color);
+  filter: drop-shadow(0 2px 6px rgba(95, 74, 42, 0.35));
 }
 
 
@@ -319,7 +330,7 @@ $hover-colors: (
 @each $key, $color in $hover-colors {
   .about-links a[href*="#{$key}"]:hover {
     color: $color;
-    filter: drop-shadow(0 0 7px $color);
+    filter: drop-shadow(0 2px 6px rgba(red($color), green($color), blue($color), 0.4));
   }
 }
 
@@ -327,36 +338,58 @@ $hover-colors: (
 /*------------------------------------------------
   5. TABBED CONTENT
 -------------------------------------------------*/
-/* Tab container */
-.tab {
-  overflow: hidden;
-  text-align: center;
+.panel-tabset {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 248, 235, 0.72);
+  box-shadow: 0 18px 38px rgba(76, 63, 46, 0.12);
 }
 
-/* Tab buttons */
-.tab button {
-  cursor: pointer;
-  transition: 0.3s;
+.panel-tabset > .nav-tabs {
+  border-bottom: 1px solid lighten($primary, 35%);
+  justify-content: center;
+  gap: .45rem;
+  margin-bottom: 1rem;
+  padding-bottom: .65rem;
+}
+
+.panel-tabset .nav-link {
+  color: $link-color;
+  border-radius: 999px;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  padding: 0.55rem 1.35rem;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background-color .25s ease, color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+
+.panel-tabset .nav-link:hover {
   color: $secondary;
-  background-color: $link-color;
-  font-family: monospace;
-  float: center;
+  background-color: rgba(95, 74, 42, 0.85);
+  transform: translateY(-1px);
 }
 
-.tab button:hover {
+.panel-tabset .nav-link.active {
   background-color: $primary;
+  color: $secondary;
+  border-color: $primary;
+  box-shadow: 0 12px 24px rgba(76, 63, 46, 0.2);
+  transform: translateY(-1px);
 }
 
-.tab button.active {
-  background-color: $link-color;
+.panel-tabset .tab-content {
+  padding: 0.75rem 0 0;
+  border: none;
+  background: transparent;
+  animation: fadeEffect 0.6s;
 }
 
-/* Tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border-top: none;
-  animation: fadeEffect 1s;
+.panel-tabset .tab-pane {
+  border: none;
+  background: transparent;
+  padding: 0 0 1rem;
 }
 
 /*------------------------------------------------
@@ -493,3 +526,12 @@ table tr:hover {
     background: $link-color;
     // transition: background-color .3s ease;
     }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

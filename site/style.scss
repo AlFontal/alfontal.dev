@@ -7,6 +7,7 @@ $secondary: #eee8d5 !default;
 $secondary-shadow: #dbd1b6 !default;
 $medium: #4c3f2ea8 !default;
 $link-color: #5f4a2a !default;
+$secondary-bg:  rgba(95, 74, 42, 0.12);
 
 // Base variables
 $body-bg: $secondary !default;
@@ -71,11 +72,11 @@ $table-border-color: $body-color !default;
 .aa-DetachedOverlay li.aa-Item[aria-selected="true"] .search-result-section,
 .aa-DetachedOverlay li.aa-Item[aria-selected="true"] .search-item,
 .aa-DetachedOverlay li.aa-Item[aria-selected="true"] .search-result-title-container,
-#quarto-search-results li.aa-Item[aria-selected="true"] .search-result-text-container {
+#quarto-search-results li.aa-Item[aria-selected="true"] .search-result-text-container,
 #quarto-search-results li.aa-Item[aria-selected="true"] .search-result-section,
 #quarto-search-results li.aa-Item[aria-selected="true"] .search-item,
 #quarto-search-results li.aa-Item[aria-selected="true"] .search-result-title-container,
-#quarto-search li.aa-Item[aria-selected="true"] .search-result-text-container {
+#quarto-search li.aa-Item[aria-selected="true"] .search-result-text-container,
 #quarto-search li.aa-Item[aria-selected="true"] .search-result-section,
 #quarto-search li.aa-Item[aria-selected="true"] .search-item,
 #quarto-search li.aa-Item[aria-selected="true"] .search-result-title-container {
@@ -88,14 +89,20 @@ $table-border-color: $body-color !default;
   to {opacity: 1;}
 }
 
+@keyframes blinkCaret {
+  to {
+    visibility: hidden;
+  }
+}
+
 /*-- scss:rules --*/
 /*------------------------------------------------
   1. TYPOGRAPHY AND BASE STYLES
 -------------------------------------------------*/
 body {
   font-family: "Georgia", serif;
-  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.1rem);
-  line-height: 1.7;
+  font-size: clamp(.9rem, 0.88rem + 0.25vw, 1.05rem);
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -118,8 +125,32 @@ h3 {
 }
 
 a {
-  transition: all .35s ease;
+  color: lighten($link-color, 12%);
   text-decoration: none;
+  transition: color .25s ease, box-shadow .25s ease;
+}
+
+a:hover,
+a:focus {
+  color: $primary;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid rgba($primary, 0.6);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 blockquote {
@@ -183,6 +214,7 @@ pre code {
   font-weight: bolder;
   font-size: 1.2em;
   font-family: 'Charmonman', cursive;
+  text-decoration: none;
 }
 
 .navbar-title:hover {
@@ -231,6 +263,7 @@ pre code {
 .navbar-nav a.nav-link {
   position: relative;
   transition: all .75s;
+  text-decoration: none;
 }
 
 .navbar-nav a.nav-link:after {
@@ -273,11 +306,64 @@ pre code {
 
 .navbar-brand {
   color: $body-color;
+  text-decoration: none;
 }
 
 .navbar-brand:hover,
 .navbar-brand:focus {
   color: $component-active-color;
+}
+
+.navbar-toggler {
+  border: 2px solid $primary;
+  border-radius: 0.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($secondary, 0.85);
+  transition: background-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+
+.navbar-toggler:hover,
+.navbar-toggler:focus {
+  background-color: rgba($secondary, 0.95);
+  box-shadow: 0 6px 14px rgba($primary, 0.18);
+  transform: translateY(-1px);
+}
+
+.navbar-toggler:focus-visible {
+  outline: 2px solid rgba($primary, 0.5);
+  outline-offset: 3px;
+}
+
+.navbar-toggler-icon {
+  position: relative;
+  width: 1.55rem;
+  height: 2px;
+  background-color: $primary;
+  transition: background-color .25s ease;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: $primary;
+  transition: transform .25s ease, background-color .25s ease;
+}
+
+.navbar-toggler-icon::before {
+  transform: translateY(-6px);
+}
+
+.navbar-toggler-icon::after {
+  transform: translateY(6px);
 }
 
 /* Search icon */
@@ -373,7 +459,7 @@ div.about-header {
 h1.about-title {
   font-size: 2rem;
   font-family: "Georgia", serif;
-  margin-bottom: -1.5rem;
+  margin-bottom: -1rem;
   font-weight: 400;
   text-align: center;
 }
@@ -388,6 +474,46 @@ p.about-subtitle {
   margin-bottom: 0.5rem;
 }
 
+.typed-terminal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.85rem;
+  background: $secondary-bg;
+  box-shadow: 0 14px 28px rgba(76, 63, 46, 0.12);
+  color: $primary;
+  font-family: 'SFMono-Regular', 'JetBrains Mono', 'Fira Code', 'Menlo', monospace;
+  font-size: 1rem;
+  line-height: 1.4;
+  flex-wrap: wrap;
+}
+
+.terminal-prefix {
+  font-weight: 600;
+  color: rgba(76, 63, 46, 0.78);
+  letter-spacing: 0.01em;
+}
+
+.typed-terminal .typed-role {
+  font-family: inherit;
+}
+
+.typed-role {
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  padding-right: 0.15rem;
+}
+
+.typed-role::after {
+  content: '|';
+  position: absolute;
+  right: 0;
+  color: $primary;
+  animation: blinkCaret 1s steps(2, start) infinite;
+}
+
 div.about-links {
   font-size: 1.4rem;
   display: flex;
@@ -400,6 +526,7 @@ div.about-links {
 div.about-links a {
   margin: 0 0.2rem;
   color: $link-color;
+  text-decoration: none;
 }
 
 div.about-links a:hover {
@@ -435,60 +562,110 @@ $hover-colors: (
 
 
 /*------------------------------------------------
-  5. TABBED CONTENT
+  5. ABOUT OVERVIEW
 -------------------------------------------------*/
-.panel-tabset {
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  border-radius: 1.25rem;
-  background: rgba(255, 248, 235, 0.72);
-  box-shadow: 0 18px 38px rgba(76, 63, 46, 0.12);
+.role-overview {
+  margin-top: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
-.panel-tabset > .nav-tabs {
-  border-bottom: 1px solid lighten($primary, 35%);
+.role-pills {
+  display: inline-flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: .45rem;
-  margin-bottom: 1rem;
-  padding-bottom: .65rem;
+  gap: 0.75rem;
+  padding: 0;
+  border: none;
+  background: transparent;
 }
 
-.panel-tabset .nav-link {
-  color: $link-color;
+.role-pill {
+  appearance: none;
+  border: 1px solid rgba($primary, 0.18);
   border-radius: 999px;
-  font-family: 'Inter', Helvetica, Arial, sans-serif;
-  font-weight: 500;
+  background: $secondary-bg;
   padding: 0.55rem 1.35rem;
-  background: transparent;
-  border: 1px solid transparent;
-  transition: background-color .25s ease, color .25s ease, box-shadow .25s ease, transform .25s ease;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: rgba($primary, 0.78);
+  text-align: center;
+  transition: color .25s ease, background-color .25s ease, box-shadow .25s ease, transform .25s ease;
+  cursor: pointer;
 }
 
-.panel-tabset .nav-link:hover {
-  color: $secondary;
-  background-color: rgba(95, 74, 42, 0.85);
+.role-pill:hover,
+.role-pill:focus {
+  color: $primary;
+  background: rgba(#fff, 0.95);
+  box-shadow: 0 10px 18px rgba($primary, 0.12);
   transform: translateY(-1px);
 }
 
-.panel-tabset .nav-link.active {
-  background-color: $primary;
+.role-pill:focus-visible {
+  outline: 2px solid rgba($primary, 0.38);
+  outline-offset: 2px;
+}
+
+.role-pill.is-active {
   color: $secondary;
-  border-color: $primary;
-  box-shadow: 0 12px 24px rgba(76, 63, 46, 0.2);
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba($primary, 0.95), rgba($primary, 0.82));
+  border-color: rgba($primary, 0.45);
+  box-shadow: 0 14px 26px rgba($primary, 0.22);
 }
 
-.panel-tabset .tab-content {
-  padding: 0.75rem 0 0;
-  border: none;
-  background: transparent;
-  animation: fadeEffect 0.6s;
+.role-panels {
+  position: relative;
+  border: 1px solid rgba($primary, 0.14);
+  border-radius: 1.15rem;
+  padding: 1.45rem 1.6rem 1.55rem;
+  background: $secondary-bg;
+  min-height: 0;
 }
 
-.panel-tabset .tab-pane {
-  border: none;
-  background: transparent;
-  padding: 0 0 1rem;
+.role-panels::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  // box-shadow: inset 0 1px 3px rgba(#fff, 0.52);
+}
+
+.role-panel {
+  animation: fadeEffect 0.35s ease;
+}
+
+.role-panel[hidden] {
+  display: none;
+}
+
+.role-panel ul {
+  padding-left: 1.15rem;
+}
+
+.role-panel li + li {
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 640px) {
+  .role-pills {
+    border-radius: 1rem;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .role-pill {
+    flex: 1 1 100%;
+    font-size: 1rem;
+  }
+
+  .role-panels {
+    padding: 1.2rem 1.25rem 1.35rem;
+  }
 }
 
 /*------------------------------------------------
@@ -632,5 +809,10 @@ table tr:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .typed-role::after {
+    animation: none;
+    opacity: 1;
   }
 }

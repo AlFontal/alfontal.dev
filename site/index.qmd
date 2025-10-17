@@ -39,7 +39,12 @@ links:
 
 <div class="about-header">
 <h1 class="about-title">Alejandro Fontal</h1>
-<p class="about-subtitle">Research Data Scientist</p>
+<p class="about-subtitle">
+<span class="typed-terminal" role="presentation">
+  <span class="terminal-prefix" aria-hidden="true"> ~$ </span>
+  <span id="role-rotator" class="typed-role" aria-live="polite">Research Data Scientist</span>
+</span>
+</p>
 <div class="about-links">
 <a href=mailto:alejandro.fontal.92@gmail.com> {{< iconify fa6-solid envelope >}}</a> 
 <a href=https://github.com/AlFontal>{{< iconify fa6-brands github >}}</a>
@@ -59,34 +64,223 @@ links:
 
 Welcome to my personal site and portfolio. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine.
 
-::: {.panel-tabset}
-## Current Role
+```{=html}
+<script>
+(function () {
+  const target = document.getElementById('role-rotator');
+  if (!target) return;
 
-Currently, I am a postdoctoral researcher at the Barcelona Institute for Global Health (ISGlobal).
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const roles = [
+    'Researcher',
+    'Data Scientist',
+    'Bioinformatician',
+    'Software Developer',
+    'Open Science Advocate',
+  ];
 
-In my research, I use a combination of time series analysis, GIS, metagenomics sequencing, and epidemiology to study the underlying drivers of diseases burdening public health systems. A big part of my work performed during my PhD and postdoc has focused on Kawasaki Disease, a pediatric syndrome that affects thousands of children each year and whose etiology is still a mystery after more than 50 years of study.
+  if (prefersReducedMotion || roles.length === 0) {
+    target.textContent = roles[0] || target.textContent;
+    return;
+  }
 
-Apart from this, I also work together with our colleagues in the [AIRLAB](https://github.com/AirLabBcn) on the *aerobiome*, studying the microbial diversity that inhabits the air, both indoors and outdoors (in the urban aerobiome but also in rural areas and up in the atmosphere).
+  let roleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typingDelay = 110;
+  const deletingDelay = 55;
+  const holdDelay = 1800;
 
-## Background
+  function type() {
+    const current = roles[roleIndex];
 
-I hold a BSc in Molecular Biotechnology from the University of Barcelona, an MSc in Bioinformatics with a specialization in Data Science from Wageningen University & Research, and a PhD in Biotechnology from the University of Barcelona.
+    if (!isDeleting) {
+      charIndex += 1;
+      target.textContent = current.substring(0, charIndex);
+      if (charIndex === current.length) {
+        isDeleting = true;
+        setTimeout(type, holdDelay);
+        return;
+      }
+    } else {
+      charIndex -= 1;
+      target.textContent = current.substring(0, charIndex);
+      if (charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+      }
+    }
 
-I have previously worked on designing and implementing online courses on the EdX platform for the Educational Staff Development department in WUR, and as a Data Scientist in the R&D department of Dupont Nutrition & Biosciences, where we applied novel machine learning techniques to optimize the protein engineering process.
+    const delay = isDeleting ? deletingDelay : typingDelay;
+    setTimeout(type, delay);
+  }
 
-For a comprehensive overview of my professional experience you can explore my detailed CV.
+  type();
+})();
+</script>
+```
 
-## This site
+```{=html}
+<div class="role-overview" data-role-default="">
+  <div class="role-pills" role="tablist" aria-label="About overview">
+    <button type="button" class="role-pill" role="tab" aria-selected="false" aria-controls="role-current" id="role-pill-current">Current Role</button>
+    <button type="button" class="role-pill" role="tab" aria-selected="false" aria-controls="role-background" id="role-pill-background">Background</button>
+    <button type="button" class="role-pill" role="tab" aria-selected="false" aria-controls="role-site" id="role-pill-site">This site</button>
+  </div>
+  <div class="role-panels" hidden aria-hidden="true">
+    <section id="role-current" class="role-panel" role="tabpanel" aria-labelledby="role-pill-current" hidden>
+      <h3 class="visually-hidden">Current Role</h3>
+      <p>Currently, I am a postdoctoral researcher at the Barcelona Institute for Global Health (ISGlobal).</p>
+      <p>In my research, I use a combination of time series analysis, GIS, metagenomics sequencing, and epidemiology to study the underlying drivers of diseases burdening public health systems. A big part of my work performed during my PhD and postdoc has focused on Kawasaki Disease, a pediatric syndrome that affects thousands of children each year and whose etiology is still a mystery after more than 50 years of study.</p>
+      <p>Apart from this, I also work together with our colleagues in the <a href="https://github.com/AirLabBcn">AIRLAB</a> on the <em>aerobiome</em>, studying the microbial diversity that inhabits the air, both indoors and outdoors (in the urban aerobiome but also in rural areas and up in the atmosphere).</p>
+    </section>
+    <section id="role-background" class="role-panel" role="tabpanel" aria-labelledby="role-pill-background" hidden>
+      <h3 class="visually-hidden">Background</h3>
+      <p>I hold a BSc in Molecular Biotechnology from the University of Barcelona, an MSc in Bioinformatics with a specialization in Data Science from Wageningen University &amp; Research, and a PhD in Biotechnology from the University of Barcelona.</p>
+      <p>I have previously worked on designing and implementing online courses on the EdX platform for the Educational Staff Development department in WUR, and as a Data Scientist in the R&amp;D department of Dupont Nutrition &amp; Biosciences, where we applied novel machine learning techniques to optimize the protein engineering process.</p>
+      <p>For a comprehensive overview of my professional experience you can explore my detailed CV.</p>
+    </section>
+    <section id="role-site" class="role-panel" role="tabpanel" aria-labelledby="role-pill-site" hidden>
+      <h3 class="visually-hidden">This site</h3>
+      <p>I built this site with <a href="https://quarto.org">Quarto</a>, an open-source project that lets you create documents, websites, and books using Markdown, R, Python, and HTML.</p>
+      <p>I treated it as an opportunity to practice modern web development and experiment with HTML/CSS and a bit of JavaScript. A lot of inspiration came from other Quarto websites:</p>
+      <ul>
+        <li><a href="https://mickael.canouil.fr/">Mickael Canouil's personal website</a>: I started from his SCSS and index files and worked from there.</li>
+        <li>Jeffrey Girard's <a href="https://affcom.ku.edu/">AffComLab website</a>: I adapted his <code>article.ejs</code> script to automatically list publications.</li>
+      </ul>
+      <p>You can check the source code on <a href="https://github.com/AlFontal">GitHub</a>. Feel free to open an issue if you spot anything broken, as I may have overdone it with the CSS/JavaScript tweaks.</p>
+    </section>
+  </div>
+</div>
+```
 
-I built this site with [Quarto](https://quarto.org), an open-source project that lets you create documents, websites, and books using Markdown, R, Python, and HTML.
+```{=html}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.role-overview').forEach(function (block) {
+    const pills = Array.from(block.querySelectorAll('.role-pill'));
+  const panels = Array.from(block.querySelectorAll('.role-panel'));
+  const panelsContainer = block.querySelector('.role-panels');
 
-I treated it as an opportunity to practice modern web development and experiment with HTML/CSS and a bit of JavaScript. A lot of inspiration came from other Quarto websites:
+    if (!pills.length || !panels.length) {
+      return;
+    }
 
-- [Mickael Canouil's personal website](https://mickael.canouil.fr/): I started from his SCSS and index files and worked from there.
-- Jeffrey Girard's [AffComLab website](https://affcom.ku.edu/): I adapted his `article.ejs` script to automatically list publications.
+    let activeId = null;
 
-You can check the source code on [GitHub](https://github.com/AlFontal). Feel free to open an issue if you spot anything broken—I may have overdone it with the CSS/JavaScript tweaks.
-:::
+    const hideAll = function () {
+      pills.forEach(function (pill) {
+        pill.classList.remove('is-active');
+        pill.setAttribute('aria-selected', 'false');
+        pill.setAttribute('aria-expanded', 'false');
+      });
+
+      panels.forEach(function (panel) {
+        panel.hidden = true;
+        panel.setAttribute('aria-hidden', 'true');
+      });
+
+      activeId = null;
+
+      if (panelsContainer) {
+        panelsContainer.hidden = true;
+        panelsContainer.setAttribute('aria-hidden', 'true');
+      }
+    };
+
+    const showPanel = function (targetId) {
+      const panel = block.querySelector('#' + CSS.escape(targetId));
+      const pill = block.querySelector('[aria-controls="' + CSS.escape(targetId) + '"]');
+
+      if (!panel || !pill) {
+        return;
+      }
+
+      hideAll();
+
+      pill.classList.add('is-active');
+      pill.setAttribute('aria-selected', 'true');
+      pill.setAttribute('aria-expanded', 'true');
+      panel.hidden = false;
+      panel.setAttribute('aria-hidden', 'false');
+      activeId = targetId;
+
+      if (panelsContainer) {
+        panelsContainer.hidden = false;
+        panelsContainer.setAttribute('aria-hidden', 'false');
+      }
+    };
+
+    const focusByOffset = function (current, offset) {
+      const index = pills.indexOf(current);
+      if (index === -1) {
+        return;
+      }
+      const nextIndex = (index + offset + pills.length) % pills.length;
+      pills[nextIndex].focus();
+    };
+
+    hideAll();
+
+    const defaultId = block.getAttribute('data-role-default');
+    if (defaultId) {
+      showPanel(defaultId);
+    }
+
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        const targetId = pill.getAttribute('aria-controls');
+        if (!targetId) {
+          return;
+        }
+
+        if (activeId === targetId) {
+          hideAll();
+          return;
+        }
+
+        showPanel(targetId);
+      });
+
+      pill.addEventListener('keydown', function (event) {
+        switch (event.key) {
+          case 'ArrowRight':
+          case 'ArrowDown':
+            event.preventDefault();
+            focusByOffset(pill, 1);
+            break;
+          case 'ArrowLeft':
+          case 'ArrowUp':
+            event.preventDefault();
+            focusByOffset(pill, -1);
+            break;
+          case 'Home':
+            event.preventDefault();
+            pills[0].focus();
+            break;
+          case 'End':
+            event.preventDefault();
+            pills[pills.length - 1].focus();
+            break;
+          case 'Enter':
+          case ' ':
+            event.preventDefault();
+            pill.click();
+            break;
+        }
+      });
+    });
+  });
+});
+</script>
+  <noscript>
+  <style>
+  .role-overview .role-panels[hidden] { display: block !important; }
+  .role-overview .role-panel { display: block !important; }
+  .role-overview .role-panel[hidden] { display: block !important; }
+  </style>
+  </noscript>
+```
 
 :::: {.grid}
 

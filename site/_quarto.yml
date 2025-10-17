@@ -72,3 +72,10 @@ format:
       source: false
       toggle: false
       caption: none
+    include-in-header:
+      - text: |
+          <script
+              src="https://app.rybbit.io/api/script.js"
+              data-site-id="152655938162"
+              defer
+          ></script>

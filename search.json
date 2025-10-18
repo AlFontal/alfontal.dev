@@ -249,20 +249,20 @@
     "href": "index.html",
     "title": "\nAlejandro Fontal\n",
     "section": "",
-    "text": "Research Data Scientist\nWelcome to my personal site and portfolio. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine."
+    "text": "~$  Research Data Scientist"
   },
   {
     "objectID": "index.html#education",
     "href": "index.html#education",
     "title": "\nAlejandro Fontal\n",
     "section": "Education",
-    "text": "Education\n\n\nPhD in Biotechnology, 2019-2024\n\n\nUniversitat de Barcelona, Spain\n\n\n\n\nI did my PhD through the Universitat de Barcelona, but carried out my daily research at ISGlobal, within the Climate and Health group at the PRBB. I was funded by a Marie Skłodowska-Curie Actions doctoral grant under the HELICAL project, a European network of more than 15 institutions focused on computational approaches to study vasculitis onset.\nMy thesis was titled “Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset” and can be found here.\n\n\n\nMSc in Bioinformatics, 2016-2018\n\n\nWageningen University & Research, The Netherlands\n\n\n\n\nDuring my MSc in Bioinformatics at Wageningen University & Research, I explored a wide range of computational biology topics: from R and (especially) Python programming, to systems biology, multiple omics fields, and data science subjects like machine learning, algorithmic development, and the usage of High Performance Computing (HPC).\nFor my thesis, I developed deep learning models to predict the subcellular localization of proteins, with an emphasis on making these models less of a black box. The thesis can be found here.\n\n\n\nBSc in Biotechnology, 2011-2015\n\n\nUniversitat de Barcelona, Spain\n\n\n\n\nI studied Biotechnology at Universitat de Barcelona, where I built a strong base in molecular biology, microbiology, and biochemistry, along with lab experience. By my final year I was already leaning toward the computational side of biology.\nMy thesis focused on transcriptomics, carrying out a meta-analysis of differential expression methods for microarray data."
+    "text": "Education\n\n  \n    \n      \n        PhD in Biotechnology\n        2019–2024\n      \n      ISGlobal & Universitat de Barcelona · Barcelona, ES\n    \n    \n      Doctoral research carried out at ISGlobal within the Climate and Health group at the PRBB, funded by a Marie Skłodowska-Curie Actions grant through the HELICAL network.\n      Thesis: Atmospheric characterization and time-series analysis of the impact of environmental factors on disease onset. Read the dissertation.\n    \n  \n\n  \n    \n      \n        MSc in Bioinformatics\n        2016–2018\n      \n      Wageningen University & Research · Wageningen, NL\n    \n    \n      During my MSc in Bioinformatics at Wageningen University & Research, I explored a wide range of computational biology topics: from R and (especially) Python programming, to systems biology, multiple omics fields, and data science subjects like machine learning, algorithmic development, and the usage of High Performance Computing (HPC).\n      For my thesis, I developed deep learning models to predict the subcellular localization of proteins, with an emphasis on making these models less of a black box. The thesis can be found here, and the GitHub repo is available here.\n    \n  \n\n  \n    \n      \n        BSc in Biotechnology\n        2011–2015\n      \n      Universitat de Barcelona · Barcelona, ES\n    \n    \n      I studied Biotechnology at Universitat de Barcelona, where I built a strong base in molecular biology, microbiology, and biochemistry, along with lab experience. By my final year I was already leaning toward the computational side of biology.\n      My thesis focused on transcriptomics, carrying out a meta-analysis of differential expression methods for microarray data."
   },
   {
     "objectID": "index.html#interests",
     "href": "index.html#interests",
     "title": "\nAlejandro Fontal\n",
     "section": "Interests",
-    "text": "Interests\n\nAutomation\nOpen Science\nReproducible Research\nData Visualisation\nMachine Learning\nEpidemiology\nGIS"
+    "text": "Interests\n\n  Automation\n  Open Science\n  Reproducible Research\n  Data Visualisation\n  Machine Learning\n  Epidemiology\n  GIS"
   }
 ]

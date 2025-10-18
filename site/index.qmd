@@ -62,8 +62,9 @@ links:
 
 :::
 
+:::{ .about-description}
 Welcome to my personal site and portfolio. My name is Alejandro and I am a researcher from Barcelona. My area of expertise lies in the application of data science to various fields of scientific research, specifically in the areas of bioinformatics, epidemiology, and computational biomedicine.
-
+:::
 ```{=html}
 <script>
 (function () {

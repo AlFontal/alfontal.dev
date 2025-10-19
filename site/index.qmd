@@ -38,8 +38,8 @@ links:
 ![](media/alejandro_square.jpg){.about-image loading=lazy}
 
 <div class="about-header">
-<h1 class="about-title">Alejandro Fontal</h1>
 <p class="about-subtitle">
+<h1 class="about-title">Alejandro Fontal</h1>
 <span class="typed-terminal" role="presentation">
   <span class="terminal-prefix" aria-hidden="true"> ~$ </span>
   <span id="role-rotator" class="typed-role" aria-live="polite">Research Data Scientist</span>

@@ -416,11 +416,17 @@ svg.aa-SubmitIcon,
   color: $primary !important;
 }
 
+
 /*------------------------------------------------
   4. PROFILE/ABOUT SECTION
 -------------------------------------------------*/
+
+div.quarto-layout-row { align-items: center; }
+
 div.profile-text {
   text-align: center;
+  margin-top: -1rem;
+  margin-bottom: -.5rem;
 }
 
 img.about-image {
@@ -428,8 +434,9 @@ img.about-image {
   border-style: solid;
   border-width: 2pt;
   border-color: $primary;
-  height: 10rem;
-  width: 10rem;
+  height: 8rem;                
+  width: 8rem;
+  object-fit: cover;
 }
 
 img.about-image:hover {
@@ -437,9 +444,18 @@ img.about-image:hover {
   filter: drop-shadow(0 0 10px $primary);
 }
 
-img.about-logo {
-  height: 10rem;
+img.about-logo { height: 8rem; }
+
+
+/* Mobile and thin viewports: hide logo */
+@media (max-width: 770px) {
+
+  .profile-text .quarto-layout-row > .quarto-layout-cell:nth-child(3) {
+    display: none !important;
+  }
+
 }
+
 
 img.about-logo:hover {
   transition: all .35s ease;
@@ -459,24 +475,17 @@ div.about-header {
 h1.about-title {
   font-size: 2rem;
   font-family: "Georgia", serif;
-  margin-bottom: -1rem;
+  margin-bottom: .75rem;
+  margin-top: 0.5rem;
   font-weight: 400;
   text-align: center;
 }
 
-h1.about-title:hover {
-  text-shadow: 0 0 5px $primary;
-}
+h1.about-title:hover { text-shadow: 0 0 5px $primary; }
 
-p.about-subtitle {
-  font-size: 1.2em;
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
+p.about-subtitle { font-size: 1.2em; text-align: center; margin-bottom: 0.5rem; }
 
-div.about-description {
-  font-size: 1rem;
-}
+div.about-description { font-size: 1rem;}
 
 .typed-terminal {
   display: inline-flex;
@@ -493,15 +502,8 @@ div.about-description {
   flex-wrap: wrap;
 }
 
-.terminal-prefix {
-  font-weight: 600;
-  color: rgba(76, 63, 46, 0.78);
-  letter-spacing: 0.01em;
-}
-
-.typed-terminal .typed-role {
-  font-family: inherit;
-}
+.terminal-prefix { font-weight: 600; color: rgba(76, 63, 46, 0.78); letter-spacing: 0.01em; }
+.typed-terminal .typed-role { font-family: inherit; }
 
 .typed-role {
   display: inline-block;
@@ -509,7 +511,6 @@ div.about-description {
   white-space: nowrap;
   padding-right: 0.15rem;
 }
-
 .typed-role::after {
   content: '|';
   position: absolute;
@@ -538,13 +539,12 @@ div.about-links a:hover {
   filter: drop-shadow(0 2px 6px rgba(95, 74, 42, 0.35));
 }
 
-
 .about-links a {
   transition: transform 0.25s ease, color 0.25s ease, filter 0.25s ease;
   filter: drop-shadow(0 0 0 transparent);
 }
 
-/* Social Links Hover Effects */
+/* Social link hover colors */
 $hover-colors: (
   "mailto": #bb001b,
   "github": #333,

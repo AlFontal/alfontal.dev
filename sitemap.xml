@@ -2,58 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://alfontal.dev/projects.html</loc>
-    <lastmod>2025-10-20T09:33:05.038Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications.html</loc>
-    <lastmod>2025-10-20T09:33:05.052Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/posts/first-post/index.html</loc>
-    <lastmod>2025-10-20T09:33:05.029Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/pozdniakova2025.html</loc>
-    <lastmod>2025-10-20T09:33:05.053Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/rodo2024.html</loc>
-    <lastmod>2025-10-20T09:33:05.053Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/fontal2021.html</loc>
-    <lastmod>2025-10-20T09:33:05.053Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/vasculitis2022.html</loc>
-    <lastmod>2025-10-20T09:33:05.053Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/blog.html</loc>
-    <lastmod>2025-10-20T09:33:05.021Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/fontal2025.html</loc>
-    <lastmod>2025-10-20T09:33:05.053Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/rodofontal2021.html</loc>
-    <lastmod>2025-10-20T09:33:05.053Z</lastmod>
-  </url>
-  <url>
-    <loc>https://alfontal.dev/publications/articles/rodo2023.html</loc>
-    <lastmod>2025-10-20T09:33:05.053Z</lastmod>
+    <lastmod>2025-11-04T17:39:03.244Z</lastmod>
   </url>
   <url>
     <loc>https://alfontal.dev/publications/articles/thesis2017.html</loc>
-    <lastmod>2025-10-20T09:33:05.053Z</lastmod>
+    <lastmod>2025-11-04T17:39:03.259Z</lastmod>
   </url>
   <url>
-    <loc>https://alfontal.dev/posts/guess_who/guess_who.html</loc>
-    <lastmod>2025-10-20T09:33:05.038Z</lastmod>
+    <loc>https://alfontal.dev/publications/articles/rodo2023.html</loc>
+    <lastmod>2025-11-04T17:39:03.258Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/fontal2025.html</loc>
+    <lastmod>2025-11-04T17:39:03.258Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/vasculitis2022.html</loc>
+    <lastmod>2025-11-04T17:39:03.259Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/blog.html</loc>
+    <lastmod>2025-11-04T17:39:03.208Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/posts/world-population/world_pop_densities.html</loc>
+    <lastmod>2025-11-04T17:39:03.244Z</lastmod>
   </url>
   <url>
     <loc>https://alfontal.dev/index.html</loc>
-    <lastmod>2025-10-20T09:33:05.022Z</lastmod>
+    <lastmod>2025-11-04T17:39:03.208Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/posts/first-post/index.html</loc>
+    <lastmod>2025-11-04T17:39:03.217Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/posts/guess_who/guess_who.html</loc>
+    <lastmod>2025-11-04T17:39:03.225Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications.html</loc>
+    <lastmod>2025-11-04T17:39:03.258Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/pozdniakova2025.html</loc>
+    <lastmod>2025-11-04T17:39:03.258Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/fontal2021.html</loc>
+    <lastmod>2025-11-04T17:39:03.258Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/rodofontal2021.html</loc>
+    <lastmod>2025-11-04T17:39:03.259Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alfontal.dev/publications/articles/rodo2024.html</loc>
+    <lastmod>2025-11-04T17:39:03.258Z</lastmod>
   </url>
 </urlset>

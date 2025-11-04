@@ -4,6 +4,14 @@
     "items": []
   },
   {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/world-population/world_pop_densities.html",
+      "/posts/guess_who/guess_who.html",
+      "/posts/first-post/index.html"
+    ]
+  },
+  {
     "listing": "/publications.html",
     "items": [
       "/publications/articles/fontal2025.html",
@@ -14,13 +22,6 @@
       "/publications/articles/rodofontal2021.html",
       "/publications/articles/fontal2021.html",
       "/publications/articles/thesis2017.html"
-    ]
-  },
-  {
-    "listing": "/blog.html",
-    "items": [
-      "/posts/guess_who/guess_who.html",
-      "/posts/first-post/index.html"
     ]
   }
 ]

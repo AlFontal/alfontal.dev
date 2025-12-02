@@ -1,5 +1,5 @@
 ---
-title: "Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols"
+title: "Laser-Induced Fluorescence coupled with Machine Learning as an effective approach for real-time identification of bacteria in bioaerosols"
 type: "article"
 authors:
   - name: "Alejandro Fontal"
@@ -16,12 +16,12 @@ authors:
     orcid: 0000-0003-4843-6180
     email: "xavier.rodo@isglobal.org"
 
-date: '2025-08-05'
+date: '2025-12-02'
 
 year: "2025"
-publication: "EGUsphere (preprint)"
-pdf: "https://egusphere.copernicus.org/preprints/2025/egusphere-2025-2484/egusphere-2025-2484.pdf"
-doi: "https://doi.org/10.5194/egusphere-2025-2484"
+publication: "Atmospheric Measurement Techniques"
+pdf: "https://amt.copernicus.org/articles/18/7297/2025/amt-18-7297-2025.pdf"
+doi: "https://doi.org/10.5194/amt-18-7297-2025"
 code: "https://github.com/AlFontal/lif-bacteria-aerosols-ms"
 toc: false
 categories:
@@ -34,7 +34,7 @@ categories:
 
 ## Citation (APA)
 
-> Fontal, A., Borràs, S., Cañas, L., Pozdniakova, S., & Rodó, X. (2025). Benchmarking Laser-Induced Fluorescence and Machine Learning for real-time identification of bacteria in bioaerosols. EGUsphere, 2025, 1-25.
+> Fontal, A., Borràs, S., Cañas, L., Pozdniakova, S., & Rodó, X. (2025). Laser-induced fluorescence coupled with machine learning as an effective approach for real-time identification of bacteria in bioaerosols. Atmospheric Measurement Techniques, 18, 7297–7313. https://doi.org/10.5194/amt-18-7297-2025
 
 ## Abstract
 

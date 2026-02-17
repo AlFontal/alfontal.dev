@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="First post on the blog"
+  description="Introducing the site, the blog, and the workflow used to publish notebook-driven reports."
+>
+  <article class="article reveal-in">
+    <header class="article-header">
+      <p class="article-kicker">2023-02-20 · Alejandro Fontal</p>
+      <h1>First post on the blog</h1>
+      <p>Introducing the site and the publication workflow behind notebook-based reports.</p>
+    </header>
+
+    <section>
+      <h2>Introduction</h2>
+      <p>
+        This blog started as a way to document research, programming experiments, and practical workflows for sharing
+        technical outputs with both technical and non-technical audiences.
+      </p>
+      <p>
+        Most of my work is still notebook-centric, but the default rendering of notebooks in repository viewers can
+        make long analyses difficult to navigate. This motivated the transition toward static sites with stronger
+        layout and information architecture.
+      </p>
+    </section>
+
+    <section>
+      <h2>Static publishing path</h2>
+      <p>
+        Over time, the stack evolved from Pelican to Jupyter Book and eventually Quarto. The main requirement has
+        always been the same: keep source reports close to code while producing polished, searchable outputs.
+      </p>
+      <p>
+        A static pipeline makes this feasible: content lives in notebooks or markdown, the CI build renders HTML, and
+        hosting deploys the generated pages.
+      </p>
+    </section>
+
+    <section>
+      <h2>Current workflow</h2>
+      <img
+        src="/assets/posts/first-post/workflow.png"
+        alt="Schematic view of the publication workflow"
+        width="1536"
+        height="1024"
+        loading="lazy"
+      />
+      <ol>
+        <li>Write reports in `.ipynb` or `.qmd` and render locally.</li>
+        <li>Push to the main repository branch.</li>
+        <li>CI installs dependencies and renders static pages.</li>
+        <li>The generated output branch is deployed to hosting.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Conclusion</h2>
+      <p>
+        The blog exists to keep technical notes public, reproducible, and readable. Future posts will continue to
+        blend code, scientific context, and communication design.
+      </p>
+    </section>
+  </article>
+</BaseLayout>

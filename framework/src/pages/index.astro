@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  educationTimeline,
+  interestTags,
+  overviewPanels,
+  quickFacts,
+  rotatingRoles,
+  socialLinks,
+  siteMeta,
+} from '../data/content';
+
+const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
+---
+
+<BaseLayout>
+  <section class="hero-grid reveal-in">
+    <article class="hero-card">
+      <div class="hero-title-row">
+        <h1>Alejandro Fontal</h1>
+        <span class="status-dot">Barcelona · Research</span>
+      </div>
+
+      <div class="terminal" role="status" aria-live="polite">
+        <span class="prompt">alfontal@work:</span>
+        <span id="role-rotator">{rotatingRoles[0]}</span>
+      </div>
+
+      <p class="hero-intro">
+        Welcome to my personal site and portfolio. I apply data science to scientific research, with a focus
+        on bioinformatics, computational epidemiology, and environmental health.
+      </p>
+
+      <div class="fact-grid" aria-label="Quick highlights">
+        {
+          quickFacts.map((fact) => (
+            <article class="fact-card">
+              <h2>{fact.value}</h2>
+              <p>{fact.label}</p>
+            </article>
+          ))
+        }
+      </div>
+    </article>
+
+    <aside class="portrait-panel">
+      <img
+        src="/assets/media/alejandro_hike_profile.jpg"
+        alt="Alejandro Fontal hiking in front of a mountain"
+        width="2880"
+        height="3600"
+        loading="eager"
+      />
+      <p>
+        Contact: <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a>
+      </p>
+      <ul class="portrait-socials" aria-label="Social links">
+        {
+          profileSocialLinks.map((link) => (
+            <li>
+              <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
+                <iconify-icon icon={link.icon}></iconify-icon>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+  </section>
+
+  <section class="block reveal-in" aria-labelledby="overview-heading">
+    <div class="section-head">
+      <h2 id="overview-heading">Role Overview</h2>
+      <p>Two snapshots that summarize current work and scientific background.</p>
+    </div>
+
+    <div class="pill-row" role="tablist" aria-label="Profile tabs">
+      {
+        overviewPanels.map((panel, index) => (
+          <button
+            type="button"
+            class={`pill-toggle ${index === 0 ? 'is-active' : ''}`}
+            role="tab"
+            aria-selected={index === 0 ? 'true' : 'false'}
+            aria-controls={`panel-${panel.id}`}
+            id={`tab-${panel.id}`}
+          >
+            {panel.title}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="overview-panels">
+      {
+        overviewPanels.map((panel, index) => (
+          <section
+            class="overview-panel"
+            id={`panel-${panel.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${panel.id}`}
+            hidden={index !== 0}
+          >
+            {panel.body.map((paragraph) => <p>{paragraph}</p>)}
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="block reveal-in" aria-labelledby="education-heading">
+    <div class="section-head">
+      <h2 id="education-heading">Education Path</h2>
+      <p>Compact timeline of research and technical formation.</p>
+    </div>
+    <ol class="timeline">
+      {
+        educationTimeline.map((item) => (
+          <li>
+            <article class="timeline-card">
+              <header>
+                <h3>{item.degree}</h3>
+                <span>{item.years}</span>
+              </header>
+              <p class="timeline-meta">{item.institution}</p>
+              <p>{item.focus}</p>
+            </article>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="block reveal-in" aria-labelledby="domains-heading">
+    <div class="section-head">
+      <h2 id="domains-heading">Research Domains</h2>
+      <p>Areas I work on most frequently.</p>
+    </div>
+    <ul class="chip-list">
+      {interestTags.map((tag) => <li>{tag}</li>)}
+    </ul>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const roles = ['Researcher', 'Data Scientist', 'Bioinformatician', 'Software Developer', 'Open Science Advocate'];
+      const target = document.getElementById('role-rotator');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (target) {
+        if (prefersReducedMotion) {
+          target.textContent = roles[0];
+        } else {
+          let roleIndex = 0;
+          let charIndex = 0;
+          let deleting = false;
+
+          const tick = () => {
+            const role = roles[roleIndex];
+
+            if (!deleting) {
+              charIndex += 1;
+              target.textContent = role.slice(0, charIndex);
+              if (charIndex >= role.length) {
+                deleting = true;
+                setTimeout(tick, 1200);
+                return;
+              }
+              setTimeout(tick, 66);
+              return;
+            }
+
+            charIndex -= 1;
+            target.textContent = role.slice(0, charIndex);
+            if (charIndex <= 0) {
+              deleting = false;
+              roleIndex = (roleIndex + 1) % roles.length;
+              setTimeout(tick, 220);
+              return;
+            }
+            setTimeout(tick, 40);
+          };
+
+          target.textContent = '';
+          tick();
+        }
+      }
+
+      const overview = document.querySelector('[aria-labelledby=\"overview-heading\"]');
+      if (!overview) return;
+
+      const tabs = [...overview.querySelectorAll('.pill-toggle')];
+      const panels = [...overview.querySelectorAll('.overview-panel')];
+      if (!tabs.length || !panels.length) return;
+
+      const activate = (tab) => {
+        const panelId = tab.getAttribute('aria-controls');
+        tabs.forEach((item) => {
+          const active = item === tab;
+          item.classList.toggle('is-active', active);
+          item.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach((panel) => {
+          panel.hidden = panel.id !== panelId;
+        });
+      };
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => activate(tab));
+        tab.addEventListener('keydown', (event) => {
+          const index = tabs.indexOf(tab);
+          if (index === -1) return;
+
+          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+            event.preventDefault();
+            const next = tabs[(index + 1) % tabs.length];
+            next.focus();
+            activate(next);
+          }
+
+          if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+            event.preventDefault();
+            const prev = tabs[(index - 1 + tabs.length) % tabs.length];
+            prev.focus();
+            activate(prev);
+          }
+        });
+      });
+    })();
+  </script>
+</BaseLayout>

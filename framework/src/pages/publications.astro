@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { publications } from '../data/content';
+
+const sortedPublications = [...publications].sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
+const normalizeAuthors = (authors: string) => authors.replace(/alejandro\s+fontal/gi, 'Alejandro Fontal');
+const highlightAuthors = (authors: string) => normalizeAuthors(authors).split(/(Alejandro Fontal)/g);
+---
+
+<BaseLayout title="Publications" description="Peer-reviewed articles, conference proceedings, and thesis work.">
+  <section class="section-head reveal-in">
+    <h1>Publications</h1>
+    <p>Peer-reviewed papers and conference contributions across epidemiology, aerobiology, and data science.</p>
+  </section>
+
+  <section class="publication-list reveal-in" aria-label="Publication records">
+    {
+      sortedPublications.map((item) => (
+        <article class="publication-item">
+          <header>
+            <h2>{item.title}</h2>
+            <p class="meta-row">
+              <span>{item.publication}</span>
+              <span>{item.year}</span>
+            </p>
+          </header>
+          <p class="publication-authors">
+            {
+              highlightAuthors(item.authors).map((segment) =>
+                segment === 'Alejandro Fontal' ? <strong>{segment}</strong> : segment
+              )
+            }
+          </p>
+          <ul class="chip-list compact">
+            {item.categories.map((category) => <li>{category}</li>)}
+          </ul>
+          <div class="link-row">
+            {item.doi && (
+              <a href={item.doi} target="_blank" rel="noopener noreferrer">
+                DOI
+              </a>
+            )}
+            {item.pdf && (
+              <a href={item.pdf} target="_blank" rel="noopener noreferrer">
+                PDF
+              </a>
+            )}
+            {item.code && (
+              <a href={item.code} target="_blank" rel="noopener noreferrer">
+                Code
+              </a>
+            )}
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>

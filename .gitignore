@@ -4,3 +4,11 @@
 site/_site
 site/.quarto
 site/.luarc.json
+# framework
+framework/node_modules
+framework/dist
+framework/.astro
+framework/.git.disabled
+framework/src/content/notebooks-generated
+framework/public/assets/notebooks
+framework/src/generated/notebooks-manifest.json

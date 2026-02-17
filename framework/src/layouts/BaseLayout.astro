@@ -1,0 +1,185 @@
+---
+import '../styles/global.css';
+import { navLinks, siteMeta, socialLinks } from '../data/content';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = siteMeta.description } = Astro.props;
+const path = Astro.url.pathname;
+const pageTitle = title ? `${title} | ${siteMeta.name}` : siteMeta.name;
+const canonical = new URL(path, siteMeta.siteUrl).toString();
+const dnaCodons = ['ATG', 'TGC', 'GCA', 'CGA', 'GGT', 'AAC', 'TTA', 'CCA', 'GAA', 'TTC', 'AGC', 'GAT'];
+const aminoAcids = ['ALA', 'ARG', 'ASN', 'ASP', 'CYS', 'GLN', 'GLU', 'GLY', 'HIS', 'ILE', 'LEU', 'LYS', 'MET', 'PHE', 'PRO', 'SER', 'THR', 'TRP', 'TYR', 'VAL'];
+
+const seededRandom = (seed: number) => {
+  let state = seed % 2147483647;
+  if (state <= 0) state += 2147483646;
+  return () => {
+    state = (state * 48271) % 2147483647;
+    return (state - 1) / 2147483646;
+  };
+};
+
+const buildMatrixStream = (tokens: string[], index: number, length: number) => {
+  let seed = (index + 1) * 89;
+  const lines: string[] = [];
+
+  for (let i = 0; i < length; i += 1) {
+    seed = (seed * 73 + 17 + i * 11) % 9973;
+    // Insert deterministic sparse gaps to break uniform blocks and keep a matrix feel.
+    if ((seed + i * 13) % 19 === 0 || (seed + i * 7) % 41 === 0) {
+      lines.push('');
+    } else {
+      lines.push(tokens[seed % tokens.length]);
+    }
+  }
+
+  return lines.join('\n');
+};
+
+const rand = seededRandom(42026017);
+const matrixColumns = Array.from({ length: 22 }, (_, index) => {
+  const isDna = rand() < 0.52;
+  const duration = 125 + rand() * 143;
+  return {
+    text: buildMatrixStream(isDna ? dnaCodons : aminoAcids, index, 420),
+    type: isDna ? 'is-codon' : 'is-amino',
+    x: (-10 + rand() * 120).toFixed(2),
+    dur: duration.toFixed(2),
+    delay: (rand() * duration).toFixed(2),
+    alpha: (0.09 + rand() * 0.16).toFixed(2),
+    drift: (-2.6 + rand() * 5.2).toFixed(2),
+  };
+});
+
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${siteMeta.siteUrl}/assets/media/og_image.png`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteMeta.siteUrl}/assets/media/og_image.png`} />
+
+    <link rel="icon" type="image/svg+xml" href="/assets/media/logo_alejandro.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js" defer></script>
+    <script is:inline>
+      (() => {
+        const storedTheme = localStorage.getItem('af-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="page-bg" aria-hidden="true">
+      {
+        matrixColumns.map((column, index) => (
+          <span
+            class={`matrix-column ${column.type}`}
+            style={`--x:${column.x}%;--dur:${column.dur}s;--delay:-${column.delay}s;--alpha:${column.alpha};--drift:${column.drift}vw;`}
+          >
+            {column.text}
+          </span>
+        ))
+      }
+    </div>
+    <header class="site-header shell">
+      <a class="site-brand" href="/">
+        <img src="/assets/media/logo_alejandro.svg" width="44" height="44" alt="Alejandro Fontal logo" loading="eager" />
+        <span>
+          <strong>{siteMeta.name}</strong>
+          <em>Lab Notes / Portfolio</em>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <nav aria-label="Main">
+          <ul class="nav-list">
+            {
+              navLinks.map((link) => (
+                <li>
+                  <a class={isActive(link.href) ? 'is-active' : ''} href={link.href}>{link.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme">
+          Theme: <span data-theme-label>Light</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="shell page-content">
+      <slot />
+    </main>
+
+    <footer class="shell site-footer">
+      <div class="footer-identity">
+        <p>{siteMeta.tagline}</p>
+        <a href={siteMeta.repoUrl} target="_blank" rel="noopener noreferrer">View source code</a>
+      </div>
+      <ul class="social-list" aria-label="Social links">
+        {
+          socialLinks.map((link) => (
+            <li>
+              <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
+                <iconify-icon icon={link.icon} aria-hidden="true"></iconify-icon>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </footer>
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const button = document.querySelector('[data-theme-toggle]');
+        const label = document.querySelector('[data-theme-label]');
+
+        if (!button || !label) return;
+
+        const applyTheme = (theme) => {
+          root.dataset.theme = theme;
+          localStorage.setItem('af-theme', theme);
+          label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+          button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        };
+
+        applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
+
+        button.addEventListener('click', () => {
+          const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          applyTheme(nextTheme);
+        });
+      })();
+    </script>
+  </body>
+</html>

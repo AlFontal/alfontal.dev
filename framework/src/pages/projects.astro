@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects } from '../data/content';
+
+const sortedProjects = [...projects].sort((a, b) => (a.date < b.date ? 1 : -1));
+---
+
+<BaseLayout title="Projects" description="Selected software and data projects.">
+  <section class="section-head reveal-in">
+    <h1>Projects</h1>
+    <p>Selected repositories spanning data engineering, scientific software, and reproducible analysis workflows.</p>
+  </section>
+
+  <section class="card-grid reveal-in" aria-label="Projects list">
+    {
+      sortedProjects.map((project) => (
+        <article class="content-card">
+          <img src={project.image} alt={project.title} width="1200" height="630" loading="lazy" />
+          <div class="content-card-body">
+            <p class="meta-row">
+              <span>{project.date}</span>
+            </p>
+            <h2>{project.title}</h2>
+            <p>{project.description}</p>
+            <ul class="chip-list compact">
+              {project.categories.map((category) => <li>{category}</li>)}
+            </ul>
+            <a href={project.href} class="inline-link" target="_blank" rel="noopener noreferrer">
+              Open repository
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>

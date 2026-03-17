@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import '../styles/global.css';
 import { navLinks, siteMeta, socialLinks } from '../data/content';
+import logoMark from '../assets/media/logo_alejandro.svg';
 
 interface Props {
   title?: string;
@@ -11,50 +13,6 @@ const { title, description = siteMeta.description } = Astro.props;
 const path = Astro.url.pathname;
 const pageTitle = title ? `${title} | ${siteMeta.name}` : siteMeta.name;
 const canonical = new URL(path, siteMeta.siteUrl).toString();
-const dnaCodons = ['ATG', 'TGC', 'GCA', 'CGA', 'GGT', 'AAC', 'TTA', 'CCA', 'GAA', 'TTC', 'AGC', 'GAT'];
-const aminoAcids = ['ALA', 'ARG', 'ASN', 'ASP', 'CYS', 'GLN', 'GLU', 'GLY', 'HIS', 'ILE', 'LEU', 'LYS', 'MET', 'PHE', 'PRO', 'SER', 'THR', 'TRP', 'TYR', 'VAL'];
-
-const seededRandom = (seed: number) => {
-  let state = seed % 2147483647;
-  if (state <= 0) state += 2147483646;
-  return () => {
-    state = (state * 48271) % 2147483647;
-    return (state - 1) / 2147483646;
-  };
-};
-
-const buildMatrixStream = (tokens: string[], index: number, length: number) => {
-  let seed = (index + 1) * 89;
-  const lines: string[] = [];
-
-  for (let i = 0; i < length; i += 1) {
-    seed = (seed * 73 + 17 + i * 11) % 9973;
-    // Insert deterministic sparse gaps to break uniform blocks and keep a matrix feel.
-    if ((seed + i * 13) % 19 === 0 || (seed + i * 7) % 41 === 0) {
-      lines.push('');
-    } else {
-      lines.push(tokens[seed % tokens.length]);
-    }
-  }
-
-  return lines.join('\n');
-};
-
-const rand = seededRandom(42026017);
-const matrixColumns = Array.from({ length: 22 }, (_, index) => {
-  const isDna = rand() < 0.52;
-  const duration = 125 + rand() * 143;
-  return {
-    text: buildMatrixStream(isDna ? dnaCodons : aminoAcids, index, 420),
-    type: isDna ? 'is-codon' : 'is-amino',
-    x: (-10 + rand() * 120).toFixed(2),
-    dur: duration.toFixed(2),
-    delay: (rand() * duration).toFixed(2),
-    alpha: (0.09 + rand() * 0.16).toFixed(2),
-    drift: (-2.6 + rand() * 5.2).toFixed(2),
-  };
-});
-
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
@@ -97,24 +55,12 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     </script>
   </head>
   <body>
-    <div class="page-bg" aria-hidden="true">
-      {
-        matrixColumns.map((column, index) => (
-          <span
-            class={`matrix-column ${column.type}`}
-            style={`--x:${column.x}%;--dur:${column.dur}s;--delay:-${column.delay}s;--alpha:${column.alpha};--drift:${column.drift}vw;`}
-          >
-            {column.text}
-          </span>
-        ))
-      }
-    </div>
     <header class="site-header shell">
       <a class="site-brand" href="/">
-        <img src="/assets/media/logo_alejandro.svg" width="44" height="44" alt="Alejandro Fontal logo" loading="eager" />
+        <Image src={logoMark} width={44} height={44} alt="Alejandro Fontal logo" loading="eager" />
         <span>
           <strong>{siteMeta.name}</strong>
-          <em>Lab Notes / Portfolio</em>
+          <em>Website / Blog / Portfolio</em>
         </span>
       </a>
 

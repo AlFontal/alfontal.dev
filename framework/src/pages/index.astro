@@ -1,42 +1,38 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {
-  educationTimeline,
+  homeAnchorCards,
+  homeHero,
   interestTags,
   overviewPanels,
-  quickFacts,
-  rotatingRoles,
   socialLinks,
   siteMeta,
 } from '../data/content';
+import portraitImage from '../assets/media/alejandro_hike_profile.jpg';
 
 const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
 ---
 
 <BaseLayout>
   <section class="hero-grid reveal-in">
-    <article class="hero-card">
+    <article class="hero-card hero-stack">
       <div class="hero-title-row">
-        <h1>Alejandro Fontal</h1>
-        <span class="status-dot">Barcelona · Research</span>
+        <h1>{homeHero.name}</h1>
+        <span class="status-dot">{homeHero.credential}</span>
       </div>
 
-      <div class="terminal" role="status" aria-live="polite">
-        <span class="prompt">alfontal@work:</span>
-        <span id="role-rotator">{rotatingRoles[0]}</span>
-      </div>
-
+      <p class="hero-note">{homeHero.availability}</p>
       <p class="hero-intro">
-        Welcome to my personal site and portfolio. I apply data science to scientific research, with a focus
-        on bioinformatics, computational epidemiology, and environmental health.
+        {homeHero.tagline}
       </p>
 
-      <div class="fact-grid" aria-label="Quick highlights">
+      <div class="fact-grid" aria-label="Core focus areas">
         {
-          quickFacts.map((fact) => (
+          homeHero.cards.map((card) => (
             <article class="fact-card">
-              <h2>{fact.value}</h2>
-              <p>{fact.label}</p>
+              <h2>{card.title}</h2>
+              <p>{card.subtitle}</p>
             </article>
           ))
         }
@@ -44,12 +40,14 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
     </article>
 
     <aside class="portrait-panel">
-      <img
-        src="/assets/media/alejandro_hike_profile.jpg"
+      <Image
+        src={portraitImage}
         alt="Alejandro Fontal hiking in front of a mountain"
-        width="2880"
-        height="3600"
+        width={720}
+        height={720}
         loading="eager"
+        fetchpriority="high"
+        decoding="async"
       />
       <p>
         Contact: <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a>
@@ -66,6 +64,25 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
         }
       </ul>
     </aside>
+  </section>
+
+  <section class="block reveal-in" aria-labelledby="quick-paths-heading">
+    <div class="section-head">
+      <h2 id="quick-paths-heading">Quick Paths</h2>
+      <p>Jump straight to hiring, selected work, or the blog.</p>
+    </div>
+
+    <div class="anchor-grid">
+      {
+        homeAnchorCards.map((card) => (
+          <article class="anchor-card" id={card.id}>
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+            <a href={card.linkHref} class="inline-link">{card.linkLabel}</a>
+          </article>
+        ))
+      }
+    </div>
   </section>
 
   <section class="block reveal-in" aria-labelledby="overview-heading">
@@ -108,28 +125,6 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
     </div>
   </section>
 
-  <section class="block reveal-in" aria-labelledby="education-heading">
-    <div class="section-head">
-      <h2 id="education-heading">Education Path</h2>
-      <p>Compact timeline of research and technical formation.</p>
-    </div>
-    <ol class="timeline">
-      {
-        educationTimeline.map((item) => (
-          <li>
-            <article class="timeline-card">
-              <header>
-                <h3>{item.degree}</h3>
-                <span>{item.years}</span>
-              </header>
-              <p class="timeline-meta">{item.institution}</p>
-              <p>{item.focus}</p>
-            </article>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
 
   <section class="block reveal-in" aria-labelledby="domains-heading">
     <div class="section-head">
@@ -143,49 +138,6 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
 
   <script is:inline>
     (() => {
-      const roles = ['Researcher', 'Data Scientist', 'Bioinformatician', 'Software Developer', 'Open Science Advocate'];
-      const target = document.getElementById('role-rotator');
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if (target) {
-        if (prefersReducedMotion) {
-          target.textContent = roles[0];
-        } else {
-          let roleIndex = 0;
-          let charIndex = 0;
-          let deleting = false;
-
-          const tick = () => {
-            const role = roles[roleIndex];
-
-            if (!deleting) {
-              charIndex += 1;
-              target.textContent = role.slice(0, charIndex);
-              if (charIndex >= role.length) {
-                deleting = true;
-                setTimeout(tick, 1200);
-                return;
-              }
-              setTimeout(tick, 66);
-              return;
-            }
-
-            charIndex -= 1;
-            target.textContent = role.slice(0, charIndex);
-            if (charIndex <= 0) {
-              deleting = false;
-              roleIndex = (roleIndex + 1) % roles.length;
-              setTimeout(tick, 220);
-              return;
-            }
-            setTimeout(tick, 40);
-          };
-
-          target.textContent = '';
-          tick();
-        }
-      }
-
       const overview = document.querySelector('[aria-labelledby=\"overview-heading\"]');
       if (!overview) return;
 

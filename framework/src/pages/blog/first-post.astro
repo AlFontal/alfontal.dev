@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import workflowImage from '../../assets/posts/first-post/workflow.png';
 ---
 
 <BaseLayout
@@ -40,11 +42,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     <section>
       <h2>Current workflow</h2>
-      <img
-        src="/assets/posts/first-post/workflow.png"
+      <Image
+        src={workflowImage}
         alt="Schematic view of the publication workflow"
-        width="1536"
-        height="1024"
+        width={1536}
+        height={1024}
         loading="lazy"
       />
       <ol>

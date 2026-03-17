@@ -1,3 +1,15 @@
+import type { ImageMetadata } from 'astro';
+
+import firstPostFeatured from '../assets/posts/first-post/featured.png';
+import aqiStationsScraperImage from '../assets/projects/aqi_stations_scraper.png';
+import argosExtensionsImage from '../assets/projects/argos_extensions.png';
+import sdcpyImage from '../assets/projects/sdcpy.png';
+import sdcpyAppImage from '../assets/projects/sdcpy_app.png';
+import sugarboardImage from '../assets/projects/sugarboard.png';
+import tokyoSkylineImage from '../assets/projects/tokyo_skyline.jpg';
+import guessWhoFeaturedImage from '../assets/notebooks/guess_who/guess_who/featured.png';
+import worldPopulationFeaturedImage from '../assets/notebooks/world-population/world_pop_densities/featured_map.png';
+
 export type NavLink = {
   label: string;
   href: string;
@@ -15,7 +27,7 @@ export type BlogPost = {
   description: string;
   date: string;
   categories: string[];
-  image: string;
+  image: ImageMetadata;
   href: string;
 };
 
@@ -24,8 +36,37 @@ export type Project = {
   description: string;
   date: string;
   categories: string[];
-  image: string;
+  image: ImageMetadata;
   href: string;
+};
+
+export type HeroCard = {
+  title: string;
+  subtitle: string;
+};
+
+export type HeroAction = {
+  label: string;
+  href: string;
+  variant: 'primary' | 'secondary';
+};
+
+export type HeroPackage = {
+  name: string;
+  credential: string;
+  availability: string;
+  tagline: string;
+  cards: HeroCard[];
+  actions: HeroAction[];
+  proof: string[];
+};
+
+export type HomeAnchorCard = {
+  id: string;
+  title: string;
+  description: string;
+  linkLabel: string;
+  linkHref: string;
 };
 
 export type Publication = {
@@ -41,9 +82,9 @@ export type Publication = {
 
 export const siteMeta = {
   name: 'Alejandro Fontal',
-  tagline: 'Researcher · Data Scientist · Software Developer',
+  tagline: 'Health data scientist · Bioinformatics · Scientific software',
   description:
-    'A personal website and portfolio about computational biomedicine, data science, programming, and open science.',
+    'Health data scientist building time-series analyses, bioinformatics pipelines, and reproducible scientific software.',
   siteUrl: 'https://alfontal.dev',
   repoUrl: 'https://github.com/AlFontal/alfontal.dev',
   email: 'alejandro.fontal.92@gmail.com',
@@ -63,17 +104,93 @@ export const socialLinks: SocialLink[] = [
   { label: 'GitLab', href: 'https://gitlab.com/AlFontal', short: 'GL', icon: 'fa6-brands:gitlab' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/alfontal', short: 'IN', icon: 'fa6-brands:linkedin' },
   { label: 'ORCID', href: 'https://orcid.org/0000-0003-1138-2158', short: 'ORCID', icon: 'fa6-brands:orcid' },
-  { label: 'X (Twitter)', href: 'https://twitter.com/alefontal', short: 'X', icon: 'fa6-brands:x-twitter' },
   { label: 'Letterboxd', href: 'https://letterboxd.com/AlFontal', short: 'LB', icon: 'simple-icons:letterboxd' },
-  { label: 'Strava', href: 'https://www.strava.com/athletes/24896086', short: 'SV', icon: 'fa6-brands:strava' },
+  // that was a bit too much but we can keep it commented just in case XD
+  // { label: 'Strava', href: 'https://www.strava.com/athletes/24896086', short: 'SV', icon: 'fa6-brands:strava' },
 ];
 
-export const rotatingRoles = [
-  'Researcher',
-  'Data Scientist',
-  'Bioinformatician',
-  'Software Developer',
-  'Open Science Advocate',
+// A/B/C homepage hero packages live here so the copy can be swapped without touching the template.
+export const heroPackages: Record<'a' | 'b' | 'c', HeroPackage> = {
+  a: {
+    name: 'Alejandro Fontal',
+    credential: '',
+    availability: 'Data Science – ML Engineering  – PhD – Software Development ',
+    tagline: 'Health data scientist, I turn time-series, bioinformatics, and ML work into clear analyses and small tools.',
+    cards: [
+      { title: 'Health Analytics', subtitle: 'time series, seasonality, decision support' },
+      { title: 'Bioinformatics Pipelines', subtitle: 'omics workflows, QA, reproducible outputs' },
+      { title: 'Applied ML Delivery', subtitle: 'models, APIs, dashboards' },
+    ],
+    actions: [
+      { label: 'Consulting', href: '/#consulting', variant: 'primary' },
+      { label: 'Projects', href: '/#projects', variant: 'secondary' },
+      { label: 'Blog', href: '/#blog', variant: 'secondary' },
+    ],
+    proof: ['publications', 'open-source', 'Python-first', 'exploring digital health'],
+  },
+  b: {
+    name: 'Alejandro Fontal',
+    credential: 'PhD (Biotechnology)',
+    availability: 'Open to health analytics and ML roles, plus focused consulting.',
+    tagline: 'Health data scientist, I build time-series and ML analyses into reproducible pipelines and small tools.',
+    cards: [
+      { title: 'Health Analytics (Epi)', subtitle: 'time series, seasonality, inference' },
+      { title: 'Bioinformatics & Omics', subtitle: 'metagenomics, workflows, QA' },
+      { title: 'Scientific Software Delivery', subtitle: 'packages, APIs, dashboards, CI' },
+    ],
+    actions: [
+      { label: 'Projects', href: '/#projects', variant: 'primary' },
+      { label: 'Consulting', href: '/#consulting', variant: 'secondary' },
+      { label: 'Blog', href: '/#blog', variant: 'secondary' },
+    ],
+    proof: ['publications', 'open-source', 'Python-first', 'exploring digital health'],
+  },
+  c: {
+    name: 'Alejandro Fontal',
+    credential: 'PhD (Biotechnology)',
+    availability: 'Interested in product-minded data work, from health analytics to side projects.',
+    tagline: 'I work on health data, bioinformatics, and scientific software, then write about the useful bits.',
+    cards: [
+      { title: 'Reproducible Analysis', subtitle: 'pipelines, notebooks, reviewable code' },
+      { title: 'Health Data Tools', subtitle: 'dashboards, APIs, small prototypes' },
+      { title: 'Side Projects That Teach', subtitle: 'open-source, experiments, blog notes' },
+    ],
+    actions: [
+      { label: 'Blog', href: '/#blog', variant: 'primary' },
+      { label: 'Projects', href: '/#projects', variant: 'secondary' },
+      { label: 'CV', href: '/cv', variant: 'secondary' },
+    ],
+    proof: ['publications', 'open-source', 'small tools', 'exploring digital health'],
+  },
+};
+
+export const defaultHeroPackage = 'a' as const;
+
+export const homeHero = heroPackages[defaultHeroPackage];
+
+export const homeAnchorCards: HomeAnchorCard[] = [
+  {
+    id: 'consulting',
+    title: 'Consulting',
+    description:
+      'I help with data pipelines, applied analyses, prototypes, and decision support for research and health-adjacent teams.',
+    linkLabel: 'Start a conversation',
+    linkHref: 'mailto:alejandro.fontal.92@gmail.com?subject=Consulting%20inquiry',
+  },
+  {
+    id: 'projects',
+    title: 'Projects',
+    description: 'Selected repositories, dashboards, and open-source experiments, the quickest way to see how I build.',
+    linkLabel: 'Browse projects',
+    linkHref: '/projects',
+  },
+  {
+    id: 'blog',
+    title: 'Blog',
+    description: 'Short notes on workflows, side projects, and things I wanted written down.',
+    linkLabel: 'Read the blog',
+    linkHref: '/blog',
+  },
 ];
 
 export const overviewPanels = [
@@ -93,12 +210,6 @@ export const overviewPanels = [
       'Previous industry and education experience includes online course design (EdX) and ML-driven R&D workflows for protein engineering.',
     ],
   },
-];
-
-export const quickFacts = [
-  { label: 'Research Papers', value: '8+' },
-  { label: 'Main Domains', value: 'Bioinformatics · Epidemiology · GIS' },
-  { label: 'Preferred Stack', value: 'Python · Quarto · Astro' },
 ];
 
 export const educationTimeline = [
@@ -137,7 +248,7 @@ export const blogPosts: BlogPost[] = [
     description: 'Introducing the site and the blog.',
     date: '2023-02-20',
     categories: ['Quarto', 'Blog'],
-    image: '/assets/posts/first-post/featured.png',
+    image: firstPostFeatured,
     href: '/blog/first-post',
   },
 ];
@@ -148,7 +259,7 @@ export const projects: Project[] = [
     description: 'Repository collecting, processing and organizing environmental data sources for Japan.',
     date: '2022-09-01',
     categories: ['Python', 'GIS', 'Data Mining'],
-    image: '/assets/projects/tokyo_skyline.jpg',
+    image: tokyoSkylineImage,
     href: 'https://github.com/AlFontal/environmental-data-japan',
   },
   {
@@ -157,7 +268,7 @@ export const projects: Project[] = [
       'A series of extensions for Argos GNOME Shell top-bar workflows (plus xbar support for macOS).',
     date: '2022-06-01',
     categories: ['Python', 'Argos', 'xbar', 'API', 'Linux', 'MacOS'],
-    image: '/assets/projects/argos_extensions.png',
+    image: argosExtensionsImage,
     href: 'https://github.com/AlFontal/argos-extensions',
   },
   {
@@ -165,7 +276,7 @@ export const projects: Project[] = [
     description: 'A Streamlit dashboard to visualize Nightscout CGM data.',
     date: '2022-03-01',
     categories: ['Python', 'Streamlit', 'API', 'Data Visualisation', 'Dashboard'],
-    image: '/assets/projects/sugarboard.png',
+    image: sugarboardImage,
     href: 'https://github.com/AlFontal/sugarboard',
   },
   {
@@ -174,7 +285,7 @@ export const projects: Project[] = [
       'A Selenium-based scraper automated with GitHub Actions to collect historical AQI station data.',
     date: '2021-07-01',
     categories: ['Python', 'Selenium', 'Scraping', 'Data Mining'],
-    image: '/assets/projects/aqi_stations_scraper.png',
+    image: aqiStationsScraperImage,
     href: 'https://github.com/AlFontal/aqi-stations-scraper',
   },
   {
@@ -182,7 +293,7 @@ export const projects: Project[] = [
     description: 'A Dash app for scale-dependent correlation analysis.',
     date: '2021-06-01',
     categories: ['Python', 'Time-Series Analysis', 'Dash', 'Heroku'],
-    image: '/assets/projects/sdcpy_app.png',
+    image: sdcpyAppImage,
     href: 'https://github.com/AlFontal/sdcpy-app',
   },
   {
@@ -190,10 +301,15 @@ export const projects: Project[] = [
     description: 'A Python library to perform Scale Dependent Correlation Analysis (SDC).',
     date: '2021-04-01',
     categories: ['Python', 'Time-Series Analysis'],
-    image: '/assets/projects/sdcpy.png',
+    image: sdcpyImage,
     href: 'https://github.com/AlFontal/sdcpy',
   },
 ];
+
+export const notebookPreviewImages: Record<string, ImageMetadata> = {
+  '/assets/notebooks/guess_who/guess_who/featured.png': guessWhoFeaturedImage,
+  '/assets/notebooks/world-population/world_pop_densities/featured_map.png': worldPopulationFeaturedImage,
+};
 
 export const publications: Publication[] = [
   {

@@ -51,7 +51,11 @@ export const cvEducation: CvEducationItem[] = [
     institution: 'Universitat de Barcelona',
     date: '2019 - 2024',
     location: 'Barcelona, ES',
-    details: ['Specialized in data science and epidemiology.'],
+    details: [
+      'Thesis in data science applied to epidemiology, metagenomics, and climate-health interactions.',
+
+
+    ],
   },
   {
     degree: 'MSc in Bioinformatics',
@@ -96,7 +100,7 @@ export const cvExperience: CvExperienceItem[] = [
       'Integrated nationwide case data with climate reanalysis, remote sensing, GIS layers, and air-mass trajectories.',
       'Coordinated in-situ sampling campaigns in Japan to characterize biological and chemical air-mass fractions.',
     ],
-    tags: ['Time-Series', 'GIS', 'Epidemiology', 'Docker', 'Nextflow', 'Quarto', 'GitHub Actions'],
+    tags: ['Time-Series', 'GIS', 'Epidemiology', 'Docker', 'Nextflow', 'Quarto', 'GitHub Actions', 'Web-dev'],
   },
   {
     role: 'Data Scientist',
@@ -130,7 +134,7 @@ export const cvExperience: CvExperienceItem[] = [
       'Developed assignments and technical content for 10+ edX MOOCs.',
       'Provided technical support across course development workflows.',
     ],
-    tags: ['Education', 'Technical Writing', 'Course Production'],
+    tags: ['Education', 'Technical Writing', 'Course Production', 'Web-dev'],
   },
 ];
 
@@ -157,6 +161,12 @@ export const cvSkills: CvSkillGroup[] = [
     details: 'Collaborative development with GitHub Actions and GitLab CI/CD.',
   },
   {
+    title: 'Web-dev',
+    icon: 'mdi:web',
+    details:
+      'Builds responsive web apps and scientific interfaces with Astro, Quarto, HTML/CSS, JavaScript, and dashboard-oriented UX patterns.',
+  },
+  {
     title: 'Systems',
     icon: 'mdi:server',
     details:
@@ -167,7 +177,9 @@ export const cvSkills: CvSkillGroup[] = [
 export const cvLanguages: CvLanguage[] = [
   { name: 'Spanish', level: 'Native' },
   { name: 'Catalan', level: 'Native' },
-  { name: 'English', level: 'C2 (Proficient)' },
+  { name: 'English', level: 'C2 (Proficient)'},
+  { name: 'Italian', level: 'B2 (Upper-Intermediate)'},
+  { name: 'Dutch', level: 'A1/2'},
 ];
 
 export const cvTagOrder = [
@@ -181,6 +193,7 @@ export const cvTagOrder = [
   'Docker',
   'Nextflow',
   'Quarto',
+  'Web-dev',
   'GitHub Actions',
   'Bioinformatics',
   'R&D',

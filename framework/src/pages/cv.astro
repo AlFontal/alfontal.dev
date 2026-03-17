@@ -24,37 +24,29 @@ allTags.sort((a, b) => {
         <span>{cvHeader.location}</span>
       </p>
       <div class="cv-meta-links">
-        <a href={`tel:${cvHeader.phone.replace(/\s+/g, '')}`} class="cv-meta-pill">
+        <a href={`mailto:${cvHeader.email}`} class="cv-contact-pill is-email">
+          <iconify-icon icon="fa6-solid:envelope" aria-hidden="true"></iconify-icon>
+          <span>{cvHeader.email}</span>
+        </a>
+        <a href={`tel:${cvHeader.phone.replace(/\s+/g, '')}`} class="cv-contact-pill is-phone">
           <iconify-icon icon="fa6-solid:phone" aria-hidden="true"></iconify-icon>
           <span>{cvHeader.phone}</span>
-        </a>
-        <a class="cv-download" href="/assets/cv/Alejandro_Fontal_CV-4.pdf" target="_blank" rel="noopener noreferrer">
-          <iconify-icon icon="fa6-solid:file-pdf" aria-hidden="true"></iconify-icon>
-          Open Original PDF
         </a>
       </div>
     </div>
     <div class="cv-actions">
       <ul class="cv-contact-list">
         <li>
-          <a href={`mailto:${cvHeader.email}`} class="cv-contact-pill is-email">
-            <iconify-icon icon="fa6-solid:envelope" aria-hidden="true"></iconify-icon>
-            <span>Email: {cvHeader.email}</span>
-          </a>
-        </li>
-        <li>
           <a href={cvHeader.linkedin} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-linkedin">
             <iconify-icon icon="fa6-brands:linkedin" aria-hidden="true"></iconify-icon>
             <span>LinkedIn: {cvHeader.linkedinHandle}</span>
           </a>
         </li>
-        <li>
+        <li class="cv-contact-cluster">
           <a href={cvHeader.github} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-github">
             <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
             <span>GitHub: {cvHeader.githubHandle}</span>
           </a>
-        </li>
-        <li>
           <a href={cvHeader.gitlab} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-gitlab">
             <iconify-icon icon="fa6-brands:gitlab" aria-hidden="true"></iconify-icon>
             <span>GitLab: {cvHeader.gitlabHandle}</span>
@@ -64,6 +56,17 @@ allTags.sort((a, b) => {
           <a href={cvHeader.orcid} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-orcid">
             <iconify-icon icon="fa6-brands:orcid" aria-hidden="true"></iconify-icon>
             <span>ORCID: {cvHeader.orcidId}</span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="cv-contact-pill is-pdf"
+            href="/assets/cv/Alejandro_Fontal_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <iconify-icon icon="fa6-solid:file-pdf" aria-hidden="true"></iconify-icon>
+            <span>Open Original PDF</span>
           </a>
         </li>
       </ul>
@@ -130,7 +133,10 @@ allTags.sort((a, b) => {
             <header>
               <div>
                 <h3>{item.role}</h3>
-                <p class="cv-org">{item.organization}</p>
+                <p class="cv-org cv-org-company">
+                  <iconify-icon icon="fa6-solid:building" aria-hidden="true"></iconify-icon>
+                  <span>{item.organization}</span>
+                </p>
               </div>
               <div class="cv-timeplace">
                 <span>{item.date}</span>
@@ -166,7 +172,13 @@ allTags.sort((a, b) => {
             cvEducation.map((item) => (
               <article class="cv-education-card">
                 <header>
-                  <h3>{item.degree}</h3>
+                  <div>
+                    <h3>{item.degree}</h3>
+                    <p class="cv-org cv-org-university">
+                      <iconify-icon icon="fa6-solid:building-columns" aria-hidden="true"></iconify-icon>
+                      <span>{item.institution}</span>
+                    </p>
+                  </div>
                   <div class="cv-timeplace">
                     <span>{item.date}</span>
                     <span class="cv-location">
@@ -175,7 +187,6 @@ allTags.sort((a, b) => {
                     </span>
                   </div>
                 </header>
-                <p class="cv-org">{item.institution}</p>
                 <ul>
                   {item.details.map((detail) => <li>{detail}</li>)}
                 </ul>

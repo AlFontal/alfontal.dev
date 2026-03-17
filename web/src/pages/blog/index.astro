@@ -1,0 +1,79 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { blogPosts, notebookPreviewImages } from '../../data/content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+type BlogListingItem = {
+  title: string;
+  description: string;
+  date: string;
+  categories: string[];
+  image: ImageMetadata;
+  href: string;
+  origin: 'manual' | 'notebook';
+};
+
+const fallbackPreviewImage = blogPosts[0].image;
+
+const notebookPosts: BlogListingItem[] = (await getCollection('notebooks')).map((entry) => ({
+  title: entry.data.title,
+  description: entry.data.description,
+  date: entry.data.date.toISOString().slice(0, 10),
+  categories: entry.data.categories,
+  image: notebookPreviewImages[entry.data.image] ?? fallbackPreviewImage,
+  href: entry.data.routePath,
+  origin: 'notebook',
+}));
+
+const manualPosts: BlogListingItem[] = blogPosts.map((post) => ({
+  title: post.title,
+  description: post.description,
+  date: post.date,
+  categories: post.categories,
+  image: post.image,
+  href: post.href,
+  origin: 'manual',
+}));
+
+const sortedPosts = [...manualPosts, ...notebookPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
+---
+
+<BaseLayout title="Blog" description="Research notes, coding experiments, and long-form technical posts.">
+  <section class="section-head reveal-in">
+    <h1>Blog</h1>
+    <p>Notebook-driven posts and articles across scientific computing, data visualization, and programming.</p>
+  </section>
+
+  <section class="card-grid reveal-in" aria-label="Blog posts">
+    {
+      sortedPosts.map((post, index) => (
+        <article class="content-card">
+          <Image
+            src={post.image}
+            alt={post.title}
+            width={1200}
+            height={630}
+            loading={index < 2 ? 'eager' : 'lazy'}
+            fetchpriority={index === 0 ? 'high' : 'auto'}
+          />
+          <div class="content-card-body">
+            <p class="meta-row">
+              <span>{post.date}</span>
+              {post.origin === 'notebook' && <span class="meta-badge">Notebook rendered</span>}
+            </p>
+            <h2>{post.title}</h2>
+            <p>{post.description}</p>
+            <ul class="chip-list compact">
+              {post.categories.map((category) => <li>{category}</li>)}
+            </ul>
+            <a href={post.href} class="inline-link">
+              Read article
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>

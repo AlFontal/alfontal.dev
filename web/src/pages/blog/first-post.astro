@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import workflowImage from '../../assets/posts/first-post/workflow.png';
+---
+
+<BaseLayout
+  title="First post on the blog"
+  description="Introducing the site and the current workflow for turning notebooks into published blog posts."
+>
+  <article class="article reveal-in">
+    <header class="article-header">
+      <p class="article-kicker">2023-02-20 · Alejandro Fontal</p>
+      <h1>First post on the blog</h1>
+      <p>Introducing the site and the current workflow for publishing notebook-based posts.</p>
+    </header>
+
+    <section>
+      <h2>Introduction</h2>
+      <p>
+        This blog started as a way to document research, programming experiments, and practical workflows for sharing
+        technical outputs with both technical and non-technical audiences.
+      </p>
+      <p>
+        Most of my work is still notebook-centric, but the default rendering of notebooks in repository viewers can
+        make long analyses difficult to navigate. This motivated the transition toward static sites with stronger
+        layout and information architecture.
+      </p>
+    </section>
+
+    <section>
+      <h2>Notebook to post</h2>
+      <p>
+        The current site treats notebooks as source material, not as pages served directly from a notebook renderer.
+        A notebook lives in the repository, is converted into Markdown during the content build, and then gets rendered
+        inside the Astro site like any other article.
+      </p>
+      <p>
+        Quarto is still useful in that pipeline, but only as an intermediary step from `.ipynb` to Markdown. The
+        published site is Astro, and the post route belongs to the Astro app rather than to a separate site.
+      </p>
+    </section>
+
+    <section>
+      <h2>Current workflow</h2>
+      <Image
+        src={workflowImage}
+        alt="Schematic view of the publication workflow"
+        width={1536}
+        height={1024}
+        loading="lazy"
+      />
+      <ol>
+        <li>Write the post as an `.ipynb` notebook under `notebooks/&lt;section&gt;/`.</li>
+        <li>Add front matter in the first Markdown cell, including title, date, categories, author, and preview image.</li>
+        <li>Run `npm run notebooks:render` so the notebook is converted to Markdown and its assets are copied into the Astro app.</li>
+        <li>Review the result with `npm run dev`, then ship it as part of the Astro site.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Conclusion</h2>
+      <p>
+        The goal is simple: keep notebooks close to the analysis, but publish posts through a site that has stronger
+        layout, navigation, and presentation. Future posts will continue to blend code, scientific context, and
+        web-native presentation without depending on the old site stack.
+      </p>
+    </section>
+  </article>
+</BaseLayout>

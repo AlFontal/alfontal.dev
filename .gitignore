@@ -1,14 +1,14 @@
 .DS_Store
 /.luarc.json
 /.quarto
-site/_site
-site/.quarto
-site/.luarc.json
+**/.quarto
+**/.tmp/
+**/.tmp/*
 # framework
-framework/node_modules
-framework/dist
-framework/.astro
-framework/.git.disabled
-framework/src/content/notebooks-generated
-framework/public/assets/notebooks
-framework/src/generated/notebooks-manifest.json
+web/node_modules
+web/dist
+web/.astro
+web/.git.disabled
+web/src/content/notebooks-generated
+web/public/assets/notebooks
+web/src/generated/notebooks-manifest.json

@@ -30,10 +30,10 @@ export type CvLanguage = {
 
 export const cvHeader = {
   name: 'Alejandro Fontal',
-  title: 'Research Data Scientist',
+  title: 'Data Science · AI/ML · Software Engineering',
   location: 'Barcelona, ES',
-  email: 'alejandrofontal92@gmail.com',
-  phone: '+34 623 090 672',
+  email: 'alejandro.fontal.92@gmail.com',
+  phone: '+34 623 107 939',
   website: 'https://alfontal.dev',
   linkedin: 'https://www.linkedin.com/in/alfontal',
   linkedinHandle: 'alfontal',
@@ -52,9 +52,7 @@ export const cvEducation: CvEducationItem[] = [
     date: '2019 - 2024',
     location: 'Barcelona, ES',
     details: [
-      'Thesis in data science applied to epidemiology, metagenomics, and climate-health interactions.',
-
-
+      'PhD focused on environmental determinants of disease onset, spatiotemporal modeling, and long-read aerobiome metagenomics.',
     ],
   },
   {
@@ -64,7 +62,7 @@ export const cvEducation: CvEducationItem[] = [
     location: 'Wageningen, NL',
     details: [
       'Data Science minor with cum laude distinction.',
-      'Thesis on explainable deep learning models for protein subcellular location prediction.',
+      'Thesis on interpretable deep learning for protein subcellular location prediction.',
     ],
   },
   {
@@ -72,54 +70,53 @@ export const cvEducation: CvEducationItem[] = [
     institution: 'Universitat de Barcelona',
     date: '2011 - 2015',
     location: 'Barcelona, ES',
-    details: ['Thesis at the Bioinformatics unit of VHIR on meta-analysis of transcriptomics tools.'],
+    details: ['Thesis at the VHIR Bioinformatics Unit on meta-analysis of transcriptomics tools.'],
   },
 ];
 
 export const cvExperience: CvExperienceItem[] = [
   {
-    role: 'Post-doctoral Researcher',
+    role: 'Postdoctoral Researcher · Data and Software Lead',
     organization: 'Climate & Health Program @ ISGlobal',
     date: 'Oct 2024 - Present',
     location: 'Barcelona, ES',
     highlights: [
-      'Software and data engineering lead for research workflows, including package and dashboard development.',
-      'Building reproducible pipelines for long-read aerobiome metagenomics linked to health outcomes.',
-      'Repurposing pollen detection instrumentation for bacterial discrimination using laser-induced fluorescence and supervised ML.',
+      'Lead software and data engineering for the group, building internal packages, web tools, and GitHub-based workflows for reproducible research.',
+      'Build reproducible pipelines for long-read aerobiome metagenomics and link results to health outcomes.',
+      'Repurpose a laser-based pollen detector for bacterial discrimination using fluorescence, light scattering, and supervised machine learning.',
     ],
     tags: ['Python', 'Dash', 'Metagenomics', 'Machine Learning', 'Data Engineering'],
   },
   {
-    role: 'PhD Fellow - Early Stage Researcher (ESR)',
+    role: 'PhD Fellow · Early-Stage Researcher',
     organization: 'Climate & Health Program @ ISGlobal (HELICAL ITN)',
-    date: 'Oct 2019 - Oct 2024',
+    date: 'Oct 2019 - Sep 2024',
     location: 'Barcelona, ES',
-    summary: 'Marie Sklodowska-Curie Actions ESR within HELICAL ITN.',
     highlights: [
-      'Developed time-series methods for transient/lagged effects, multi-scale correlations, and phase-shift analyses in epidemics.',
-      'Integrated nationwide case data with climate reanalysis, remote sensing, GIS layers, and air-mass trajectories.',
-      'Coordinated in-situ sampling campaigns in Japan to characterize biological and chemical air-mass fractions.',
+      'Developed time-series methods to quantify environmental signals in epidemics, including transient and lagged associations, multi-scale correlations, and phase-shift analyses.',
+      'Integrated nationwide case data with climate reanalysis, remote sensing, GIS layers, and air-mass trajectories to study Kawasaki Disease, COVID-19, and influenza.',
+      'Coordinated field sampling campaigns in Japan to characterize the biological and chemical composition of air masses.',
     ],
     tags: ['Time-Series', 'GIS', 'Epidemiology', 'Docker', 'Nextflow', 'Quarto', 'GitHub Actions', 'Web-dev'],
   },
   {
     role: 'Data Scientist',
     organization: 'Protein Engineering @ DuPont Industrial Biosciences',
-    date: 'Sep 2018 - Aug 2019',
+    date: 'Oct 2018 - Sep 2019',
     location: 'Leiden, NL',
     highlights: [
-      'Integrated data-driven and ML solutions into protein engineering workflows.',
+      'Integrated data-driven and machine-learning solutions into protein engineering workflows.',
       'Built and maintained reproducible bioinformatics and data pipelines.',
-      'Partnered with wet-lab teams to close the model-experiment loop and accelerate workflow automation.',
+      'Partnered with wet-lab teams to design experiments and close the model-experiment loop, accelerating workflow automation.',
     ],
     tags: ['Machine Learning', 'Bioinformatics', 'Pipelines', 'R&D'],
   },
   {
-    role: 'Graduate Trainee in Data Science',
+    role: 'Data Science Intern',
     organization: 'DuPont Industrial Biosciences',
     date: 'Mar 2018 - Sep 2018',
     location: 'Leiden, NL',
-    summary: 'MSc internship project: ML for empirical protein design.',
+    summary: 'Internship focused on machine learning for empirical protein design.',
     highlights: [
       'Built, trained, and benchmarked deep learning models to predict enzyme performance from sequence and structure.',
     ],
@@ -143,43 +140,43 @@ export const cvSkills: CvSkillGroup[] = [
     title: 'Python',
     icon: 'fa6-brands:python',
     details:
-      'High proficiency (9+ years): package development/testing and end-to-end data science with pandas, polars, statsmodels, scikit-learn, tensorflow, pytorch, plotnine, and dash.',
+      'Expert level (9+ years). Package development, testing, and end-to-end data science and ML with pandas, polars, statsmodels, scikit-learn, tensorflow, pytorch, plotnine, and FastAPI.',
   },
   {
     title: 'R',
     icon: 'simple-icons:r',
-    details: 'Experienced with tidyverse (ggplot2, dplyr) and Bioconductor in polyglot R/Python workflows.',
+    details: 'Proficient with tidyverse and Bioconductor, with strong R/Python interoperability in research workflows.',
   },
   {
     title: 'Shell + HPC',
     icon: 'material-symbols:terminal-rounded',
-    details: 'Daily Linux user with HPC pipelines using SLURM and Nextflow.',
+    details: 'Daily Linux user with scripting and HPC workflows using SLURM and Nextflow.',
   },
   {
     title: 'Git + CI/CD',
     icon: 'fa6-brands:git-alt',
-    details: 'Collaborative development with GitHub Actions and GitLab CI/CD.',
+    details: 'Collaborative development, code review, and automated testing and deployment with GitHub Actions and GitLab CI/CD.',
   },
   {
-    title: 'Web-dev',
+    title: 'Web + APIs',
     icon: 'mdi:web',
     details:
-      'Builds responsive web apps and scientific interfaces with Astro, Quarto, HTML/CSS, JavaScript, and dashboard-oriented UX patterns.',
+      'Responsive interfaces and REST services with Astro, HTML/CSS, JavaScript, FastAPI, deployment, and hosting.',
   },
   {
     title: 'Systems',
     icon: 'mdi:server',
     details:
-      'Maintains Linux servers; Docker behind nginx/Traefik with Let\'s Encrypt, SSH/user operations, cron/systemd automation, and WireGuard VPN.',
+      'Linux-based deployment for data applications, including containerized services, automation, secure remote access, and lightweight infrastructure.',
   },
 ];
 
 export const cvLanguages: CvLanguage[] = [
   { name: 'Spanish', level: 'Native' },
   { name: 'Catalan', level: 'Native' },
-  { name: 'English', level: 'C2 (Proficient)'},
-  { name: 'Italian', level: 'B2 (Upper-Intermediate)'},
-  { name: 'Dutch', level: 'A1/2'},
+  { name: 'English', level: 'C2 (Full professional)' },
+  { name: 'Italian', level: 'Limited working proficiency' },
+  { name: 'French', level: 'Limited working proficiency' },
 ];
 
 export const cvTagOrder = [

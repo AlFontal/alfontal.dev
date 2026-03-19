@@ -7,34 +7,56 @@ const sortedProjects = [...projects].sort((a, b) => (a.date < b.date ? 1 : -1));
 ---
 
 <BaseLayout title="Projects" description="Selected software and data projects.">
-  <section class="section-head reveal-in">
-    <h1>Projects</h1>
-    <p>Selected repositories spanning data engineering, scientific software, and reproducible analysis workflows.</p>
+  <section class="page-intro page-intro--split reveal-in">
+    <div class="section-head">
+      <p class="section-kicker">Selected builds</p>
+      <h1>Projects</h1>
+      <p>Open repositories and small systems that show how I structure data work, automation, and scientific interfaces.</p>
+    </div>
+
+    <div class="page-intro-stats" aria-label="Project overview">
+      <article>
+        <span>{sortedProjects.length}</span>
+        <p>selected repositories</p>
+      </article>
+      <article>
+        <span>{sortedProjects[0]?.date.slice(0, 4)}</span>
+        <p>most recent project year</p>
+      </article>
+      <article>
+        <span>Python-first</span>
+        <p>with dashboards, GIS, scraping, and automation</p>
+      </article>
+    </div>
   </section>
 
-  <section class="card-grid reveal-in" aria-label="Projects list">
+  <section class="project-rail reveal-in" aria-label="Projects list">
     {
       sortedProjects.map((project, index) => (
-        <article class="content-card">
-          <Image
-            src={project.image}
-            alt={project.title}
-            width={1200}
-            height={630}
-            loading={index === 0 ? 'eager' : 'lazy'}
-            fetchpriority={index === 0 ? 'high' : 'auto'}
-          />
-          <div class="content-card-body">
+        <article class={`project-feature ${index % 2 === 1 ? 'is-reversed' : ''}`}>
+          <div class="project-feature-media">
+            <Image
+              src={project.image}
+              alt={project.title}
+              width={1200}
+              height={630}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchpriority={index === 0 ? 'high' : 'auto'}
+            />
+          </div>
+
+          <div class="project-feature-body">
             <p class="meta-row">
               <span>{project.date}</span>
+              <span>Repository</span>
             </p>
             <h2>{project.title}</h2>
             <p>{project.description}</p>
             <ul class="chip-list compact">
               {project.categories.map((category) => <li>{category}</li>)}
             </ul>
-            <a href={project.href} class="inline-link" target="_blank" rel="noopener noreferrer">
-              Open repository
+            <a href={project.href} class="cta-link is-secondary" target="_blank" rel="noopener noreferrer">
+              View repository
             </a>
           </div>
         </article>

@@ -2,10 +2,10 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {
+  educationTimeline,
   homeAnchorCards,
   homeHero,
   interestTags,
-  overviewPanels,
   socialLinks,
   siteMeta,
 } from '../data/content';
@@ -17,15 +17,12 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
 <BaseLayout>
   <section class="hero-grid reveal-in">
     <article class="hero-card hero-stack">
-      <div class="hero-title-row">
-        <h1>{homeHero.name}</h1>
-        <span class="status-dot">{homeHero.credential}</span>
-      </div>
+      <p class="eyebrow">Data science · bioinformatics · Barcelona</p>
+
+      <h1>{homeHero.name}</h1>
 
       <p class="hero-note">{homeHero.availability}</p>
-      <p class="hero-intro">
-        {homeHero.tagline}
-      </p>
+      <p class="hero-intro">{homeHero.tagline}</p>
 
       <div class="fact-grid" aria-label="Core focus areas">
         {
@@ -49,15 +46,15 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
         fetchpriority="high"
         decoding="async"
       />
-      <p>
-        Contact: <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a>
+      <p class="portrait-contact">
+        <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a>
       </p>
       <ul class="portrait-socials" aria-label="Social links">
         {
           profileSocialLinks.map((link) => (
             <li>
-              <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
-                <iconify-icon icon={link.icon}></iconify-icon>
+              <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label} title={link.label}>
+                <iconify-icon icon={link.icon} aria-hidden="true"></iconify-icon>
               </a>
             </li>
           ))
@@ -66,118 +63,62 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
     </aside>
   </section>
 
-  <section class="block reveal-in" aria-labelledby="quick-paths-heading">
-    <div class="section-head">
-      <h2 id="quick-paths-heading">Quick Paths</h2>
-      <p>Jump straight to hiring, selected work, or the blog.</p>
-    </div>
+  <section class="split-layout reveal-in">
+    <section class="block" aria-labelledby="quick-paths-heading">
+      <div class="section-head">
+        <h2 id="quick-paths-heading">Quick Paths</h2>
+        <p>Choose the route that best matches why you are here: fit, proof of work, or technical writing.</p>
+      </div>
 
-    <div class="anchor-grid">
-      {
-        homeAnchorCards.map((card) => (
-          <article class="anchor-card" id={card.id}>
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-            <a href={card.linkHref} class="inline-link">{card.linkLabel}</a>
-          </article>
-        ))
-      }
-    </div>
+      <div class="pathway-list">
+        {
+          homeAnchorCards.map((card, index) => (
+            <article class="pathway-card" id={card.id}>
+              <span class="pathway-index">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+                <a href={card.linkHref} class="inline-link">{card.linkLabel}</a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <aside class="block" aria-labelledby="training-heading">
+      <div class="section-head">
+        <h2 id="training-heading">Academic Background</h2>
+        <p>Formal training across biotechnology, bioinformatics, and quantitative analysis.</p>
+      </div>
+
+      <ol class="timeline">
+        {
+          educationTimeline.map((item) => (
+            <li>
+              <article class="timeline-card">
+                <header>
+                  <h3>{item.degree}</h3>
+                  <span>{item.years}</span>
+                </header>
+                <p class="timeline-meta">{item.institution}</p>
+                <p>{item.focus}</p>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </aside>
   </section>
 
-  <section class="block reveal-in" aria-labelledby="overview-heading">
+  <section class="block domain-panel reveal-in" aria-labelledby="domains-heading">
     <div class="section-head">
-      <h2 id="overview-heading">Role Overview</h2>
-      <p>Two snapshots that summarize current work and scientific background.</p>
-    </div>
-
-    <div class="pill-row" role="tablist" aria-label="Profile tabs">
-      {
-        overviewPanels.map((panel, index) => (
-          <button
-            type="button"
-            class={`pill-toggle ${index === 0 ? 'is-active' : ''}`}
-            role="tab"
-            aria-selected={index === 0 ? 'true' : 'false'}
-            aria-controls={`panel-${panel.id}`}
-            id={`tab-${panel.id}`}
-          >
-            {panel.title}
-          </button>
-        ))
-      }
-    </div>
-
-    <div class="overview-panels">
-      {
-        overviewPanels.map((panel, index) => (
-          <section
-            class="overview-panel"
-            id={`panel-${panel.id}`}
-            role="tabpanel"
-            aria-labelledby={`tab-${panel.id}`}
-            hidden={index !== 0}
-          >
-            {panel.body.map((paragraph) => <p>{paragraph}</p>)}
-          </section>
-        ))
-      }
-    </div>
-  </section>
-
-
-  <section class="block reveal-in" aria-labelledby="domains-heading">
-    <div class="section-head">
+      <p class="section-kicker">Domains</p>
       <h2 id="domains-heading">Research Domains</h2>
-      <p>Areas I work on most frequently.</p>
+      <p>Recurring themes across publications, projects, and ongoing work.</p>
     </div>
     <ul class="chip-list">
       {interestTags.map((tag) => <li>{tag}</li>)}
     </ul>
   </section>
-
-  <script is:inline>
-    (() => {
-      const overview = document.querySelector('[aria-labelledby=\"overview-heading\"]');
-      if (!overview) return;
-
-      const tabs = [...overview.querySelectorAll('.pill-toggle')];
-      const panels = [...overview.querySelectorAll('.overview-panel')];
-      if (!tabs.length || !panels.length) return;
-
-      const activate = (tab) => {
-        const panelId = tab.getAttribute('aria-controls');
-        tabs.forEach((item) => {
-          const active = item === tab;
-          item.classList.toggle('is-active', active);
-          item.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
-        panels.forEach((panel) => {
-          panel.hidden = panel.id !== panelId;
-        });
-      };
-
-      tabs.forEach((tab) => {
-        tab.addEventListener('click', () => activate(tab));
-        tab.addEventListener('keydown', (event) => {
-          const index = tabs.indexOf(tab);
-          if (index === -1) return;
-
-          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-            event.preventDefault();
-            const next = tabs[(index + 1) % tabs.length];
-            next.focus();
-            activate(next);
-          }
-
-          if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-            event.preventDefault();
-            const prev = tabs[(index - 1 + tabs.length) % tabs.length];
-            prev.focus();
-            activate(prev);
-          }
-        });
-      });
-    })();
-  </script>
 </BaseLayout>

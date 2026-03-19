@@ -38,40 +38,85 @@ const manualPosts: BlogListingItem[] = blogPosts.map((post) => ({
 }));
 
 const sortedPosts = [...manualPosts, ...notebookPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
+const [featuredPost, ...remainingPosts] = sortedPosts;
 ---
 
 <BaseLayout title="Blog" description="Research notes, coding experiments, and long-form technical posts.">
-  <section class="section-head reveal-in">
-    <h1>Blog</h1>
-    <p>Notebook-driven posts and articles across scientific computing, data visualization, and programming.</p>
+  <section class="page-intro page-intro--split reveal-in">
+    <div class="section-head">
+      <p class="section-kicker">Notebook essays / technical notes</p>
+      <h1>Blog</h1>
+      <p>Published notes where notebook work becomes a readable article with context, figures, and code-aware structure.</p>
+    </div>
+
+    <div class="page-intro-stats" aria-label="Blog overview">
+      <article>
+        <span>{sortedPosts.length}</span>
+        <p>published pieces</p>
+      </article>
+      <article>
+        <span>{notebookPosts.length}</span>
+        <p>rendered from notebooks</p>
+      </article>
+      <article>
+        <span>{manualPosts.length}</span>
+        <p>written directly in Astro</p>
+      </article>
+    </div>
   </section>
 
-  <section class="card-grid reveal-in" aria-label="Blog posts">
+  {featuredPost && (
+    <section class="feature-story reveal-in" aria-labelledby="featured-post-heading">
+      <div class="feature-story-media">
+        <Image
+          src={featuredPost.image}
+          alt={featuredPost.title}
+          width={1200}
+          height={630}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+
+      <article class="feature-story-body">
+        <p class="section-kicker">Latest entry</p>
+        <p class="meta-row">
+          <span>{featuredPost.date}</span>
+          <span>{featuredPost.origin === 'notebook' ? 'Notebook render' : 'Astro article'}</span>
+        </p>
+        <h2 id="featured-post-heading">{featuredPost.title}</h2>
+        <p class="feature-story-copy">{featuredPost.description}</p>
+        <ul class="chip-list compact">
+          {featuredPost.categories.map((category) => <li>{category}</li>)}
+        </ul>
+        <a href={featuredPost.href} class="cta-link is-primary">
+          Read {featuredPost.origin === 'notebook' ? 'notebook essay' : 'article'}
+        </a>
+      </article>
+    </section>
+  )}
+
+  <section class="editorial-feed reveal-in" aria-label="All blog posts">
     {
-      sortedPosts.map((post, index) => (
-        <article class="content-card">
-          <Image
-            src={post.image}
-            alt={post.title}
-            width={1200}
-            height={630}
-            loading={index < 2 ? 'eager' : 'lazy'}
-            fetchpriority={index === 0 ? 'high' : 'auto'}
-          />
-          <div class="content-card-body">
-            <p class="meta-row">
-              <span>{post.date}</span>
-              {post.origin === 'notebook' && <span class="meta-badge">Notebook rendered</span>}
-            </p>
+      remainingPosts.map((post) => (
+        <article class="editorial-entry">
+          <div class="editorial-entry-meta">
+            <p class="section-kicker">{post.origin === 'notebook' ? 'Notebook render' : 'Astro article'}</p>
+            <span>{post.date}</span>
+          </div>
+
+          <div class="editorial-entry-body">
             <h2>{post.title}</h2>
             <p>{post.description}</p>
-            <ul class="chip-list compact">
-              {post.categories.map((category) => <li>{category}</li>)}
-            </ul>
-            <a href={post.href} class="inline-link">
-              Read article
-            </a>
           </div>
+
+          <ul class="chip-list compact">
+            {post.categories.map((category) => <li>{category}</li>)}
+          </ul>
+
+          <a href={post.href} class="inline-link">
+            Read {post.title}
+          </a>
         </article>
       ))
     }

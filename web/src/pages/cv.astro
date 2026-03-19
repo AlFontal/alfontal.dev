@@ -11,14 +11,18 @@ allTags.sort((a, b) => {
   if (bi === -1) return -1;
   return ai - bi;
 });
+
 ---
 
 <BaseLayout title="CV" description="Experience, skills, and education for Alejandro Fontal.">
   <section class="cv-hero reveal-in">
     <div>
-      <p class="article-kicker">Curriculum Vitae</p>
       <h1>{cvHeader.name}</h1>
       <p class="cv-title">{cvHeader.title}</p>
+      <p class="cv-summary-lead">
+        Computational scientist working across bioinformatics, epidemiology, machine learning, and scientific
+        programming. I build reproducible analyses, predictive tools, and workflows that help make sense of complex data.
+      </p>
       <p class="cv-meta">
         <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
         <span>{cvHeader.location}</span>
@@ -39,23 +43,23 @@ allTags.sort((a, b) => {
         <li>
           <a href={cvHeader.linkedin} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-linkedin">
             <iconify-icon icon="fa6-brands:linkedin" aria-hidden="true"></iconify-icon>
-            <span>LinkedIn: {cvHeader.linkedinHandle}</span>
+            <span>LinkedIn</span>
           </a>
         </li>
         <li class="cv-contact-cluster">
           <a href={cvHeader.github} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-github">
             <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
-            <span>GitHub: {cvHeader.githubHandle}</span>
+            <span>GitHub</span>
           </a>
           <a href={cvHeader.gitlab} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-gitlab">
             <iconify-icon icon="fa6-brands:gitlab" aria-hidden="true"></iconify-icon>
-            <span>GitLab: {cvHeader.gitlabHandle}</span>
+            <span>GitLab</span>
           </a>
         </li>
         <li>
           <a href={cvHeader.orcid} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-orcid">
             <iconify-icon icon="fa6-brands:orcid" aria-hidden="true"></iconify-icon>
-            <span>ORCID: {cvHeader.orcidId}</span>
+            <span>ORCID</span>
           </a>
         </li>
         <li>
@@ -66,7 +70,7 @@ allTags.sort((a, b) => {
             rel="noopener noreferrer"
           >
             <iconify-icon icon="fa6-solid:file-pdf" aria-hidden="true"></iconify-icon>
-            <span>Open Original PDF</span>
+            <span>Download PDF CV</span>
           </a>
         </li>
       </ul>
@@ -75,8 +79,7 @@ allTags.sort((a, b) => {
 
   <section class="block reveal-in" aria-labelledby="cv-skills-heading">
     <div class="section-head">
-      <h2 id="cv-skills-heading">Development Skills</h2>
-      <p>Core software and technical capabilities used in research and production workflows.</p>
+      <h2 id="cv-skills-heading">Skills</h2>
     </div>
     <div class="cv-skill-grid">
       {
@@ -95,14 +98,17 @@ allTags.sort((a, b) => {
 
   <section class="block reveal-in" aria-labelledby="cv-experience-heading">
     <div class="section-head">
-      <h2 id="cv-experience-heading">Working Experience</h2>
-      <p>Use filters to focus on specific domains, tools, or methods.</p>
+      <h2 id="cv-experience-heading">Experience</h2>
     </div>
 
     <div class="cv-controls">
-      <label class="cv-search">
-        <span>Search</span>
-        <input type="search" placeholder="Filter roles, organizations, highlights..." data-cv-search />
+      <label class="cv-search" aria-label="Search experience">
+        <input
+          type="search"
+          placeholder="Search roles, organizations, highlights..."
+          aria-label="Search roles, organizations, highlights"
+          data-cv-search
+        />
       </label>
 
       <div class="cv-filter-group" data-cv-filters>
@@ -162,7 +168,6 @@ allTags.sort((a, b) => {
   <section class="block reveal-in" aria-labelledby="cv-details-heading">
     <div class="section-head">
       <h2 id="cv-details-heading">Education & Languages</h2>
-      <p>Academic background and language profile.</p>
     </div>
 
     <div class="cv-detail-grid">

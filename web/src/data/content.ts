@@ -45,20 +45,11 @@ export type HeroCard = {
   subtitle: string;
 };
 
-export type HeroAction = {
-  label: string;
-  href: string;
-  variant: 'primary' | 'secondary';
-};
-
-export type HeroPackage = {
+export type HomeHero = {
   name: string;
-  credential: string;
   availability: string;
   tagline: string;
   cards: HeroCard[];
-  actions: HeroAction[];
-  proof: string[];
 };
 
 export type HomeAnchorCard = {
@@ -82,12 +73,14 @@ export type Publication = {
 
 export const siteMeta = {
   name: 'Alejandro Fontal',
-  tagline: 'Health data scientist · Bioinformatics · Scientific software',
+  masthead: 'Portfolio · Blog · CV',
+  tagline: 'Data science · Bioinformatics · Software',
   description:
-    'Health data scientist building time-series analyses, bioinformatics pipelines, and reproducible scientific software.',
+    'Data scientist building reproducible analyses, bioinformatics workflows, and software for health and environmental data.',
   siteUrl: 'https://alfontal.dev',
   repoUrl: 'https://github.com/AlFontal/alfontal.dev',
   email: 'alejandro.fontal.92@gmail.com',
+  footerPrompt: 'Available for data science and software roles, plus selective consulting.',
 };
 
 export const navLinks: NavLink[] = [
@@ -109,106 +102,40 @@ export const socialLinks: SocialLink[] = [
   // { label: 'Strava', href: 'https://www.strava.com/athletes/24896086', short: 'SV', icon: 'fa6-brands:strava' },
 ];
 
-// A/B/C homepage hero packages live here so the copy can be swapped without touching the template.
-export const heroPackages: Record<'a' | 'b' | 'c', HeroPackage> = {
-  a: {
-    name: 'Alejandro Fontal',
-    credential: '',
-    availability: 'Data Science – ML Engineering  – PhD – Software Development ',
-    tagline: 'Health data scientist, I turn time-series, bioinformatics, and ML work into clear analyses and small tools.',
-    cards: [
-      { title: 'Health Analytics', subtitle: 'time series, seasonality, decision support' },
-      { title: 'Bioinformatics Pipelines', subtitle: 'omics workflows, QA, reproducible outputs' },
-      { title: 'Applied ML Delivery', subtitle: 'models, APIs, dashboards' },
-    ],
-    actions: [
-      { label: 'Consulting', href: '/#consulting', variant: 'primary' },
-      { label: 'Projects', href: '/#projects', variant: 'secondary' },
-      { label: 'Blog', href: '/#blog', variant: 'secondary' },
-    ],
-    proof: ['publications', 'open-source', 'Python-first', 'exploring digital health'],
-  },
-  b: {
-    name: 'Alejandro Fontal',
-    credential: 'PhD (Biotechnology)',
-    availability: 'Open to health analytics and ML roles, plus focused consulting.',
-    tagline: 'Health data scientist, I build time-series and ML analyses into reproducible pipelines and small tools.',
-    cards: [
-      { title: 'Health Analytics (Epi)', subtitle: 'time series, seasonality, inference' },
-      { title: 'Bioinformatics & Omics', subtitle: 'metagenomics, workflows, QA' },
-      { title: 'Scientific Software Delivery', subtitle: 'packages, APIs, dashboards, CI' },
-    ],
-    actions: [
-      { label: 'Projects', href: '/#projects', variant: 'primary' },
-      { label: 'Consulting', href: '/#consulting', variant: 'secondary' },
-      { label: 'Blog', href: '/#blog', variant: 'secondary' },
-    ],
-    proof: ['publications', 'open-source', 'Python-first', 'exploring digital health'],
-  },
-  c: {
-    name: 'Alejandro Fontal',
-    credential: 'PhD (Biotechnology)',
-    availability: 'Interested in product-minded data work, from health analytics to side projects.',
-    tagline: 'I work on health data, bioinformatics, and scientific software, then write about the useful bits.',
-    cards: [
-      { title: 'Reproducible Analysis', subtitle: 'pipelines, notebooks, reviewable code' },
-      { title: 'Health Data Tools', subtitle: 'dashboards, APIs, small prototypes' },
-      { title: 'Side Projects That Teach', subtitle: 'open-source, experiments, blog notes' },
-    ],
-    actions: [
-      { label: 'Blog', href: '/#blog', variant: 'primary' },
-      { label: 'Projects', href: '/#projects', variant: 'secondary' },
-      { label: 'CV', href: '/cv', variant: 'secondary' },
-    ],
-    proof: ['publications', 'open-source', 'small tools', 'exploring digital health'],
-  },
+export const homeHero: HomeHero = {
+  name: 'Alejandro Fontal',
+  availability: 'PhD-trained data scientist open to machine learning and software roles, plus focused consulting.',
+  tagline:
+    'I turn health, environmental, and omics data into reproducible analyses, reviewable pipelines, and small tools that people can actually use.',
+  cards: [
+    { title: 'Data Science', subtitle: 'time-series epidemiology, statistical modeling, machine learning' },
+    { title: 'Bioinformatics', subtitle: 'long-read metagenomics, sequence analysis, reproducible pipelines' },
+    { title: 'Software', subtitle: 'packages, web tools, APIs, and research workflows' },
+  ],
 };
-
-export const defaultHeroPackage = 'a' as const;
-
-export const homeHero = heroPackages[defaultHeroPackage];
 
 export const homeAnchorCards: HomeAnchorCard[] = [
   {
     id: 'consulting',
-    title: 'Consulting',
+    title: 'Hiring & Consulting',
     description:
-      'I help with data pipelines, applied analyses, prototypes, and decision support for research and health-adjacent teams.',
+      'Best for teams evaluating fit, scope, or availability across health analytics, research engineering, and scientific tooling.',
     linkLabel: 'Start a conversation',
     linkHref: 'mailto:alejandro.fontal.92@gmail.com?subject=Consulting%20inquiry',
   },
   {
     id: 'projects',
-    title: 'Projects',
-    description: 'Selected repositories, dashboards, and open-source experiments, the quickest way to see how I build.',
-    linkLabel: 'Browse projects',
+    title: 'Selected Projects',
+    description: 'Open repositories, dashboards, and small systems that show how I design, ship, and document technical work.',
+    linkLabel: 'Browse selected work',
     linkHref: '/projects',
   },
   {
     id: 'blog',
-    title: 'Blog',
-    description: 'Short notes on workflows, side projects, and things I wanted written down.',
-    linkLabel: 'Read the blog',
+    title: 'Notebook Essays',
+    description: 'Published notes where notebooks become readable posts with narrative, figures, and implementation context.',
+    linkLabel: 'Read notebook essays',
     linkHref: '/blog',
-  },
-];
-
-export const overviewPanels = [
-  {
-    id: 'current',
-    title: 'Current Role',
-    body: [
-      'Postdoctoral researcher at ISGlobal in Barcelona, with a focus on epidemiology, metagenomics, and spatial time-series analysis.',
-      'Current work studies how atmospheric and environmental dynamics shape infectious disease signals and microbiome exposure in urban systems.',
-    ],
-  },
-  {
-    id: 'background',
-    title: 'Background',
-    body: [
-      'BSc in Molecular Biotechnology (University of Barcelona), MSc in Bioinformatics & Data Science (Wageningen University & Research), and PhD in Biotechnology (University of Barcelona).',
-      'Previous industry and education experience includes online course design (EdX) and ML-driven R&D workflows for protein engineering.',
-    ],
   },
 ];
 

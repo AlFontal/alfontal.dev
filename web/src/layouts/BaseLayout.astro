@@ -55,53 +55,63 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     </script>
   </head>
   <body>
-    <header class="site-header shell">
-      <a class="site-brand" href="/">
-        <Image src={logoMark} width={44} height={44} alt="Alejandro Fontal logo" loading="eager" />
-        <span>
-          <strong>{siteMeta.name}</strong>
-          <em>Website / Blog / Portfolio</em>
-        </span>
-      </a>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-      <div class="header-actions">
-        <nav aria-label="Main">
-          <ul class="nav-list">
-            {
-              navLinks.map((link) => (
-                <li>
-                  <a class={isActive(link.href) ? 'is-active' : ''} href={link.href}>{link.label}</a>
-                </li>
-              ))
-            }
-          </ul>
-        </nav>
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme">
-          Theme: <span data-theme-label>Light</span>
-        </button>
+    <header class="site-header">
+      <div class="shell site-header-inner">
+        <a class="site-brand" href="/">
+          <Image src={logoMark} width={44} height={44} alt="Alejandro Fontal logo" loading="eager" />
+          <span>
+            <strong>{siteMeta.name}</strong>
+            <em>{siteMeta.masthead}</em>
+          </span>
+        </a>
+
+        <div class="header-actions">
+          <nav aria-label="Main">
+            <ul class="nav-list">
+              {
+                navLinks.map((link) => (
+                  <li>
+                    <a class={isActive(link.href) ? 'is-active' : ''} href={link.href}>{link.label}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+          <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme">
+            Mode <span data-theme-label>Light</span>
+          </button>
+        </div>
       </div>
     </header>
 
-    <main class="shell page-content">
+    <main id="main-content" class="shell page-content">
       <slot />
     </main>
 
-    <footer class="shell site-footer">
-      <div class="footer-identity">
-        <p>{siteMeta.tagline}</p>
-        <a href={siteMeta.repoUrl} target="_blank" rel="noopener noreferrer">View source code</a>
+    <footer class="site-footer">
+      <div class="shell site-footer-inner">
+        <div class="footer-identity">
+          <p class="footer-kicker">{siteMeta.masthead}</p>
+          <p>{siteMeta.footerPrompt}</p>
+          <div class="footer-links">
+            <a href={`mailto:${siteMeta.email}`}>Get in touch</a>
+            <a href={siteMeta.repoUrl} target="_blank" rel="noopener noreferrer">View source code</a>
+          </div>
+        </div>
+        <ul class="social-list" aria-label="Social links">
+          {
+            socialLinks.map((link) => (
+              <li>
+                <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label} title={link.label}>
+                  <iconify-icon icon={link.icon} aria-hidden="true"></iconify-icon>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
-      <ul class="social-list" aria-label="Social links">
-        {
-          socialLinks.map((link) => (
-            <li>
-              <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
-                <iconify-icon icon={link.icon} aria-hidden="true"></iconify-icon>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
     </footer>
 
     <script is:inline>

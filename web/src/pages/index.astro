@@ -37,15 +37,18 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
     </article>
 
     <aside class="portrait-panel">
-      <Image
-        src={portraitImage}
-        alt="Alejandro Fontal hiking in front of a mountain"
-        width={720}
-        height={720}
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-      />
+      <div class="portrait-image">
+        <Image
+          src={portraitImage}
+          alt="Alejandro Fontal hiking in front of a mountain"
+          width={720}
+          height={720}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="portrait-base"
+        />
+      </div>
       <p class="portrait-contact">
         <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a>
       </p>
@@ -98,7 +101,10 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
             <li>
               <article class="timeline-card">
                 <header>
-                  <h3>{item.degree}</h3>
+                  <div>
+                    <h3>{item.degree}</h3>
+                    {item.subtitle && <p class="timeline-subtitle">{item.subtitle}</p>}
+                  </div>
                   <span>{item.years}</span>
                 </header>
                 <p class="timeline-meta">{item.institution}</p>

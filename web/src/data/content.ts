@@ -60,6 +60,14 @@ export type HomeAnchorCard = {
   linkHref: string;
 };
 
+export type EducationTimelineItem = {
+  degree: string;
+  subtitle?: string;
+  institution: string;
+  years: string;
+  focus: string;
+};
+
 export type Publication = {
   title: string;
   authors: string;
@@ -139,7 +147,7 @@ export const homeAnchorCards: HomeAnchorCard[] = [
   },
 ];
 
-export const educationTimeline = [
+export const educationTimeline: EducationTimelineItem[] = [
   {
     degree: 'PhD in Biotechnology',
     institution: 'University of Barcelona',
@@ -147,7 +155,8 @@ export const educationTimeline = [
     focus: 'Computational epidemiology, atmospheric drivers of Kawasaki disease, and reproducible data workflows.',
   },
   {
-    degree: 'MSc in Bioinformatics (Data Science track)',
+    degree: 'MSc in Bioinformatics',
+    subtitle: 'Data Science track',
     institution: 'Wageningen University & Research',
     years: '2016 - 2018',
     focus: 'Machine learning and scientific computing for biological systems.',

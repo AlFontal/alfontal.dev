@@ -16,7 +16,7 @@ allTags.sort((a, b) => {
 
 <BaseLayout title="CV" description="Experience, skills, and education for Alejandro Fontal.">
   <section class="cv-hero reveal-in">
-    <div>
+    <div class="cv-hero-main">
       <h1>{cvHeader.name}</h1>
       <p class="cv-title">{cvHeader.title}</p>
       <p class="cv-summary-lead">
@@ -36,44 +36,32 @@ allTags.sort((a, b) => {
           <iconify-icon icon="fa6-solid:phone" aria-hidden="true"></iconify-icon>
           <span>{cvHeader.phone}</span>
         </a>
+        <a
+          class="cv-contact-pill is-pdf"
+          href="/assets/cv/Alejandro_Fontal_CV.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <iconify-icon icon="fa6-solid:file-pdf" aria-hidden="true"></iconify-icon>
+          <span>PDF CV</span>
+        </a>
+        <a href={cvHeader.linkedin} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-linkedin">
+          <iconify-icon icon="fa6-brands:linkedin" aria-hidden="true"></iconify-icon>
+          <span>LinkedIn</span>
+        </a>
+        <a href={cvHeader.github} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-github">
+          <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+          <span>GitHub</span>
+        </a>
+        <a href={cvHeader.gitlab} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-gitlab">
+          <iconify-icon icon="fa6-brands:gitlab" aria-hidden="true"></iconify-icon>
+          <span>GitLab</span>
+        </a>
+        <a href={cvHeader.orcid} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-orcid">
+          <iconify-icon icon="fa6-brands:orcid" aria-hidden="true"></iconify-icon>
+          <span>ORCID</span>
+        </a>
       </div>
-    </div>
-    <div class="cv-actions">
-      <ul class="cv-contact-list">
-        <li>
-          <a href={cvHeader.linkedin} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-linkedin">
-            <iconify-icon icon="fa6-brands:linkedin" aria-hidden="true"></iconify-icon>
-            <span>LinkedIn</span>
-          </a>
-        </li>
-        <li class="cv-contact-cluster">
-          <a href={cvHeader.github} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-github">
-            <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
-            <span>GitHub</span>
-          </a>
-          <a href={cvHeader.gitlab} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-gitlab">
-            <iconify-icon icon="fa6-brands:gitlab" aria-hidden="true"></iconify-icon>
-            <span>GitLab</span>
-          </a>
-        </li>
-        <li>
-          <a href={cvHeader.orcid} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-orcid">
-            <iconify-icon icon="fa6-brands:orcid" aria-hidden="true"></iconify-icon>
-            <span>ORCID</span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="cv-contact-pill is-pdf"
-            href="/assets/cv/Alejandro_Fontal_CV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <iconify-icon icon="fa6-solid:file-pdf" aria-hidden="true"></iconify-icon>
-            <span>Download PDF CV</span>
-          </a>
-        </li>
-      </ul>
     </div>
   </section>
 

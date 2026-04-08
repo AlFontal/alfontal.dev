@@ -5,14 +5,14 @@ import workflowImage from '../../assets/posts/first-post/workflow.png';
 ---
 
 <BaseLayout
-  title="First post on the blog"
-  description="Introducing the site and the current workflow for turning notebooks into published blog posts."
+  title="Publishing notebooks with Astro and Quarto"
+  description="How this site turns Jupyter notebooks into published blog posts during the Astro build."
 >
   <article class="article reveal-in">
     <header class="article-header">
       <p class="article-kicker">2023-02-20 · Alejandro Fontal</p>
-      <h1>First post on the blog</h1>
-      <p>Introducing the site and the current workflow for publishing notebook-based posts.</p>
+      <h1>Publishing notebooks with Astro and Quarto</h1>
+      <p>How this site turns notebook-heavy work into readable posts without maintaining a separate publishing stack.</p>
     </header>
 
     <section>
@@ -39,6 +39,11 @@ import workflowImage from '../../assets/posts/first-post/workflow.png';
         Quarto is still useful in that pipeline, but only as an intermediary step from `.ipynb` to Markdown. The
         published site is Astro, and the post route belongs to the Astro app rather than to a separate site.
       </p>
+      <p>
+        The same rendering step runs locally before `astro dev` and `astro build`, and it also runs inside the GitHub
+        Actions build and deploy workflows. A notebook post therefore ships with the rest of the site rather than
+        through a separate publication path.
+      </p>
     </section>
 
     <section>
@@ -54,7 +59,7 @@ import workflowImage from '../../assets/posts/first-post/workflow.png';
         <li>Write the post as an `.ipynb` notebook under `notebooks/&lt;section&gt;/`.</li>
         <li>Add front matter in the first Markdown cell, including title, date, categories, author, and preview image.</li>
         <li>Run `npm run notebooks:render` so the notebook is converted to Markdown and its assets are copied into the Astro app.</li>
-        <li>Review the result with `npm run dev`, then ship it as part of the Astro site.</li>
+        <li>Review the result with `npm run dev`, then publish it with the normal Astro build and deploy flow.</li>
       </ol>
     </section>
 

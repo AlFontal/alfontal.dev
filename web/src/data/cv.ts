@@ -30,7 +30,7 @@ export type CvLanguage = {
 
 export const cvHeader = {
   name: 'Alejandro Fontal',
-  title: 'Data Science · AI/ML · Software Engineering',
+  title: 'Data Science · Bioinformatics · Scientific Software',
   location: 'Barcelona, ES',
   email: 'alejandro.fontal.92@gmail.com',
   phone: '+34 623 107 939',
@@ -140,7 +140,7 @@ export const cvSkills: CvSkillGroup[] = [
     title: 'Python',
     icon: 'fa6-brands:python',
     details:
-      'Expert level (9+ years). Package development, testing, and end-to-end data science and ML with pandas, polars, statsmodels, scikit-learn, tensorflow, pytorch, plotnine, and FastAPI.',
+      'Expert (9+ years): primary language for package development, testing, and end-to-end data and ML work with pandas, polars, statsmodels, scikit-learn, TensorFlow, PyTorch, plotnine, and FastAPI.',
   },
   {
     title: 'R',
@@ -160,8 +160,7 @@ export const cvSkills: CvSkillGroup[] = [
   {
     title: 'Web + APIs',
     icon: 'mdi:web',
-    details:
-      'Responsive interfaces and REST services with Astro, HTML/CSS, JavaScript, FastAPI, deployment, and hosting.',
+    details: 'Responsive interfaces and REST services with Astro, HTML/CSS, JavaScript, FastAPI, and lightweight deployment.',
   },
   {
     title: 'Systems',

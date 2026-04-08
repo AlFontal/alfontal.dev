@@ -7,8 +7,6 @@ import sdcpyImage from '../assets/projects/sdcpy.png';
 import sdcpyAppImage from '../assets/projects/sdcpy_app.png';
 import sugarboardImage from '../assets/projects/sugarboard.png';
 import tokyoSkylineImage from '../assets/projects/tokyo_skyline.jpg';
-import guessWhoFeaturedImage from '../assets/notebooks/guess_who/guess_who/featured.png';
-import worldPopulationFeaturedImage from '../assets/notebooks/world-population/world_pop_densities/featured_map.png';
 
 export type NavLink = {
   label: string;
@@ -82,13 +80,13 @@ export type Publication = {
 export const siteMeta = {
   name: 'Alejandro Fontal',
   masthead: 'Portfolio · Blog · CV',
-  tagline: 'Data science · Bioinformatics · Software',
+  tagline: 'Data science · Bioinformatics · Health Analytics',
   description:
-    'Data scientist building reproducible analyses, bioinformatics workflows, and software for health and environmental data.',
+    'Personal site for notebooks, projects, publications, and CV material spanning data science, bioinformatics, and scientific software.',
   siteUrl: 'https://alfontal.dev',
   repoUrl: 'https://github.com/AlFontal/alfontal.dev',
   email: 'alejandro.fontal.92@gmail.com',
-  footerPrompt: 'Available for data science and software roles, plus selective consulting.',
+  footerPrompt: 'Research notes, software projects, and contact details in one place.',
 };
 
 export const navLinks: NavLink[] = [
@@ -112,9 +110,9 @@ export const socialLinks: SocialLink[] = [
 
 export const homeHero: HomeHero = {
   name: 'Alejandro Fontal',
-  availability: 'PhD-trained data scientist open to machine learning and software roles, plus focused consulting.',
+  availability: 'Barcelona-based data scientist working across health, environmental, and omics data.',
   tagline:
-    'I turn health, environmental, and omics data into reproducible analyses, reviewable pipelines, and small tools that people can actually use.',
+    'I work on reproducible analyses, scientific software, and data products that make complex evidence easier to inspect and use.',
   cards: [
     { title: 'Data Science', subtitle: 'time-series epidemiology, statistical modeling, machine learning' },
     { title: 'Bioinformatics', subtitle: 'long-read metagenomics, sequence analysis, reproducible pipelines' },
@@ -124,12 +122,12 @@ export const homeHero: HomeHero = {
 
 export const homeAnchorCards: HomeAnchorCard[] = [
   {
-    id: 'consulting',
-    title: 'Hiring & Consulting',
+    id: 'contact',
+    title: 'Get in touch',
     description:
-      'Best for teams evaluating fit, scope, or availability across health analytics, research engineering, and scientific tooling.',
-    linkLabel: 'Start a conversation',
-    linkHref: 'mailto:alejandro.fontal.92@gmail.com?subject=Consulting%20inquiry',
+      'Email is the simplest route for collaborations, research questions, or anything on the site that you want to discuss.',
+    linkLabel: 'Send an email',
+    linkHref: 'mailto:alejandro.fontal.92@gmail.com',
   },
   {
     id: 'projects',
@@ -180,8 +178,8 @@ export const interestTags = [
 
 export const blogPosts: BlogPost[] = [
   {
-    title: 'First post on the blog',
-    description: 'Introducing the site and the current notebook-to-post workflow.',
+    title: 'Publishing notebooks with Astro and Quarto',
+    description: 'How this site turns Jupyter notebooks into blog posts during the Astro build.',
     date: '2023-02-20',
     categories: ['Publishing', 'Blog'],
     image: firstPostFeatured,
@@ -192,7 +190,7 @@ export const blogPosts: BlogPost[] = [
 export const projects: Project[] = [
   {
     title: 'Env. Data Japan',
-    description: 'Repository collecting, processing and organizing environmental data sources for Japan.',
+    description: 'Toolkit for collecting, processing, and standardizing environmental datasets for Japan.',
     date: '2022-09-01',
     categories: ['Python', 'GIS', 'Data Mining'],
     image: tokyoSkylineImage,
@@ -200,8 +198,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Argos Extensions',
-    description:
-      'A series of extensions for Argos GNOME Shell top-bar workflows (plus xbar support for macOS).',
+    description: 'Small menu-bar utilities for Argos on GNOME Shell, with xbar support for macOS.',
     date: '2022-06-01',
     categories: ['Python', 'Argos', 'xbar', 'API', 'Linux', 'MacOS'],
     image: argosExtensionsImage,
@@ -209,7 +206,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Sugarboard',
-    description: 'A Streamlit dashboard to visualize Nightscout CGM data.',
+    description: 'Streamlit dashboard for exploring Nightscout CGM time series.',
     date: '2022-03-01',
     categories: ['Python', 'Streamlit', 'API', 'Data Visualisation', 'Dashboard'],
     image: sugarboardImage,
@@ -217,8 +214,7 @@ export const projects: Project[] = [
   },
   {
     title: 'AQI Stations Scraper',
-    description:
-      'A Selenium-based scraper automated with GitHub Actions to collect historical AQI station data.',
+    description: 'Selenium scraper scheduled with GitHub Actions to collect historical AQI station records.',
     date: '2021-07-01',
     categories: ['Python', 'Selenium', 'Scraping', 'Data Mining'],
     image: aqiStationsScraperImage,
@@ -226,7 +222,7 @@ export const projects: Project[] = [
   },
   {
     title: 'SDCpy App',
-    description: 'A Dash app for scale-dependent correlation analysis.',
+    description: 'Dash interface for exploring scale-dependent correlation analysis interactively.',
     date: '2021-06-01',
     categories: ['Python', 'Time-Series Analysis', 'Dash', 'Heroku'],
     image: sdcpyAppImage,
@@ -234,18 +230,13 @@ export const projects: Project[] = [
   },
   {
     title: 'SDCpy',
-    description: 'A Python library to perform Scale Dependent Correlation Analysis (SDC).',
+    description: 'Python package for scale-dependent correlation analysis of time-series data.',
     date: '2021-04-01',
     categories: ['Python', 'Time-Series Analysis'],
     image: sdcpyImage,
     href: 'https://github.com/AlFontal/sdcpy',
   },
 ];
-
-export const notebookPreviewImages: Record<string, ImageMetadata> = {
-  '/assets/notebooks/guess_who/guess_who/featured.png': guessWhoFeaturedImage,
-  '/assets/notebooks/world-population/world_pop_densities/featured_map.png': worldPopulationFeaturedImage,
-};
 
 export const publications: Publication[] = [
   {

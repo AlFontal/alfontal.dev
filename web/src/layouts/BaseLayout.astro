@@ -142,5 +142,68 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
         });
       })();
     </script>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const header = document.querySelector('.site-header');
+        const desktopQuery = window.matchMedia('(min-width: 861px)');
+        const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        if (!header) return;
+
+        let lastY = window.scrollY;
+        let ticking = false;
+
+        const syncHeaderOffset = () => {
+          if (!desktopQuery.matches) {
+            root.style.setProperty('--header-offset', '0px');
+            header.classList.remove('is-hidden');
+            return;
+          }
+
+          const offset = Math.ceil(header.offsetHeight + 12);
+          root.style.setProperty('--header-offset', `${offset}px`);
+        };
+
+        const updateHeader = () => {
+          const currentY = window.scrollY;
+
+          if (!desktopQuery.matches || reduceMotionQuery.matches) {
+            header.classList.remove('is-hidden');
+            lastY = currentY;
+            ticking = false;
+            return;
+          }
+
+          if (currentY <= 72 || currentY < lastY - 10) {
+            header.classList.remove('is-hidden');
+          } else if (currentY > lastY + 10) {
+            header.classList.add('is-hidden');
+          }
+
+          lastY = currentY;
+          ticking = false;
+        };
+
+        const onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(updateHeader);
+        };
+
+        const onViewportChange = () => {
+          syncHeaderOffset();
+          updateHeader();
+        };
+
+        syncHeaderOffset();
+        updateHeader();
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onViewportChange);
+        desktopQuery.addEventListener?.('change', onViewportChange);
+        reduceMotionQuery.addEventListener?.('change', onViewportChange);
+      })();
+    </script>
   </body>
 </html>

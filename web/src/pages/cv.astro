@@ -67,45 +67,19 @@ const visibleLabel = `${cvExperience.length} ${
   </section>
 
   <section class="block reveal-in" aria-labelledby="cv-skills-heading">
-    <div class="section-head section-head--with-action">
+    <div class="section-head">
       <h2 id="cv-skills-heading">{cvPage.skillsHeading}</h2>
-      <button
-        type="button"
-        class="cv-utility-button"
-        data-cv-skills-toggle
-        data-label-expand="Expand all"
-        data-label-collapse="Collapse all"
-        aria-pressed="false"
-      >
-        Expand all
-      </button>
     </div>
     <div class="cv-skill-grid">
       {
         cvSkills.map((skill) => (
-          <details class="cv-skill-row cv-disclosure cv-row-surface" data-cv-skill>
-            <summary class="cv-disclosure-toggle cv-skill-toggle">
-              <span class="cv-disclosure-heading">
-                <span class="cv-disclosure-title-row">
-                  <iconify-icon icon={skill.icon} aria-hidden="true"></iconify-icon>
-                  <span>{skill.title}</span>
-                </span>
-                <span class="cv-disclosure-preview">{skill.summary}</span>
-              </span>
-              <span class="cv-disclosure-aside cv-disclosure-aside--skills">
-                <span class="cv-skill-keywords">{skill.keywords.join(' · ')}</span>
-                <span class="cv-disclosure-action" aria-hidden="true">
-                  <span class="cv-disclosure-state cv-disclosure-state--closed">Expand</span>
-                  <span class="cv-disclosure-state cv-disclosure-state--open">Collapse</span>
-                </span>
-              </span>
-            </summary>
-            <div class="cv-disclosure-panel">
-              <div class="cv-disclosure-panel-inner cv-skill-panel">
-                <p>{skill.details}</p>
-              </div>
-            </div>
-          </details>
+          <article class="cv-skill-card cv-row-surface">
+            <h3>
+              <iconify-icon icon={skill.icon} aria-hidden="true"></iconify-icon>
+              <span>{skill.title}</span>
+            </h3>
+            <p>{skill.details}</p>
+          </article>
         ))
       }
     </div>
@@ -171,23 +145,23 @@ const visibleLabel = `${cvExperience.length} ${
             <details class="cv-disclosure cv-experience-disclosure" data-cv-expander>
               <summary class="cv-disclosure-toggle cv-experience-toggle">
                 <span class="cv-disclosure-heading cv-disclosure-heading--experience">
-                  <span class="cv-disclosure-title">{item.role}</span>
-                  <span class="cv-experience-meta">
+                  <span class="cv-disclosure-title-row cv-disclosure-title-row--stacked">
+                    <span class="cv-disclosure-title">{item.role}</span>
                     <span class="cv-org cv-org-company">
                       <iconify-icon icon="fa6-solid:building" aria-hidden="true"></iconify-icon>
                       <span>{item.organization}</span>
-                    </span>
-                    <span class="cv-timeplace">
-                      <span>{item.date}</span>
-                      <span class="cv-location">
-                        <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
-                        <span>{item.location}</span>
-                      </span>
                     </span>
                   </span>
                   <span class="cv-disclosure-preview">{item.summary}</span>
                 </span>
                 <span class="cv-disclosure-aside cv-disclosure-aside--experience">
+                  <span class="cv-timeplace">
+                    <span>{item.date}</span>
+                    <span class="cv-location">
+                      <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
+                      <span>{item.location}</span>
+                    </span>
+                  </span>
                   <span class="cv-disclosure-action" aria-hidden="true">
                     <span class="cv-disclosure-state cv-disclosure-state--closed">Expand</span>
                     <span class="cv-disclosure-state cv-disclosure-state--open">Collapse</span>
@@ -278,8 +252,6 @@ const visibleLabel = `${cvExperience.length} ${
       const clearButton = root.querySelector('[data-filter-clear]');
       const filterPanel = root.querySelector('[data-cv-filter-panel]');
       const filterCount = root.querySelector('[data-cv-filter-count]');
-      const skillsToggle = root.querySelector('[data-cv-skills-toggle]');
-      const skillCards = [...root.querySelectorAll('[data-cv-skill]')];
       const activeFilters = new Set();
 
       if (!input || !result || !cards.length) return;
@@ -291,26 +263,6 @@ const visibleLabel = `${cvExperience.length} ${
             expander.dataset.manualOpen = expander.open ? 'true' : 'false';
           }
         });
-      });
-
-      const syncSkillToggle = () => {
-        if (!skillsToggle || !skillCards.length) return;
-        const shouldCollapse = skillCards.every((card) => card.open);
-        const expandLabel = skillsToggle.getAttribute('data-label-expand') || 'Expand all';
-        const collapseLabel = skillsToggle.getAttribute('data-label-collapse') || 'Collapse all';
-        skillsToggle.textContent = shouldCollapse ? collapseLabel : expandLabel;
-        skillsToggle.setAttribute('aria-pressed', shouldCollapse ? 'true' : 'false');
-      };
-
-      skillCards.forEach((card) => card.addEventListener('toggle', syncSkillToggle));
-      syncSkillToggle();
-
-      skillsToggle?.addEventListener('click', () => {
-        const shouldOpen = skillCards.some((card) => !card.open);
-        skillCards.forEach((card) => {
-          card.open = shouldOpen;
-        });
-        syncSkillToggle();
       });
 
       const update = () => {

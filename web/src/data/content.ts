@@ -491,7 +491,7 @@ export const publicationsPage: PublicationsPage = {
 };
 
 export const cvPage: CvPage = {
-  seoTitle: 'CV',
+  seoTitle: 'Alejandro Fontal, PhD',
   description: 'Experience, skills, and education for Alejandro Fontal.',
   summary:
     'Computational scientist working at the intersection of bioinformatics, epidemiology, and scientific software. I analyse complex biological and public health data, develop reproducible methods, and build tools that support research in practice.',
@@ -626,57 +626,53 @@ export const cvSkills: CvSkillGroup[] = [
     icon: 'fa6-brands:python',
     summary: 'Primary language · 9+ years',
     details:
-      'Expert (9+ years); primary language for package development, debugging, testing, and end-to-end analytical work. Regularly use pandas, polars, statsmodels, scikit-learn, FastAPI, TensorFlow, PyTorch, and plotnine.',
-    keywords: ['Packages', 'Testing', 'APIs'],
+      'Expert (9+ years); primary language for package development, testing, and end-to-end analytical and ML work. Regularly use pandas, polars, statsmodels, scikit-learn, TensorFlow, PyTorch, plotnine, and FastAPI.',
+    keywords: ['Packages', 'ML', 'APIs'],
   },
   {
-    title: 'ML / Evaluation',
-    icon: 'material-symbols:network-node',
-    summary: 'Applied ML for noisy real-world data',
-    details:
-      'Strong fundamentals in baseline design, validation strategy, metrics, error analysis, leakage checks, and evaluation-driven iteration for health, biological, and R&D datasets.',
-    keywords: ['Baselines', 'Metrics', 'Error analysis'],
-  },
-  {
-    title: 'Bioinfo / R',
+    title: 'R',
     icon: 'simple-icons:r',
-    summary: 'Omics and statistical workflow fluency',
-    details:
-      'Proficient with tidyverse and Bioconductor, with strong R/Python interoperability across bioinformatics, statistical analysis, and reproducible omics workflows.',
-    keywords: ['tidyverse', 'Bioconductor', 'Interop'],
+    summary: 'Statistics and bioinformatics workflows',
+    details: 'Proficient with tidyverse and Bioconductor, with strong R/Python interoperability in statistical and bioinformatics workflows.',
+    keywords: ['tidyverse', 'Bioconductor', 'interop'],
   },
   {
-    title: 'Linux / HPC',
+    title: 'Linux + HPC',
     icon: 'material-symbols:terminal-rounded',
-    summary: 'Shell, HPC, and workflow automation',
-    details:
-      'Daily Linux user with scripting, remote systems, and reproducible HPC workflows using SLURM, Nextflow, and command-line automation for research pipelines.',
-    keywords: ['SLURM', 'Nextflow', 'Automation'],
+    summary: 'Daily shell, remote systems, and clusters',
+    details: 'Daily Linux user with scripting, remote systems, and HPC workflows using SLURM, Nextflow, and reproducible command-line pipelines.',
+    keywords: ['SLURM', 'Nextflow', 'CLI'],
   },
   {
-    title: 'Web / APIs',
-    icon: 'mdi:web',
-    summary: 'Research-facing tools and services',
-    details:
-      'Development of lightweight web tools, dashboards, and REST services for research and data applications using HTML/CSS, JavaScript, Dash, and FastAPI.',
-    keywords: ['FastAPI', 'Dash', 'REST'],
-  },
-  {
-    title: 'Git / CI / AI',
+    title: 'Git + CI/CD',
     icon: 'fa6-brands:git-alt',
-    summary: 'Collaborative delivery and tool orchestration',
+    summary: 'Collaborative delivery and automated checks',
+    details: 'Collaborative development, code review, and automated testing and deployment with GitHub Actions and GitLab CI/CD.',
+    keywords: ['GitHub Actions', 'GitLab CI', 'review'],
+  },
+  {
+    title: 'Web + APIs',
+    icon: 'mdi:web',
+    summary: 'Research-facing web tools and services',
+    details: 'Development of lightweight web tools and REST services for research and data applications using HTML/CSS, JavaScript, and FastAPI.',
+    keywords: ['FastAPI', 'JS', 'REST'],
+  },
+  {
+    title: 'Systems',
+    icon: 'mdi:server',
+    summary: 'Deployment, containers, and remote ops',
     details:
-      'Collaborative development, code review, and automated delivery with GitHub Actions and GitLab CI/CD, plus practical experience with agentic coding workflows and structured tool orchestration.',
-    keywords: ['GitHub Actions', 'GitLab CI', 'Codex CLI'],
+      'Linux-based deployment for data and research applications, including containerized services, automation, secure remote access, and lightweight infrastructure.',
+    keywords: ['Containers', 'Automation', 'SSH'],
   },
 ];
 
 export const cvLanguages: CvLanguage[] = [
   { name: 'Spanish', level: 'Native' },
   { name: 'Catalan', level: 'Native' },
-  { name: 'English', level: 'C2 (Full professional)' },
-  { name: 'Italian', level: 'Limited working proficiency' },
-  { name: 'French', level: 'Limited working proficiency' },
+  { name: 'English', level: 'Fluent - C2' },
+  { name: 'Italian', level: 'Conversational - B1' },
+  { name: 'French', level: 'Limited working proficiency - A2' },
 ];
 
 export const cvTagOrder = [

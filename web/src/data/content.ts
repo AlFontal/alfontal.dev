@@ -510,7 +510,7 @@ export const cvPage: CvPage = {
 };
 
 export const cvHeader = {
-  name: 'Alejandro Fontal',
+  name: 'Alejandro Fontal, PhD',
   title: 'Data Science · Bioinformatics · Scientific Software',
   location: 'Barcelona, ES',
   email: 'alejandro.fontal.92@gmail.com',

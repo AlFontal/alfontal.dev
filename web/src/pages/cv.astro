@@ -171,23 +171,23 @@ const visibleLabel = `${cvExperience.length} ${
             <details class="cv-disclosure cv-experience-disclosure" data-cv-expander>
               <summary class="cv-disclosure-toggle cv-experience-toggle">
                 <span class="cv-disclosure-heading cv-disclosure-heading--experience">
-                  <span class="cv-disclosure-title-row cv-disclosure-title-row--stacked">
-                    <span class="cv-disclosure-title">{item.role}</span>
+                  <span class="cv-disclosure-title">{item.role}</span>
+                  <span class="cv-experience-meta">
                     <span class="cv-org cv-org-company">
                       <iconify-icon icon="fa6-solid:building" aria-hidden="true"></iconify-icon>
                       <span>{item.organization}</span>
+                    </span>
+                    <span class="cv-timeplace">
+                      <span>{item.date}</span>
+                      <span class="cv-location">
+                        <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
+                        <span>{item.location}</span>
+                      </span>
                     </span>
                   </span>
                   <span class="cv-disclosure-preview">{item.summary}</span>
                 </span>
                 <span class="cv-disclosure-aside cv-disclosure-aside--experience">
-                  <span class="cv-timeplace">
-                    <span>{item.date}</span>
-                    <span class="cv-location">
-                      <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
-                      <span>{item.location}</span>
-                    </span>
-                  </span>
                   <span class="cv-disclosure-action" aria-hidden="true">
                     <span class="cv-disclosure-state cv-disclosure-state--closed">Expand</span>
                     <span class="cv-disclosure-state cv-disclosure-state--open">Collapse</span>

@@ -1514,8 +1514,8 @@ input {
 
 .cv-skill-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
 .cv-experience-list,
@@ -1601,7 +1601,7 @@ input {
 }
 
 .cv-disclosure-heading--experience {
-  gap: 0.55rem;
+  gap: 0.42rem;
 }
 
 .cv-disclosure-title-row {
@@ -1617,11 +1617,6 @@ input {
 .cv-disclosure-title-row iconify-icon {
   color: var(--accent);
   transition: transform 180ms ease, color 180ms ease;
-}
-
-.cv-disclosure-title-row--stacked {
-  display: grid;
-  gap: 0.28rem;
 }
 
 .cv-disclosure-title {
@@ -1660,7 +1655,7 @@ input {
 }
 
 .cv-disclosure-aside--experience {
-  gap: 0.55rem;
+  align-self: center;
 }
 
 .cv-disclosure-state--open {
@@ -1738,10 +1733,14 @@ input {
   align-items: start;
 }
 
+.cv-skill-row .cv-disclosure-toggle {
+  min-height: 9.75rem;
+}
+
 .cv-skill-keywords {
   color: var(--ink-soft);
   font-family: 'IBM Plex Mono', 'Consolas', monospace;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   text-align: right;
   line-height: 1.5;
   transition:
@@ -1914,6 +1913,14 @@ input {
   align-items: start;
 }
 
+.cv-experience-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem 1rem;
+}
+
 .cv-org {
   display: inline-flex;
   align-items: center;
@@ -1942,8 +1949,8 @@ input {
 }
 
 .cv-experience-panel {
-  gap: 0.9rem;
-  max-width: 82ch;
+  gap: 0.95rem;
+  max-width: none;
 }
 
 .cv-experience-panel ul,
@@ -1965,28 +1972,26 @@ input {
   list-style: none;
   display: inline-flex;
   align-items: center;
-  min-height: 2rem;
-  padding: 0.38rem 0.62rem;
-  border-radius: 999px;
-  border: 1px solid color-mix(in oklab, var(--edge-strong) 82%, var(--accent) 18%);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in oklab, var(--paper) 96%, transparent),
-      color-mix(in oklab, var(--paper-strong) 92%, transparent)
-    );
-  color: color-mix(in oklab, var(--ink-soft) 82%, var(--ink) 18%);
-  box-shadow: inset 0 1px 0 color-mix(in oklab, white 9%, transparent);
-  font-family: 'IBM Plex Mono', 'Consolas', monospace;
-  font-size: 0.72rem;
+  min-height: 1.8rem;
+  padding: 0.28rem 0.58rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--accent) 16%, var(--edge) 84%);
+  background: color-mix(in oklab, var(--accent-soft) 42%, var(--paper) 58%);
+  color: color-mix(in oklab, var(--ink-soft) 76%, var(--ink) 24%);
+  font-size: 0.74rem;
+  font-weight: 500;
   line-height: 1;
   letter-spacing: 0.01em;
 }
 
-.cv-tag-list--muted li {
-  border-style: dashed;
-  border-color: color-mix(in oklab, var(--edge-strong) 88%, var(--accent) 12%);
-  background: color-mix(in oklab, var(--paper) 96%, transparent);
+.cv-tag-list li::before {
+  content: '';
+  width: 0.38rem;
+  height: 0.38rem;
+  margin-right: 0.45rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--accent) 72%, white 28%);
+  flex-shrink: 0;
 }
 
 .cv-language-row {
@@ -2065,6 +2070,11 @@ input {
   .cv-hero,
   .cv-detail-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cv-skill-grid,
+  .publication-year-group {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .publication-year-group {
@@ -2153,6 +2163,15 @@ input {
     justify-items: start;
   }
 
+  .cv-experience-meta {
+    display: grid;
+  }
+
+  .cv-timeplace {
+    justify-items: start;
+    text-align: left;
+  }
+
   .cv-language-row {
     display: grid;
   }
@@ -2164,12 +2183,6 @@ input {
   .cv-experience-disclosure .cv-disclosure-action {
     display: none;
   }
-
-  .cv-timeplace {
-    justify-items: start;
-    text-align: left;
-  }
-
 }
 
 @media (max-width: 640px) {

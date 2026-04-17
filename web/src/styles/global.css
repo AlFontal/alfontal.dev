@@ -1552,9 +1552,7 @@ input {
 }
 
 .cv-row-surface:hover,
-.cv-row-surface:focus-within,
-.cv-row-surface[open],
-.cv-row-surface:has(.cv-disclosure[open]) {
+.cv-row-surface:focus-within {
   border-color: color-mix(in oklab, var(--accent) 28%, var(--edge));
   background: color-mix(in oklab, var(--paper-strong) 90%, transparent);
   box-shadow:
@@ -1563,10 +1561,14 @@ input {
 }
 
 .cv-row-surface:hover::after,
-.cv-row-surface:focus-within::after,
-.cv-row-surface[open]::after,
-.cv-row-surface:has(.cv-disclosure[open])::after {
+.cv-row-surface:focus-within::after {
   opacity: 1;
+}
+
+.cv-row-surface[open],
+.cv-row-surface:has(.cv-disclosure[open]) {
+  border-color: color-mix(in oklab, var(--accent) 18%, var(--edge) 82%);
+  background: color-mix(in oklab, var(--paper-strong) 87%, transparent);
 }
 
 .cv-disclosure {
@@ -1585,7 +1587,7 @@ input {
 
 .cv-disclosure-toggle {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.85rem;
   align-items: start;
   padding: 1rem 1rem 0.95rem;
@@ -1631,7 +1633,12 @@ input {
 .cv-disclosure-preview {
   color: var(--ink-soft);
   line-height: 1.55;
-  transition: color 180ms ease;
+  max-height: 4.5rem;
+  overflow: hidden;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease,
+    max-height 220ms ease;
 }
 
 .cv-disclosure-action {
@@ -1645,13 +1652,36 @@ input {
   letter-spacing: 0.08em;
 }
 
+.cv-disclosure-aside {
+  display: grid;
+  justify-items: end;
+  align-content: start;
+  gap: 0.35rem;
+}
+
+.cv-disclosure-aside--experience {
+  gap: 0.55rem;
+}
+
+.cv-disclosure-state--open {
+  display: none;
+}
+
+.cv-disclosure[open] .cv-disclosure-state--closed {
+  display: none;
+}
+
+.cv-disclosure[open] .cv-disclosure-state--open {
+  display: inline;
+}
+
 .cv-disclosure-action::before {
   content: '';
   width: 0.66rem;
   height: 0.66rem;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg) translateY(-1px);
+  transform: rotate(45deg) translateY(-2px);
   transform-origin: center;
   transition: transform 220ms ease, color 220ms ease;
 }
@@ -1661,7 +1691,7 @@ input {
 }
 
 .cv-disclosure[open] .cv-disclosure-action::before {
-  transform: rotate(225deg) translateY(-1px);
+  transform: rotate(225deg) translateY(0);
 }
 
 .cv-disclosure-panel {
@@ -1678,7 +1708,7 @@ input {
   overflow: hidden;
   display: grid;
   gap: 0.75rem;
-  padding: 0 1rem 1rem 1.95rem;
+  padding: 0 1rem 1rem;
   border-top: 1px solid color-mix(in oklab, var(--edge) 82%, transparent);
 }
 
@@ -1688,24 +1718,18 @@ input {
 
 .cv-row-surface:hover .cv-disclosure-title,
 .cv-row-surface:focus-within .cv-disclosure-title,
-.cv-row-surface[open] .cv-disclosure-title,
-.cv-row-surface:has(.cv-disclosure[open]) .cv-disclosure-title,
 .cv-row-surface:hover h4,
 .cv-row-surface:focus-within h4 {
   color: color-mix(in oklab, var(--ink) 88%, var(--accent) 12%);
 }
 
 .cv-row-surface:hover .cv-disclosure-preview,
-.cv-row-surface:focus-within .cv-disclosure-preview,
-.cv-row-surface[open] .cv-disclosure-preview,
-.cv-row-surface:has(.cv-disclosure[open]) .cv-disclosure-preview {
+.cv-row-surface:focus-within .cv-disclosure-preview {
   color: color-mix(in oklab, var(--ink-soft) 82%, var(--ink) 18%);
 }
 
 .cv-row-surface:hover .cv-disclosure-title-row iconify-icon,
-.cv-row-surface:focus-within .cv-disclosure-title-row iconify-icon,
-.cv-row-surface[open] .cv-disclosure-title-row iconify-icon,
-.cv-row-surface:has(.cv-disclosure[open]) .cv-disclosure-title-row iconify-icon {
+.cv-row-surface:focus-within .cv-disclosure-title-row iconify-icon {
   transform: translateX(1px);
   color: color-mix(in oklab, var(--accent) 86%, white 14%);
 }
@@ -1720,10 +1744,13 @@ input {
   font-size: 0.72rem;
   text-align: right;
   line-height: 1.5;
+  transition:
+    opacity 180ms ease,
+    max-height 220ms ease;
 }
 
 .cv-skill-panel {
-  max-width: 38ch;
+  max-width: none;
 }
 
 .cv-controls {
@@ -1848,6 +1875,10 @@ input {
   gap: 0.75rem;
 }
 
+.cv-languages-panel {
+  align-content: center;
+}
+
 .cv-subsection-heading {
   font-family: 'IBM Plex Mono', 'Consolas', monospace;
   font-size: 0.78rem;
@@ -1881,15 +1912,6 @@ input {
 
 .cv-experience-disclosure .cv-disclosure-toggle {
   align-items: start;
-}
-
-.cv-experience-toggle {
-  grid-template-columns: minmax(0, 1fr) auto auto;
-}
-
-.cv-experience-disclosure .cv-disclosure-action {
-  align-self: start;
-  margin-top: 0.1rem;
 }
 
 .cv-org {
@@ -1983,6 +2005,12 @@ input {
 .cv-language-row span {
   color: var(--ink-soft);
   font-size: 0.88rem;
+}
+
+.cv-disclosure[open] .cv-disclosure-preview,
+.cv-disclosure[open] .cv-skill-keywords {
+  opacity: 0;
+  max-height: 0;
 }
 
 .site-footer {
@@ -2119,6 +2147,10 @@ input {
 
   .cv-skill-keywords {
     text-align: left;
+  }
+
+  .cv-disclosure-aside {
+    justify-items: start;
   }
 
   .cv-language-row {

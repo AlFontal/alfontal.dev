@@ -73,11 +73,11 @@ const visibleLabel = `${cvExperience.length} ${
         type="button"
         class="cv-utility-button"
         data-cv-skills-toggle
-        data-label-expand="Open all"
-        data-label-collapse="Close all"
+        data-label-expand="Expand all"
+        data-label-collapse="Collapse all"
         aria-pressed="false"
       >
-        Open all
+        Expand all
       </button>
     </div>
     <div class="cv-skill-grid">
@@ -92,8 +92,13 @@ const visibleLabel = `${cvExperience.length} ${
                 </span>
                 <span class="cv-disclosure-preview">{skill.summary}</span>
               </span>
-              <span class="cv-skill-keywords">{skill.keywords.join(' · ')}</span>
-              <span class="cv-disclosure-action" aria-hidden="true">Open</span>
+              <span class="cv-disclosure-aside cv-disclosure-aside--skills">
+                <span class="cv-skill-keywords">{skill.keywords.join(' · ')}</span>
+                <span class="cv-disclosure-action" aria-hidden="true">
+                  <span class="cv-disclosure-state cv-disclosure-state--closed">Expand</span>
+                  <span class="cv-disclosure-state cv-disclosure-state--open">Collapse</span>
+                </span>
+              </span>
             </summary>
             <div class="cv-disclosure-panel">
               <div class="cv-disclosure-panel-inner cv-skill-panel">
@@ -175,14 +180,19 @@ const visibleLabel = `${cvExperience.length} ${
                   </span>
                   <span class="cv-disclosure-preview">{item.summary}</span>
                 </span>
-                <span class="cv-timeplace">
-                  <span>{item.date}</span>
-                  <span class="cv-location">
-                    <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
-                    <span>{item.location}</span>
+                <span class="cv-disclosure-aside cv-disclosure-aside--experience">
+                  <span class="cv-timeplace">
+                    <span>{item.date}</span>
+                    <span class="cv-location">
+                      <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
+                      <span>{item.location}</span>
+                    </span>
+                  </span>
+                  <span class="cv-disclosure-action" aria-hidden="true">
+                    <span class="cv-disclosure-state cv-disclosure-state--closed">Expand</span>
+                    <span class="cv-disclosure-state cv-disclosure-state--open">Collapse</span>
                   </span>
                 </span>
-                <span class="cv-disclosure-action" aria-hidden="true">Open</span>
               </summary>
               <div class="cv-disclosure-panel">
                 <div class="cv-disclosure-panel-inner cv-experience-panel">

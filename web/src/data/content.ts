@@ -50,6 +50,14 @@ export type HomeHero = {
   cards: HeroCard[];
 };
 
+export type HomePage = {
+  eyebrow: string;
+  quickPathsHeading: string;
+  academicBackgroundHeading: string;
+  academicBackgroundIntro: string;
+  interestsHeading: string;
+};
+
 export type HomeAnchorCard = {
   id: string;
   title: string;
@@ -75,6 +83,105 @@ export type Publication = {
   doi?: string;
   pdf?: string;
   code?: string;
+};
+
+export type ProjectsPage = {
+  seoTitle: string;
+  description: string;
+  kicker: string;
+  title: string;
+  intro: string;
+  stats: {
+    totalLabel: string;
+    latestYearLabel: string;
+    stackValue: string;
+    stackLabel: string;
+  };
+  ctaLabel: string;
+};
+
+export type PublicationsPage = {
+  seoTitle: string;
+  description: string;
+  kicker: string;
+  title: string;
+  intro: string;
+  stats: {
+    totalLabel: string;
+    latestYearLabel: string;
+    codeLabel: string;
+  };
+  links: {
+    doi: string;
+    pdf: string;
+    code: string;
+  };
+};
+
+export type BlogPage = {
+  seoTitle: string;
+  description: string;
+  kicker: string;
+  title: string;
+  intro: string;
+  stats: {
+    totalLabel: string;
+    notebookLabel: string;
+    manualLabel: string;
+  };
+  featuredLabel: string;
+  notebookLabel: string;
+  manualLabel: string;
+};
+
+export type CvEducationItem = {
+  degree: string;
+  institution: string;
+  date: string;
+  location: string;
+  details: string[];
+};
+
+export type CvExperienceItem = {
+  role: string;
+  organization: string;
+  date: string;
+  location: string;
+  summary: string;
+  highlights: string[];
+  tags: string[];
+};
+
+export type CvSkillGroup = {
+  title: string;
+  icon: string;
+  summary: string;
+  details: string;
+  keywords: string[];
+};
+
+export type CvLanguage = {
+  name: string;
+  level: string;
+  notes?: string;
+};
+
+export type CvPage = {
+  seoTitle: string;
+  description: string;
+  summary: string;
+  skillsHeading: string;
+  experienceHeading: string;
+  detailsHeading: string;
+  searchPlaceholder: string;
+  skillsToggleLabel: {
+    expand: string;
+    collapse: string;
+  };
+  experienceVisibleLabel: {
+    singular: string;
+    plural: string;
+  };
 };
 
 export const siteMeta = {
@@ -118,6 +225,14 @@ export const homeHero: HomeHero = {
     { title: 'Bioinformatics', subtitle: 'metagenomics, sequence analysis, reproducible pipelines' },
     { title: 'Software', subtitle: 'packages, web tools, APIs, research workflows, data engineering' },
   ],
+};
+
+export const homePage: HomePage = {
+  eyebrow: 'Data science · Bioinformatics · Scientific software',
+  quickPathsHeading: 'Quick Paths',
+  academicBackgroundHeading: 'Academic Background',
+  academicBackgroundIntro: 'A quick overview of my educational journey.',
+  interestsHeading: 'Interests & Topics',
 };
 
 export const homeAnchorCards: HomeAnchorCard[] = [
@@ -188,6 +303,22 @@ export const blogPosts: BlogPost[] = [
   },
 ];
 
+export const blogPage: BlogPage = {
+  seoTitle: 'Blog',
+  description: 'Research notes, coding experiments, and long-form technical posts.',
+  kicker: 'Notebook essays / technical notes',
+  title: 'Blog',
+  intro: 'Notebook-first posts and longer notes, rewritten into something easier to read, cite, and revisit.',
+  stats: {
+    totalLabel: 'published posts',
+    notebookLabel: 'built from notebooks',
+    manualLabel: 'written directly in Astro',
+  },
+  featuredLabel: 'Latest entry',
+  notebookLabel: 'Notebook post',
+  manualLabel: 'Astro article',
+};
+
 export const projects: Project[] = [
   {
     title: 'Env. Data Japan',
@@ -238,6 +369,21 @@ export const projects: Project[] = [
     href: 'https://github.com/AlFontal/sdcpy',
   },
 ];
+
+export const projectsPage: ProjectsPage = {
+  seoTitle: 'Projects',
+  description: 'Selected software and data projects.',
+  kicker: 'Selected builds',
+  title: 'Projects',
+  intro: 'Open repositories and small systems spanning data workflows, automation, dashboards, and scientific interfaces.',
+  stats: {
+    totalLabel: 'selected repositories',
+    latestYearLabel: 'most recent project year',
+    stackValue: 'Python-first',
+    stackLabel: 'with dashboards, GIS, scraping, and automation',
+  },
+  ctaLabel: 'View repository',
+};
 
 export const publications: Publication[] = [
   {
@@ -324,4 +470,225 @@ export const publications: Publication[] = [
     categories: ['Bioinformatics', 'Proteomics', 'Machine Learning'],
     pdf: 'https://edepot.wur.nl/429151',
   },
+];
+
+export const publicationsPage: PublicationsPage = {
+  seoTitle: 'Publications',
+  description: 'Peer-reviewed articles, conference proceedings, and thesis work.',
+  kicker: 'Peer-reviewed work',
+  title: 'Publications',
+  intro: 'Research output across epidemiology, aerobiology, microbiome work, and climate-health analysis.',
+  stats: {
+    totalLabel: 'listed publications',
+    latestYearLabel: 'latest publication year',
+    codeLabel: 'records with public code',
+  },
+  links: {
+    doi: 'DOI record',
+    pdf: 'Open PDF',
+    code: 'Code repository',
+  },
+};
+
+export const cvPage: CvPage = {
+  seoTitle: 'CV',
+  description: 'Experience, skills, and education for Alejandro Fontal.',
+  summary:
+    'Computational scientist working at the intersection of bioinformatics, epidemiology, and scientific software. I analyse complex biological and public health data, develop reproducible methods, and build tools that support research in practice.',
+  skillsHeading: 'Development Skills',
+  experienceHeading: 'Experience',
+  detailsHeading: 'Education & Languages',
+  searchPlaceholder: 'Search roles, organizations, highlights...',
+  skillsToggleLabel: {
+    expand: 'Expand all',
+    collapse: 'Collapse all',
+  },
+  experienceVisibleLabel: {
+    singular: 'role visible',
+    plural: 'roles visible',
+  },
+};
+
+export const cvHeader = {
+  name: 'Alejandro Fontal',
+  title: 'Data Science · Bioinformatics · Scientific Software',
+  location: 'Barcelona, ES',
+  email: 'alejandro.fontal.92@gmail.com',
+  phone: '+34 623 107 939',
+  website: 'https://alfontal.dev',
+  linkedin: 'https://www.linkedin.com/in/alfontal',
+  linkedinHandle: 'alfontal',
+  github: 'https://github.com/AlFontal',
+  githubHandle: 'AlFontal',
+  gitlab: 'https://gitlab.com/AlFontal',
+  gitlabHandle: 'AlFontal',
+  orcid: 'https://orcid.org/0000-0003-1138-2158',
+  orcidId: '0000-0003-1138-2158',
+};
+
+export const cvEducation: CvEducationItem[] = [
+  {
+    degree: 'PhD in Biotechnology',
+    institution: 'Universitat de Barcelona',
+    date: '2019 - 2024',
+    location: 'Barcelona, ES',
+    details: [
+      'PhD focused on environmental determinants of disease onset, spatiotemporal modeling, and long-read aerobiome metagenomics.',
+    ],
+  },
+  {
+    degree: 'MSc in Bioinformatics',
+    institution: 'Wageningen University & Research',
+    date: '2016 - 2018',
+    location: 'Wageningen, NL',
+    details: [
+      'Data Science minor with cum laude distinction.',
+      'Thesis on interpretable deep learning for protein subcellular location prediction.',
+    ],
+  },
+  {
+    degree: 'BSc in Biotechnology',
+    institution: 'Universitat de Barcelona',
+    date: '2011 - 2015',
+    location: 'Barcelona, ES',
+    details: ['Thesis at the VHIR Bioinformatics Unit on meta-analysis of transcriptomics tools.'],
+  },
+];
+
+export const cvExperience: CvExperienceItem[] = [
+  {
+    role: 'Postdoctoral Researcher · Data and Software Lead',
+    organization: 'Climate & Health Program @ ISGlobal',
+    date: 'Oct 2024 - Present',
+    location: 'Barcelona, ES',
+    summary: 'Leading software, data, and reproducibility infrastructure for climate-health and aerobiome research.',
+    highlights: [
+      'Lead software and data engineering for the group, building internal packages, web tools, and GitHub-based workflows for reproducible research.',
+      'Build reproducible pipelines for long-read aerobiome metagenomics and link results to health outcomes.',
+      'Repurpose a laser-based pollen detector for bacterial discrimination using fluorescence, light scattering, and supervised machine learning.',
+    ],
+    tags: ['Python', 'Dash', 'Metagenomics', 'Machine Learning', 'Data Engineering'],
+  },
+  {
+    role: 'PhD Fellow · Early-Stage Researcher',
+    organization: 'Climate & Health Program @ ISGlobal (HELICAL ITN)',
+    date: 'Oct 2019 - Sep 2024',
+    location: 'Barcelona, ES',
+    summary: 'Developed computational methods and field workflows to connect atmospheric processes with infectious disease dynamics.',
+    highlights: [
+      'Developed time-series methods to quantify environmental signals in epidemics, including transient and lagged associations, multi-scale correlations, and phase-shift analyses.',
+      'Integrated nationwide case data with climate reanalysis, remote sensing, GIS layers, and air-mass trajectories to study Kawasaki Disease, COVID-19, and influenza.',
+      'Coordinated field sampling campaigns in Japan to characterize the biological and chemical composition of air masses.',
+    ],
+    tags: ['Time-Series', 'GIS', 'Epidemiology', 'Docker', 'Nextflow', 'Quarto', 'GitHub Actions', 'Web-dev'],
+  },
+  {
+    role: 'Data Scientist',
+    organization: 'Protein Engineering @ DuPont Industrial Biosciences',
+    date: 'Oct 2018 - Sep 2019',
+    location: 'Leiden, NL',
+    summary: 'Embedded machine learning and reproducible pipelines into protein engineering workflows with wet-lab partners.',
+    highlights: [
+      'Integrated data-driven and machine-learning solutions into protein engineering workflows.',
+      'Built and maintained reproducible bioinformatics and data pipelines.',
+      'Partnered with wet-lab teams to design experiments and close the model-experiment loop, accelerating workflow automation.',
+    ],
+    tags: ['Machine Learning', 'Bioinformatics', 'Pipelines', 'R&D'],
+  },
+  {
+    role: 'Data Science Intern',
+    organization: 'DuPont Industrial Biosciences',
+    date: 'Mar 2018 - Sep 2018',
+    location: 'Leiden, NL',
+    summary: 'Internship focused on machine learning for empirical protein design and model benchmarking.',
+    highlights: [
+      'Built, trained, and benchmarked deep learning models to predict enzyme performance from sequence and structure.',
+    ],
+    tags: ['PyTorch', 'TensorFlow', 'GANs', 'CNNs', 'LSTMs', 'GitLab CI/CD'],
+  },
+  {
+    role: 'Assistant in MOOCs Development',
+    organization: 'Educational Staff Development @ Wageningen University',
+    date: 'Sep 2016 - Dec 2017',
+    location: 'Wageningen, NL',
+    summary: 'Produced assignments and technical support materials for large-scale online course delivery.',
+    highlights: [
+      'Developed assignments and technical content for 10+ edX MOOCs.',
+      'Provided technical support across course development workflows.',
+    ],
+    tags: ['Education', 'Technical Writing', 'Course Production', 'Web-dev'],
+  },
+];
+
+export const cvSkills: CvSkillGroup[] = [
+  {
+    title: 'Python',
+    icon: 'fa6-brands:python',
+    summary: 'Primary language · 9+ years',
+    details:
+      'Expert (9+ years); primary language for package development, testing, and end-to-end analytical and ML work. Regularly use pandas, polars, statsmodels, scikit-learn, TensorFlow, PyTorch, plotnine, and FastAPI.',
+    keywords: ['Packages', 'ML', 'APIs'],
+  },
+  {
+    title: 'R',
+    icon: 'simple-icons:r',
+    summary: 'Statistics and bioinformatics workflows',
+    details: 'Proficient with tidyverse and Bioconductor, with strong R/Python interoperability in statistical and bioinformatics workflows.',
+    keywords: ['tidyverse', 'Bioconductor', 'interop'],
+  },
+  {
+    title: 'Linux + HPC',
+    icon: 'material-symbols:terminal-rounded',
+    summary: 'Daily shell, remote systems, and clusters',
+    details: 'Daily Linux user with scripting, remote systems, and HPC workflows using SLURM, Nextflow, and reproducible command-line pipelines.',
+    keywords: ['SLURM', 'Nextflow', 'CLI'],
+  },
+  {
+    title: 'Git + CI/CD',
+    icon: 'fa6-brands:git-alt',
+    summary: 'Collaborative delivery and automated checks',
+    details: 'Collaborative development, code review, and automated testing and deployment with GitHub Actions and GitLab CI/CD.',
+    keywords: ['GitHub Actions', 'GitLab CI', 'review'],
+  },
+  {
+    title: 'Web + APIs',
+    icon: 'mdi:web',
+    summary: 'Research-facing web tools and services',
+    details: 'Development of lightweight web tools and REST services for research and data applications using HTML/CSS, JavaScript, and FastAPI.',
+    keywords: ['FastAPI', 'JS', 'REST'],
+  },
+  {
+    title: 'Systems',
+    icon: 'mdi:server',
+    summary: 'Deployment, containers, and remote ops',
+    details:
+      'Linux-based deployment for data and research applications, including containerized services, automation, secure remote access, and lightweight infrastructure.',
+    keywords: ['Containers', 'Automation', 'SSH'],
+  },
+];
+
+export const cvLanguages: CvLanguage[] = [
+  { name: 'Spanish', level: 'Native' },
+  { name: 'Catalan', level: 'Native' },
+  { name: 'English', level: 'C2 (Full professional)' },
+  { name: 'Italian', level: 'Limited working proficiency' },
+  { name: 'French', level: 'Limited working proficiency' },
+];
+
+export const cvTagOrder = [
+  'Python',
+  'Machine Learning',
+  'Metagenomics',
+  'Time-Series',
+  'GIS',
+  'Epidemiology',
+  'Data Engineering',
+  'Docker',
+  'Nextflow',
+  'Quarto',
+  'Web-dev',
+  'GitHub Actions',
+  'Bioinformatics',
+  'R&D',
+  'Education',
 ];

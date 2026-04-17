@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { cvEducation, cvExperience, cvHeader, cvLanguages, cvSkills, cvTagOrder } from '../data/cv';
+import { cvEducation, cvExperience, cvHeader, cvLanguages, cvPage, cvSkills, cvTagOrder } from '../data/content';
 
 const allTags = Array.from(new Set(cvExperience.flatMap((item) => item.tags)));
 allTags.sort((a, b) => {
@@ -12,16 +12,18 @@ allTags.sort((a, b) => {
   return ai - bi;
 });
 
+const visibleLabel = `${cvExperience.length} ${
+  cvExperience.length === 1 ? cvPage.experienceVisibleLabel.singular : cvPage.experienceVisibleLabel.plural
+}`;
+
 ---
 
-<BaseLayout title="CV" description="Experience, skills, and education for Alejandro Fontal.">
+<BaseLayout title={cvPage.seoTitle} description={cvPage.description}>
   <section class="cv-hero reveal-in">
     <div class="cv-hero-main">
       <h1>{cvHeader.name}</h1>
       <p class="cv-title">{cvHeader.title}</p>
-      <p class="cv-summary-lead">
-Computational scientist working at the intersection of bioinformatics, epidemiology, and scientific software. I analyse complex biological and public health data, develop reproducible methods, and build tools that support research in practice.
-      </p>
+      <p class="cv-summary-lead">{cvPage.summary}</p>
       <p class="cv-meta">
         <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
         <span>{cvHeader.location}</span>
@@ -65,19 +67,40 @@ Computational scientist working at the intersection of bioinformatics, epidemiol
   </section>
 
   <section class="block reveal-in" aria-labelledby="cv-skills-heading">
-    <div class="section-head">
-      <h2 id="cv-skills-heading">Development Skills</h2>
+    <div class="section-head section-head--with-action">
+      <h2 id="cv-skills-heading">{cvPage.skillsHeading}</h2>
+      <button
+        type="button"
+        class="cv-utility-button"
+        data-cv-skills-toggle
+        data-label-expand="Open all"
+        data-label-collapse="Close all"
+        aria-pressed="false"
+      >
+        Open all
+      </button>
     </div>
     <div class="cv-skill-grid">
       {
         cvSkills.map((skill) => (
-          <article class="cv-skill-card">
-            <h3>
-              <iconify-icon icon={skill.icon} aria-hidden="true"></iconify-icon>
-              <span>{skill.title}</span>
-            </h3>
-            <p>{skill.details}</p>
-          </article>
+          <details class="cv-skill-row cv-disclosure cv-row-surface" data-cv-skill>
+            <summary class="cv-disclosure-toggle cv-skill-toggle">
+              <span class="cv-disclosure-heading">
+                <span class="cv-disclosure-title-row">
+                  <iconify-icon icon={skill.icon} aria-hidden="true"></iconify-icon>
+                  <span>{skill.title}</span>
+                </span>
+                <span class="cv-disclosure-preview">{skill.summary}</span>
+              </span>
+              <span class="cv-skill-keywords">{skill.keywords.join(' · ')}</span>
+              <span class="cv-disclosure-action" aria-hidden="true">Open</span>
+            </summary>
+            <div class="cv-disclosure-panel">
+              <div class="cv-disclosure-panel-inner cv-skill-panel">
+                <p>{skill.details}</p>
+              </div>
+            </div>
+          </details>
         ))
       }
     </div>
@@ -85,67 +108,93 @@ Computational scientist working at the intersection of bioinformatics, epidemiol
 
   <section class="block reveal-in" aria-labelledby="cv-experience-heading">
     <div class="section-head">
-      <h2 id="cv-experience-heading">Experience</h2>
+      <h2 id="cv-experience-heading">{cvPage.experienceHeading}</h2>
     </div>
 
     <div class="cv-controls">
-      <label class="cv-search" aria-label="Search experience">
-        <input
-          type="search"
-          placeholder="Search roles, organizations, highlights..."
-          aria-label="Search roles, organizations, highlights"
-          data-cv-search
-        />
-      </label>
+      <div class="cv-controls-bar">
+        <label class="cv-search" aria-label="Search experience">
+          <input
+            type="search"
+            placeholder={cvPage.searchPlaceholder}
+            aria-label={cvPage.searchPlaceholder}
+            data-cv-search
+          />
+        </label>
 
-      <div class="cv-filter-group" data-cv-filters>
-        {
-          allTags.map((tag) => (
-            <button type="button" class="cv-filter-chip" data-filter={tag} aria-pressed="false">
-              {tag}
-            </button>
-          ))
-        }
-        <button type="button" class="cv-filter-chip is-clear" data-filter-clear>Clear filters</button>
+        <details class="cv-filter-panel" data-cv-filter-panel>
+          <summary class="cv-filter-summary">
+            <span>Filter by topic</span>
+            <span class="cv-filter-count" data-cv-filter-count>0 active</span>
+          </summary>
+          <div class="cv-filter-panel-body">
+            <div class="cv-filter-group" data-cv-filters>
+              {
+                allTags.map((tag) => (
+                  <button type="button" class="cv-filter-chip" data-filter={tag} aria-pressed="false">
+                    {tag}
+                  </button>
+                ))
+              }
+              <button type="button" class="cv-filter-chip is-clear" data-filter-clear>Clear filters</button>
+            </div>
+          </div>
+        </details>
+
+        <p
+          class="cv-result"
+          data-cv-result
+          data-singular={cvPage.experienceVisibleLabel.singular}
+          data-plural={cvPage.experienceVisibleLabel.plural}
+        >
+          {visibleLabel}
+        </p>
       </div>
-
-      <p class="cv-result" data-cv-result>{cvExperience.length} roles visible</p>
     </div>
 
     <div class="cv-experience-list" data-cv-list>
       {
         cvExperience.map((item) => (
           <article
-            class="cv-experience-card"
+            class="cv-experience-entry cv-row-surface"
             data-cv-item
             data-tags={item.tags.join('|').toLowerCase()}
-            data-search={[item.role, item.organization, item.location, item.summary ?? '', ...item.highlights, ...item.tags]
+            data-search={[item.role, item.organization, item.location, item.summary, ...item.highlights, ...item.tags]
               .join(' ')
               .toLowerCase()}
           >
-            <header>
-              <div>
-                <h3>{item.role}</h3>
-                <p class="cv-org cv-org-company">
-                  <iconify-icon icon="fa6-solid:building" aria-hidden="true"></iconify-icon>
-                  <span>{item.organization}</span>
-                </p>
-              </div>
-              <div class="cv-timeplace">
-                <span>{item.date}</span>
-                <span class="cv-location">
-                  <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
-                  <span>{item.location}</span>
+            <details class="cv-disclosure cv-experience-disclosure" data-cv-expander>
+              <summary class="cv-disclosure-toggle cv-experience-toggle">
+                <span class="cv-disclosure-heading cv-disclosure-heading--experience">
+                  <span class="cv-disclosure-title-row cv-disclosure-title-row--stacked">
+                    <span class="cv-disclosure-title">{item.role}</span>
+                    <span class="cv-org cv-org-company">
+                      <iconify-icon icon="fa6-solid:building" aria-hidden="true"></iconify-icon>
+                      <span>{item.organization}</span>
+                    </span>
+                  </span>
+                  <span class="cv-disclosure-preview">{item.summary}</span>
                 </span>
+                <span class="cv-timeplace">
+                  <span>{item.date}</span>
+                  <span class="cv-location">
+                    <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
+                    <span>{item.location}</span>
+                  </span>
+                </span>
+                <span class="cv-disclosure-action" aria-hidden="true">Open</span>
+              </summary>
+              <div class="cv-disclosure-panel">
+                <div class="cv-disclosure-panel-inner cv-experience-panel">
+                  <ul>
+                    {item.highlights.map((point) => <li>{point}</li>)}
+                  </ul>
+                  <ul class="chip-list compact cv-tag-list">
+                    {item.tags.map((tag) => <li>{tag}</li>)}
+                  </ul>
+                </div>
               </div>
-            </header>
-            {item.summary && <p class="cv-summary">{item.summary}</p>}
-            <ul>
-              {item.highlights.map((point) => <li>{point}</li>)}
-            </ul>
-            <ul class="chip-list compact cv-tag-list">
-              {item.tags.map((tag) => <li>{tag}</li>)}
-            </ul>
+            </details>
           </article>
         ))
       }
@@ -154,18 +203,19 @@ Computational scientist working at the intersection of bioinformatics, epidemiol
 
   <section class="block reveal-in" aria-labelledby="cv-details-heading">
     <div class="section-head">
-      <h2 id="cv-details-heading">Education & Languages</h2>
+      <h2 id="cv-details-heading">{cvPage.detailsHeading}</h2>
     </div>
 
     <div class="cv-detail-grid">
-      <section class="cv-detail-panel cv-education-panel">
+      <section class="cv-detail-column cv-education-panel">
+        <h3 class="cv-subsection-heading">Education</h3>
         <div class="cv-education-list">
           {
             cvEducation.map((item) => (
-              <article class="cv-education-card">
+              <article class="cv-education-row cv-row-surface">
                 <header>
                   <div>
-                    <h3>{item.degree}</h3>
+                    <h4>{item.degree}</h4>
                     <p class="cv-org cv-org-university">
                       <iconify-icon icon="fa6-solid:building-columns" aria-hidden="true"></iconify-icon>
                       <span>{item.institution}</span>
@@ -188,14 +238,17 @@ Computational scientist working at the intersection of bioinformatics, epidemiol
         </div>
       </section>
 
-      <aside class="cv-detail-panel cv-languages-panel">
+      <aside class="cv-detail-column cv-languages-panel">
+        <h3 class="cv-subsection-heading">Languages</h3>
         <div class="cv-languages-list">
           {
             cvLanguages.map((item) => (
-              <article class="cv-language-card">
-                <h3>{item.name}</h3>
+              <article class="cv-language-row cv-row-surface">
+                <div>
+                  <h4>{item.name}</h4>
+                  {item.notes && <span>{item.notes}</span>}
+                </div>
                 <p>{item.level}</p>
-                {item.notes && <span>{item.notes}</span>}
               </article>
             ))
           }
@@ -210,27 +263,80 @@ Computational scientist working at the intersection of bioinformatics, epidemiol
       const input = root.querySelector('[data-cv-search]');
       const result = root.querySelector('[data-cv-result]');
       const cards = [...root.querySelectorAll('[data-cv-item]')];
+      const expanders = cards.map((card) => card.querySelector('[data-cv-expander]')).filter(Boolean);
       const filterButtons = [...root.querySelectorAll('[data-filter]')];
       const clearButton = root.querySelector('[data-filter-clear]');
+      const filterPanel = root.querySelector('[data-cv-filter-panel]');
+      const filterCount = root.querySelector('[data-cv-filter-count]');
+      const skillsToggle = root.querySelector('[data-cv-skills-toggle]');
+      const skillCards = [...root.querySelectorAll('[data-cv-skill]')];
       const activeFilters = new Set();
 
       if (!input || !result || !cards.length) return;
 
+      expanders.forEach((expander) => {
+        expander.dataset.manualOpen = expander.open ? 'true' : 'false';
+        expander.addEventListener('toggle', () => {
+          if (!input.value.trim() && activeFilters.size === 0) {
+            expander.dataset.manualOpen = expander.open ? 'true' : 'false';
+          }
+        });
+      });
+
+      const syncSkillToggle = () => {
+        if (!skillsToggle || !skillCards.length) return;
+        const shouldCollapse = skillCards.every((card) => card.open);
+        const expandLabel = skillsToggle.getAttribute('data-label-expand') || 'Expand all';
+        const collapseLabel = skillsToggle.getAttribute('data-label-collapse') || 'Collapse all';
+        skillsToggle.textContent = shouldCollapse ? collapseLabel : expandLabel;
+        skillsToggle.setAttribute('aria-pressed', shouldCollapse ? 'true' : 'false');
+      };
+
+      skillCards.forEach((card) => card.addEventListener('toggle', syncSkillToggle));
+      syncSkillToggle();
+
+      skillsToggle?.addEventListener('click', () => {
+        const shouldOpen = skillCards.some((card) => !card.open);
+        skillCards.forEach((card) => {
+          card.open = shouldOpen;
+        });
+        syncSkillToggle();
+      });
+
       const update = () => {
         const query = String(input.value || '').trim().toLowerCase();
+        const hasActiveQuery = query.length > 0 || activeFilters.size > 0;
         let visible = 0;
 
-        cards.forEach((card) => {
+        if (filterCount) {
+          filterCount.textContent = `${activeFilters.size} active`;
+        }
+
+        cards.forEach((card, index) => {
           const searchHaystack = String(card.getAttribute('data-search') || '');
           const tags = String(card.getAttribute('data-tags') || '');
           const matchesQuery = !query || searchHaystack.includes(query);
           const matchesFilter = !activeFilters.size || [...activeFilters].every((tag) => tags.includes(tag));
           const show = matchesQuery && matchesFilter;
+          const expander = expanders[index];
           card.hidden = !show;
+
+          if (expander) {
+            if (!show) {
+              expander.open = false;
+            } else if (hasActiveQuery) {
+              expander.open = true;
+            } else {
+              expander.open = expander.dataset.manualOpen === 'true';
+            }
+          }
+
           if (show) visible += 1;
         });
 
-        result.textContent = `${visible} role${visible === 1 ? '' : 's'} visible`;
+        const singular = result.getAttribute('data-singular') || 'role visible';
+        const plural = result.getAttribute('data-plural') || 'roles visible';
+        result.textContent = `${visible} ${visible === 1 ? singular : plural}`;
       };
 
       filterButtons.forEach((button) => {
@@ -246,6 +352,7 @@ Computational scientist working at the intersection of bioinformatics, epidemiol
             activeFilters.add(value);
             button.setAttribute('aria-pressed', 'true');
             button.classList.add('is-active');
+            if (filterPanel) filterPanel.open = true;
           }
 
           update();
@@ -258,6 +365,7 @@ Computational scientist working at the intersection of bioinformatics, epidemiol
           button.setAttribute('aria-pressed', 'false');
           button.classList.remove('is-active');
         });
+        if (filterPanel) filterPanel.open = false;
         input.value = '';
         update();
       });

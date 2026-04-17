@@ -140,17 +140,17 @@ export const cvSkills: CvSkillGroup[] = [
     title: 'Python',
     icon: 'fa6-brands:python',
     details:
-      'Expert (9+ years): primary language for package development, testing, and end-to-end data and ML work with pandas, polars, statsmodels, scikit-learn, TensorFlow, PyTorch, plotnine, and FastAPI.',
+      'Expert (9+ years); primary language for package development, testing, and end-to-end analytical and ML work. Regularly use pandas, polars, statsmodels, scikit-learn, TensorFlow, PyTorch, plotnine, and FastAPI.',
   },
   {
     title: 'R',
     icon: 'simple-icons:r',
-    details: 'Proficient with tidyverse and Bioconductor, with strong R/Python interoperability in research workflows.',
+    details: 'Proficient with tidyverse and Bioconductor, with strong R/Python interoperability in statistical and bioinformatics workflows.',
   },
   {
-    title: 'Shell + HPC',
+    title: 'Linux + HPC',
     icon: 'material-symbols:terminal-rounded',
-    details: 'Daily Linux user with scripting and HPC workflows using SLURM and Nextflow.',
+    details: 'Daily Linux user with scripting, remote systems, and HPC workflows using SLURM, Nextflow, and reproducible command-line pipelines.',
   },
   {
     title: 'Git + CI/CD',
@@ -160,13 +160,13 @@ export const cvSkills: CvSkillGroup[] = [
   {
     title: 'Web + APIs',
     icon: 'mdi:web',
-    details: 'Responsive interfaces and REST services with Astro, HTML/CSS, JavaScript, FastAPI, and lightweight deployment.',
+    details: 'Development of lightweight web tools and REST services for research and data applications using HTML/CSS, JavaScript, and FastAPI.',
   },
   {
     title: 'Systems',
     icon: 'mdi:server',
     details:
-      'Linux-based deployment for data applications, including containerized services, automation, secure remote access, and lightweight infrastructure.',
+      'Linux-based deployment for data and research applications, including containerized services, automation, secure remote access, and lightweight infrastructure.',
   },
 ];
 

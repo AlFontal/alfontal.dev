@@ -1352,7 +1352,7 @@ input {
 }
 
 .cv-summary-lead {
-  max-width: min(58ch, 100%);
+  max-width: min(80ch, 100%);
   color: var(--ink-soft);
   font-size: clamp(1rem, 0.97rem + 0.22vw, 1.12rem);
   line-height: 1.62;

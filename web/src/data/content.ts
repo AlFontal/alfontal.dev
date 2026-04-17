@@ -110,13 +110,13 @@ export const socialLinks: SocialLink[] = [
 
 export const homeHero: HomeHero = {
   name: 'Alejandro Fontal',
-  availability: 'Barcelona-based data scientist working across health, environmental, and omics data.',
+  availability: 'I’m a data scientist based in Barcelona, working mostly on health, environmental, and omics data. See my CV for full professional background.',
   tagline:
-    'I work on reproducible analyses, scientific software, and data products that make complex evidence easier to inspect and use.',
+    'I use this site for projects, writing, publications, and whatever I’m building or thinking about lately, with the occasional rabbit hole.',
   cards: [
-    { title: 'Data Science', subtitle: 'time-series epidemiology, statistical modeling, machine learning' },
-    { title: 'Bioinformatics', subtitle: 'long-read metagenomics, sequence analysis, reproducible pipelines' },
-    { title: 'Software', subtitle: 'packages, web tools, APIs, and research workflows' },
+    { title: 'Data Science', subtitle: 'Applied ML/AI, time series, spatial analysis, statistics, and data visualization' },
+    { title: 'Bioinformatics', subtitle: 'metagenomics, sequence analysis, reproducible pipelines' },
+    { title: 'Software', subtitle: 'packages, web tools, APIs, research workflows, data engineering' },
   ],
 };
 
@@ -131,15 +131,15 @@ export const homeAnchorCards: HomeAnchorCard[] = [
   },
   {
     id: 'projects',
-    title: 'Selected Projects',
-    description: 'Open repositories, dashboards, and small systems that show how I design, ship, and document technical work.',
+    title: 'Projects & Code',
+    description: 'Mostly open-source contributions in the form of dashboards, apps, and small systems.',
     linkLabel: 'Browse selected work',
     linkHref: '/projects',
   },
   {
     id: 'blog',
-    title: 'Notebook Essays',
-    description: 'Published notes where notebooks become readable posts with narrative, figures, and implementation context.',
+    title: 'Blog & Notebooks',
+    description: 'Published blog posts with a mix of technical and non-technical content, often based on rendered Jupyter notebooks.',
     linkLabel: 'Read notebook essays',
     linkHref: '/blog',
   },
@@ -168,12 +168,13 @@ export const educationTimeline: EducationTimelineItem[] = [
 ];
 
 export const interestTags = [
-  'Time-Series Analysis',
+  'Machine Learning',
+  'Wearable Technologies',
+  'Health Analytics',
   'Metagenomics',
+  'Self-hosting',
   'Open Science',
-  'Epidemiology',
   'GIS & Geospatial Modeling',
-  'Scientific Software',
 ];
 
 export const blogPosts: BlogPost[] = [

@@ -192,7 +192,6 @@ The production site is therefore deployed directly from one GitHub Actions workf
 
 The repo also includes:
 
-- `web/public/CNAME` so the build declares `alfontal.dev` as the custom domain
 - `web/public/.nojekyll` so GitHub Pages serves the static output as-is
 
 If you want to deploy manually, the essential command is still:
@@ -210,6 +209,7 @@ For GitHub Pages specifically, the repository should be configured in:
 - `Pages`
 - `Build and deployment`
 - `Source: GitHub Actions`
+- `Custom domain: alfontal.dev`
 
 ## Checks
 

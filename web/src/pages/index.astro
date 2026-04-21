@@ -5,6 +5,7 @@ import {
   educationTimeline,
   homeAnchorCards,
   homeHero,
+  homePage,
   interestTags,
   socialLinks,
   siteMeta,
@@ -17,12 +18,20 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
 <BaseLayout>
   <section class="hero-grid reveal-in">
     <article class="hero-card hero-stack">
-      <p class="eyebrow">Data science · Bioinformatics · Scientific software</p>
+      <p class="eyebrow">{homePage.eyebrow}</p>
 
       <h1>{homeHero.name}</h1>
 
-      <p class="hero-note">{homeHero.availability}</p>
-      <p class="hero-intro">{homeHero.tagline}</p>
+      <p class="hero-note">
+        I’m a data scientist based in Barcelona, working mostly on health-adjacent problems, mixing environmental and omics data.
+        <br /> 
+      </p>
+      <p>
+        I use this site as a sort of public portfolio, a place to share projects, writing, publications, and whatever I’m building or thinking about lately.
+      </p> <p>
+        Check out my{' '}
+        <a href="/cv" class="hero-note-link">web CV</a>  or my <a href="https://www.linkedin.com/in/alfontal/" class="hero-note-link" target="_blank" rel="noopener noreferrer">LinkedIn profile</a> for a full professional background.
+      </p>
 
       <div class="fact-grid" aria-label="Core focus areas">
         {
@@ -37,47 +46,48 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
     </article>
 
     <aside class="portrait-panel">
-      <div class="portrait-image">
-        <Image
-          src={portraitImage}
-          alt="Alejandro Fontal hiking in front of a mountain"
-          width={720}
-          height={720}
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-          class="portrait-base"
-        />
+      <div class="portrait-stack">
+        <div class="portrait-image">
+          <Image
+            src={portraitImage}
+            alt="Alejandro Fontal hiking in front of a mountain"
+            width={720}
+            height={720}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="portrait-base"
+          />
+        </div>
+        <div class="portrait-meta-cloud">
+          <p class="portrait-contact">
+            <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a>
+          </p>
+          <ul class="portrait-socials" aria-label="Social links">
+            {
+              profileSocialLinks.map((link) => (
+                <li>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label} title={link.label}>
+                    <iconify-icon icon={link.icon} aria-hidden="true"></iconify-icon>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
-      <p class="portrait-contact">
-        <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a>
-      </p>
-      <ul class="portrait-socials" aria-label="Social links">
-        {
-          profileSocialLinks.map((link) => (
-            <li>
-              <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label} title={link.label}>
-                <iconify-icon icon={link.icon} aria-hidden="true"></iconify-icon>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
     </aside>
   </section>
 
   <section class="split-layout reveal-in">
-    <section class="block" aria-labelledby="quick-paths-heading">
-      <div class="section-head">
-        <h2 id="quick-paths-heading">Quick Paths</h2>
-        <!-- <p>A short route into the site: background, selected work, or notebook-based writing.</p> -->
-      </div>
-
+    <section class="block quick-paths-panel">
       <div class="pathway-list">
         {
-          homeAnchorCards.map((card, index) => (
+          homeAnchorCards.map((card) => (
             <article class="pathway-card" id={card.id}>
-              <span class="pathway-index">{String(index + 1).padStart(2, '0')}</span>
+              <span class="pathway-icon" aria-hidden="true">
+                <iconify-icon icon={card.icon}></iconify-icon>
+              </span>
               <div>
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
@@ -91,8 +101,7 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
 
     <aside class="block" aria-labelledby="training-heading">
       <div class="section-head">
-        <h2 id="training-heading">Academic Background</h2>
-        <p>A quick overview of my educational journey.</p>
+        <h2 id="training-heading">{homePage.academicBackgroundHeading}</h2>
       </div>
 
       <ol class="timeline">
@@ -107,8 +116,10 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
                   </div>
                   <span>{item.years}</span>
                 </header>
-                <p class="timeline-meta">{item.institution}</p>
-                <p>{item.focus}</p>
+                <p class="timeline-meta timeline-meta--institution">
+                  <iconify-icon icon="fa6-solid:building-columns" aria-hidden="true"></iconify-icon>
+                  <span>{item.institution}</span>
+                </p>
               </article>
             </li>
           ))
@@ -119,7 +130,7 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
 
   <section class="block domain-panel reveal-in" aria-labelledby="domains-heading">
     <div class="section-head">
-      <h2 id="domains-heading">Interests & Topics</h2>
+      <h2 id="domains-heading">{homePage.interestsHeading}</h2>
     </div>
     <ul class="chip-list">
       {interestTags.map((tag) => <li>{tag}</li>)}

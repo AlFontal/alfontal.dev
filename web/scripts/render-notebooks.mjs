@@ -18,6 +18,7 @@ const repoRoot = path.resolve(frameworkRoot, '..');
 const sourcePostsRoot = path.join(repoRoot, 'notebooks');
 const generatedContentRoot = path.join(frameworkRoot, 'src', 'content', 'notebooks-generated');
 const generatedManifestPath = path.join(frameworkRoot, 'src', 'generated', 'notebooks-manifest.json');
+const generatedQuartoRoot = path.join(frameworkRoot, 'src', 'generated', 'quarto-fragments');
 const generatedPublicAssetsRoot = path.join(frameworkRoot, 'public', 'assets', 'notebooks');
 
 const REQUIRED_FIELDS = ['title', 'description', 'date', 'categories', 'author', 'image'];
@@ -76,6 +77,16 @@ function rewriteRelativeReferences(markdown, assetBasePath) {
   });
 
   transformed = transformed.replace(/(<(?:img|a)\b[^>]*?\b(?:src|href)=')([^']+)('[^>]*>)/g, (_match, start, target, end) => {
+    const rewritten = rewriteUrl(target, assetBasePath);
+    return `${start}${rewritten}${end}`;
+  });
+
+  transformed = transformed.replace(/(<(?:link|script)\b[^>]*?\b(?:src|href)=")([^"]+)("[^>]*>)/g, (_match, start, target, end) => {
+    const rewritten = rewriteUrl(target, assetBasePath);
+    return `${start}${rewritten}${end}`;
+  });
+
+  transformed = transformed.replace(/(<(?:link|script)\b[^>]*?\b(?:src|href)=')([^']+)('[^>]*>)/g, (_match, start, target, end) => {
     const rewritten = rewriteUrl(target, assetBasePath);
     return `${start}${rewritten}${end}`;
   });
@@ -203,17 +214,16 @@ async function listNotebookSources() {
   return notebooks;
 }
 
-async function renderNotebookToMarkdown(notebookPath, notebookName) {
+async function renderNotebook(notebookPath, notebookName, format, outputName) {
   const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'astro-notebook-'));
   const tempNotebookPath = path.join(tmpDir, `${notebookName}.ipynb`);
-  const outputName = `${notebookName}.md`;
 
   await fs.copyFile(notebookPath, tempNotebookPath);
 
   try {
     await execFileAsync(
       'quarto',
-      ['render', `${notebookName}.ipynb`, '--to', 'gfm', '--no-execute', '--output', outputName],
+      ['render', `${notebookName}.ipynb`, '--to', format, '--no-execute', '--output', outputName],
       {
         cwd: tmpDir,
         maxBuffer: 10 * 1024 * 1024,
@@ -224,11 +234,11 @@ async function renderNotebookToMarkdown(notebookPath, notebookName) {
     throw new Error(`Quarto failed for ${notebookPath}: ${stderr}`);
   }
 
-  const markdown = await fs.readFile(path.join(tmpDir, outputName), 'utf8');
-  return { markdown, tmpDir };
+  const output = await fs.readFile(path.join(tmpDir, outputName), 'utf8');
+  return { output, tmpDir };
 }
 
-async function copyNotebookAssets(context, tmpRenderDir) {
+async function copyNotebookAssets(context, tmpRenderDirs) {
   const { sourceDir, section, notebook } = context;
   const destinationRoot = path.join(generatedPublicAssetsRoot, section, notebook);
 
@@ -248,10 +258,56 @@ async function copyNotebookAssets(context, tmpRenderDir) {
     await copyRecursive(path.join(sourceDir, entry.name), path.join(destinationRoot, entry.name));
   }
 
-  const quartoAssetsDir = path.join(tmpRenderDir, `${notebook}_files`);
-  if (await exists(quartoAssetsDir)) {
-    await copyRecursive(quartoAssetsDir, path.join(destinationRoot, `${notebook}_files`));
+  for (const tmpRenderDir of tmpRenderDirs) {
+    if (!tmpRenderDir) continue;
+    const quartoAssetsDir = path.join(tmpRenderDir, `${notebook}_files`);
+    if (await exists(quartoAssetsDir)) {
+      await copyRecursive(quartoAssetsDir, path.join(destinationRoot, `${notebook}_files`));
+    }
   }
+}
+
+function extractHeadAssets(html) {
+  const headStart = html.indexOf('<head>');
+  const headEnd = html.indexOf('</head>');
+
+  if (headStart === -1 || headEnd === -1 || headEnd <= headStart) {
+    throw new Error('Unable to locate Quarto head block.');
+  }
+
+  const head = html.slice(headStart + '<head>'.length, headEnd);
+  const styles = Array.from(head.matchAll(/<style[\s\S]*?<\/style>/g))
+    .map((match) => match[0])
+    .join('\n')
+    .trim();
+
+  const stylesheetLinks = Array.from(head.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*>/g))
+    .map((match) => match[0])
+    .filter((tag) => {
+      const lower = tag.toLowerCase();
+      if (lower.includes('id="quarto-bootstrap"')) return false;
+      if (lower.includes('libs/bootstrap/bootstrap-') && !lower.includes('bootstrap-icons.css')) return false;
+      return true;
+    })
+    .join('\n')
+    .trim();
+
+  return [styles, stylesheetLinks].filter(Boolean).join('\n').trim();
+}
+
+function extractMainInnerHtml(html) {
+  const mainStart = html.indexOf('<main ');
+  if (mainStart === -1) {
+    throw new Error('Unable to locate Quarto main content block.');
+  }
+
+  const mainTagEnd = html.indexOf('>', mainStart);
+  const mainEnd = html.indexOf('</main>', mainTagEnd);
+  if (mainTagEnd === -1 || mainEnd === -1 || mainEnd <= mainTagEnd) {
+    throw new Error('Unable to parse Quarto main content block.');
+  }
+
+  return html.slice(mainTagEnd + 1, mainEnd).trim();
 }
 
 function buildGeneratedFrontMatter(metadata, context) {
@@ -268,6 +324,7 @@ function buildGeneratedFrontMatter(metadata, context) {
     categories: metadata.categories.map((value) => String(value)),
     author: String(metadata.author),
     image: imageValue,
+    renderer: 'quarto',
     section,
     notebook,
     routePath: `/posts/${section}/${notebook}`,
@@ -276,10 +333,12 @@ function buildGeneratedFrontMatter(metadata, context) {
 
 async function cleanGeneratedOutputs() {
   await fs.rm(generatedContentRoot, { recursive: true, force: true });
+  await fs.rm(generatedQuartoRoot, { recursive: true, force: true });
   await fs.rm(generatedPublicAssetsRoot, { recursive: true, force: true });
   await fs.rm(generatedManifestPath, { force: true });
 
   await fs.mkdir(generatedContentRoot, { recursive: true });
+  await fs.mkdir(generatedQuartoRoot, { recursive: true });
   await fs.mkdir(generatedPublicAssetsRoot, { recursive: true });
   await fs.mkdir(path.dirname(generatedManifestPath), { recursive: true });
 }
@@ -305,16 +364,30 @@ async function main() {
     }
     seenRoutePaths.add(generatedFrontMatter.routePath);
 
-    const { markdown, tmpDir } = await renderNotebookToMarkdown(
+    const markdownOutputName = `${notebookContext.notebook}.md`;
+    const htmlOutputName = `${notebookContext.notebook}.html`;
+
+    const { output: markdown, tmpDir: markdownTmpDir } = await renderNotebook(
       notebookContext.sourcePath,
       notebookContext.notebook,
+      'gfm',
+      markdownOutputName,
     );
 
-    await copyNotebookAssets(notebookContext, tmpDir);
+    const { output: rawHtml, tmpDir: htmlTmpDir } = await renderNotebook(
+      notebookContext.sourcePath,
+      notebookContext.notebook,
+      'html',
+      htmlOutputName,
+    );
+
+    await copyNotebookAssets(notebookContext, [markdownTmpDir, htmlTmpDir]);
 
     const assetBasePath = `/assets/notebooks/${notebookContext.section}/${notebookContext.notebook}`;
     const strippedMarkdown = stripQuartoPrelude(markdown, generatedFrontMatter);
     const rewrittenMarkdown = rewriteRelativeReferences(strippedMarkdown, assetBasePath);
+    const rewrittenQuartoHtml = rewriteRelativeReferences(extractMainInnerHtml(rawHtml), assetBasePath);
+    const quartoStyles = rewriteRelativeReferences(extractHeadAssets(rawHtml), assetBasePath);
 
     const frontMatterYaml = YAML.stringify(generatedFrontMatter).trimEnd();
     const finalMarkdown = `---\n${frontMatterYaml}\n---\n\n${rewrittenMarkdown.trimStart()}\n`;
@@ -327,6 +400,21 @@ async function main() {
     await fs.mkdir(path.dirname(targetFile), { recursive: true });
     await fs.writeFile(targetFile, finalMarkdown, 'utf8');
 
+    const quartoTargetDir = path.join(generatedQuartoRoot, notebookContext.section);
+    const quartoHtmlFile = path.join(quartoTargetDir, `${notebookContext.notebook}.body.html`);
+    const quartoStylesFile = path.join(quartoTargetDir, `${notebookContext.notebook}.head.html`);
+
+    await fs.mkdir(quartoTargetDir, { recursive: true });
+    await fs.writeFile(quartoHtmlFile, `${rewrittenQuartoHtml}\n`, 'utf8');
+    await fs.writeFile(quartoStylesFile, quartoStyles ? `${quartoStyles}\n` : '', 'utf8');
+
+    generatedFrontMatter.quartoHtmlPath = path.relative(frameworkRoot, quartoHtmlFile).replace(/\\/g, '/');
+    generatedFrontMatter.quartoStylesPath = path.relative(frameworkRoot, quartoStylesFile).replace(/\\/g, '/');
+
+    const updatedFrontMatterYaml = YAML.stringify(generatedFrontMatter).trimEnd();
+    const updatedMarkdown = `---\n${updatedFrontMatterYaml}\n---\n\n${rewrittenMarkdown.trimStart()}\n`;
+    await fs.writeFile(targetFile, updatedMarkdown, 'utf8');
+
     manifest.push({
       section: notebookContext.section,
       notebook: notebookContext.notebook,
@@ -336,6 +424,7 @@ async function main() {
       image: generatedFrontMatter.image,
       date: generatedFrontMatter.date,
       categories: generatedFrontMatter.categories,
+      quartoHtmlPath: generatedFrontMatter.quartoHtmlPath,
     });
   }
 

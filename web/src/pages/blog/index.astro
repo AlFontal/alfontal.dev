@@ -2,7 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { blogPosts } from '../../data/content';
+import { blogPage, blogPosts } from '../../data/content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 type BlogListingItem = {
@@ -40,28 +40,14 @@ const [featuredPost, ...remainingPosts] = sortedPosts;
 const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetadata => typeof image !== 'string';
 ---
 
-<BaseLayout title="Blog" description="Research notes, coding experiments, and long-form technical posts.">
+<BaseLayout title={blogPage.seoTitle} description={blogPage.description}>
   <section class="page-intro page-intro--split reveal-in">
     <div class="section-head">
-      <p class="section-kicker">Notebook essays / technical notes</p>
-      <h1>Blog</h1>
-      <p>Notebook-first posts and longer notes, rewritten into something easier to read, cite, and revisit.</p>
+      <p class="section-kicker">{blogPage.kicker}</p>
+      <h1>{blogPage.title}</h1>
+      <p>{blogPage.intro}</p>
     </div>
 
-    <div class="page-intro-stats" aria-label="Blog overview">
-      <article>
-        <span>{sortedPosts.length}</span>
-        <p>published posts</p>
-      </article>
-      <article>
-        <span>{notebookPosts.length}</span>
-        <p>built from notebooks</p>
-      </article>
-      <article>
-        <span>{manualPosts.length}</span>
-        <p>written directly in Astro</p>
-      </article>
-    </div>
   </section>
 
   {featuredPost && (
@@ -91,10 +77,9 @@ const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetada
       </div>
 
       <article class="feature-story-body">
-        <p class="section-kicker">Latest entry</p>
+        <p class="section-kicker">{blogPage.featuredLabel}</p>
         <p class="meta-row">
           <span>{featuredPost.date}</span>
-          <span>{featuredPost.origin === 'notebook' ? 'Notebook post' : 'Astro article'}</span>
         </p>
         <h2 id="featured-post-heading">{featuredPost.title}</h2>
         <p class="feature-story-copy">{featuredPost.description}</p>
@@ -102,7 +87,7 @@ const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetada
           {featuredPost.categories.map((category) => <li>{category}</li>)}
         </ul>
         <a href={featuredPost.href} class="cta-link is-primary">
-          Read {featuredPost.origin === 'notebook' ? 'notebook post' : 'article'}
+          Open post
         </a>
       </article>
     </section>
@@ -112,23 +97,36 @@ const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetada
     {
       remainingPosts.map((post) => (
         <article class="editorial-entry">
-          <div class="editorial-entry-meta">
-            <p class="section-kicker">{post.origin === 'notebook' ? 'Notebook post' : 'Astro article'}</p>
-            <span>{post.date}</span>
-          </div>
-
           <div class="editorial-entry-body">
+            <div class="editorial-entry-meta">
+              <span>{post.date}</span>
+            </div>
             <h2>{post.title}</h2>
             <p>{post.description}</p>
+            <ul class="chip-list compact">
+              {post.categories.map((category) => <li>{category}</li>)}
+            </ul>
+            <a href={post.href} class="cta-link is-secondary">
+              Open post
+            </a>
           </div>
 
-          <ul class="chip-list compact">
-            {post.categories.map((category) => <li>{category}</li>)}
-          </ul>
-
-          <a href={post.href} class="inline-link">
-            Read {post.title}
-          </a>
+          <div class="editorial-entry-media">
+            {
+              isOptimizedImage(post.image) ? (
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={1200}
+                  height={630}
+                  loading="lazy"
+                  fetchpriority="auto"
+                />
+              ) : (
+                <img src={post.image} alt={post.title} width="1200" height="630" loading="lazy" />
+              )
+            }
+          </div>
         </article>
       ))
     }

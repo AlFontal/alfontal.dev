@@ -58,6 +58,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
         document.documentElement.dataset.theme = theme;
       })();
     </script>
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>

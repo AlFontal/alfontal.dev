@@ -1,32 +1,17 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { projects } from '../data/content';
+import { projects, projectsPage } from '../data/content';
 
 const sortedProjects = [...projects].sort((a, b) => (a.date < b.date ? 1 : -1));
 ---
 
-<BaseLayout title="Projects" description="Selected software and data projects.">
-  <section class="page-intro page-intro--split reveal-in">
+<BaseLayout title={projectsPage.seoTitle} description={projectsPage.description}>
+  <section class="page-intro reveal-in">
     <div class="section-head">
-      <p class="section-kicker">Selected builds</p>
-      <h1>Projects</h1>
-      <p>Open repositories and small systems spanning data workflows, automation, dashboards, and scientific interfaces.</p>
-    </div>
-
-    <div class="page-intro-stats" aria-label="Project overview">
-      <article>
-        <span>{sortedProjects.length}</span>
-        <p>selected repositories</p>
-      </article>
-      <article>
-        <span>{sortedProjects[0]?.date.slice(0, 4)}</span>
-        <p>most recent project year</p>
-      </article>
-      <article>
-        <span>Python-first</span>
-        <p>with dashboards, GIS, scraping, and automation</p>
-      </article>
+      <p class="section-kicker">{projectsPage.kicker}</p>
+      <h1>{projectsPage.title}</h1>
+      <p>{projectsPage.intro}</p>
     </div>
   </section>
 
@@ -55,8 +40,9 @@ const sortedProjects = [...projects].sort((a, b) => (a.date < b.date ? 1 : -1));
             <ul class="chip-list compact">
               {project.categories.map((category) => <li>{category}</li>)}
             </ul>
-            <a href={project.href} class="cta-link is-secondary" target="_blank" rel="noopener noreferrer">
-              View repository
+            <a href={project.href} class="cta-link is-secondary cta-link--repo" target="_blank" rel="noopener noreferrer">
+              <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+              <span>{projectsPage.ctaLabel}</span>
             </a>
           </div>
         </article>

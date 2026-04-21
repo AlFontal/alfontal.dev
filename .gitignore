@@ -1,4 +1,4 @@
-.DS_Store
+**/.DS_Store
 .omx
 /.luarc.json
 /.quarto
@@ -12,4 +12,7 @@ web/.astro
 web/.git.disabled
 web/src/content/notebooks-generated
 web/public/assets/notebooks
-web/src/generated/notebooks-manifest.json
+web/src/generated
+.playwright-cli/
+notebooks/**/*.html
+notebooks/**/*_files/

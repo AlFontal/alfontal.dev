@@ -64,6 +64,7 @@ export type HomeAnchorCard = {
   description: string;
   linkLabel: string;
   linkHref: string;
+  icon: string;
 };
 
 export type EducationTimelineItem = {
@@ -79,6 +80,7 @@ export type Publication = {
   authors: string;
   publication: string;
   year: number;
+  publishedOn?: string;
   categories: string[];
   doi?: string;
   pdf?: string;
@@ -112,7 +114,7 @@ export type PublicationsPage = {
     codeLabel: string;
   };
   links: {
-    doi: string;
+    journal: string;
     pdf: string;
     code: string;
   };
@@ -217,13 +219,13 @@ export const socialLinks: SocialLink[] = [
 
 export const homeHero: HomeHero = {
   name: 'Alejandro Fontal',
-  availability: 'I’m a data scientist based in Barcelona, working mostly on health, environmental, and omics data. See my CV for full professional background.',
+  availability: 'I’m a data scientist based in Barcelona, working mostly on health-adjacent, environmental, and omics data.\n See my CV for full professional background.',
   tagline:
-    'I use this site for projects, writing, publications, and whatever I’m building or thinking about lately, with the occasional rabbit hole.',
+    'I use this site as a sort of public portfolio, a place to share projects, writing, publications, and whatever I’m building or thinking about lately.',
   cards: [
     { title: 'Data Science', subtitle: 'Applied ML/AI, time series, spatial analysis, statistics, and data visualization' },
-    { title: 'Bioinformatics', subtitle: 'metagenomics, sequence analysis, reproducible pipelines' },
-    { title: 'Software', subtitle: 'packages, web tools, APIs, research workflows, data engineering' },
+    { title: 'Bioinformatics', subtitle: 'Metagenomics, sequence analysis, reproducible pipelines' },
+    { title: 'Software', subtitle: 'Packages, web tools, APIs, research workflows, data engineering' },
   ],
 };
 
@@ -232,7 +234,7 @@ export const homePage: HomePage = {
   quickPathsHeading: 'Quick Paths',
   academicBackgroundHeading: 'Academic Background',
   academicBackgroundIntro: 'A quick overview of my educational journey.',
-  interestsHeading: 'Interests & Topics',
+  interestsHeading: 'Interests',
 };
 
 export const homeAnchorCards: HomeAnchorCard[] = [
@@ -240,23 +242,26 @@ export const homeAnchorCards: HomeAnchorCard[] = [
     id: 'contact',
     title: 'Get in touch',
     description:
-      'Email is the simplest route for collaborations, research questions, or anything on the site that you want to discuss.',
+      'Email is the simplest route for collaborations, research questions, or anything you might want to reach out about.',
     linkLabel: 'Send an email',
     linkHref: 'mailto:alejandro.fontal.92@gmail.com',
+    icon: 'fa6-solid:envelope',
   },
   {
     id: 'projects',
     title: 'Projects & Code',
-    description: 'Mostly open-source contributions in the form of dashboards, apps, and small systems.',
+    description: 'A collection of mostly open-source software projects, repositories, and code snippets that I have built over the years.',
     linkLabel: 'Browse selected work',
     linkHref: '/projects',
+    icon: 'fa6-solid:terminal',
   },
   {
     id: 'blog',
-    title: 'Blog & Notebooks',
-    description: 'Published blog posts with a mix of technical and non-technical content, often based on rendered Jupyter notebooks.',
-    linkLabel: 'Read notebook essays',
+    title: 'Blog & Writing',
+    description: 'Published blog posts with a mix of technical and non-technical content, from research notes to coding experiments and reproducible notebooks.',
+    linkLabel: 'Read the blog',
     linkHref: '/blog',
+    icon: 'fa6-solid:book-open',
   },
 ];
 
@@ -277,7 +282,7 @@ export const educationTimeline: EducationTimelineItem[] = [
   {
     degree: 'BSc in Molecular Biotechnology',
     institution: 'University of Barcelona',
-    years: '2010 - 2015',
+    years: '2011 - 2015',
     focus: 'Foundations in molecular biology, systems thinking, and quantitative analysis.',
   },
 ];
@@ -286,9 +291,11 @@ export const interestTags = [
   'Machine Learning',
   'Wearable Technologies',
   'Health Analytics',
+  'T1D technology',
   'Metagenomics',
   'Self-hosting',
   'Open Science',
+  'FOSS',
   'GIS & Geospatial Modeling',
 ];
 
@@ -306,9 +313,9 @@ export const blogPosts: BlogPost[] = [
 export const blogPage: BlogPage = {
   seoTitle: 'Blog',
   description: 'Research notes, coding experiments, and long-form technical posts.',
-  kicker: 'Notebook essays / technical notes',
+  kicker: 'Writing / coding / technical notes',
   title: 'Blog',
-  intro: 'Notebook-first posts and longer notes, rewritten into something easier to read, cite, and revisit.',
+  intro: 'A mix of technical and non-technical writing, sometimes sharing reproducible code blocks.',
   stats: {
     totalLabel: 'published posts',
     notebookLabel: 'built from notebooks',
@@ -392,6 +399,7 @@ export const publications: Publication[] = [
       'Sofya Pozdniakova, Akira Uchida, Alejandro Fontal, Lidia Cañas, Samuel Santamaría, Lim Yee Hui, Irvan Luhung, Stephan C. Schuster, Xavier Rodó, Sílvia Borràs',
     publication: 'iScience',
     year: 2025,
+    publishedOn: '2025-07-01',
     categories: ['Microbiology', 'Microbiome', 'Aerobiology', 'Environmental monitoring'],
     doi: 'https://doi.org/10.1016/j.isci.2025.113015',
     pdf: 'https://www.cell.com/action/showPdf?pii=S2589-0042%2825%2901276-3',
@@ -403,6 +411,7 @@ export const publications: Publication[] = [
     authors: 'Alejandro Fontal, Sílvia Borràs, Sofya Pozdniakova, Lidia Cañas, Xavier Rodó',
     publication: 'Atmospheric Measurement Techniques',
     year: 2025,
+    publishedOn: '2025-12-02',
     categories: ['Microbiology', 'Machine Learning', 'Laser-Induced Fluorescence', 'Aerobiology'],
     doi: 'https://doi.org/10.5194/amt-18-7297-2025',
     pdf: 'https://amt.copernicus.org/articles/18/7297/2025/amt-18-7297-2025.pdf',
@@ -415,6 +424,7 @@ export const publications: Publication[] = [
       'Xavier Rodó, Sofya Pozdniakova, Sílvia Borràs, Atsushi Matsuki, Hiroshi Tanimoto, Maria-Pilar Armengol, Irina Pey, Laura Muñoz, Samuel Santamaría, Lidia Cañas, Josep-Anton Morguí, Alejandro Fontal, Roger Curcoll',
     publication: 'Proceedings of the National Academy of Sciences',
     year: 2024,
+    publishedOn: '2024-09-17',
     categories: ['Microbiology', 'Metagenomics', 'Aerobiology', 'Infectious Diseases'],
     doi: 'https://doi.org/10.1073/pnas.2404191121',
     pdf: 'https://www.pnas.org/doi/pdf/10.1073/pnas.2404191121',
@@ -427,6 +437,7 @@ export const publications: Publication[] = [
       'Xavier Rodó, Albert Navarro-Gallinad, Tomoko Kojima, Josep-Anton Morguí, Sílvia Borràs, Alejandro Fontal',
     publication: 'Environmental Research Letters',
     year: 2023,
+    publishedOn: '2023-07-01',
     categories: ['Kawasaki Disease', 'Time Series Analysis', 'Air Pollution & Health'],
     doi: 'https://doi.org/10.1088/1748-9326/acd798',
     pdf: 'https://iopscience.iop.org/article/10.1088/1748-9326/acd798/pdf',
@@ -447,6 +458,7 @@ export const publications: Publication[] = [
     authors: 'Xavier Rodó, Alejandro Fontal',
     publication: 'JAMA Network Open',
     year: 2021,
+    publishedOn: '2021-04-06',
     categories: ['COVID-19', 'Kawasaki Disease', 'Epidemiology', 'Infectious Diseases'],
     doi: 'https://doi.org/10.1001/jamanetworkopen.2021.4624',
     pdf: 'https://jamanetwork.com/journals/jamanetworkopen/articlepdf/2778186/rod_2021_ic_210055_1617035383.10445.pdf',
@@ -457,6 +469,7 @@ export const publications: Publication[] = [
       'Alejandro Fontal, Menno J. Bouma, Adrià San José, Leonardo López, Mercedes Pascual, Xavier Rodó',
     publication: 'Nature Computational Science',
     year: 2021,
+    publishedOn: '2021-10-21',
     categories: ['COVID-19', 'Time Series Analysis', 'Climate & Health', 'Infectious Diseases'],
     doi: 'https://doi.org/10.1038/s43588-021-00136-6',
     pdf: 'https://www.nature.com/articles/s43588-021-00136-6.pdf',
@@ -484,7 +497,7 @@ export const publicationsPage: PublicationsPage = {
     codeLabel: 'records with public code',
   },
   links: {
-    doi: 'DOI record',
+    journal: 'Link to journal',
     pdf: 'Open PDF',
     code: 'Code repository',
   },

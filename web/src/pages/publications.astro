@@ -1,8 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { publications } from '../data/content';
+import { publications, publicationsPage } from '../data/content';
 
-const sortedPublications = [...publications].sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
+const publicationSortValue = (value?: string, year?: number) => {
+  if (value) return new Date(value).getTime();
+  return new Date(`${year ?? 0}-01-01`).getTime();
+};
+
+const sortedPublications = [...publications].sort((a, b) => {
+  const byYear = b.year - a.year;
+  if (byYear !== 0) return byYear;
+
+  const byDate = publicationSortValue(b.publishedOn, b.year) - publicationSortValue(a.publishedOn, a.year);
+  if (byDate !== 0) return byDate;
+
+  return a.title.localeCompare(b.title);
+});
 const normalizeAuthors = (authors: string) => authors.replace(/alejandro\s+fontal/gi, 'Alejandro Fontal');
 const highlightAuthors = (authors: string) => normalizeAuthors(authors).split(/(Alejandro Fontal)/g);
 const publicationGroups = Object.entries(
@@ -15,27 +28,12 @@ const publicationGroups = Object.entries(
 ).sort((a, b) => Number(b[0]) - Number(a[0]));
 ---
 
-<BaseLayout title="Publications" description="Peer-reviewed articles, conference proceedings, and thesis work.">
-  <section class="page-intro page-intro--split reveal-in">
+<BaseLayout title={publicationsPage.seoTitle} description={publicationsPage.description}>
+  <section class="page-intro reveal-in">
     <div class="section-head">
-      <p class="section-kicker">Peer-reviewed work</p>
-      <h1>Publications</h1>
-      <p>Research output across epidemiology, aerobiology, microbiome work, and climate-health analysis.</p>
-    </div>
-
-    <div class="page-intro-stats" aria-label="Publication overview">
-      <article>
-        <span>{sortedPublications.length}</span>
-        <p>listed publications</p>
-      </article>
-      <article>
-        <span>{sortedPublications[0]?.year}</span>
-        <p>latest publication year</p>
-      </article>
-      <article>
-        <span>{sortedPublications.filter((item) => item.code).length}</span>
-        <p>records with public code</p>
-      </article>
+      <p class="section-kicker">{publicationsPage.kicker}</p>
+      <h1>{publicationsPage.title}</h1>
+      <p>{publicationsPage.intro}</p>
     </div>
   </section>
 
@@ -66,18 +64,21 @@ const publicationGroups = Object.entries(
                 </ul>
                 <div class="link-row">
                   {item.doi && (
-                    <a href={item.doi} target="_blank" rel="noopener noreferrer">
-                      DOI record
+                    <a href={item.doi} class="publication-link publication-link--journal" target="_blank" rel="noopener noreferrer">
+                      <iconify-icon icon="fa6-solid:link" aria-hidden="true"></iconify-icon>
+                      <span>{publicationsPage.links.journal}</span>
                     </a>
                   )}
                   {item.pdf && (
-                    <a href={item.pdf} target="_blank" rel="noopener noreferrer">
-                      Open PDF
+                    <a href={item.pdf} class="publication-link publication-link--pdf" target="_blank" rel="noopener noreferrer">
+                      <iconify-icon icon="fa6-solid:file-pdf" aria-hidden="true"></iconify-icon>
+                      <span>{publicationsPage.links.pdf}</span>
                     </a>
                   )}
                   {item.code && (
-                    <a href={item.code} target="_blank" rel="noopener noreferrer">
-                      Code repository
+                    <a href={item.code} class="publication-link publication-link--code" target="_blank" rel="noopener noreferrer">
+                      <iconify-icon icon={item.code.includes('github.com') ? 'fa6-brands:github' : 'fa6-solid:code'} aria-hidden="true"></iconify-icon>
+                      <span>{publicationsPage.links.code}</span>
                     </a>
                   )}
                 </div>

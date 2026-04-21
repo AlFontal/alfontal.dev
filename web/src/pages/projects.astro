@@ -18,7 +18,7 @@ const sortedProjects = [...projects].sort((a, b) => (a.date < b.date ? 1 : -1));
   <section class="project-rail reveal-in" aria-label="Projects list">
     {
       sortedProjects.map((project, index) => (
-        <article class={`project-feature ${index % 2 === 1 ? 'is-reversed' : ''}`}>
+        <article class="project-feature">
           <div class="project-feature-media">
             <Image
               src={project.image}

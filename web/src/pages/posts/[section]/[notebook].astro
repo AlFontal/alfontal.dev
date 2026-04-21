@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GiscusComments from '../../../components/GiscusComments.astro';
 
 export async function getStaticPaths() {
   const notebooks = await getCollection('notebooks');
@@ -68,4 +69,5 @@ const entryDate = entry.data.date.toISOString().slice(0, 10);
       )
     }
   </article>
+  <GiscusComments />
 </BaseLayout>

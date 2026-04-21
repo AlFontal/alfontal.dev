@@ -1,0 +1,91 @@
+---
+const repo = import.meta.env.PUBLIC_GISCUS_REPO ?? 'AlFontal/alfontal.dev';
+const repoId = import.meta.env.PUBLIC_GISCUS_REPO_ID ?? 'R_kgDOI8y_Yg';
+const category = import.meta.env.PUBLIC_GISCUS_CATEGORY ?? 'Comments';
+const categoryId = import.meta.env.PUBLIC_GISCUS_CATEGORY_ID ?? 'DIC_kwDOI8y_Ys4C7Wha';
+const mapping = import.meta.env.PUBLIC_GISCUS_MAPPING ?? 'pathname';
+const strict = import.meta.env.PUBLIC_GISCUS_STRICT ?? '1';
+const reactionsEnabled = import.meta.env.PUBLIC_GISCUS_REACTIONS_ENABLED ?? '0';
+const emitMetadata = import.meta.env.PUBLIC_GISCUS_EMIT_METADATA ?? '0';
+const inputPosition = import.meta.env.PUBLIC_GISCUS_INPUT_POSITION ?? 'top';
+const lang = import.meta.env.PUBLIC_GISCUS_LANG ?? 'en';
+---
+
+<section class="comments-panel reveal-in" aria-label="Comments">
+  <div class="comments-panel-head">
+    <h2>Comments</h2>
+    <p>Replies are powered by GitHub Discussions.</p>
+  </div>
+  <div
+    class="comments-panel-embed"
+    data-giscus-repo={repo}
+    data-giscus-repo-id={repoId}
+    data-giscus-category={category}
+    data-giscus-category-id={categoryId}
+    data-giscus-mapping={mapping}
+    data-giscus-strict={strict}
+    data-giscus-reactions-enabled={reactionsEnabled}
+    data-giscus-emit-metadata={emitMetadata}
+    data-giscus-input-position={inputPosition}
+    data-giscus-lang={lang}
+  ></div>
+  <script is:inline>
+    (() => {
+      const container = document.currentScript?.previousElementSibling;
+      if (!(container instanceof HTMLElement)) return;
+
+      const loadGiscus = () => {
+        if (container.querySelector('iframe.giscus-frame')) return;
+        if (container.querySelector('script[src="https://giscus.app/client.js"]')) return;
+
+        const theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+        const script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.async = true;
+        script.crossOrigin = 'anonymous';
+        script.setAttribute('data-repo', container.dataset.giscusRepo ?? '');
+        script.setAttribute('data-repo-id', container.dataset.giscusRepoId ?? '');
+        script.setAttribute('data-category', container.dataset.giscusCategory ?? '');
+        script.setAttribute('data-category-id', container.dataset.giscusCategoryId ?? '');
+        script.setAttribute('data-mapping', container.dataset.giscusMapping ?? 'pathname');
+        script.setAttribute('data-strict', container.dataset.giscusStrict ?? '1');
+        script.setAttribute('data-reactions-enabled', container.dataset.giscusReactionsEnabled ?? '0');
+        script.setAttribute('data-emit-metadata', container.dataset.giscusEmitMetadata ?? '0');
+        script.setAttribute('data-input-position', container.dataset.giscusInputPosition ?? 'top');
+        script.setAttribute('data-theme', theme);
+        script.setAttribute('data-lang', container.dataset.giscusLang ?? 'en');
+        script.setAttribute('data-loading', 'lazy');
+        container.append(script);
+      };
+
+      const syncGiscusTheme = () => {
+        const theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+        const iframe = container.querySelector('iframe.giscus-frame');
+
+        if (!iframe?.contentWindow) return;
+
+        iframe.contentWindow.postMessage(
+          {
+            giscus: {
+              setConfig: { theme },
+            },
+          },
+          'https://giscus.app',
+        );
+      };
+
+      const observer = new MutationObserver(() => syncGiscusTheme());
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme'],
+      });
+
+      loadGiscus();
+      window.addEventListener('load', syncGiscusTheme, { once: true });
+      document.addEventListener('astro:page-load', () => {
+        loadGiscus();
+        syncGiscusTheme();
+      });
+    })();
+  </script>
+</section>

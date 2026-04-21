@@ -73,7 +73,26 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
           </span>
         </a>
 
-        <div class="header-actions">
+        <div class="header-controls">
+          <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme">
+            <iconify-icon data-theme-icon icon="fa6-solid:moon" aria-hidden="true"></iconify-icon>
+            <span class="theme-toggle-prefix">Mode</span>
+            <span data-theme-label>Light</span>
+          </button>
+          <button
+            type="button"
+            class="menu-toggle"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="site-menu"
+            aria-label="Toggle navigation menu"
+          >
+            <iconify-icon icon="fa6-solid:bars" aria-hidden="true"></iconify-icon>
+            <span class="menu-toggle-label">Menu</span>
+          </button>
+        </div>
+
+        <div class="header-actions" id="site-menu" data-site-menu>
           <nav aria-label="Main">
             <ul class="nav-list">
               {
@@ -85,9 +104,6 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
               }
             </ul>
           </nav>
-          <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme">
-            Mode <span data-theme-label>Light</span>
-          </button>
         </div>
       </div>
     </header>
@@ -100,7 +116,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       <div class="shell site-footer-inner">
         <div class="footer-identity">
           <p class="footer-kicker">{siteMeta.masthead}</p>
-          <p>{siteMeta.footerPrompt}</p>
+          <p>{siteMeta.description}</p>
           <div class="footer-links">
             <a href={`mailto:${siteMeta.email}`}>Get in touch</a>
             <a href={siteMeta.repoUrl} target="_blank" rel="noopener noreferrer">View source code</a>
@@ -123,23 +139,65 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     <script is:inline>
       (() => {
         const root = document.documentElement;
-        const button = document.querySelector('[data-theme-toggle]');
-        const label = document.querySelector('[data-theme-label]');
+        const themeButtons = Array.from(document.querySelectorAll('[data-theme-toggle]'));
+        const themeLabels = Array.from(document.querySelectorAll('[data-theme-label]'));
+        const themeIcons = Array.from(document.querySelectorAll('[data-theme-icon]'));
 
-        if (!button || !label) return;
+        if (!themeButtons.length || !themeLabels.length) return;
 
         const applyTheme = (theme) => {
           root.dataset.theme = theme;
           localStorage.setItem('af-theme', theme);
-          label.textContent = theme === 'dark' ? 'Dark' : 'Light';
-          button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+          themeLabels.forEach((label) => {
+            label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+          });
+          themeIcons.forEach((icon) => {
+            icon.setAttribute('icon', theme === 'dark' ? 'fa6-solid:moon' : 'fa6-solid:sun');
+          });
+          themeButtons.forEach((button) => {
+            button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+          });
         };
 
         applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
 
-        button.addEventListener('click', () => {
-          const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-          applyTheme(nextTheme);
+        themeButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            applyTheme(nextTheme);
+          });
+        });
+      })();
+    </script>
+    <script is:inline>
+      (() => {
+        const menuButton = document.querySelector('[data-menu-toggle]');
+        const menu = document.querySelector('[data-site-menu]');
+        const desktopQuery = window.matchMedia('(min-width: 861px)');
+
+        if (!(menuButton instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) return;
+
+        const setMenuState = (open) => {
+          menu.classList.toggle('is-open', open);
+          menuButton.setAttribute('aria-expanded', open ? 'true' : 'false');
+          document.body.classList.toggle('menu-open', open);
+        };
+
+        setMenuState(false);
+
+        menuButton.addEventListener('click', () => {
+          const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+          setMenuState(!isOpen);
+        });
+
+        menu.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => setMenuState(false));
+        });
+
+        desktopQuery.addEventListener?.('change', (event) => {
+          if (event.matches) {
+            setMenuState(false);
+          }
         });
       })();
     </script>

@@ -36,7 +36,6 @@ const manualPosts: BlogListingItem[] = blogPosts.map((post) => ({
 }));
 
 const sortedPosts = [...manualPosts, ...notebookPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
-const [featuredPost, ...remainingPosts] = sortedPosts;
 const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetadata => typeof image !== 'string';
 ---
 
@@ -50,52 +49,9 @@ const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetada
 
   </section>
 
-  {featuredPost && (
-    <section class="feature-story reveal-in" aria-labelledby="featured-post-heading">
-      <div class="feature-story-media">
-        {
-          isOptimizedImage(featuredPost.image) ? (
-            <Image
-              src={featuredPost.image}
-              alt={featuredPost.title}
-              width={1200}
-              height={630}
-              loading="eager"
-              fetchpriority="high"
-            />
-          ) : (
-            <img
-              src={featuredPost.image}
-              alt={featuredPost.title}
-              width="1200"
-              height="630"
-              loading="eager"
-              fetchpriority="high"
-            />
-          )
-        }
-      </div>
-
-      <article class="feature-story-body">
-        <p class="section-kicker">{blogPage.featuredLabel}</p>
-        <p class="meta-row">
-          <span>{featuredPost.date}</span>
-        </p>
-        <h2 id="featured-post-heading">{featuredPost.title}</h2>
-        <p class="feature-story-copy">{featuredPost.description}</p>
-        <ul class="chip-list compact">
-          {featuredPost.categories.map((category) => <li>{category}</li>)}
-        </ul>
-        <a href={featuredPost.href} class="cta-link is-primary">
-          Open post
-        </a>
-      </article>
-    </section>
-  )}
-
   <section class="editorial-feed reveal-in" aria-label="All blog posts">
     {
-      remainingPosts.map((post) => (
+      sortedPosts.map((post, index) => (
         <article class="editorial-entry">
           <div class="editorial-entry-body">
             <div class="editorial-entry-meta">
@@ -119,11 +75,17 @@ const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetada
                   alt={post.title}
                   width={1200}
                   height={630}
-                  loading="lazy"
-                  fetchpriority="auto"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={index === 0 ? 'high' : 'auto'}
                 />
               ) : (
-                <img src={post.image} alt={post.title} width="1200" height="630" loading="lazy" />
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  width="1200"
+                  height="630"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
               )
             }
           </div>

@@ -52,7 +52,6 @@ export type HomeHero = {
 
 export type HomePage = {
   eyebrow: string;
-  quickPathsHeading: string;
   academicBackgroundHeading: string;
   academicBackgroundIntro: string;
   interestsHeading: string;
@@ -131,7 +130,6 @@ export type BlogPage = {
     notebookLabel: string;
     manualLabel: string;
   };
-  featuredLabel: string;
   notebookLabel: string;
   manualLabel: string;
 };
@@ -195,7 +193,6 @@ export const siteMeta = {
   siteUrl: 'https://alfontal.dev',
   repoUrl: 'https://github.com/AlFontal/alfontal.dev',
   email: 'alejandro.fontal.92@gmail.com',
-  footerPrompt: 'Research notes, software projects, and contact details in one place.',
 };
 
 export const navLinks: NavLink[] = [
@@ -231,7 +228,6 @@ export const homeHero: HomeHero = {
 
 export const homePage: HomePage = {
   eyebrow: 'Data science · Bioinformatics · Scientific software',
-  quickPathsHeading: 'Quick Paths',
   academicBackgroundHeading: 'Academic Background',
   academicBackgroundIntro: 'A quick overview of my educational journey.',
   interestsHeading: 'Interests',
@@ -321,7 +317,6 @@ export const blogPage: BlogPage = {
     notebookLabel: 'built from notebooks',
     manualLabel: 'written directly in Astro',
   },
-  featuredLabel: 'Latest entry',
   notebookLabel: 'Notebook post',
   manualLabel: 'Astro article',
 };
@@ -490,7 +485,7 @@ export const publicationsPage: PublicationsPage = {
   description: 'Peer-reviewed articles, conference proceedings, and thesis work.',
   kicker: 'Peer-reviewed work',
   title: 'Publications',
-  intro: 'Research output across epidemiology, aerobiology, microbiome work, and climate-health analysis.',
+  intro: 'Peer-reviewed articles, conference proceedings, and thesis work.',
   stats: {
     totalLabel: 'listed publications',
     latestYearLabel: 'latest publication year',

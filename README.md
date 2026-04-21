@@ -1,6 +1,6 @@
 # alfontal.dev <img src="web/public/assets/media/logo_alejandro.png" align="right" width="120" />
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ed83a5a9-9ce4-43dc-85b0-6c8779cc67a6/deploy-status)](https://app.netlify.com/sites/alfontal/deploys)
+[![Site status](https://github.com/AlFontal/alfontal.dev/actions/workflows/web-build.yml/badge.svg?branch=main)](https://alfontal.dev)
 
 Source for [alfontal.dev](https://alfontal.dev), a personal site built with [Astro](https://astro.build/) and a notebook publishing workflow powered by Quarto.
 
@@ -179,23 +179,16 @@ web/src/pages/blog/
 
 Deployment is currently handled by GitHub Actions and GitHub Pages.
 
-There are two workflows:
+There is one workflow:
 
 - `.github/workflows/web-build.yml`
-  - runs on pushes to `main` and on pull requests
+  - runs on pull requests, pushes to `main`, and manual `workflow_dispatch`
   - installs Node and Quarto
-  - builds the Astro site
-  - uploads `web/dist` as an artifact
+  - builds the Astro site once
+  - on `main`, uploads the GitHub Pages artifact
+  - on `main`, deploys that artifact through the native GitHub Pages Actions flow
 
-- `.github/workflows/web-deploy.yml`
-  - runs on pushes to `main`
-  - also supports manual runs through `workflow_dispatch`
-  - installs Node and Quarto
-  - builds the Astro site
-  - uploads `web/dist` as a GitHub Pages artifact
-  - deploys that artifact through the native GitHub Pages Actions flow
-
-The production site is therefore deployed directly from GitHub Actions to GitHub Pages. The source of truth stays in `main`; there is no separate published branch in the repository workflow anymore.
+The production site is therefore deployed directly from one GitHub Actions workflow to GitHub Pages. The source of truth stays in `main`; there is no separate published branch in the repository workflow anymore.
 
 The repo also includes:
 

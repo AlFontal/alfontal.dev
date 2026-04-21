@@ -5,6 +5,16 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
   build-web:
@@ -32,8 +42,21 @@ jobs:
         working-directory: web
         run: npm run build
 
-      - name: Upload web artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload GitHub Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: web-dist
           path: web/dist
+
+  deploy-web:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build-web
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

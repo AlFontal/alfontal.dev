@@ -1,0 +1,339 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { cvEducation, cvExperience, cvHeader, cvLanguages, cvPage, cvSkills, cvTagOrder } from '../data/content';
+
+const allTags = Array.from(new Set(cvExperience.flatMap((item) => item.tags)));
+allTags.sort((a, b) => {
+  const ai = cvTagOrder.indexOf(a);
+  const bi = cvTagOrder.indexOf(b);
+  if (ai === -1 && bi === -1) return a.localeCompare(b);
+  if (ai === -1) return 1;
+  if (bi === -1) return -1;
+  return ai - bi;
+});
+
+const visibleLabel = `${cvExperience.length} ${
+  cvExperience.length === 1 ? cvPage.experienceVisibleLabel.singular : cvPage.experienceVisibleLabel.plural
+}`;
+
+---
+
+<BaseLayout title={cvPage.seoTitle} description={cvPage.description}>
+  <section class="cv-hero reveal-in">
+    <div class="cv-hero-main">
+      <h1>{cvHeader.name}</h1>
+      <p class="cv-title">{cvHeader.title}</p>
+      <p class="cv-summary-lead">{cvPage.summary}</p>
+      <p class="cv-meta">
+        <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
+        <span>{cvHeader.location}</span>
+      </p>
+      <div class="cv-meta-links">
+        <a href={`mailto:${cvHeader.email}`} class="cv-contact-pill is-email">
+          <iconify-icon icon="fa6-solid:envelope" aria-hidden="true"></iconify-icon>
+          <span>{cvHeader.email}</span>
+        </a>
+        <a href={`tel:${cvHeader.phone.replace(/\s+/g, '')}`} class="cv-contact-pill is-phone">
+          <iconify-icon icon="fa6-solid:phone" aria-hidden="true"></iconify-icon>
+          <span>{cvHeader.phone}</span>
+        </a>
+        <a
+          class="cv-contact-pill is-pdf"
+          href="/assets/cv/Alejandro_Fontal_CV.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <iconify-icon icon="fa6-solid:file-pdf" aria-hidden="true"></iconify-icon>
+          <span>PDF CV</span>
+        </a>
+        <a href={cvHeader.linkedin} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-linkedin">
+          <iconify-icon icon="fa6-brands:linkedin" aria-hidden="true"></iconify-icon>
+          <span>LinkedIn</span>
+        </a>
+        <a href={cvHeader.github} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-github">
+          <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+          <span>GitHub</span>
+        </a>
+        <a href={cvHeader.gitlab} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-gitlab">
+          <iconify-icon icon="fa6-brands:gitlab" aria-hidden="true"></iconify-icon>
+          <span>GitLab</span>
+        </a>
+        <a href={cvHeader.orcid} target="_blank" rel="noopener noreferrer" class="cv-contact-pill is-orcid">
+          <iconify-icon icon="fa6-brands:orcid" aria-hidden="true"></iconify-icon>
+          <span>ORCID</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block reveal-in" aria-labelledby="cv-skills-heading">
+    <div class="section-head">
+      <h2 id="cv-skills-heading">{cvPage.skillsHeading}</h2>
+    </div>
+    <div class="cv-skill-grid">
+      {
+        cvSkills.map((skill) => (
+          <article class="cv-skill-card cv-row-surface">
+            <h3>
+              <iconify-icon icon={skill.icon} aria-hidden="true"></iconify-icon>
+              <span>{skill.title}</span>
+            </h3>
+            <p>{skill.details}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="block reveal-in" aria-labelledby="cv-experience-heading">
+    <div class="section-head">
+      <h2 id="cv-experience-heading">{cvPage.experienceHeading}</h2>
+    </div>
+
+    <div class="cv-controls">
+      <div class="cv-controls-bar">
+        <label class="cv-search" aria-label="Search experience">
+          <input
+            type="search"
+            placeholder={cvPage.searchPlaceholder}
+            aria-label={cvPage.searchPlaceholder}
+            data-cv-search
+          />
+        </label>
+
+        <details class="cv-filter-panel" data-cv-filter-panel>
+          <summary class="cv-filter-summary">
+            <span>Filter by topic</span>
+            <span class="cv-filter-count" data-cv-filter-count>0 active</span>
+          </summary>
+          <div class="cv-filter-panel-body">
+            <div class="cv-filter-group" data-cv-filters>
+              {
+                allTags.map((tag) => (
+                  <button type="button" class="cv-filter-chip" data-filter={tag} aria-pressed="false">
+                    {tag}
+                  </button>
+                ))
+              }
+              <button type="button" class="cv-filter-chip is-clear" data-filter-clear>Clear filters</button>
+            </div>
+          </div>
+        </details>
+
+        <p
+          class="cv-result"
+          data-cv-result
+          data-singular={cvPage.experienceVisibleLabel.singular}
+          data-plural={cvPage.experienceVisibleLabel.plural}
+        >
+          {visibleLabel}
+        </p>
+      </div>
+    </div>
+
+    <div class="cv-experience-list" data-cv-list>
+      {
+        cvExperience.map((item) => (
+          <article
+            class="cv-experience-entry cv-row-surface"
+            data-cv-item
+            data-tags={item.tags.join('|').toLowerCase()}
+            data-search={[item.role, item.organization, item.location, item.summary, ...item.highlights, ...item.tags]
+              .join(' ')
+              .toLowerCase()}
+          >
+            <details class="cv-disclosure cv-experience-disclosure" data-cv-expander>
+              <summary class="cv-disclosure-toggle cv-experience-toggle">
+                <span class="cv-disclosure-heading cv-disclosure-heading--experience">
+                  <span class="cv-disclosure-title-row cv-disclosure-title-row--stacked">
+                    <span class="cv-disclosure-title">{item.role}</span>
+                    <span class="cv-org cv-org-company">
+                      <iconify-icon icon="fa6-solid:building" aria-hidden="true"></iconify-icon>
+                      <span>{item.organization}</span>
+                    </span>
+                  </span>
+                  <span class="cv-disclosure-preview">{item.summary}</span>
+                </span>
+                <span class="cv-disclosure-aside cv-disclosure-aside--experience">
+                  <span class="cv-timeplace">
+                    <span>{item.date}</span>
+                    <span class="cv-location">
+                      <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
+                      <span>{item.location}</span>
+                    </span>
+                  </span>
+                  <span class="cv-disclosure-action" aria-hidden="true">
+                    <span class="cv-disclosure-state cv-disclosure-state--closed">Expand</span>
+                    <span class="cv-disclosure-state cv-disclosure-state--open">Collapse</span>
+                  </span>
+                </span>
+              </summary>
+              <div class="cv-disclosure-panel">
+                <div class="cv-disclosure-panel-inner cv-experience-panel">
+                  <ul>
+                    {item.highlights.map((point) => <li>{point}</li>)}
+                  </ul>
+                  <ul class="chip-list compact cv-tag-list">
+                    {item.tags.map((tag) => <li>{tag}</li>)}
+                  </ul>
+                </div>
+              </div>
+            </details>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="block reveal-in" aria-labelledby="cv-details-heading">
+    <div class="section-head">
+      <h2 id="cv-details-heading">{cvPage.detailsHeading}</h2>
+    </div>
+
+    <div class="cv-detail-grid">
+      <section class="cv-detail-column cv-education-panel">
+        <h3 class="cv-subsection-heading">Education</h3>
+        <div class="cv-education-list">
+          {
+            cvEducation.map((item) => (
+              <article class="cv-education-row cv-row-surface">
+                <header>
+                  <div>
+                    <h4>{item.degree}</h4>
+                    <p class="cv-org cv-org-university">
+                      <iconify-icon icon="fa6-solid:building-columns" aria-hidden="true"></iconify-icon>
+                      <span>{item.institution}</span>
+                    </p>
+                  </div>
+                  <div class="cv-timeplace">
+                    <span>{item.date}</span>
+                    <span class="cv-location">
+                      <iconify-icon icon="mdi:map-marker" aria-hidden="true"></iconify-icon>
+                      <span>{item.location}</span>
+                    </span>
+                  </div>
+                </header>
+                <ul>
+                  {item.details.map((detail) => <li>{detail}</li>)}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <aside class="cv-detail-column cv-languages-panel">
+        <h3 class="cv-subsection-heading">Languages</h3>
+        <div class="cv-languages-list">
+          {
+            cvLanguages.map((item) => (
+              <article class="cv-language-row cv-row-surface">
+                <div>
+                  <h4>{item.name}</h4>
+                  {item.notes && <span>{item.notes}</span>}
+                </div>
+                <p>{item.level}</p>
+              </article>
+            ))
+          }
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const root = document;
+      const input = root.querySelector('[data-cv-search]');
+      const result = root.querySelector('[data-cv-result]');
+      const cards = [...root.querySelectorAll('[data-cv-item]')];
+      const expanders = cards.map((card) => card.querySelector('[data-cv-expander]')).filter(Boolean);
+      const filterButtons = [...root.querySelectorAll('[data-filter]')];
+      const clearButton = root.querySelector('[data-filter-clear]');
+      const filterPanel = root.querySelector('[data-cv-filter-panel]');
+      const filterCount = root.querySelector('[data-cv-filter-count]');
+      const activeFilters = new Set();
+
+      if (!input || !result || !cards.length) return;
+
+      expanders.forEach((expander) => {
+        expander.dataset.manualOpen = expander.open ? 'true' : 'false';
+        expander.addEventListener('toggle', () => {
+          if (!input.value.trim() && activeFilters.size === 0) {
+            expander.dataset.manualOpen = expander.open ? 'true' : 'false';
+          }
+        });
+      });
+
+      const update = () => {
+        const query = String(input.value || '').trim().toLowerCase();
+        const hasActiveQuery = query.length > 0 || activeFilters.size > 0;
+        let visible = 0;
+
+        if (filterCount) {
+          filterCount.textContent = `${activeFilters.size} active`;
+        }
+
+        cards.forEach((card, index) => {
+          const searchHaystack = String(card.getAttribute('data-search') || '');
+          const tags = String(card.getAttribute('data-tags') || '');
+          const matchesQuery = !query || searchHaystack.includes(query);
+          const matchesFilter = !activeFilters.size || [...activeFilters].every((tag) => tags.includes(tag));
+          const show = matchesQuery && matchesFilter;
+          const expander = expanders[index];
+          card.hidden = !show;
+
+          if (expander) {
+            if (!show) {
+              expander.open = false;
+            } else if (hasActiveQuery) {
+              expander.open = true;
+            } else {
+              expander.open = expander.dataset.manualOpen === 'true';
+            }
+          }
+
+          if (show) visible += 1;
+        });
+
+        const singular = result.getAttribute('data-singular') || 'role visible';
+        const plural = result.getAttribute('data-plural') || 'roles visible';
+        result.textContent = `${visible} ${visible === 1 ? singular : plural}`;
+      };
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const value = String(button.getAttribute('data-filter') || '').toLowerCase();
+          if (!value) return;
+
+          if (activeFilters.has(value)) {
+            activeFilters.delete(value);
+            button.setAttribute('aria-pressed', 'false');
+            button.classList.remove('is-active');
+          } else {
+            activeFilters.add(value);
+            button.setAttribute('aria-pressed', 'true');
+            button.classList.add('is-active');
+            if (filterPanel) filterPanel.open = true;
+          }
+
+          update();
+        });
+      });
+
+      clearButton?.addEventListener('click', () => {
+        activeFilters.clear();
+        filterButtons.forEach((button) => {
+          button.setAttribute('aria-pressed', 'false');
+          button.classList.remove('is-active');
+        });
+        if (filterPanel) filterPanel.open = false;
+        input.value = '';
+        update();
+      });
+
+      input.addEventListener('input', update);
+      update();
+    })();
+  </script>
+</BaseLayout>

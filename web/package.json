@@ -1,0 +1,26 @@
+{
+  "name": "web",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "notebooks:render": "node scripts/render-notebooks.mjs",
+    "watch:notebooks": "node scripts/watch-notebooks.mjs",
+    "predev": "npm run notebooks:render",
+    "prebuild": "npm run notebooks:render",
+    "dev": "astro dev",
+    "dev:notebooks": "node scripts/dev-with-notebooks.mjs",
+    "build": "astro build",
+    "check": "node scripts/check-content-source.mjs",
+    "test": "npm run check",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.17.1",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "typescript": "^5.9.3"
+  }
+}

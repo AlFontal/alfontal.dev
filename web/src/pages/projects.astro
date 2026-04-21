@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects, projectsPage } from '../data/content';
+
+const sortedProjects = [...projects].sort((a, b) => (a.date < b.date ? 1 : -1));
+---
+
+<BaseLayout title={projectsPage.seoTitle} description={projectsPage.description}>
+  <section class="page-intro reveal-in">
+    <div class="section-head">
+      <p class="section-kicker">{projectsPage.kicker}</p>
+      <h1>{projectsPage.title}</h1>
+      <p>{projectsPage.intro}</p>
+    </div>
+  </section>
+
+  <section class="project-rail reveal-in" aria-label="Projects list">
+    {
+      sortedProjects.map((project, index) => (
+        <article class="project-feature">
+          <div class="project-feature-media">
+            <Image
+              src={project.image}
+              alt={project.title}
+              width={1200}
+              height={630}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchpriority={index === 0 ? 'high' : 'auto'}
+            />
+          </div>
+
+          <div class="project-feature-body">
+            <p class="meta-row">
+              <span>{project.date}</span>
+              <span>Repository</span>
+            </p>
+            <h2>{project.title}</h2>
+            <p>{project.description}</p>
+            <ul class="chip-list compact">
+              {project.categories.map((category) => <li>{category}</li>)}
+            </ul>
+            <a href={project.href} class="cta-link is-secondary cta-link--repo" target="_blank" rel="noopener noreferrer">
+              <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+              <span>{projectsPage.ctaLabel}</span>
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>

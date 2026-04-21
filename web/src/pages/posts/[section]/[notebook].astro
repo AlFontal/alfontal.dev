@@ -1,0 +1,73 @@
+---
+import { getCollection, getEntry, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GiscusComments from '../../../components/GiscusComments.astro';
+
+export async function getStaticPaths() {
+  const notebooks = await getCollection('notebooks');
+
+  return notebooks.map((entry) => ({
+    params: {
+      section: entry.data.section,
+      notebook: entry.data.notebook,
+    },
+    props: { entryId: entry.id },
+  }));
+}
+
+type Props = {
+  entryId: CollectionEntry<'notebooks'>['id'];
+};
+
+const { entryId } = Astro.props;
+const entry = await getEntry('notebooks', entryId);
+if (!entry) {
+  throw new Error(`Notebook entry not found for id '${entryId}'`);
+}
+
+const quartoHtmlModules = import.meta.glob('../../../generated/quarto-fragments/**/*.body.html', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+const quartoStyleModules = import.meta.glob('../../../generated/quarto-fragments/**/*.head.html', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+const quartoHtmlKey = `../../../generated/quarto-fragments/${entry.data.section}/${entry.data.notebook}.body.html`;
+const quartoStylesKey = `../../../generated/quarto-fragments/${entry.data.section}/${entry.data.notebook}.head.html`;
+const quartoHtml = typeof quartoHtmlModules[quartoHtmlKey] === 'string' ? quartoHtmlModules[quartoHtmlKey] : '';
+const quartoStyles = typeof quartoStyleModules[quartoStylesKey] === 'string' ? quartoStyleModules[quartoStylesKey] : '';
+const fallbackContent = quartoHtml ? null : await render(entry);
+const FallbackContent = fallbackContent?.Content;
+const entryDate = entry.data.date.toISOString().slice(0, 10);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  {quartoStyles && <Fragment slot="head" set:html={quartoStyles} />}
+  <article class:list={['article', 'notebook-article', 'reveal-in', quartoHtml && 'quarto-article']}>
+    {
+      quartoHtml ? (
+        <div class="notebook-content quarto-document" set:html={quartoHtml} />
+      ) : (
+        <>
+          <header class="article-header">
+            <p class="article-kicker">{entryDate} · {entry.data.author}</p>
+            <h1>{entry.data.title}</h1>
+            <p>{entry.data.description}</p>
+            <ul class="chip-list compact" aria-label="Notebook categories">
+              {entry.data.categories.map((category) => <li>{category}</li>)}
+            </ul>
+          </header>
+
+          <div class="notebook-content">
+            {FallbackContent && <FallbackContent />}
+          </div>
+        </>
+      )
+    }
+  </article>
+  <GiscusComments />
+</BaseLayout>

@@ -1,0 +1,96 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { blogPage, blogPosts } from '../../data/content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+type BlogListingItem = {
+  title: string;
+  description: string;
+  date: string;
+  categories: string[];
+  image: ImageMetadata | string;
+  href: string;
+  origin: 'manual' | 'notebook';
+};
+
+const notebookPosts: BlogListingItem[] = (await getCollection('notebooks')).map((entry) => ({
+  title: entry.data.title,
+  description: entry.data.description,
+  date: entry.data.date.toISOString().slice(0, 10),
+  categories: entry.data.categories,
+  image: entry.data.image,
+  href: entry.data.routePath,
+  origin: 'notebook',
+}));
+
+const manualPosts: BlogListingItem[] = blogPosts.map((post) => ({
+  title: post.title,
+  description: post.description,
+  date: post.date,
+  categories: post.categories,
+  image: post.image,
+  href: post.href,
+  origin: 'manual',
+}));
+
+const sortedPosts = [...manualPosts, ...notebookPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
+const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetadata => typeof image !== 'string';
+---
+
+<BaseLayout title={blogPage.seoTitle} description={blogPage.description}>
+  <section class="page-intro page-intro--split reveal-in">
+    <div class="section-head">
+      <p class="section-kicker">{blogPage.kicker}</p>
+      <h1>{blogPage.title}</h1>
+      <p>{blogPage.intro}</p>
+    </div>
+
+  </section>
+
+  <section class="editorial-feed reveal-in" aria-label="All blog posts">
+    {
+      sortedPosts.map((post, index) => (
+        <article class="editorial-entry">
+          <div class="editorial-entry-body">
+            <div class="editorial-entry-meta">
+              <span>{post.date}</span>
+            </div>
+            <h2>{post.title}</h2>
+            <p>{post.description}</p>
+            <ul class="chip-list compact">
+              {post.categories.map((category) => <li>{category}</li>)}
+            </ul>
+            <a href={post.href} class="cta-link is-secondary">
+              Open post
+            </a>
+          </div>
+
+          <div class="editorial-entry-media">
+            {
+              isOptimizedImage(post.image) ? (
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={1200}
+                  height={630}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={index === 0 ? 'high' : 'auto'}
+                />
+              ) : (
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  width="1200"
+                  height="630"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+              )
+            }
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>

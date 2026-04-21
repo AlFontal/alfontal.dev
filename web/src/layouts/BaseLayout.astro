@@ -1,0 +1,268 @@
+---
+import { Image } from 'astro:assets';
+import '../styles/global.css';
+import { navLinks, siteMeta, socialLinks } from '../data/content';
+import logoMark from '../assets/media/logo_alejandro.svg';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = siteMeta.description } = Astro.props;
+const path = Astro.url.pathname;
+const pageTitle = title ? `${title} | ${siteMeta.name}` : siteMeta.name;
+const canonical = new URL(path, siteMeta.siteUrl).toString();
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${siteMeta.siteUrl}/assets/media/og_image.png`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteMeta.siteUrl}/assets/media/og_image.png`} />
+
+    <link rel="icon" type="image/svg+xml" href="/assets/media/logo_alejandro.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js" defer></script>
+    <script
+      src="https://app.rybbit.io/api/script.js"
+      data-site-id="152655938162"
+      defer
+    ></script>
+    <script is:inline>
+      (() => {
+        const storedTheme = localStorage.getItem('af-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="shell site-header-inner">
+        <a class="site-brand" href="/">
+          <Image src={logoMark} width={44} height={44} alt="Alejandro Fontal logo" loading="eager" />
+          <span>
+            <strong>{siteMeta.name}</strong>
+            <em>{siteMeta.masthead}</em>
+          </span>
+        </a>
+
+        <div class="header-controls">
+          <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme">
+            <iconify-icon data-theme-icon icon="fa6-solid:moon" aria-hidden="true"></iconify-icon>
+            <span class="theme-toggle-prefix">Mode</span>
+            <span data-theme-label>Light</span>
+          </button>
+          <button
+            type="button"
+            class="menu-toggle"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="site-menu"
+            aria-label="Toggle navigation menu"
+          >
+            <iconify-icon icon="fa6-solid:bars" aria-hidden="true"></iconify-icon>
+            <span class="menu-toggle-label">Menu</span>
+          </button>
+        </div>
+
+        <div class="header-actions" id="site-menu" data-site-menu>
+          <nav aria-label="Main">
+            <ul class="nav-list">
+              {
+                navLinks.map((link) => (
+                  <li>
+                    <a class={isActive(link.href) ? 'is-active' : ''} href={link.href}>{link.label}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="shell page-content">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell site-footer-inner">
+        <div class="footer-identity">
+          <p class="footer-kicker">{siteMeta.masthead}</p>
+          <p>{siteMeta.description}</p>
+          <div class="footer-links">
+            <a href={`mailto:${siteMeta.email}`}>Get in touch</a>
+            <a href={siteMeta.repoUrl} target="_blank" rel="noopener noreferrer">View source code</a>
+          </div>
+        </div>
+        <ul class="social-list" aria-label="Social links">
+          {
+            socialLinks.map((link) => (
+              <li>
+                <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label} title={link.label}>
+                  <iconify-icon icon={link.icon} aria-hidden="true"></iconify-icon>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const themeButtons = Array.from(document.querySelectorAll('[data-theme-toggle]'));
+        const themeLabels = Array.from(document.querySelectorAll('[data-theme-label]'));
+        const themeIcons = Array.from(document.querySelectorAll('[data-theme-icon]'));
+
+        if (!themeButtons.length || !themeLabels.length) return;
+
+        const applyTheme = (theme) => {
+          root.dataset.theme = theme;
+          localStorage.setItem('af-theme', theme);
+          themeLabels.forEach((label) => {
+            label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+          });
+          themeIcons.forEach((icon) => {
+            icon.setAttribute('icon', theme === 'dark' ? 'fa6-solid:moon' : 'fa6-solid:sun');
+          });
+          themeButtons.forEach((button) => {
+            button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+          });
+        };
+
+        applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
+
+        themeButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            applyTheme(nextTheme);
+          });
+        });
+      })();
+    </script>
+    <script is:inline>
+      (() => {
+        const menuButton = document.querySelector('[data-menu-toggle]');
+        const menu = document.querySelector('[data-site-menu]');
+        const desktopQuery = window.matchMedia('(min-width: 861px)');
+
+        if (!(menuButton instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) return;
+
+        const setMenuState = (open) => {
+          menu.classList.toggle('is-open', open);
+          menuButton.setAttribute('aria-expanded', open ? 'true' : 'false');
+          document.body.classList.toggle('menu-open', open);
+        };
+
+        setMenuState(false);
+
+        menuButton.addEventListener('click', () => {
+          const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+          setMenuState(!isOpen);
+        });
+
+        menu.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => setMenuState(false));
+        });
+
+        desktopQuery.addEventListener?.('change', (event) => {
+          if (event.matches) {
+            setMenuState(false);
+          }
+        });
+      })();
+    </script>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const header = document.querySelector('.site-header');
+        const desktopQuery = window.matchMedia('(min-width: 861px)');
+        const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        if (!header) return;
+
+        let lastY = window.scrollY;
+        let ticking = false;
+
+        const syncHeaderOffset = () => {
+          if (!desktopQuery.matches) {
+            root.style.setProperty('--header-offset', '0px');
+            header.classList.remove('is-hidden');
+            return;
+          }
+
+          const offset = Math.ceil(header.offsetHeight + 12);
+          root.style.setProperty('--header-offset', `${offset}px`);
+        };
+
+        const updateHeader = () => {
+          const currentY = window.scrollY;
+
+          if (!desktopQuery.matches || reduceMotionQuery.matches) {
+            header.classList.remove('is-hidden');
+            lastY = currentY;
+            ticking = false;
+            return;
+          }
+
+          if (currentY <= 72 || currentY < lastY - 10) {
+            header.classList.remove('is-hidden');
+          } else if (currentY > lastY + 10) {
+            header.classList.add('is-hidden');
+          }
+
+          lastY = currentY;
+          ticking = false;
+        };
+
+        const onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(updateHeader);
+        };
+
+        const onViewportChange = () => {
+          syncHeaderOffset();
+          updateHeader();
+        };
+
+        syncHeaderOffset();
+        updateHeader();
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onViewportChange);
+        desktopQuery.addEventListener?.('change', onViewportChange);
+        reduceMotionQuery.addEventListener?.('change', onViewportChange);
+      })();
+    </script>
+  </body>
+</html>

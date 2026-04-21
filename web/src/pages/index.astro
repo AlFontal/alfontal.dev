@@ -1,0 +1,139 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  educationTimeline,
+  homeAnchorCards,
+  homeHero,
+  homePage,
+  interestTags,
+  socialLinks,
+  siteMeta,
+} from '../data/content';
+import portraitImage from '../assets/media/alejandro_hike_profile.jpg';
+
+const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
+---
+
+<BaseLayout>
+  <section class="hero-grid reveal-in">
+    <article class="hero-card hero-stack">
+      <p class="eyebrow">{homePage.eyebrow}</p>
+
+      <h1>{homeHero.name}</h1>
+
+      <p class="hero-note">
+        I’m a data scientist based in Barcelona, working mostly on health-adjacent problems, mixing environmental and omics data.
+        <br /> 
+      </p>
+      <p>
+        I use this site as a sort of public portfolio, a place to share projects, writing, publications, and whatever I’m building or thinking about lately.
+      </p> <p>
+        Check out my{' '}
+        <a href="/cv" class="hero-note-link">web CV</a>  or my <a href="https://www.linkedin.com/in/alfontal/" class="hero-note-link" target="_blank" rel="noopener noreferrer">LinkedIn profile</a> for a full professional background.
+      </p>
+
+      <div class="fact-grid" aria-label="Core focus areas">
+        {
+          homeHero.cards.map((card) => (
+            <article class="fact-card">
+              <h2>{card.title}</h2>
+              <p>{card.subtitle}</p>
+            </article>
+          ))
+        }
+      </div>
+    </article>
+
+    <aside class="portrait-panel">
+      <div class="portrait-stack">
+        <div class="portrait-image">
+          <Image
+            src={portraitImage}
+            alt="Alejandro Fontal hiking in front of a mountain"
+            width={720}
+            height={720}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="portrait-base"
+          />
+        </div>
+        <div class="portrait-meta-cloud">
+          <p class="portrait-contact">
+            <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a>
+          </p>
+          <ul class="portrait-socials" aria-label="Social links">
+            {
+              profileSocialLinks.map((link) => (
+                <li>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label} title={link.label}>
+                    <iconify-icon icon={link.icon} aria-hidden="true"></iconify-icon>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="split-layout reveal-in">
+    <section class="block quick-paths-panel">
+      <div class="pathway-list">
+        {
+          homeAnchorCards.map((card) => (
+            <article class="pathway-card" id={card.id}>
+              <span class="pathway-icon" aria-hidden="true">
+                <iconify-icon icon={card.icon}></iconify-icon>
+              </span>
+              <div>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+                <a href={card.linkHref} class="inline-link">{card.linkLabel}</a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <aside class="block" aria-labelledby="training-heading">
+      <div class="section-head">
+        <h2 id="training-heading">{homePage.academicBackgroundHeading}</h2>
+      </div>
+
+      <ol class="timeline">
+        {
+          educationTimeline.map((item) => (
+            <li>
+              <article class="timeline-card">
+                <header>
+                  <div>
+                    <h3>{item.degree}</h3>
+                    {item.subtitle && <p class="timeline-subtitle">{item.subtitle}</p>}
+                  </div>
+                  <span>{item.years}</span>
+                </header>
+                <p class="timeline-meta timeline-meta--institution">
+                  <iconify-icon icon="fa6-solid:building-columns" aria-hidden="true"></iconify-icon>
+                  <span>{item.institution}</span>
+                </p>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </aside>
+  </section>
+
+  <section class="block domain-panel reveal-in" aria-labelledby="domains-heading">
+    <div class="section-head">
+      <h2 id="domains-heading">{homePage.interestsHeading}</h2>
+    </div>
+    <ul class="chip-list">
+      {interestTags.map((tag) => <li>{tag}</li>)}
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,6 +1,18 @@
-.DS_Store
+**/.DS_Store
+.omx
 /.luarc.json
 /.quarto
-site/_site
-site/.quarto
-site/.luarc.json
+**/.quarto
+**/.tmp/
+**/.tmp/*
+# framework
+web/node_modules
+web/dist
+web/.astro
+web/.git.disabled
+web/src/content/notebooks-generated
+web/public/assets/notebooks
+web/src/generated
+.playwright-cli/
+notebooks/**/*.html
+notebooks/**/*_files/

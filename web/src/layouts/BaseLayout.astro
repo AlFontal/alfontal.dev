@@ -178,7 +178,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       (() => {
         const menuButton = document.querySelector('[data-menu-toggle]');
         const menu = document.querySelector('[data-site-menu]');
-        const desktopQuery = window.matchMedia('(min-width: 861px)');
+        const desktopQuery = window.matchMedia('(min-width: 981px)');
 
         if (!(menuButton instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) return;
 
@@ -210,7 +210,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       (() => {
         const root = document.documentElement;
         const header = document.querySelector('.site-header');
-        const desktopQuery = window.matchMedia('(min-width: 861px)');
+        const desktopQuery = window.matchMedia('(min-width: 981px)');
         const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
         if (!header) return;

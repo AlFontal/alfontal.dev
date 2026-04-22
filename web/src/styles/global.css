@@ -1596,6 +1596,20 @@ input {
   color: var(--ink-soft);
 }
 
+.quarto-document p + p,
+.quarto-document p + ul,
+.quarto-document p + ol,
+.quarto-document ul + p,
+.quarto-document ol + p,
+.quarto-document blockquote + p,
+.quarto-document p + blockquote {
+  margin-top: 1rem;
+}
+
+.quarto-document > p + p {
+  margin-top: 0;
+}
+
 .quarto-document .quarto-title-meta {
   display: flex;
   flex-wrap: wrap;

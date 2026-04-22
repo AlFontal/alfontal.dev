@@ -3,10 +3,13 @@ import type { ImageMetadata } from 'astro';
 import firstPostFeatured from '../assets/posts/first-post/featured.png';
 import aqiStationsScraperImage from '../assets/projects/aqi_stations_scraper.png';
 import argosExtensionsImage from '../assets/projects/argos_extensions.png';
+import environmentalDataJapanImage from '../assets/projects/environmental_data_japan.png';
+import japanIdwrDbImage from '../assets/projects/jp_idwr_db.png';
+import lifMlImage from '../assets/projects/lif_ml.png';
+import rmdVscodeImage from '../assets/projects/rmd_vscode.png';
 import sdcpyImage from '../assets/projects/sdcpy.png';
-import sdcpyAppImage from '../assets/projects/sdcpy_app.png';
+import sdcpyStudioImage from '../assets/projects/sdcpy_studio.png';
 import sugarboardImage from '../assets/projects/sugarboard.png';
-import tokyoSkylineImage from '../assets/projects/tokyo_skyline.jpg';
 
 export type NavLink = {
   label: string;
@@ -323,11 +326,43 @@ export const blogPage: BlogPage = {
 
 export const projects: Project[] = [
   {
-    title: 'Env. Data Japan',
+    title: 'RMD Notebooks VS Code',
+    description: 'Extension for working with `.rmd` and `.qmd` with VS Code (and forks) via the notebook API.',
+    date: '2026-03-22',
+    categories: ['TypeScript', 'VS Code', 'Quarto', 'RMarkdown', 'Extension'],
+    image: rmdVscodeImage,
+    href: 'https://github.com/AlFontal/rmd-notebooks-vscode',
+  },
+  {
+    title: 'SDCpy Studio',
+    description: 'FastAPI web application for running scale-dependent correlation and SDC-map analysis from a browser interface.',
+    date: '2026-02-11',
+    categories: ['Python', 'FastAPI', 'Time-Series Analysis', 'Dashboard', 'Spatial Analysis', 'Plotly'],
+    image: sdcpyStudioImage,
+    href: 'https://github.com/AlFontal/sdcpy-studio',
+  },
+  {
+    title: 'Japan IDWR DB',
+    description: 'Self-updating database of scraped Japanese NIID infectious disease surveillance records offered as Python package and DuckDB database.',
+    date: '2026-02-03',
+    categories: ['Python', 'Epidemiology', 'Database', 'Japan', 'Data Engineering', 'Scraping'],
+    image: japanIdwrDbImage,
+    href: 'https://github.com/AlFontal/jp-idwr-db',
+  },
+  {
+    title: 'LIF-based Bacterial Bioaerosol ML Classifier',
+    description: 'Bacterial discrimination in bioaerosols using laser-induced fluorescence and supervised machine learning.',
+    date: '2025-05-21',
+    categories: ['Jupyter', 'Machine Learning', 'Aerosols', 'Microbiology', 'Python'],
+    image: lifMlImage,
+    href: 'https://github.com/AlFontal/lif-bacteria-aerosols-ms',
+  },
+  {
+    title: 'Environmental Data Japan',
     description: 'Toolkit for collecting, processing, and standardizing environmental datasets for Japan.',
     date: '2022-09-01',
     categories: ['Python', 'GIS', 'Data Mining'],
-    image: tokyoSkylineImage,
+    image: environmentalDataJapanImage,
     href: 'https://github.com/AlFontal/environmental-data-japan',
   },
   {
@@ -340,9 +375,9 @@ export const projects: Project[] = [
   },
   {
     title: 'Sugarboard',
-    description: 'Streamlit dashboard for exploring Nightscout CGM time series.',
+    description: 'NiceGUI dashboard for personal CGM monitoring insights via the Nightscout API.',
     date: '2022-03-01',
-    categories: ['Python', 'Streamlit', 'API', 'Data Visualisation', 'Dashboard'],
+    categories: ['Python', 'NiceGUI', 'API', 'Data Visualisation', 'Nightscout', 'T1D'],
     image: sugarboardImage,
     href: 'https://github.com/AlFontal/sugarboard',
   },
@@ -353,14 +388,6 @@ export const projects: Project[] = [
     categories: ['Python', 'Selenium', 'Scraping', 'Data Mining'],
     image: aqiStationsScraperImage,
     href: 'https://github.com/AlFontal/aqi-stations-scraper',
-  },
-  {
-    title: 'SDCpy App',
-    description: 'Dash interface for exploring scale-dependent correlation analysis interactively.',
-    date: '2021-06-01',
-    categories: ['Python', 'Time-Series Analysis', 'Dash', 'Heroku'],
-    image: sdcpyAppImage,
-    href: 'https://github.com/AlFontal/sdcpy-app',
   },
   {
     title: 'SDCpy',

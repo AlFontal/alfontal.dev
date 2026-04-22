@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GiscusComments from '../../components/GiscusComments.astro';
+import ImageLightbox from '../../components/ImageLightbox.astro';
 import workflowImage from '../../assets/posts/first-post/workflow.png';
 ---
 
@@ -9,7 +10,7 @@ import workflowImage from '../../assets/posts/first-post/workflow.png';
   title="Publishing notebooks with Astro and Quarto"
   description="How this site turns Jupyter notebooks into published blog posts during the Astro build."
 >
-  <article class="article reveal-in">
+  <article class="article reveal-in" data-lightbox-root>
     <header class="article-header">
       <p class="article-kicker">2023-02-20 · Alejandro Fontal</p>
       <h1>Publishing notebooks with Astro and Quarto</h1>
@@ -73,5 +74,6 @@ import workflowImage from '../../assets/posts/first-post/workflow.png';
       </p>
     </section>
   </article>
+  <ImageLightbox />
   <GiscusComments />
 </BaseLayout>

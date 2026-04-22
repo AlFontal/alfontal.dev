@@ -116,10 +116,15 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       <div class="shell site-footer-inner">
         <div class="footer-identity">
           <p class="footer-kicker">{siteMeta.masthead}</p>
-          <p>{siteMeta.description}</p>
           <div class="footer-links">
-            <a href={`mailto:${siteMeta.email}`}>Get in touch</a>
-            <a href={siteMeta.repoUrl} target="_blank" rel="noopener noreferrer">View source code</a>
+            <a href={`mailto:${siteMeta.email}`}>
+              <iconify-icon icon="fa6-solid:envelope" aria-hidden="true"></iconify-icon>
+              <span>Get in touch</span>
+            </a>
+            <a href={siteMeta.repoUrl} target="_blank" rel="noopener noreferrer">
+              <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+              <span>View source code</span>
+            </a>
           </div>
         </div>
         <ul class="social-list" aria-label="Social links">
@@ -262,6 +267,72 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
         window.addEventListener('resize', onViewportChange);
         desktopQuery.addEventListener?.('change', onViewportChange);
         reduceMotionQuery.addEventListener?.('change', onViewportChange);
+      })();
+    </script>
+    <script is:inline>
+      (() => {
+        const copyButtons = Array.from(document.querySelectorAll('.code-copy-button'));
+        if (!copyButtons.length) return;
+
+        const setButtonState = (button, copied) => {
+          const icon = button.querySelector('.bi');
+          button.classList.toggle('code-copy-button-checked', copied);
+          button.setAttribute('aria-label', copied ? 'Copied' : 'Copy code');
+          button.setAttribute('title', copied ? 'Copied' : 'Copy code');
+          if (icon) {
+            icon.className = copied ? 'bi bi-clipboard-check' : 'bi bi-clipboard';
+          }
+        };
+
+        const copyText = async (text) => {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(text);
+            return;
+          }
+
+          const helper = document.createElement('textarea');
+          helper.value = text;
+          helper.setAttribute('readonly', '');
+          helper.style.position = 'absolute';
+          helper.style.left = '-9999px';
+          document.body.appendChild(helper);
+          helper.select();
+          document.execCommand('copy');
+          helper.remove();
+        };
+
+        copyButtons.forEach((button) => {
+          if (!(button instanceof HTMLButtonElement)) return;
+          setButtonState(button, false);
+
+          button.addEventListener('click', async () => {
+            const outerScaffold = button.parentElement?.cloneNode(true);
+            const code = outerScaffold instanceof HTMLElement ? outerScaffold.querySelector('code') : null;
+
+            if (code instanceof HTMLElement) {
+              Array.from(code.children).forEach((child) => {
+                const hasCodeAnnotationClass = Array.from(child.classList).some((className) =>
+                  className.startsWith('code-annotation-'),
+                );
+                if (hasCodeAnnotationClass) {
+                  child.remove();
+                }
+              });
+            }
+
+            const text = code?.textContent;
+
+            if (!text) return;
+
+            try {
+              await copyText(text);
+              setButtonState(button, true);
+              window.setTimeout(() => setButtonState(button, false), 1600);
+            } catch {
+              setButtonState(button, false);
+            }
+          });
+        });
       })();
     </script>
   </body>

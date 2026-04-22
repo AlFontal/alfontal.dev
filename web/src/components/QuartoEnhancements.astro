@@ -1,0 +1,152 @@
+---
+interface Props {
+  assetBasePath: string;
+}
+
+const { assetBasePath } = Astro.props;
+---
+
+<script is:inline define:vars={{ assetBasePath }}>
+  (() => {
+    const enhanceAnchors = () => {
+      document.querySelectorAll('.quarto-document .anchored').forEach((heading) => {
+        if (!(heading instanceof HTMLElement)) return;
+        if (heading.querySelector('.header-anchor')) return;
+
+        const anchorId = heading.dataset.anchorId || heading.id;
+        if (!anchorId) return;
+
+        if (!heading.id) {
+          heading.id = anchorId;
+        }
+
+        const anchor = document.createElement('a');
+        anchor.className = 'header-anchor';
+        anchor.href = `#${anchorId}`;
+        anchor.setAttribute('aria-label', 'Link to this section');
+        anchor.textContent = '#';
+
+        heading.append(' ', anchor);
+
+        heading.addEventListener('mouseleave', () => heading.classList.remove('reveal-anchor'));
+        anchor.addEventListener('focus', () => heading.classList.add('reveal-anchor'));
+        anchor.addEventListener('blur', () => heading.classList.remove('reveal-anchor'));
+      });
+    };
+
+    const enhanceTabsets = () => {
+      const tabsets = Array.from(document.querySelectorAll('.quarto-document .panel-tabset'));
+      if (!tabsets.length) return;
+
+      const storageKey = 'quarto-persistent-tabsets-data';
+
+      const readSettings = () => {
+        try {
+          return JSON.parse(localStorage.getItem(storageKey) || '{}');
+        } catch {
+          return {};
+        }
+      };
+
+      const writeSettings = (nextSettings) => {
+        localStorage.setItem(storageKey, JSON.stringify(nextSettings));
+      };
+
+      const activateTab = (tabset, tab) => {
+        if (!(tab instanceof HTMLElement)) return;
+
+        const tabs = Array.from(tabset.querySelectorAll('[data-bs-toggle="tab"], [role="tab"]'));
+        tabs.forEach((candidate) => {
+          if (!(candidate instanceof HTMLElement)) return;
+          const isActive = candidate === tab;
+          candidate.classList.toggle('active', isActive);
+          candidate.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          candidate.tabIndex = isActive ? 0 : -1;
+
+          const targetId =
+            candidate.getAttribute('data-bs-target')?.replace(/^#/, '') ||
+            candidate.getAttribute('href')?.split('#')[1] ||
+            candidate.getAttribute('aria-controls');
+
+          if (!targetId) return;
+
+          const panel = document.getElementById(targetId);
+          if (!(panel instanceof HTMLElement)) return;
+          panel.classList.toggle('active', isActive);
+          panel.classList.toggle('show', isActive);
+        });
+      };
+
+      const syncGroupedTabs = (groupName, labelText) => {
+        document.querySelectorAll(`.quarto-document .panel-tabset[data-group="${groupName}"]`).forEach((tabset) => {
+          const matchingTab = Array.from(tabset.querySelectorAll('[data-bs-toggle="tab"], [role="tab"]')).find((tab) => {
+            return tab instanceof HTMLElement && tab.textContent?.trim() === labelText;
+          });
+
+          if (matchingTab instanceof HTMLElement) {
+            activateTab(tabset, matchingTab);
+          }
+        });
+      };
+
+      tabsets.forEach((tabset) => {
+        const tabs = Array.from(tabset.querySelectorAll('[data-bs-toggle="tab"], [role="tab"]'));
+        if (!tabs.length) return;
+
+        tabs.forEach((tab, index) => {
+          if (!(tab instanceof HTMLElement)) return;
+
+          tab.addEventListener('click', (event) => {
+            event.preventDefault();
+            activateTab(tabset, tab);
+
+            const groupName = tabset.getAttribute('data-group');
+            const labelText = tab.textContent?.trim();
+            if (groupName && labelText) {
+              const nextSettings = readSettings();
+              nextSettings[groupName] = labelText;
+              writeSettings(nextSettings);
+              syncGroupedTabs(groupName, labelText);
+            }
+          });
+
+          if (!tab.classList.contains('active') && index === 0) {
+            tab.tabIndex = -1;
+          }
+        });
+
+        const groupName = tabset.getAttribute('data-group');
+        const savedLabel = groupName ? readSettings()[groupName] : null;
+        const savedTab = savedLabel
+          ? tabs.find((tab) => tab instanceof HTMLElement && tab.textContent?.trim() === savedLabel)
+          : null;
+        const defaultTab = savedTab || tabs.find((tab) => tab instanceof HTMLElement && tab.classList.contains('active')) || tabs[0];
+
+        if (defaultTab instanceof HTMLElement) {
+          activateTab(tabset, defaultTab);
+        }
+      });
+    };
+
+    const loadNotebookRuntime = () => {
+      if (!assetBasePath) return;
+
+      const script = document.createElement('script');
+      script.src = `${assetBasePath}/libs/bootstrap/bootstrap.min.js`;
+      script.defer = true;
+      document.head.appendChild(script);
+    };
+
+    const init = () => {
+      loadNotebookRuntime();
+      enhanceAnchors();
+      enhanceTabsets();
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init, { once: true });
+    } else {
+      init();
+    }
+  })();
+</script>

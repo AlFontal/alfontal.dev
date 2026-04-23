@@ -199,11 +199,17 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
           link.addEventListener('click', () => setMenuState(false));
         });
 
-        desktopQuery.addEventListener?.('change', (event) => {
+        const onDesktopQueryChange = (event) => {
           if (event.matches) {
             setMenuState(false);
           }
-        });
+        };
+
+        if (desktopQuery.addEventListener) {
+          desktopQuery.addEventListener('change', onDesktopQueryChange);
+        } else {
+          desktopQuery.addListener(onDesktopQueryChange);
+        }
       })();
     </script>
     <script is:inline>
@@ -211,11 +217,12 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
         const root = document.documentElement;
         const header = document.querySelector('.site-header');
         const desktopQuery = window.matchMedia('(min-width: 981px)');
-        const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
         if (!header) return;
 
-        let lastY = window.scrollY;
+        const getScrollY = () => window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+        let lastY = getScrollY();
         let ticking = false;
 
         const syncHeaderOffset = () => {
@@ -230,9 +237,9 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
         };
 
         const updateHeader = () => {
-          const currentY = window.scrollY;
+          const currentY = getScrollY();
 
-          if (!desktopQuery.matches || reduceMotionQuery.matches) {
+          if (!desktopQuery.matches) {
             header.classList.remove('is-hidden');
             lastY = currentY;
             ticking = false;
@@ -265,8 +272,11 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', onViewportChange);
-        desktopQuery.addEventListener?.('change', onViewportChange);
-        reduceMotionQuery.addEventListener?.('change', onViewportChange);
+        if (desktopQuery.addEventListener) {
+          desktopQuery.addEventListener('change', onViewportChange);
+        } else {
+          desktopQuery.addListener(onViewportChange);
+        }
       })();
     </script>
     <script is:inline>

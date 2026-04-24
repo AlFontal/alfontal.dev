@@ -545,6 +545,10 @@ figure img {
   filter: none;
 }
 
+figure.figure {
+  margin-inline: 0;
+}
+
 .giscus,
 .giscus-frame {
   width: 100%;

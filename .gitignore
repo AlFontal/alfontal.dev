@@ -16,5 +16,6 @@ web/public/assets/notebooks
 web/src/generated
 .playwright-cli/
 notebooks/**/*.html
+!notebooks/_includes/*.html
 notebooks/**/*_files/
 .playwright-mcp/*

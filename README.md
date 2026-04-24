@@ -9,7 +9,7 @@ The site mixes a few kinds of content in one static build:
 - hand-authored Astro pages for the core site
 - data-driven sections for projects, publications, CV, and homepage content
 - notebook-based blog posts rendered from `notebooks/`
-- Quarto-generated HTML fragments embedded inside the Astro shell
+- Quarto-generated standalone post pages bundled into the final site
 
 ## Repository layout
 
@@ -21,8 +21,8 @@ The site mixes a few kinds of content in one static build:
 │   │   ├── pages/            # Routes
 │   │   ├── data/             # Structured site content
 │   │   ├── content/          # Generated notebook markdown entries
-│   │   └── generated/        # Generated Quarto fragments + notebook manifest
-│   ├── public/assets/        # Static media, copied notebook assets, CV PDF
+│   │   └── generated/        # Generated notebook manifest
+│   ├── public/               # Static media plus generated Quarto post pages
 │   └── scripts/              # Build helpers, especially notebook rendering
 └── .github/workflows/        # Build and deploy automation
 ```
@@ -42,14 +42,15 @@ Most of the site is built from normal Astro pages and shared data files:
 Notebook posts take a different path:
 
 1. Source notebooks live under `notebooks/<section>/<name>.ipynb`.
+  Shared notebook-level Quarto defaults live in `notebooks/_quarto.yml`, including the default HTML ToC settings, and individual notebook front matter can still override them.
 2. `web/scripts/render-notebooks.mjs` reads the first markdown cell and extracts YAML front matter.
 3. Quarto renders each notebook twice:
    - once to `gfm` for a generated Astro content entry
-   - once to `html` for a Quarto-authored body fragment
+  - once to `html` for a published Quarto-authored post page
 4. Companion assets are copied into `web/public/assets/notebooks/...`.
-5. The generated notebook route is rendered through Astro at `/posts/<section>/<name>`.
+5. The published Quarto page is written to `web/public/posts/<section>/<name>/index.html` and served directly at `/posts/<section>/<name>/`.
 
-That setup keeps the website visually consistent while preserving Quarto features such as code formatting, richer notebook structure, and notebook-local assets.
+That setup keeps Astro focused on the main site while letting Quarto own notebook layout, ToC behavior, and wide-content rendering directly.
 
 ## Requirements
 

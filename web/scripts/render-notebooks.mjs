@@ -16,10 +16,13 @@ const frameworkRoot = path.resolve(__dirname, '..');
 const repoRoot = path.resolve(frameworkRoot, '..');
 
 const sourcePostsRoot = path.join(repoRoot, 'notebooks');
+const sharedNotebookQuartoConfigPath = path.join(sourcePostsRoot, '_quarto.yml');
+const sharedNotebookIncludesPath = path.join(sourcePostsRoot, '_includes');
 const generatedContentRoot = path.join(frameworkRoot, 'src', 'content', 'notebooks-generated');
 const generatedManifestPath = path.join(frameworkRoot, 'src', 'generated', 'notebooks-manifest.json');
-const generatedQuartoRoot = path.join(frameworkRoot, 'src', 'generated', 'quarto-fragments');
+const generatedFragmentsRoot = path.join(frameworkRoot, 'src', 'generated', 'quarto-fragments');
 const generatedPublicAssetsRoot = path.join(frameworkRoot, 'public', 'assets', 'notebooks');
+const generatedPublicPostsRoot = path.join(frameworkRoot, 'public', 'posts');
 
 const REQUIRED_FIELDS = ['title', 'description', 'date', 'categories', 'author', 'image'];
 
@@ -190,7 +193,11 @@ async function listNotebookSources() {
   const notebooks = [];
 
   for (const sectionEntry of sections.sort((a, b) => a.name.localeCompare(b.name))) {
-    if (!sectionEntry.isDirectory() || sectionEntry.name.startsWith('.')) {
+    if (
+      !sectionEntry.isDirectory() ||
+      sectionEntry.name.startsWith('.') ||
+      sectionEntry.name.startsWith('_')
+    ) {
       continue;
     }
 
@@ -233,6 +240,16 @@ async function renderNotebook(notebookPath, notebookName, format, outputName) {
     }
 
     await copyRecursive(path.join(sourceDir, entry.name), path.join(tmpDir, entry.name));
+  }
+
+  const tempQuartoConfigPath = path.join(tmpDir, '_quarto.yml');
+  if (!(await exists(tempQuartoConfigPath)) && (await exists(sharedNotebookQuartoConfigPath))) {
+    await fs.copyFile(sharedNotebookQuartoConfigPath, tempQuartoConfigPath);
+  }
+
+  const tempIncludesPath = path.join(tmpDir, '_includes');
+  if (!(await exists(tempIncludesPath)) && (await exists(sharedNotebookIncludesPath))) {
+    await copyRecursive(sharedNotebookIncludesPath, tempIncludesPath);
   }
 
   try {
@@ -282,81 +299,6 @@ async function copyNotebookAssets(context, tmpRenderDirs) {
   }
 }
 
-function extractHeadAssets(html) {
-  const headStart = html.indexOf('<head>');
-  const headEnd = html.indexOf('</head>');
-
-  if (headStart === -1 || headEnd === -1 || headEnd <= headStart) {
-    throw new Error('Unable to locate Quarto head block.');
-  }
-
-  const head = html.slice(headStart + '<head>'.length, headEnd);
-  const styles = Array.from(head.matchAll(/<style[\s\S]*?<\/style>/g))
-    .map((match) => match[0])
-    .join('\n')
-    .trim();
-
-  const stylesheetLinks = Array.from(head.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*>/g))
-    .map((match) => match[0])
-    .filter((tag) => {
-      const lower = tag.toLowerCase();
-      if (lower.includes('id="quarto-bootstrap"')) return false;
-      if (lower.includes('libs/bootstrap/bootstrap-') && !lower.includes('bootstrap-icons.css')) return false;
-      return true;
-    })
-    .join('\n')
-    .trim();
-
-  const headScripts = Array.from(head.matchAll(/<script[\s\S]*?<\/script>/g))
-    .map((match) => match[0])
-    .filter((tag) => {
-      const lower = tag.toLowerCase();
-      return (
-        lower.includes('popper') ||
-        lower.includes('tippy') ||
-        lower.includes('mathjax') ||
-        lower.includes('polyfill') ||
-        lower.includes('typesetmath') ||
-        lower.includes('window.quarto')
-      );
-    })
-    .join('\n')
-    .trim();
-
-  return [styles, stylesheetLinks, headScripts].filter(Boolean).join('\n').trim();
-}
-
-function extractMainInnerHtml(html) {
-  const mainStart = html.indexOf('<main ');
-  if (mainStart === -1) {
-    throw new Error('Unable to locate Quarto main content block.');
-  }
-
-  const mainTagEnd = html.indexOf('>', mainStart);
-  const mainEnd = html.indexOf('</main>', mainTagEnd);
-  if (mainTagEnd === -1 || mainEnd === -1 || mainEnd <= mainTagEnd) {
-    throw new Error('Unable to parse Quarto main content block.');
-  }
-
-  return html.slice(mainTagEnd + 1, mainEnd).trim();
-}
-
-function extractQuartoContentHtml(html) {
-  const contentStart = html.indexOf('<div id="quarto-content"');
-  const contentEndMarker = '</div> <!-- /content -->';
-
-  if (contentStart === -1) {
-    return extractMainInnerHtml(html);
-  }
-
-  const contentEnd = html.indexOf(contentEndMarker, contentStart);
-  if (contentEnd === -1 || contentEnd <= contentStart) {
-    throw new Error('Unable to parse Quarto content shell.');
-  }
-
-  return html.slice(contentStart, contentEnd + contentEndMarker.length).trim();
-}
-
 function buildGeneratedFrontMatter(metadata, context) {
   const { section, notebook } = context;
   const assetBasePath = `/assets/notebooks/${section}/${notebook}`;
@@ -380,14 +322,21 @@ function buildGeneratedFrontMatter(metadata, context) {
 
 async function cleanGeneratedOutputs() {
   await fs.rm(generatedContentRoot, { recursive: true, force: true });
-  await fs.rm(generatedQuartoRoot, { recursive: true, force: true });
   await fs.rm(generatedPublicAssetsRoot, { recursive: true, force: true });
+  await fs.rm(generatedPublicPostsRoot, { recursive: true, force: true });
   await fs.rm(generatedManifestPath, { force: true });
+  await fs.rm(generatedFragmentsRoot, { recursive: true, force: true });
 
   await fs.mkdir(generatedContentRoot, { recursive: true });
-  await fs.mkdir(generatedQuartoRoot, { recursive: true });
   await fs.mkdir(generatedPublicAssetsRoot, { recursive: true });
+  await fs.mkdir(generatedPublicPostsRoot, { recursive: true });
   await fs.mkdir(path.dirname(generatedManifestPath), { recursive: true });
+}
+
+async function ensureSectionListingsFile(section) {
+  const sectionDir = path.join(generatedPublicPostsRoot, section);
+  await fs.mkdir(sectionDir, { recursive: true });
+  await fs.writeFile(path.join(sectionDir, 'listings.json'), '[]\n', 'utf8');
 }
 
 async function main() {
@@ -433,8 +382,7 @@ async function main() {
     const assetBasePath = `/assets/notebooks/${notebookContext.section}/${notebookContext.notebook}`;
     const strippedMarkdown = stripQuartoPrelude(markdown, generatedFrontMatter);
     const rewrittenMarkdown = rewriteRelativeReferences(strippedMarkdown, assetBasePath);
-    const rewrittenQuartoHtml = rewriteRelativeReferences(extractQuartoContentHtml(rawHtml), assetBasePath);
-    const quartoStyles = rewriteRelativeReferences(extractHeadAssets(rawHtml), assetBasePath);
+    const rewrittenHtml = rewriteRelativeReferences(rawHtml, assetBasePath);
 
     const frontMatterYaml = YAML.stringify(generatedFrontMatter).trimEnd();
     const finalMarkdown = `---\n${frontMatterYaml}\n---\n\n${rewrittenMarkdown.trimStart()}\n`;
@@ -447,20 +395,17 @@ async function main() {
     await fs.mkdir(path.dirname(targetFile), { recursive: true });
     await fs.writeFile(targetFile, finalMarkdown, 'utf8');
 
-    const quartoTargetDir = path.join(generatedQuartoRoot, notebookContext.section);
-    const quartoHtmlFile = path.join(quartoTargetDir, `${notebookContext.notebook}.body.html`);
-    const quartoStylesFile = path.join(quartoTargetDir, `${notebookContext.notebook}.head.html`);
-
-    await fs.mkdir(quartoTargetDir, { recursive: true });
-    await fs.writeFile(quartoHtmlFile, `${rewrittenQuartoHtml}\n`, 'utf8');
-    await fs.writeFile(quartoStylesFile, quartoStyles ? `${quartoStyles}\n` : '', 'utf8');
-
-    generatedFrontMatter.quartoHtmlPath = path.relative(frameworkRoot, quartoHtmlFile).replace(/\\/g, '/');
-    generatedFrontMatter.quartoStylesPath = path.relative(frameworkRoot, quartoStylesFile).replace(/\\/g, '/');
-
-    const updatedFrontMatterYaml = YAML.stringify(generatedFrontMatter).trimEnd();
-    const updatedMarkdown = `---\n${updatedFrontMatterYaml}\n---\n\n${rewrittenMarkdown.trimStart()}\n`;
-    await fs.writeFile(targetFile, updatedMarkdown, 'utf8');
+    const publishedPostFile = path.join(
+      generatedPublicPostsRoot,
+      notebookContext.section,
+      notebookContext.notebook,
+      'index.html',
+    );
+    const publishedPostDir = path.dirname(publishedPostFile);
+    await fs.mkdir(publishedPostDir, { recursive: true });
+    await fs.writeFile(publishedPostFile, rewrittenHtml, 'utf8');
+    await fs.writeFile(path.join(publishedPostDir, 'listings.json'), '[]\n', 'utf8');
+    await ensureSectionListingsFile(notebookContext.section);
 
     manifest.push({
       section: notebookContext.section,
@@ -471,7 +416,6 @@ async function main() {
       image: generatedFrontMatter.image,
       date: generatedFrontMatter.date,
       categories: generatedFrontMatter.categories,
-      quartoHtmlPath: generatedFrontMatter.quartoHtmlPath,
     });
   }
 

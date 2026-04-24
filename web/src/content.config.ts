@@ -11,8 +11,6 @@ const notebooks = defineCollection({
     author: z.string(),
     image: z.string(),
     renderer: z.string().optional(),
-    quartoHtmlPath: z.string().optional(),
-    quartoStylesPath: z.string().optional(),
     section: z.string(),
     notebook: z.string(),
     routePath: z.string(),

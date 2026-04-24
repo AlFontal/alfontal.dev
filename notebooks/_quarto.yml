@@ -1,0 +1,25 @@
+format:
+  html:
+    theme:
+      light: litera
+      dark: darkly
+    respect-user-color-scheme: true
+    toc: true
+    toc-location: right
+    include-in-header: _includes/head.html
+    include-before-body: _includes/header.html
+    include-after-body: _includes/footer.html
+comments:
+  giscus:
+    repo: AlFontal/alfontal.dev
+    repo-id: R_kgDOI8y_Yg
+    category: Comments
+    category-id: DIC_kwDOI8y_Ys4C7Wha
+    mapping: pathname
+    reactions-enabled: false
+    loading: lazy
+    input-position: top
+    language: en
+    theme:
+      light: light
+      dark: dark

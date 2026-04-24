@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alejandro Fontal">
+<meta name="dcterms.date" content="2023-05-16">
+<meta name="description" content="Exploring vegetation and land-use patterns across Asia with Google Earth Engine.">
+
+<title>Vegetation, land use and Google’s Earth Engine API</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/clipboard/clipboard.min.js"></script>
+<script src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/popper.min.js"></script>
+<script src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/anchor.min.js"></script>
+<link href="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/bootstrap/bootstrap-edcd12c3eba23ba1c70847d0cc8d6409.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/bootstrap/bootstrap-dark-534f9e6eb4fde8fa3495dc6c45b1673d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/bootstrap/bootstrap-edcd12c3eba23ba1c70847d0cc8d6409.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="icon" type="image/svg+xml" href="/assets/media/logo_alejandro.svg">
+<link rel="stylesheet" href="/assets/quarto/af-quarto.css">
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js" defer=""></script>
+<script src="https://app.rybbit.io/api/script.js" data-site-id="152655938162" defer=""></script>
+<script src="/assets/quarto/af-quarto.js" defer=""></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#earth-engine-api" id="toc-earth-engine-api" class="nav-link" data-scroll-target="#earth-engine-api">Earth Engine API</a>
+  <ul class="collapse">
+  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
+  <li><a href="#data-selection-and-wrangling-with-earth-engine" id="toc-data-selection-and-wrangling-with-earth-engine" class="nav-link" data-scroll-target="#data-selection-and-wrangling-with-earth-engine">Data selection and wrangling with Earth Engine</a></li>
+  <li><a href="#image-collection-visualizations" id="toc-image-collection-visualizations" class="nav-link" data-scroll-target="#image-collection-visualizations">Image collection visualizations</a></li>
+  <li><a href="#computing-statistics-and-measuring-changes" id="toc-computing-statistics-and-measuring-changes" class="nav-link" data-scroll-target="#computing-statistics-and-measuring-changes">Computing statistics and measuring changes</a></li>
+  <li><a href="#land-cover" id="toc-land-cover" class="nav-link" data-scroll-target="#land-cover">Land Cover</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<a class="skip-link" href="#quarto-document-content">Skip to content</a>
+
+<header class="site-header">
+  <div class="shell site-header-inner">
+    <a class="site-brand" href="/">
+      <img src="/assets/media/logo_alejandro.svg" width="44" height="44" alt="Alejandro Fontal logo">
+      <span>
+        <strong>Alejandro Fontal</strong>
+        <em>Portfolio · Blog · CV</em>
+      </span>
+    </a>
+
+    <div class="header-controls">
+      <button type="button" class="theme-toggle quarto-color-scheme-toggle quarto-site-theme-toggle" aria-label="Toggle dark theme" aria-pressed="false">
+        <iconify-icon data-theme-icon="" icon="fa6-solid:sun" aria-hidden="true"></iconify-icon>
+        <span data-theme-label="">Light theme</span>
+      </button>
+      <button type="button" class="menu-toggle quarto-site-menu-toggle" aria-expanded="false" aria-controls="quarto-site-menu" aria-label="Toggle navigation menu">
+        <iconify-icon icon="fa6-solid:bars" aria-hidden="true"></iconify-icon>
+      </button>
+    </div>
+
+    <div class="header-actions" id="quarto-site-menu" data-site-menu="">
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="/" data-nav-link="">About</a></li>
+          <li><a href="/cv" data-nav-link="">CV</a></li>
+          <li><a href="/blog" data-nav-link="">Blog</a></li>
+          <li><a href="/projects" data-nav-link="">Projects</a></li>
+          <li><a href="/publications" data-nav-link="">Publications</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Vegetation, land use and Google’s Earth Engine API</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Remote Sensing</div>
+    <div class="quarto-category">Earth Engine</div>
+    <div class="quarto-category">GIS</div>
+    <div class="quarto-category">Land Use</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Exploring vegetation and land-use patterns across Asia with Google Earth Engine.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p><a href="https://alfontal.dev">Alejandro Fontal</a> <a href="mailto:alejandro.fontal.92@gmail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-1138-2158" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 16, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="preamble" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="preamble">Preamble</h4>
+<details>
+<summary>
+Show code imports and presets
+</summary>
+<p><br> In this section we load the necessary libraries and set the global parameters for the notebook. It’s irrelevant for the narrative of the analysis but essential for the reproducibility of the results.</p>
+<section id="imports" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="imports">Imports</h5>
+<div id="cell-5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ee</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> wxee</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotnine <span class="im">as</span> p9</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.path <span class="im">as</span> mpath</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> mtick</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely.geometry <span class="im">import</span> Polygon</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mizani.breaks <span class="im">import</span> date_breaks</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib_inline.backend_inline <span class="im">import</span> set_matplotlib_formats</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mizani.formatters <span class="im">import</span> custom_format, date_format, percent_format</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="pre-sets" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="pre-sets">Pre-sets</h5>
+<div id="cell-7" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matplotlib settings</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'font.family'</span>] <span class="op">=</span> <span class="st">'Georgia'</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'svg.fonttype'</span>] <span class="op">=</span> <span class="st">'none'</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>set_matplotlib_formats(<span class="st">'retina'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.dpi'</span>] <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotnine settings (for figures)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>p9.options.set_option(<span class="st">'base_family'</span>, <span class="st">'Georgia'</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>p9.theme_set(</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    p9.theme_bw()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.theme(panel_grid<span class="op">=</span>p9.element_blank(),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>               legend_background<span class="op">=</span>p9.element_blank(),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>               panel_grid_major<span class="op">=</span>p9.element_line(size<span class="op">=</span><span class="fl">.5</span>, linetype<span class="op">=</span><span class="st">'dashed'</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                                                alpha<span class="op">=</span><span class="fl">.15</span>, color<span class="op">=</span><span class="st">'black'</span>),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>               dpi<span class="op">=</span><span class="dv">300</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</details></section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this notebook we are going to explore the usage of Google’s Earth Engine API to visualize changes in vegetation and land use across Asia. The goal is to build a reproducible remote-sensing workflow that makes it easier to compare large-scale spatial patterns over time.</p>
+</section>
+<section id="earth-engine-api" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="earth-engine-api">Earth Engine API</h2>
+<section id="authentication" class="level3">
+<h3 class="anchored" data-anchor-id="authentication">Authentication</h3>
+<p>The first step is to authenticate the user with the Google’s Earth Engine API. This is done by running the following code, which opens up a new window in the browser where the user can authenticate with their Google account. The user should have previously registered in the Earth Engine platform as a developer.</p>
+<p>There is the option to provide only read-only access to the user’s data, but in this case we want to save the results of the analysis in the user’s Google Drive, so we need to provide full access to the user’s Google account.</p>
+<p>After the authentication step, a token is generated and stored in the user’s computer. We can now just use that token to initialize the Earth Engine API:</p>
+<div id="cell-14" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ee.Authenticate()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-15" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ee.Initialize()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>wxee.Initialize()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We should now be able to use the Earth Engine API to query the data we need with our Google account.</p>
+</section>
+<section id="data-selection-and-wrangling-with-earth-engine" class="level3">
+<h3 class="anchored" data-anchor-id="data-selection-and-wrangling-with-earth-engine">Data selection and wrangling with Earth Engine</h3>
+<p>We are going to use the <strong>MOD13A2</strong> data product, which is a 16-day composite of the <strong>Terra MODIS</strong> satellite imagery. The data is available starting from 2000-02-18 for the whole globe at a spatial resolution of 1000 m.</p>
+<p>Since we are interested in the vegetation dynamics in Asia, we are going to focus on the region between 20°N - 60°N and 78°E - 165°E. We can select this region by defining a bounding box and then filtering the data by the bounding box coordinates.</p>
+<p>The selected region looks like this:</p>
+<div id="cell-19" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>aoi <span class="op">=</span> Polygon([(<span class="dv">78</span>, <span class="dv">20</span>), (<span class="dv">78</span>, <span class="dv">55</span>), (<span class="dv">165</span>, <span class="dv">55</span>), (<span class="dv">165</span>, <span class="dv">20</span>)])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>world_gdf <span class="op">=</span> gpd.read_file(<span class="st">'../data/shapefiles/ne_50m_admin_0_countries.zip'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>(world_gdf</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> .query(<span class="st">'NAME != "Antarctica"'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a> .pipe(<span class="kw">lambda</span> dd: p9.ggplot(dd) </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.geom_map(color<span class="op">=</span><span class="st">'black'</span>, size<span class="op">=</span><span class="fl">.2</span>, alpha<span class="op">=</span><span class="fl">.6</span>) </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.scale_x_continuous(breaks<span class="op">=</span>[<span class="op">-</span><span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">100</span>],</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                                    labels<span class="op">=</span>[<span class="st">'100°W'</span>, <span class="st">'0°'</span>, <span class="st">'100°E'</span>])</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.scale_y_continuous(breaks<span class="op">=</span>[<span class="op">-</span><span class="dv">50</span>, <span class="dv">0</span>, <span class="dv">50</span>],</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                                    labels<span class="op">=</span>[<span class="st">'50°S'</span>, <span class="st">'0°'</span>, <span class="st">'50°N'</span>])</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.theme(figure_size<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.annotate(<span class="st">'rect'</span>, xmin<span class="op">=</span><span class="dv">78</span>, xmax<span class="op">=</span><span class="dv">165</span>, ymin<span class="op">=</span><span class="dv">20</span>, ymax<span class="op">=</span><span class="dv">55</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                          color<span class="op">=</span><span class="st">'red'</span>, size<span class="op">=</span><span class="fl">.8</span>, alpha<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-6-output-1.png" width="2026" height="1039" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Zooming in:</p>
+<div id="cell-21" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(world_gdf</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> .pipe(<span class="kw">lambda</span> dd: p9.ggplot(dd) </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.geom_map(color<span class="op">=</span><span class="st">'black'</span>, size<span class="op">=</span><span class="fl">.2</span>, alpha<span class="op">=</span><span class="fl">.6</span>) </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.scale_x_continuous(labels<span class="op">=</span>custom_format(<span class="st">'</span><span class="sc">{:0g}</span><span class="st">°E'</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                            limits<span class="op">=</span>(<span class="dv">78</span>, <span class="dv">165</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.scale_y_continuous(labels<span class="op">=</span>custom_format(<span class="st">'</span><span class="sc">{:0g}</span><span class="st">°N'</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                            limits<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">55</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.theme(figure_size<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.annotate(<span class="st">'rect'</span>, xmin<span class="op">=</span><span class="dv">78</span>, xmax<span class="op">=</span><span class="dv">165</span>, ymin<span class="op">=</span><span class="dv">20</span>, ymax<span class="op">=</span><span class="dv">55</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                  color<span class="op">=</span><span class="st">'red'</span>, size<span class="op">=</span><span class="fl">.8</span>, alpha<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-7-output-1.png" width="2027" height="1039" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In total, the area defined by the bounding box contains surface pixels from 20 different countries:</p>
+<div id="cell-23" class="cell" data-execution_count="137">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country <span class="kw">in</span> world_gdf.loc[world_gdf.geometry.intersects(aoi)].ADMIN.unique():</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(country)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Vietnam
+Thailand
+Taiwan
+South Korea
+Russia
+Philippines
+North Korea
+Nepal
+Mongolia
+Laos
+Kyrgyzstan
+Kazakhstan
+Japan
+India
+China
+Macao S.A.R
+Hong Kong S.A.R.
+Myanmar
+Bhutan
+Bangladesh</code></pre>
+</div>
+</div>
+<p>We’ll keep the ISO codes of those countries in a list for later use in case we need to filter the data by country later on.</p>
+<div id="cell-25" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>iso_codes <span class="op">=</span> world_gdf.loc[world_gdf.geometry.intersects(aoi)].ADM0_ISO.unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let’s now start to interact with the Earth Engine API. We first need to select the actual data product we want to use. In this case, we are going to use the <strong>MOD13A2</strong> and we’ll select the <strong>NDVI</strong> band, which is the Normalized Difference Vegetation Index:</p>
+<div id="cell-27" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>modis_ndvi <span class="op">=</span> ee.ImageCollection(<span class="st">"MODIS/006/MOD13A2"</span>).select(<span class="st">"NDVI"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can now filter by bounds to select the pixels within the bounding box we defined before (previous transformation to the Earth Engine coordinate system):</p>
+<div id="cell-29" class="cell" data-execution_count="247">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>aoi_bounds <span class="op">=</span> ee.Geometry.Rectangle(aoi.bounds)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-30" class="cell" data-execution_count="248">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>aoi_bounds <span class="op">=</span> ee.Geometry.Rectangle(aoi.bounds)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>asia_ndvi <span class="op">=</span> modis_ndvi.filterBounds(aoi_bounds)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="image-collection-visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="image-collection-visualizations">Image collection visualizations</h3>
+<p>To make sure we are selecting the correct data, we can plot an animation of the time series of the NDVI values for a single year, such as 2019. The data is available for every 16 days, so in total we will have 22 images for the year 2019:</p>
+<div id="cell-33" class="cell" data-execution_count="249">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>asia_ndvi_2019 <span class="op">=</span> asia_ndvi.filterDate(<span class="st">'2019-01-01'</span>, <span class="st">'2019-12-31'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If we now generate a visualization (defining some parameters previously), we get a link that points to the following:</p>
+<div id="cell-35" class="cell" data-hide-output="true" data-execution_count="250">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>vis_params <span class="op">=</span> {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'min'</span>: <span class="fl">0.0</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max'</span>: <span class="fl">9000.0</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'palette'</span>: [</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'FFFFFF'</span>, <span class="st">'CE7E45'</span>, <span class="st">'DF923D'</span>, <span class="st">'F1B555'</span>, <span class="st">'FCD163'</span>, <span class="st">'99B718'</span>, <span class="st">'74A901'</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'66A000'</span>, <span class="st">'529400'</span>, <span class="st">'3E8601'</span>, <span class="st">'207401'</span>, <span class="st">'056201'</span>, <span class="st">'004C00'</span>, <span class="st">'023B01'</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'012E01'</span>, <span class="st">'011D01'</span>, <span class="st">'011301'</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>gif_params <span class="op">=</span> {</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'region'</span>: aoi_bounds,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dimensions'</span>: <span class="dv">1000</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'framesPerSecond'</span>: <span class="dv">1</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'crs'</span>: <span class="st">'EPSG:3857'</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>asia_ndvi_2019.<span class="bu">map</span>(<span class="kw">lambda</span> dd: dd.visualize(<span class="op">**</span>vis_params)).getVideoThumbURL(gif_params)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="250">
+<pre><code>'https://earthengine-highvolume.googleapis.com/v1alpha/projects/earthengine-legacy/videoThumbnails/3b3324b689c895e28bd97836a74a9b89-2d7e485f3020916801793e5949a87484:getPixels'</code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/images/asia_2019_ndvi.gif" class="img-fluid figure-img"></p>
+<figcaption>NDVI images for the year 2019</figcaption>
+</figure>
+</div>
+<p>We can also use the API to directly run expensive computations which would take a long time on a local machinein Google’s servers.</p>
+<p>For example, we can compute the median NDVI per year in each pixel of the bounding box and generate a new visualization:</p>
+<div id="cell-38" class="cell" data-execution_count="202">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>gif_params[<span class="st">'region'</span>] <span class="op">=</span> ne_china_bounds</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>seasonal_medians.filterBounds(ne_china_bounds).<span class="bu">map</span>(<span class="kw">lambda</span> dd: dd.visualize(<span class="op">**</span>vis_params)).getVideoThumbURL(gif_params)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="202">
+<pre><code>'https://earthengine-highvolume.googleapis.com/v1alpha/projects/earthengine-legacy/videoThumbnails/e5b49b61cd8def840ab5e775fda66e5b-a257082415c81470ccc8e58435609072:getPixels'</code></pre>
+</div>
+</div>
+<div id="cell-39" class="cell" data-execution_count="27">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>yearly_medians <span class="op">=</span> []</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2001</span>, <span class="dv">2022</span>):</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    yearly_median <span class="op">=</span> asia_ndvi.filterDate(ee.Date.fromYMD(year, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                                         ee.Date.fromYMD(year <span class="op">+</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    yearly_medians.append(yearly_median</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                          .median()</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                          .<span class="bu">set</span>(<span class="st">"system:time_start"</span>, ee.Date.fromYMD(year, <span class="dv">1</span>, <span class="dv">1</span>)))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>yearly_medians <span class="op">=</span> ee.ImageCollection(yearly_medians)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>yearly_medians.<span class="bu">map</span>(<span class="kw">lambda</span> dd: dd.visualize(<span class="op">**</span>vis_params)).getVideoThumbURL(gif_params)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>'https://earthengine-highvolume.googleapis.com/v1alpha/projects/earthengine-legacy/videoThumbnails/2bf609ce1c11322209e3fa0097ac6407-36e1808ec3e375c536e203c8b0c116b4:getPixels'</code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/images/asia_median_ndvi.gif" class="img-fluid figure-img"></p>
+<figcaption>Median NDVI image per year (2000-2023)</figcaption>
+</figure>
+</div>
+<p>Another thing we might be more interested in doing is to observe the median seasonal cycle of the NDVI values for each pixel in the whole period since 2000.</p>
+<p>Since the NDVI values are 16 day composites and don’t match exactly with the yearly calendar, we will first assign each of the 22/23 images that each year has to a 16-day period of the year. We can then compute the median NDVI value per period and pixel and perform further computations with the data.</p>
+<p>If we do that, the resulting image is similar to the one we obtained for 2019 (as it contained a full seasonal cycle) but more smoothed out:</p>
+<div id="cell-42" class="cell" data-execution_count="201">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_period_of_year(image):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Add day of year to image."""</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    date <span class="op">=</span> ee.Date(image.get(<span class="st">'system:time_start'</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    day_of_year <span class="op">=</span> date.getRelative(<span class="st">'day'</span>, <span class="st">'year'</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    period_of_year <span class="op">=</span> day_of_year.floor().divide(<span class="dv">16</span>).add(<span class="dv">1</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image.<span class="bu">set</span>(<span class="st">'period_of_year'</span>, period_of_year)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>asia_ndvi <span class="op">=</span> asia_ndvi.<span class="bu">map</span>(add_period_of_year)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>seasonal_medians <span class="op">=</span> []</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> period <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, (<span class="dv">366</span> <span class="op">//</span> <span class="dv">16</span> <span class="op">+</span> <span class="dv">1</span>)):</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    period_median <span class="op">=</span> asia_ndvi.<span class="bu">filter</span>(ee.Filter.eq(<span class="st">'period_of_year'</span>, period))</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    seasonal_medians.append(period_median.median().<span class="bu">set</span>({<span class="st">'period'</span>: period}))</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>seasonal_medians <span class="op">=</span> ee.ImageCollection(seasonal_medians)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>(seasonal_medians</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a> .<span class="bu">map</span>(<span class="kw">lambda</span> dd: dd.visualize(<span class="op">**</span>vis_params))</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a> .getVideoThumbURL(gif_params)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/images/asia_seasonal_medians.gif" class="img-fluid figure-img"></p>
+<figcaption>Median NDVI per biweekly period of the year (2000-2023)</figcaption>
+</figure>
+</div>
+</section>
+<section id="computing-statistics-and-measuring-changes" class="level3">
+<h3 class="anchored" data-anchor-id="computing-statistics-and-measuring-changes">Computing statistics and measuring changes</h3>
+<p>While the previous visualizations are useful to get a general idea of the data, we might be more interested in computing some statistics and measuring changes in the vegetation over time that can be used in further analysis.</p>
+<p>Let’s take a look at how to do that while offseting the computation to Google’s servers.</p>
+<section id="ndvi-change-over-time" class="level4">
+<h4 class="anchored" data-anchor-id="ndvi-change-over-time">NDVI change over time</h4>
+<p>Let’s define a region of interex within the bounding box we defined before. We’ll select the area in northeastern China (with areas of Mongolia and Russia) that is one of the main sources of westerly winds that reach Japan:</p>
+<div id="cell-49" class="cell" data-execution_count="251">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ne_china <span class="op">=</span> Polygon([</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">134</span>, <span class="dv">42</span>),</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">134</span>, <span class="dv">50</span>),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">115</span>, <span class="dv">50</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">115</span>, <span class="dv">42</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>ne_china_bounds <span class="op">=</span> ee.Geometry.Rectangle(ne_china.bounds)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>(world_gdf</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a> .pipe(<span class="kw">lambda</span> dd: p9.ggplot(dd) </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.geom_map(color<span class="op">=</span><span class="st">'black'</span>, size<span class="op">=</span><span class="fl">.2</span>, alpha<span class="op">=</span><span class="fl">.6</span>) </span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.scale_x_continuous(labels<span class="op">=</span>custom_format(<span class="st">'</span><span class="sc">{:0g}</span><span class="st">°E'</span>),</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>                            limits<span class="op">=</span>(<span class="dv">78</span>, <span class="dv">165</span>))</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.scale_y_continuous(labels<span class="op">=</span>custom_format(<span class="st">'</span><span class="sc">{:0g}</span><span class="st">°N'</span>),</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>                            limits<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">55</span>))</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.theme(figure_size<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.geom_map(data<span class="op">=</span>gpd.GeoDataFrame(<span class="bu">dict</span>(geometry<span class="op">=</span>[ne_china])),</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>                  fill<span class="op">=</span><span class="va">None</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-19-output-1.png" width="2027" height="1039" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We’ll compute the mean NDVI value for the whole region for each of the periods, and store the results in a local list:</p>
+<div id="cell-51" class="cell" data-execution_count="161">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mean_ndvi(image, out_list):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    mean_ndvi <span class="op">=</span> image.reduceRegion(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        reducer<span class="op">=</span>ee.Reducer.mean(),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        geometry<span class="op">=</span>ne_china_bounds,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        scale<span class="op">=</span><span class="dv">500</span>  <span class="co"># MODIS resolution is 500m</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    ).get(<span class="st">"NDVI"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ee.List(out_list).add(ee.Dictionary({</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"system:index"</span>: image.get(<span class="st">"system:index"</span>),</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"system:time_start"</span>: image.get(<span class="st">"system:time_start"</span>),</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"system:time_end"</span>: image.get(<span class="st">"system:time_end"</span>),</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mean_ndvi"</span>: mean_ndvi</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    }))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-52" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> <span class="st">'2010-06-21'</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>end_date <span class="op">=</span> <span class="st">'2021-12-31'</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>date_range <span class="op">=</span> pd.date_range(start_date, end_date, freq<span class="op">=</span><span class="st">'16D'</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># series = defaultdict(list)</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>ne_china_ndvi <span class="op">=</span> asia_ndvi.filterBounds(ne_china_bounds)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> start, end <span class="kw">in</span> tqdm(<span class="bu">zip</span>(date_range[:<span class="op">-</span><span class="dv">1</span>], date_range[<span class="dv">1</span>:]),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                       total<span class="op">=</span><span class="bu">len</span>(date_range) <span class="op">-</span> <span class="dv">1</span>):    </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    filtered <span class="op">=</span> (ne_china_ndvi</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        .filterDate(start.strftime(<span class="st">"%Y-%m-</span><span class="sc">%d</span><span class="st">"</span>),  end.strftime(<span class="st">"%Y-%m-</span><span class="sc">%d</span><span class="st">"</span>))</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>        .first()</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    mean_ndvi <span class="op">=</span> (filtered</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>        .reduceRegion(ee.Reducer.mean(), ne_china_bounds, <span class="dv">500</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>        .get(<span class="st">"NDVI"</span>)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>        .getInfo()</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    series[<span class="st">'mean_ndvi'</span>].append(mean_ndvi)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    series[<span class="st">'date'</span>].append(start)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If we now plot the results, we can observe the clear seasonal cycle of the NDVI values:</p>
+<div id="cell-54" class="cell" data-execution_count="245">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(pd.DataFrame(series)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a> .pipe(<span class="kw">lambda</span> dd: p9.ggplot(dd)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">+</span> p9.aes(<span class="st">'date'</span>, <span class="st">'mean_ndvi'</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">+</span> p9.geom_line()</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">+</span> p9.theme(figure_size<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">2</span>))</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">+</span> p9.labs(x<span class="op">=</span><span class="st">''</span>, y<span class="op">=</span><span class="st">'Mean NDVI'</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-22-output-1.png" width="1627" height="577" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-55" class="cell" data-execution_count="184">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(series).date.<span class="bu">max</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="184">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean_ndvi</th>
+<th data-quarto-table-cell-role="th">date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>772.256545</td>
+<td>2000-02-18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1182.915976</td>
+<td>2000-03-05</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1600.821338</td>
+<td>2000-03-21</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2140.528870</td>
+<td>2000-04-06</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2542.288759</td>
+<td>2000-04-22</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">...</th>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">231</th>
+<td>2001.654737</td>
+<td>2010-04-02</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">232</th>
+<td>2475.060747</td>
+<td>2010-04-18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">233</th>
+<td>3185.733557</td>
+<td>2010-05-04</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">234</th>
+<td>4709.294367</td>
+<td>2010-05-20</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">235</th>
+<td>5955.199148</td>
+<td>2010-06-05</td>
+</tr>
+</tbody>
+</table>
+
+<p>236 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div id="cell-56" class="cell" data-execution_count="187">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(pd.DataFrame(series)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a> .assign(day_of_year<span class="op">=</span><span class="kw">lambda</span> dd: dd.date.dt.dayofyear)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a> .assign(year<span class="op">=</span><span class="kw">lambda</span> dd: dd.date.dt.year)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a> .pipe(<span class="kw">lambda</span> dd: p9.ggplot(dd)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.aes(x<span class="op">=</span><span class="st">'day_of_year'</span>, y<span class="op">=</span><span class="st">'mean_ndvi'</span>, group<span class="op">=</span><span class="st">'year'</span>, color<span class="op">=</span><span class="st">'year'</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.geom_line()</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.labs(x<span class="op">=</span><span class="st">'Day of Year'</span>, y<span class="op">=</span><span class="st">'Mean NDVI'</span>, color<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.scale_x_continuous(</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        breaks<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">32</span>, <span class="dv">60</span>, <span class="dv">91</span>, <span class="dv">121</span>, <span class="dv">152</span>, <span class="dv">182</span>, <span class="dv">213</span>, <span class="dv">244</span>, <span class="dv">274</span>, <span class="dv">305</span>, <span class="dv">335</span>],</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span>[<span class="st">'Jan'</span>, <span class="st">'Feb'</span>, <span class="st">'Mar'</span>, <span class="st">'Apr'</span>, <span class="st">'May'</span>, <span class="st">'Jun'</span>,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Jul'</span>, <span class="st">'Aug'</span>, <span class="st">'Sep'</span>, <span class="st">'Oct'</span>, <span class="st">'Nov'</span>, <span class="st">'Dec'</span>],</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                expand<span class="op">=</span>(<span class="fl">.01</span>, <span class="dv">0</span>))</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.theme(figure_size<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">3</span>),</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>               legend_position<span class="op">=</span>(<span class="fl">.775</span>, <span class="fl">.725</span>),</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>               legend_key_size<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>               legend_text<span class="op">=</span>p9.element_text(size<span class="op">=</span><span class="dv">7</span>, rotation<span class="op">=</span><span class="dv">45</span>, y<span class="op">=</span><span class="fl">3.5</span>),)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-24-output-1.png" width="1627" height="886" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="land-cover" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="land-cover">Land Cover</h3>
+<p>Using the yearly variation of the NDVI values, certain land cover types can be identified and classified. In this case, we are going to fetch a land cover product that uses the IGBP classification scheme. The data is available at a spatial resolution of 500 m and a temporal resolution of 1 year. There are 17 distinct land cover types in the dataset:</p>
+<div id="cell-59" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>igbp_classification <span class="op">=</span> {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>: <span class="st">'Evergreen Needleleaf Forests'</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>: <span class="st">'Evergreen Broadleaf Forests'</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: <span class="st">'Deciduous Needleleaf Forests'</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>: <span class="st">'Deciduous Broadleaf Forests'</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>: <span class="st">'Mixed Forests'</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>: <span class="st">'Closed Shrublands'</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">7</span>: <span class="st">'Open Shrublands'</span>,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">8</span>: <span class="st">'Woody Savannas'</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">9</span>: <span class="st">'Savannas'</span>,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">10</span>: <span class="st">'Grasslands'</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">11</span>: <span class="st">'Permanent Wetlands'</span>,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span>: <span class="st">'Croplands'</span>,</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">13</span>: <span class="st">'Urban and Built-up Lands'</span>,</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="dv">14</span>: <span class="st">'Cropland/Natural Vegetation Mosaics'</span>,</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="dv">15</span>: <span class="st">'Permanent Snow and Ice'</span>,</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="dv">16</span>: <span class="st">'Barren'</span>,</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">17</span>: <span class="st">'Water Bodies'</span>,</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We are going to download the data for the whole available period (2001 to 2020) for East Asia (roughly, the area bounded by 90E, 150E, 20N, and 60N). Since the Earth Engine requests are limited to a maximum bytes per request and the full resolution data is too big, we’ll aggregate the data to 1km resolution and download the area in 6 different chunks to process the whole dataset without exceeding the maximum bytes per request.</p>
+<div id="cell-61" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>modis_land_cover <span class="op">=</span> ee.ImageCollection(<span class="st">"MODIS/006/MCD12Q1"</span>).select(<span class="st">"LC_Type1"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the area of interest</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>aoi <span class="op">=</span> Polygon([(<span class="dv">90</span>, <span class="dv">20</span>), (<span class="dv">90</span>, <span class="dv">60</span>), (<span class="dv">150</span>, <span class="dv">60</span>), (<span class="dv">150</span>, <span class="dv">20</span>)])</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the grid size for chunking (in degrees)</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>grid_size <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a grid of latitudes and longitudes</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>lats <span class="op">=</span> np.arange(aoi.bounds[<span class="dv">1</span>], aoi.bounds[<span class="dv">3</span>], grid_size).tolist()</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>lons <span class="op">=</span> np.arange(aoi.bounds[<span class="dv">0</span>], aoi.bounds[<span class="dv">2</span>], grid_size).tolist()</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the years</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">2001</span>, <span class="dv">2021</span>))</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty dictionary to store the chunks</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>chunks <span class="op">=</span> []</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop over the years</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> years:</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Loop over the grid</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lat <span class="kw">in</span> lats:</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> lon <span class="kw">in</span> lons:</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Define the chunk bounds</span></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>            chunk_bounds <span class="op">=</span> ee.Geometry.Rectangle([lon,</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>                                                  lat,</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>                                                  lon <span class="op">+</span> grid_size,</span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>                                                  lat <span class="op">+</span> grid_size])</span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Filter the collection by date</span></span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>            start_date <span class="op">=</span> ee.Date.fromYMD(year, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>            end_date <span class="op">=</span> start_date.advance(<span class="dv">1</span>, <span class="st">'year'</span>)</span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>            yearly_image <span class="op">=</span> modis_land_cover.filterDate(start_date, end_date).first()</span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Clip the image to the chunk bounds</span></span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>            chunk_image <span class="op">=</span> yearly_image.clip(chunk_bounds)</span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Convert the chunk image to an xarray dataset</span></span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>            chunk_image_wxee <span class="op">=</span> wxee.Image(chunk_image)</span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a>                chunk_data_array <span class="op">=</span> chunk_image_wxee.to_xarray(scale<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a>                                                              crs<span class="op">=</span><span class="st">"EPSG:4326"</span>)</span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Append the chunk data array to the list</span></span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a>                chunks.append(chunk_data_array)</span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"Failed to download chunk for year </span><span class="sc">{</span>year<span class="sc">}</span><span class="ss"> at lat: </span><span class="sc">{</span>lat<span class="sc">}</span><span class="ss">, lon: </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">. Error: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can now merge the yearly chunks into a single NetCDF file per year:</p>
+<div id="cell-63" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>yearly_chunks <span class="op">=</span> []</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2001</span>, <span class="dv">2021</span>):</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    yearly_chunks.append(xr.combine_nested(chunks[i:i <span class="op">+</span> <span class="dv">6</span>], concat_dim<span class="op">=</span><span class="va">None</span>))</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    i <span class="op">+=</span> <span class="dv">6</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, year <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">range</span>(<span class="dv">2001</span>, <span class="dv">2021</span>)):</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    yearly_chunks[i].to_netcdf(<span class="ss">f'../data/modis_land_cover_</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-64" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>yearly_chunks <span class="op">=</span> []</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2001</span>, <span class="dv">2021</span>):</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    yearly_chunks.append(xr.open_dataset(<span class="ss">f'../data/modis_land_cover_</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">.nc'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>And we can combine the full dataset into a single NetCDF file too that we can read from later on in our local machine:</p>
+<div id="cell-66" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>full_yearly_land_cover <span class="op">=</span> xr.combine_nested(yearly_chunks[:<span class="dv">10</span>], concat_dim<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>full_yearly_land_cover_2 <span class="op">=</span> xr.combine_nested(yearly_chunks[<span class="dv">10</span>:], concat_dim<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>land_cover_2001_2020 <span class="op">=</span> xr.combine_nested(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    [full_yearly_land_cover, full_yearly_land_cover_2], concat_dim<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>land_cover_2001_2020.to_netcdf(<span class="st">'../data/modis_land_cover_2001_2020.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-67" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>land_cover_2001_2020 <span class="op">=</span> xr.open_dataset(<span class="st">'../data/modis_land_cover_2001_2020.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-68" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with a map</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, projection<span class="op">=</span>ccrs.AlbersEqualArea(central_longitude<span class="op">=</span><span class="dv">120</span>, central_latitude<span class="op">=</span><span class="dv">40</span>))</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>ax.set_extent([land_cover_2001_2020.x.<span class="bu">min</span>(), land_cover_2001_2020.x.<span class="bu">max</span>(),</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>               land_cover_2001_2020.y.<span class="bu">min</span>(), land_cover_2001_2020.y.<span class="bu">max</span>()],</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>               crs<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add coastlines and borders</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>borders <span class="op">=</span> cfeature.NaturalEarthFeature(</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>                    category<span class="op">=</span><span class="st">'cultural'</span>,</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>                    name<span class="op">=</span><span class="st">'admin_0_boundary_lines_land'</span>,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span><span class="st">'50m'</span>,</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>                    facecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>ax.add_feature(borders, linewidth<span class="op">=</span><span class="fl">.5</span>)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>ax.coastlines(resolution<span class="op">=</span><span class="st">'50m'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the cropland data</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>(land_cover_2001_2020</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a> .where(land_cover_2001_2020<span class="op">==</span><span class="dv">12</span>)</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a> .sel(time<span class="op">=</span><span class="st">'2001-01-01'</span>)</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a> [<span class="st">'LC_Type1'</span>]</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a> .plot</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a> .pcolormesh(<span class="st">'x'</span>, <span class="st">'y'</span>, ax<span class="op">=</span>ax, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>             cmap<span class="op">=</span><span class="st">'Greens'</span>, add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> land_cover_2001_2020.x.<span class="bu">min</span>(), land_cover_2001_2020.x.<span class="bu">max</span>()</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>ylim <span class="op">=</span> land_cover_2001_2020.y.<span class="bu">min</span>(), land_cover_2001_2020.y.<span class="bu">max</span>()</span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>rect <span class="op">=</span> mpath.Path([[xlim[<span class="dv">0</span>], ylim[<span class="dv">0</span>]],</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>                   [xlim[<span class="dv">1</span>], ylim[<span class="dv">0</span>]],</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>                   [xlim[<span class="dv">1</span>], ylim[<span class="dv">1</span>]],</span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>                   [xlim[<span class="dv">0</span>], ylim[<span class="dv">1</span>]],</span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>                   [xlim[<span class="dv">0</span>], ylim[<span class="dv">0</span>]],</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>                   ]).interpolated(<span class="dv">20</span>)</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>proj_to_data <span class="op">=</span> ccrs.PlateCarree()._as_mpl_transform(ax) <span class="op">-</span> ax.transData</span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>rect_in_target <span class="op">=</span> proj_to_data.transform_path(rect)</span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>ax.set_boundary(rect_in_target)</span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>ax.set_extent([xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], ylim[<span class="dv">0</span>] <span class="op">-</span> <span class="dv">5</span>, ylim[<span class="dv">1</span>]])</span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>gl <span class="op">=</span> ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>, linestyle<span class="op">=</span><span class="st">':'</span>)</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>gl.ylabel_style <span class="op">=</span> {<span class="st">'size'</span>: <span class="dv">10</span>}</span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>gl.xlabel_style <span class="op">=</span> {<span class="st">'size'</span>: <span class="dv">10</span>}</span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>gl.top_labels <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>gl.right_labels <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Croplands in East Asia (2001)'</span>)</span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-31-output-1.png" width="1919" height="1621" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-69" class="cell page-columns page-full" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with two subplots side by side</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">8</span>), subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.AlbersEqualArea(central_longitude<span class="op">=</span><span class="dv">120</span>, central_latitude<span class="op">=</span><span class="dv">40</span>)})</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, year <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="dv">2001</span>, <span class="dv">2020</span>]):</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    axs[i].set_extent([land_cover_2001_2020.x.<span class="bu">min</span>(), land_cover_2001_2020.x.<span class="bu">max</span>(),</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                     land_cover_2001_2020.y.<span class="bu">min</span>(), land_cover_2001_2020.y.<span class="bu">max</span>()],</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                     crs<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add coastlines and borders</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    axs[i].add_feature(borders, linewidth<span class="op">=</span><span class="fl">.5</span>)</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    axs[i].coastlines(resolution<span class="op">=</span><span class="st">'50m'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    (land_cover_2001_2020</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>     .where(land_cover_2001_2020<span class="op">==</span><span class="dv">12</span>)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>     .sel(time<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-01-01'</span>)</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>     [<span class="st">'LC_Type1'</span>]</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>     .plot</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>     .pcolormesh(<span class="st">'x'</span>, <span class="st">'y'</span>, ax<span class="op">=</span>axs[i], transform<span class="op">=</span>ccrs.PlateCarree(),</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>                 cmap<span class="op">=</span><span class="st">'Greens'</span>, add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    proj_to_data <span class="op">=</span> ccrs.PlateCarree()._as_mpl_transform(axs[i]) <span class="op">-</span> axs[i].transData</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>    rect_in_target <span class="op">=</span> proj_to_data.transform_path(rect)</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>    axs[i].set_boundary(rect_in_target)</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>    axs[i].set_extent([xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], ylim[<span class="dv">0</span>] <span class="op">-</span> <span class="dv">5</span>, ylim[<span class="dv">1</span>]])</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>    gl <span class="op">=</span> axs[i].gridlines(draw_labels<span class="op">=</span><span class="va">True</span>, linestyle<span class="op">=</span><span class="st">':'</span>, )</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>    gl.top_labels <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>    gl.right_labels <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set the plot title</span></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>    axs[i].set_title(<span class="ss">f'</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">'</span>, size<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Croplands in East Asia'</span>, size<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display page-columns page-full">
+<div class="page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-32-output-1.png" width="4770" height="2148" class="figure-img column-page-inset"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-70" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the cropland condition</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>is_cropland <span class="op">=</span> land_cover_2001_2020[<span class="st">'LC_Type1'</span>] <span class="op">==</span> <span class="dv">12</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pixels that have been croplands for the entire period (2001-2020)</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>croplands_always <span class="op">=</span> is_cropland.<span class="bu">all</span>(dim<span class="op">=</span><span class="st">'time'</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pixels that were croplands at 2001 but are not anymore</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>croplands_2001_not_now <span class="op">=</span> is_cropland.sel(time<span class="op">=</span><span class="st">'2001-01-01'</span>) <span class="op">&amp;</span> <span class="op">~</span>is_cropland.sel(time<span class="op">=</span><span class="st">'2020-01-01'</span>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Pixels that were not croplands at 2001 but are now</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>not_croplands_2001_but_now <span class="op">=</span> <span class="op">~</span>is_cropland.sel(time<span class="op">=</span><span class="st">'2001-01-01'</span>) <span class="op">&amp;</span> is_cropland.sel(time<span class="op">=</span><span class="st">'2020-01-01'</span>)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Pixels that have been croplands at some point in the period (2001-2020) but not at the beginning or the end of the period</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>croplands_in_between <span class="op">=</span> is_cropland.<span class="bu">any</span>(dim<span class="op">=</span><span class="st">'time'</span>) <span class="op">&amp;</span> <span class="op">~</span>croplands_always <span class="op">&amp;</span> <span class="op">~</span>croplands_2001_not_now <span class="op">&amp;</span> <span class="op">~</span>not_croplands_2001_but_now</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Now you can use these boolean DataArrays to classify your pixels. For example:</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>classification <span class="op">=</span> xr.Dataset({</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'always_croplands'</span>: croplands_always.astype(<span class="bu">int</span>),</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'croplands_2001_not_now'</span>: croplands_2001_not_now.astype(<span class="bu">int</span>),</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'not_croplands_2001_but_now'</span>: not_croplands_2001_but_now.astype(<span class="bu">int</span>),</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'croplands_in_between'</span>: croplands_in_between.astype(<span class="bu">int</span>)</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-71" class="cell" data-execution_count="71">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>category_colors <span class="op">=</span> {</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'always_croplands'</span>: <span class="st">'Greens'</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'croplands_2001_not_now'</span>: <span class="st">'Reds'</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'not_croplands_2001_but_now'</span>: <span class="st">'Purples'</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'croplands_in_between'</span>: <span class="st">'Wistia'</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with a map</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, projection<span class="op">=</span>ccrs.AlbersEqualArea(central_longitude<span class="op">=</span><span class="dv">120</span>, central_latitude<span class="op">=</span><span class="dv">40</span>))</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>ax.set_extent([land_cover_2001_2020.x.<span class="bu">min</span>(), land_cover_2001_2020.x.<span class="bu">max</span>(),</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>               land_cover_2001_2020.y.<span class="bu">min</span>(), land_cover_2001_2020.y.<span class="bu">max</span>()],</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>               crs<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>               </span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add coastlines and borders</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>borders <span class="op">=</span> cfeature.NaturalEarthFeature(</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>                    category<span class="op">=</span><span class="st">'cultural'</span>,</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>                    name<span class="op">=</span><span class="st">'admin_0_boundary_lines_land'</span>,</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span><span class="st">'50m'</span>,</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>                    facecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>ax.add_feature(borders, linewidth<span class="op">=</span><span class="fl">.5</span>)</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>ax.coastlines(</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>    resolution<span class="op">=</span><span class="st">'50m'</span>,</span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.8</span></span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>proj_to_data <span class="op">=</span> ccrs.PlateCarree()._as_mpl_transform(ax) <span class="op">-</span> ax.transData</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>rect_in_target <span class="op">=</span> proj_to_data.transform_path(rect)</span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>ax.set_boundary(rect_in_target)</span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>ax.set_extent([xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], ylim[<span class="dv">0</span>] <span class="op">-</span> <span class="dv">5</span>, ylim[<span class="dv">1</span>]])</span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot each category</span></span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> category, color <span class="kw">in</span> category_colors.items():</span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>    (classification[category]</span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a>     .where(<span class="kw">lambda</span> x: x <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>     .plot</span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a>     .pcolormesh(<span class="st">'x'</span>, <span class="st">'y'</span>, ax<span class="op">=</span>ax, transform<span class="op">=</span>ccrs.PlateCarree(), cmap<span class="op">=</span>color, add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Add gridlines and labels</span></span>
+<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a>gl <span class="op">=</span> ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>, linestyle<span class="op">=</span><span class="st">':'</span>, )</span>
+<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a>gl.top_labels <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a>gl.right_labels <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a>gl.ylabel_style <span class="op">=</span> {<span class="st">'size'</span>: <span class="dv">10</span>}</span>
+<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a>gl.xlabel_style <span class="op">=</span> {<span class="st">'size'</span>: <span class="dv">10</span>}</span>
+<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb36-50"><a href="#cb36-50" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Cropland Area Summary in East Asia (2001-2020)'</span>, size<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb36-51"><a href="#cb36-51" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-34-output-1.png" width="1919" height="1614" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-72" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>(classification.<span class="bu">sum</span>()</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a> .to_pandas()</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a> .rename(<span class="st">'counts'</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a> .reset_index()</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a> .rename(columns<span class="op">=</span>{<span class="st">'index'</span>: <span class="st">'category'</span>})</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a> .replace({</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'always_croplands'</span>: <span class="st">'Always croplands'</span>,</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'croplands_2001_not_now'</span>: <span class="st">'Croplands in 2001 but not now'</span>,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">'not_croplands_2001_but_now'</span>: <span class="st">'Not croplands in 2001 but now'</span>,</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'croplands_in_between'</span>: <span class="st">'Croplands in between'</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a> }</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a> .assign(fraction<span class="op">=</span><span class="kw">lambda</span> dd: dd[<span class="st">'counts'</span>] <span class="op">/</span> dd[<span class="st">'counts'</span>].<span class="bu">sum</span>())</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a> .pipe(<span class="kw">lambda</span> dd: p9.ggplot(dd)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.aes(<span class="st">'category'</span>, <span class="st">'counts'</span>)</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.geom_col(p9.aes(fill<span class="op">=</span><span class="st">'category'</span>))</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.scale_fill_manual(values<span class="op">=</span>[<span class="st">'#73C476'</span>, <span class="st">'#FB694A'</span>, <span class="st">'#FFBD00'</span>, <span class="st">'#9E9AC8'</span>])</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.coord_flip()</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.geom_text(p9.aes(</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>              label<span class="op">=</span><span class="st">'(fraction.round(3) * 100).astype(str) + "%"'</span>,</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>              y<span class="op">=</span><span class="st">'counts - 12500'</span>,</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>              ), size<span class="op">=</span><span class="dv">8</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.labs(x<span class="op">=</span><span class="st">''</span>, y<span class="op">=</span><span class="st">'Total pixels (km2)'</span>)</span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.theme(figure_size<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">2</span>))</span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> p9.guides(fill<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-35-output-1.png" width="1542" height="640" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-73" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">2</span>))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>is_cropland.<span class="bu">sum</span>(dim<span class="op">=</span>[<span class="st">'x'</span>, <span class="st">'y'</span>]).plot(</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'k'</span>, markersize<span class="op">=</span><span class="dv">3</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Cropland area (km$^2$)'</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">''</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Cropland area over time in East Asia'</span>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>ax.grid(axis<span class="op">=</span><span class="st">'y'</span>, linestyle<span class="op">=</span><span class="st">':'</span>)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>xlabels <span class="op">=</span> ax.get_xlabel()</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels(<span class="bu">range</span>(<span class="dv">2000</span>, <span class="dv">2022</span>, <span class="dv">2</span>), ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>''</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-36-output-2.png" width="1628" height="698" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-74" class="cell" data-execution_count="119">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">2</span>))</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>is_cropland.mean(dim<span class="op">=</span>[<span class="st">'x'</span>, <span class="st">'y'</span>]).plot(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'k'</span>, markersize<span class="op">=</span><span class="dv">3</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Cropland area (%)'</span>)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">''</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Cropland area over time in East Asia'</span>)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>ax.grid(axis<span class="op">=</span><span class="st">'y'</span>, linestyle<span class="op">=</span><span class="st">':'</span>)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>xlabels <span class="op">=</span> ax.get_xlabel()</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels(<span class="bu">range</span>(<span class="dv">2000</span>, <span class="dv">2022</span>, <span class="dv">2</span>), ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co"># percent formatter</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(mtick.PercentFormatter(<span class="dv">1</span>))</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="fl">0.07</span>)</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="119">
+<pre><code>''</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-37-output-2.png" width="1637" height="698" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-75" class="cell" data-execution_count="88">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>crop_chunks_df <span class="op">=</span> []</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lon <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">10</span>):</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lat <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>, <span class="dv">60</span>, <span class="dv">10</span>):</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>        crop_chunks_df.append(is_cropland</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    .sel(x<span class="op">=</span><span class="bu">slice</span>(lon, lon <span class="op">+</span> <span class="dv">10</span>), y<span class="op">=</span><span class="bu">slice</span>(lat, lat <span class="op">+</span> <span class="dv">10</span>))</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    .mean(dim<span class="op">=</span>[<span class="st">'x'</span>, <span class="st">'y'</span>])</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    .to_pandas()</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    .rename(<span class="st">'crop_fraction'</span>)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    .assign(lon<span class="op">=</span>lon, lat<span class="op">=</span>lat)</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>    .assign(lon_label<span class="op">=</span><span class="kw">lambda</span> dd: dd.lon.astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">'-'</span> <span class="op">+</span> (dd.lon <span class="op">+</span> <span class="dv">10</span>).astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">'°E'</span>)</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>    .assign(lat_label<span class="op">=</span><span class="kw">lambda</span> dd: dd.lat.astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">'-'</span> <span class="op">+</span> (dd.lat <span class="op">+</span> <span class="dv">10</span>).astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">'°N'</span>)</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>crop_chunks_df <span class="op">=</span> (pd.concat(crop_chunks_df)</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>    .assign(lat_label<span class="op">=</span><span class="kw">lambda</span> dd: pd.Categorical(dd.lat_label, categories<span class="op">=</span>dd.lat_label.unique()[::<span class="op">-</span><span class="dv">1</span>], ordered<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-76" class="cell" data-execution_count="120">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>(crop_chunks_df</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a> .assign(crop_fraction<span class="op">=</span><span class="kw">lambda</span> dd: dd.crop_fraction.<span class="bu">round</span>(<span class="dv">4</span>))</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a> .pipe(<span class="kw">lambda</span> dd: p9.ggplot(dd)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.aes(<span class="st">'time'</span>, <span class="st">'crop_fraction'</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.geom_line()</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.scale_x_datetime(</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>         labels<span class="op">=</span>date_format(<span class="st">'%Y'</span>),</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>         breaks<span class="op">=</span>date_breaks(<span class="st">'4 years'</span>),</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>         limits<span class="op">=</span>(pd.to_datetime(<span class="st">'2002-01-01'</span>), pd.to_datetime(<span class="st">'2018-01-01'</span>))</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>         )               </span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.scale_y_continuous(labels<span class="op">=</span>percent_format())</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.facet_grid(<span class="st">'lat_label ~ lon_label'</span>)</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.labs(x<span class="op">=</span><span class="st">''</span>, y<span class="op">=</span><span class="st">'Croplands fraction (%)'</span>, </span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Cropland area over time in East Asia'</span>)</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.theme(</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>      figure_size<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>),</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>      axis_text_x<span class="op">=</span>p9.element_text(rotation<span class="op">=</span><span class="dv">30</span>, ha<span class="op">=</span><span class="st">'center'</span>),</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>      axis_text_y<span class="op">=</span>p9.element_text(size<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-39-output-1.png" width="2136" height="1448" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-77" class="cell" data-execution_count="142">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>(crop_chunks_df</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a> .query(<span class="st">'lon == 120 &amp; lat == 40'</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a> .pipe(<span class="kw">lambda</span> dd: p9.ggplot(dd) </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.aes(<span class="st">'time'</span>, <span class="st">'crop_fraction'</span>) </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.geom_line()</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.geom_point(size<span class="op">=</span><span class="fl">.8</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.labs(x<span class="op">=</span><span class="st">''</span>, y<span class="op">=</span><span class="st">'Croplands fraction (%)'</span>, title<span class="op">=</span><span class="st">'Cropland area over time in NE China (120-130°E, 40-50°N)'</span>)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.scale_y_continuous(labels<span class="op">=</span>percent_format())</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.scale_x_datetime(labels<span class="op">=</span>date_format(<span class="st">'%Y'</span>))</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p9.theme(figure_size<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">2</span>),</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>               title<span class="op">=</span>p9.element_text(size<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>    )       </span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/figure-html/cell-40-output-1.png" width="1659" height="643" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<section id="comments" class="comments-panel reveal-in" aria-label="Comments">
+  <div class="comments-panel-head">
+    <h2>Comments</h2>
+    <p>Replies are powered by GitHub Discussions.</p>
+  </div>
+  <div class="comments-panel-embed"></div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell site-footer-inner">
+    <div class="footer-identity">
+      <p class="footer-kicker">Portfolio · Blog · CV</p>
+      <div class="footer-links">
+        <a href="mailto:alejandro.fontal.92@gmail.com">
+          <iconify-icon icon="fa6-solid:envelope" aria-hidden="true"></iconify-icon>
+          <span>Get in touch</span>
+        </a>
+        <a href="https://github.com/AlFontal/alfontal.dev" target="_blank" rel="noopener noreferrer">
+          <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+          <span>View source code</span>
+        </a>
+      </div>
+    </div>
+
+    <ul class="social-list" aria-label="Social links">
+
+      <li>
+        <a href="https://github.com/AlFontal" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+          <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+        </a>
+      </li>
+      <li>
+        <a href="https://gitlab.com/AlFontal" target="_blank" rel="noopener noreferrer" aria-label="GitLab" title="GitLab">
+          <iconify-icon icon="fa6-brands:gitlab" aria-hidden="true"></iconify-icon>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/alfontal" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+          <iconify-icon icon="fa6-brands:linkedin" aria-hidden="true"></iconify-icon>
+        </a>
+      </li>
+      <li>
+        <a href="https://orcid.org/0000-0003-1138-2158" target="_blank" rel="noopener noreferrer" aria-label="ORCID" title="ORCID">
+          <iconify-icon icon="fa6-brands:orcid" aria-hidden="true"></iconify-icon>
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "AlFontal/alfontal.dev";
+    script.dataset.repoId = "R_kgDOI8y_Yg";
+    script.dataset.category = "Comments";
+    script.dataset.categoryId = "DIC_kwDOI8y_Ys4C7Wha";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "0";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="/assets/notebooks/vegetation-land-use/land_use/land_use_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

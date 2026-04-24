@@ -38,15 +38,17 @@ Publishing flow:
 1. Create or update the notebook in `notebooks/`.
 2. Set the front matter and preview image path in the notebook.
 3. Regenerate notebook-derived content.
-4. Preview the result locally in Astro.
+4. Preview the result locally in Astro, which serves the generated Quarto pages from `public/posts/...`.
 
-Quarto is used here only as an intermediate notebook-to-Markdown converter:
+Quarto is used to generate both Astro listing metadata and the final notebook post pages:
 
 ```bash
 npm run notebooks:render
 ```
 
 For non-notebook articles, add Astro pages directly under `web/src/pages/blog/`.
+
+Notebook post routes under `/posts/<section>/<name>/` are published as standalone Quarto HTML files in `web/public/posts/...`. Astro still owns the blog index and the rest of the site, but it no longer wraps notebook post bodies inside an Astro page.
 
 Build production files:
 

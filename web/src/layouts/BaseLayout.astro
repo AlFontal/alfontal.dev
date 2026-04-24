@@ -7,9 +7,10 @@ import logoMark from '../assets/media/logo_alejandro.svg';
 interface Props {
   title?: string;
   description?: string;
+  mainClass?: string;
 }
 
-const { title, description = siteMeta.description } = Astro.props;
+const { title, description = siteMeta.description, mainClass } = Astro.props;
 const path = Astro.url.pathname;
 const pageTitle = title ? `${title} | ${siteMeta.name}` : siteMeta.name;
 const canonical = new URL(path, siteMeta.siteUrl).toString();
@@ -75,9 +76,8 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
         <div class="header-controls">
           <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme">
-            <iconify-icon data-theme-icon icon="fa6-solid:moon" aria-hidden="true"></iconify-icon>
-            <span class="theme-toggle-prefix">Mode</span>
-            <span data-theme-label>Light</span>
+            <iconify-icon data-theme-icon icon="fa6-solid:sun" aria-hidden="true"></iconify-icon>
+            <span data-theme-label>Light theme</span>
           </button>
           <button
             type="button"
@@ -108,7 +108,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       </div>
     </header>
 
-    <main id="main-content" class="shell page-content">
+    <main id="main-content" class:list={['shell', 'page-content', mainClass]}>
       <slot />
     </main>
 
@@ -154,7 +154,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
           root.dataset.theme = theme;
           localStorage.setItem('af-theme', theme);
           themeLabels.forEach((label) => {
-            label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+            label.textContent = theme === 'dark' ? 'Dark theme' : 'Light theme';
           });
           themeIcons.forEach((icon) => {
             icon.setAttribute('icon', theme === 'dark' ? 'fa6-solid:moon' : 'fa6-solid:sun');

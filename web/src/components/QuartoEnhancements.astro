@@ -129,62 +129,255 @@ const { assetBasePath } = Astro.props;
     };
 
     const enhanceToc = () => {
-      const tocLinks = Array.from(document.querySelectorAll('.quarto-document #TOC a[data-scroll-target]'));
+      const tocEl = document.querySelector('.quarto-document nav.toc-active[role="doc-toc"]');
+      const marginSidebarEl = document.querySelector('.quarto-document #quarto-margin-sidebar');
+      if (!(tocEl instanceof HTMLElement)) return;
+
+      const tocLinks = Array.from(tocEl.querySelectorAll('a[data-scroll-target]')).filter(
+        (link) => link instanceof HTMLAnchorElement,
+      );
       if (!tocLinks.length) return;
 
-      const targets = tocLinks
-        .map((link) => {
-          if (!(link instanceof HTMLAnchorElement)) return null;
-          const selector = link.dataset.scrollTarget || link.hash;
-          if (!selector) return null;
+      const sections = tocLinks.map((link) => {
+        const target = link.getAttribute('data-scroll-target');
+        if (!target) return null;
+        if (target.startsWith('#')) {
+          return document.getElementById(decodeURI(target.slice(1)));
+        }
+        const resolved = document.querySelector(decodeURI(target));
+        return resolved instanceof HTMLElement ? resolved : null;
+      });
 
-          const target = document.querySelector(selector);
-          return target instanceof HTMLElement ? { link, target } : null;
-        })
-        .filter(Boolean);
-
-      if (!targets.length) return;
-
-      const setActiveLink = (activeLink) => {
-        targets.forEach(({ link }) => {
-          link.classList.toggle('active', link === activeLink);
-        });
+      const prevSiblingIsActiveLink = (el) => {
+        const sibling = el.previousElementSibling;
+        return sibling instanceof HTMLAnchorElement && sibling.classList.contains('active');
       };
 
-      if (!('IntersectionObserver' in window)) {
-        setActiveLink(targets[0].link);
+      const removeAllActive = () => {
+        tocLinks.forEach((link) => link.classList.remove('active'));
+      };
+
+      let currentActive = 0;
+      let didInit = false;
+      const sectionMargin = Math.max(
+        160,
+        parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-offset'), 10) || 0,
+      );
+
+      const updateActiveLink = () => {
+        let sectionIndex = -1;
+
+        if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+          sectionIndex = 0;
+        } else {
+          sectionIndex = [...sections].reverse().findIndex((section) => {
+            return section instanceof HTMLElement && window.pageYOffset >= section.offsetTop - sectionMargin;
+          });
+        }
+
+        if (sectionIndex > -1) {
+          const nextActive = sections.length - sectionIndex - 1;
+          if (nextActive !== currentActive || !didInit) {
+            removeAllActive();
+            currentActive = nextActive;
+            tocLinks[currentActive]?.classList.add('active');
+            didInit = true;
+          }
+        }
+      };
+
+      const tocOpenDepthValue = Number(tocEl.getAttribute('data-toc-expanded') || '1');
+      const tocOpenDepth = Number.isNaN(tocOpenDepthValue) ? 1 : tocOpenDepthValue;
+
+      const walkToc = (el, depth) => {
+        let nextDepth = depth;
+        if (el.tagName === 'UL') {
+          nextDepth += 1;
+        }
+
+        const isActiveNode = el instanceof HTMLAnchorElement && el.classList.contains('active');
+        let hasActiveChild = false;
+
+        Array.from(el.children).forEach((child) => {
+          hasActiveChild = walkToc(child, nextDepth) || hasActiveChild;
+        });
+
+        if (el.tagName === 'UL') {
+          if (tocOpenDepth === -1 && nextDepth > 1) {
+            el.classList.add('collapse');
+          } else if (nextDepth <= tocOpenDepth || hasActiveChild || prevSiblingIsActiveLink(el)) {
+            el.classList.remove('collapse');
+          } else {
+            el.classList.add('collapse');
+          }
+        }
+
+        return hasActiveChild || isActiveNode;
+      };
+
+      if (!(marginSidebarEl instanceof HTMLElement)) {
+        updateActiveLink();
+        walkToc(tocEl, 0);
         return;
       }
 
-      const visibleTargets = new Map();
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!(entry.target instanceof HTMLElement)) return;
+      let toggleContainer = null;
+      let closeToggle = () => {};
 
-            if (entry.isIntersecting) {
-              visibleTargets.set(entry.target.id, entry.boundingClientRect.top);
-            } else {
-              visibleTargets.delete(entry.target.id);
-            }
-          });
+      const positionToggle = () => {
+        if (!(toggleContainer instanceof HTMLElement)) return;
+        const sidebarRect = marginSidebarEl.getBoundingClientRect();
+        const clampedLeft = Math.max(12, Math.min(sidebarRect.left, window.innerWidth - sidebarRect.width - 12));
+        toggleContainer.style.left = `${clampedLeft}px`;
+        toggleContainer.style.top = `${Math.max(sidebarRect.top, 12)}px`;
+        toggleContainer.style.width = `${sidebarRect.width}px`;
+      };
 
-          const visibleTarget = Array.from(visibleTargets.entries()).sort((a, b) => a[1] - b[1])[0];
-          const nextTarget = visibleTarget
-            ? targets.find(({ target }) => target.id === visibleTarget[0])
-            : targets.find(({ target }) => target.getBoundingClientRect().top > 0) || targets[targets.length - 1];
+      const convertToMenu = () => {
+        if (toggleContainer instanceof HTMLElement) {
+          positionToggle();
+          return;
+        }
 
-          if (nextTarget) {
-            setActiveLink(nextTarget.link);
+        Array.from(marginSidebarEl.children).forEach((child) => {
+          if (!(child instanceof HTMLElement)) return;
+          child.style.opacity = '0';
+          child.style.overflow = 'hidden';
+          child.style.pointerEvents = 'none';
+        });
+
+        const titleText = tocEl.querySelector('#toc-title')?.textContent?.trim() || 'Contents';
+
+        toggleContainer = document.createElement('div');
+        toggleContainer.id = 'quarto-toc-toggle';
+        toggleContainer.className = 'quarto-sidebar-toggle zindex-over-content';
+        toggleContainer.style.position = 'fixed';
+
+        const toggleTitle = document.createElement('button');
+        toggleTitle.type = 'button';
+        toggleTitle.className = 'quarto-sidebar-toggle-title zindex-over-content';
+        toggleTitle.setAttribute('aria-expanded', 'false');
+        toggleTitle.innerHTML = `<span>${titleText}</span><span class="quarto-sidebar-toggle-icon" aria-hidden="true"></span>`;
+
+        const toggleContents = document.createElement('div');
+        toggleContents.className = 'quarto-sidebar-toggle-contents zindex-over-content';
+        toggleContents.style.height = '0px';
+
+        Array.from(tocEl.children).forEach((child) => {
+          if (!(child instanceof HTMLElement) || child.id === 'toc-title') return;
+          toggleContents.append(child.cloneNode(true));
+        });
+
+        let isExpanded = false;
+        closeToggle = () => {
+          if (!toggleContainer || !isExpanded) return;
+          toggleContainer.classList.remove('expanded');
+          toggleTitle.setAttribute('aria-expanded', 'false');
+          toggleContents.style.height = '0px';
+          isExpanded = false;
+        };
+
+        toggleTitle.addEventListener('click', () => {
+          if (!toggleContainer) return;
+          if (isExpanded) {
+            closeToggle();
+            return;
           }
+
+          toggleContainer.classList.add('expanded');
+          toggleTitle.setAttribute('aria-expanded', 'true');
+          toggleContents.style.height = `${toggleContents.scrollHeight}px`;
+          isExpanded = true;
+        });
+
+        toggleContents.addEventListener('click', (event) => {
+          const target = event.target;
+          if (target instanceof HTMLAnchorElement) {
+            closeToggle();
+          }
+        });
+
+        toggleContainer.append(toggleTitle, toggleContents);
+        marginSidebarEl.parentElement?.prepend(toggleContainer);
+        positionToggle();
+      };
+
+      const convertToSidebar = () => {
+        closeToggle();
+        toggleContainer?.remove();
+        toggleContainer = null;
+
+        Array.from(marginSidebarEl.children).forEach((child) => {
+          if (!(child instanceof HTMLElement)) return;
+          child.style.opacity = '1';
+          child.style.overflow = '';
+          child.style.pointerEvents = '';
+        });
+      };
+
+      const overlapPadding = 10;
+      const conflictingSelector =
+        '.quarto-document [class^="column-"], .quarto-document [class*=" column-"], .quarto-document aside, .quarto-document [class*="margin-caption"], .quarto-document [class*=" margin-caption"], .quarto-document [class*="margin-ref"], .quarto-document [class*=" margin-ref"]';
+
+      const isRightConflict = (el) => {
+        if (!(el instanceof HTMLElement)) return false;
+        if (el === marginSidebarEl || marginSidebarEl.contains(el)) return false;
+        if (el.tagName === 'ASIDE') return true;
+        if (el.classList.contains('margin-caption')) return true;
+
+        return Array.from(el.classList).some((className) => {
+          return (
+            className !== 'column-body' &&
+            !className.endsWith('container') &&
+            className.startsWith('column-') &&
+            !className.endsWith('left')
+          );
+        });
+      };
+
+      const rightConflictEls = Array.from(document.querySelectorAll(conflictingSelector)).filter(isRightConflict);
+
+      const hasVisibleOverlap = () => {
+        const activeTocBox = toggleContainer instanceof HTMLElement ? toggleContainer : tocEl;
+        if (!(activeTocBox instanceof HTMLElement)) return false;
+
+        const tocRect = activeTocBox.getBoundingClientRect();
+        const hasVisibleToc = tocRect.bottom > 0 && tocRect.top < window.innerHeight;
+        if (!hasVisibleToc) return false;
+
+        return rightConflictEls.some((el) => {
+          if (!(el instanceof HTMLElement)) return false;
+          const rect = el.getBoundingClientRect();
+          if (rect.bottom <= 0 || rect.top >= window.innerHeight) return false;
+
+          const verticalOverlap = tocRect.top <= rect.bottom + overlapPadding && tocRect.bottom >= rect.top - overlapPadding;
+          const horizontalOverlap = tocRect.left <= rect.right + overlapPadding && tocRect.right >= rect.left - overlapPadding;
+          return verticalOverlap && horizontalOverlap;
+        });
+      };
+
+      const syncToc = () => {
+        updateActiveLink();
+        walkToc(tocEl, 0);
+
+        if (hasVisibleOverlap()) {
+          convertToMenu();
+        } else {
+          convertToSidebar();
+        }
+      };
+
+      document.addEventListener(
+        'scroll',
+        () => {
+          syncToc();
+          closeToggle();
         },
-        {
-          rootMargin: `-${Math.max(80, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-offset'), 10) || 0)}px 0px -68% 0px`,
-          threshold: 0,
-        },
+        { passive: true },
       );
 
-      targets.forEach(({ target }) => observer.observe(target));
+      window.addEventListener('resize', syncToc);
+      syncToc();
     };
 
     const enhanceCitations = () => {

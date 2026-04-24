@@ -1403,7 +1403,8 @@ input {
 }
 
 .quarto-comments-shell {
-  --quarto-prose-width: 54rem;
+  /* Prose grows proportionally on wide screens to fill available space, capped at 70rem for readability */
+  --quarto-prose-width: clamp(52rem, 55vw, 70rem);
   --quarto-margin-width: clamp(10rem, 12vw, 13rem);
   --quarto-toc-width: clamp(12rem, 14vw, 15rem);
   --quarto-column-gap: clamp(1.5rem, 2.4vw, 2.6rem);
@@ -1509,8 +1510,9 @@ input {
 }
 
 .quarto-post-layout {
-  --quarto-prose-width: 54rem;
-  --quarto-code-width: 54rem;
+  /* Prose grows proportionally on wide screens to fill available space, capped at 70rem for readability */
+  --quarto-prose-width: clamp(52rem, 55vw, 70rem);
+  --quarto-code-width: clamp(52rem, 55vw, 70rem);
   --quarto-margin-width: clamp(10rem, 12vw, 13rem);
   --quarto-toc-width: clamp(12rem, 14vw, 15rem);
   --quarto-column-gap: clamp(1.5rem, 2.4vw, 2.6rem);
@@ -1595,11 +1597,14 @@ input {
   grid-row: 1;
   position: sticky;
   top: calc(var(--header-offset) + 1rem);
-  max-height: calc(100vh - var(--header-offset) - 2rem);
+  max-height: calc(100vh - var(--header-offset) - 1rem);
   overflow: auto;
+  overflow-x: hidden;
   min-width: 0;
   padding-left: 0.9rem;
   border-left: 1px solid var(--edge);
+  /* Match Quarto's scroll margin for heading anchors */
+  scroll-margin-top: var(--header-offset);
 }
 
 .quarto-document #quarto-document-content {

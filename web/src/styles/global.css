@@ -1402,6 +1402,35 @@ input {
   width: 100%;
 }
 
+.quarto-comments-shell {
+  --quarto-prose-width: 54rem;
+  --quarto-margin-width: clamp(10rem, 12vw, 13rem);
+  --quarto-toc-width: clamp(12rem, 14vw, 15rem);
+  --quarto-column-gap: clamp(1.5rem, 2.4vw, 2.6rem);
+  width: min(
+    100%,
+    calc(
+      var(--quarto-prose-width) +
+      var(--quarto-margin-width) +
+      var(--quarto-toc-width) +
+      (var(--quarto-column-gap) * 2)
+    )
+  );
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns:
+    minmax(0, var(--quarto-prose-width))
+    minmax(0, var(--quarto-margin-width))
+    minmax(0, var(--quarto-toc-width));
+  column-gap: var(--quarto-column-gap);
+}
+
+.quarto-comments-shell > .comments-panel {
+  grid-column: 1 / 3;
+  width: 100%;
+  max-width: none;
+}
+
 .article > * {
   width: 100%;
   max-width: var(--reading-width);
@@ -1479,12 +1508,36 @@ input {
   gap: 1.5rem;
 }
 
-.quarto-article {
-  --reading-width: 66rem;
-  --quarto-prose-width: 58rem;
+.quarto-post-layout {
+  --quarto-prose-width: 54rem;
   --quarto-code-width: 54rem;
-  --quarto-figure-width: 66rem;
-  --quarto-inset-width: 62rem;
+  --quarto-margin-width: clamp(10rem, 12vw, 13rem);
+  --quarto-toc-width: clamp(12rem, 14vw, 15rem);
+  --quarto-column-gap: clamp(1.5rem, 2.4vw, 2.6rem);
+  --quarto-layout-width: calc(
+    var(--quarto-prose-width) +
+    var(--quarto-margin-width) +
+    var(--quarto-toc-width) +
+    (var(--quarto-column-gap) * 2)
+  );
+  display: grid;
+  gap: 2.25rem;
+}
+
+.quarto-article {
+  --reading-width: var(--quarto-layout-width);
+  width: min(100%, var(--quarto-layout-width));
+  max-width: var(--quarto-layout-width);
+  justify-self: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.quarto-article > * {
+  max-width: none;
 }
 
 .notebook-content {
@@ -1520,7 +1573,144 @@ input {
 .quarto-document {
   gap: 1.35rem;
   min-width: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.quarto-document > #quarto-content {
+  display: grid;
+  align-items: start;
+  grid-template-columns:
+    minmax(0, var(--quarto-prose-width))
+    minmax(0, var(--quarto-margin-width))
+    minmax(0, var(--quarto-toc-width));
+  column-gap: var(--quarto-column-gap);
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+}
+
+.quarto-document #quarto-margin-sidebar {
+  grid-column: 3;
+  grid-row: 1;
+  position: sticky;
+  top: calc(var(--header-offset) + 1rem);
+  max-height: calc(100vh - var(--header-offset) - 2rem);
+  overflow: auto;
+  min-width: 0;
+  padding-left: 0.9rem;
+  border-left: 1px solid var(--edge);
+}
+
+.quarto-document #quarto-document-content {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+  display: grid;
+  align-items: start;
+  grid-template-columns: minmax(0, var(--quarto-prose-width)) minmax(0, var(--quarto-margin-width));
+  column-gap: var(--quarto-column-gap);
+}
+
+.quarto-document #quarto-document-content > * {
+  grid-column: 1;
+}
+
+.quarto-document .screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Children of #quarto-document-content that are .page-columns span the full inner 2-column sub-grid.
+   Note: #quarto-document-content itself is intentionally excluded from this selector so that its
+   grid-column (1 / 3 from the ID rule above) is not overridden to 1 / -1. */
+.quarto-document #quarto-document-content .page-columns {
+  display: grid;
+  align-items: start;
+  grid-template-columns: minmax(0, var(--quarto-prose-width)) minmax(0, var(--quarto-margin-width));
+  column-gap: var(--quarto-column-gap);
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.quarto-document #quarto-document-content.page-columns > *,
+.quarto-document #quarto-document-content .page-columns > * {
+  grid-column: 1;
+}
+
+.quarto-document #quarto-document-content > .column-margin,
+.quarto-document #quarto-document-content.page-columns > .column-margin,
+.quarto-document #quarto-document-content .page-columns > .column-margin,
+.quarto-document #quarto-document-content > .margin-caption,
+.quarto-document #quarto-document-content.page-columns > .margin-caption,
+.quarto-document #quarto-document-content .page-columns > .margin-caption,
+.quarto-document #quarto-document-content > .column-sidebar,
+.quarto-document #quarto-document-content.page-columns > .column-sidebar,
+.quarto-document #quarto-document-content .page-columns > .column-sidebar {
+  grid-column: 2;
+  justify-self: stretch;
+  width: 100%;
   max-width: 100%;
+}
+
+.quarto-document .column-margin > *,
+.quarto-document .margin-caption > * {
+  margin-top: 0;
+}
+
+.quarto-document #TOC {
+  display: grid;
+  gap: 0.55rem;
+  color: var(--ink-soft);
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.quarto-document #toc-title {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.quarto-document #TOC ul {
+  display: grid;
+  gap: 0.18rem;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.quarto-document #TOC ul ul {
+  gap: 0.1rem;
+  margin-top: 0.15rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--edge);
+}
+
+.quarto-document #TOC a {
+  display: block;
+  padding: 0.16rem 0;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.quarto-document #TOC a:hover,
+.quarto-document #TOC a:focus-visible,
+.quarto-document #TOC a.active {
+  color: var(--accent);
 }
 
 .quarto-document > :first-child {
@@ -1554,9 +1744,17 @@ input {
 .quarto-document > blockquote,
 .quarto-document > .callout,
 .quarto-document > section:not(.page-full),
-.quarto-document > .quarto-title-block {
-  width: min(100%, var(--quarto-prose-width));
-  margin-inline: auto;
+.quarto-document > .quarto-title-block,
+.quarto-document #quarto-document-content > p,
+.quarto-document #quarto-document-content > ul,
+.quarto-document #quarto-document-content > ol,
+.quarto-document #quarto-document-content > table,
+.quarto-document #quarto-document-content > blockquote,
+.quarto-document #quarto-document-content > .callout,
+.quarto-document #quarto-document-content > section:not(.page-full),
+.quarto-document #quarto-document-content > .quarto-title-block {
+  width: 100%;
+  margin-inline: 0;
 }
 
 .quarto-document .page-full > h2,
@@ -1572,8 +1770,8 @@ input {
 .quarto-document .page-full > .callout,
 .quarto-document .page-full > details,
 .quarto-document .page-full > section:not(.page-full) {
-  width: min(100%, var(--quarto-prose-width));
-  margin-inline: auto;
+  width: 100%;
+  margin-inline: 0;
 }
 
 .quarto-document .quarto-title-block {
@@ -1649,22 +1847,6 @@ input {
   padding: 0.35rem 0.68rem;
 }
 
-.quarto-document .page-columns {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  overflow: visible;
-}
-
-.quarto-document .page-full,
-.quarto-document .column-body-outset,
-.quarto-document .column-page,
-.quarto-document .column-screen {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-}
-
 .quarto-document .columns {
   align-items: start;
 }
@@ -1674,8 +1856,38 @@ input {
   gap: 0.7rem;
   margin: 1rem 0;
   width: 100%;
-  max-width: var(--quarto-prose-width);
-  margin-inline: auto;
+  max-width: none;
+  margin-inline: 0;
+}
+
+.quarto-document .cell > * {
+  grid-column: 1;
+}
+
+.quarto-document .cell.page-columns,
+.quarto-document .cell.page-full,
+.quarto-document .page-full,
+.quarto-document .column-body-outset,
+.quarto-document .column-page,
+.quarto-document .column-screen {
+  grid-column: 1 / -1;
+}
+
+.quarto-document .cell.page-columns,
+.quarto-document .cell.page-full {
+  display: grid;
+  grid-template-columns: minmax(0, var(--quarto-prose-width)) minmax(0, var(--quarto-margin-width));
+  column-gap: var(--quarto-column-gap);
+}
+
+.quarto-document .cell > .code-copy-outer-scaffold,
+.quarto-document .cell > .sourceCode,
+.quarto-document .cell > pre,
+.quarto-document .cell > .cell-output-stdout,
+.quarto-document .cell > .cell-output-stderr {
+  width: min(100%, var(--quarto-code-width));
+  max-width: var(--quarto-code-width);
+  justify-self: start;
 }
 
 .quarto-document .code-copy-button {
@@ -1772,12 +1984,82 @@ input {
   background: color-mix(in oklab, var(--paper) 94%, var(--paper-strong) 6%);
 }
 
-.quarto-document table {
+.quarto-document .callout-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quarto-document .callout-title-container {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.quarto-document .citation a,
+.quarto-document a[role='doc-biblioref'],
+.quarto-document a[role='doc-noteref'],
+.quarto-document a[role='doc-backlink'] {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.tippy-box[data-theme~='quarto-citations'] {
+  max-width: min(28rem, calc(100vw - 2rem));
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-md);
+  background: color-mix(in oklab, var(--paper) 92%, black 8%);
+  color: var(--ink);
+  box-shadow: var(--shadow-strong);
+}
+
+.tippy-box[data-theme~='quarto-citations'] .tippy-content {
+  padding: 0.7rem 0.8rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.tippy-box[data-theme~='quarto-citations'] .csl-entry + .csl-entry {
+  margin-top: 0.65rem;
+}
+
+.quarto-document #quarto-appendix {
+  grid-column: 1;
   width: 100%;
+  margin-top: 2rem;
+}
+
+.quarto-document .quarto-appendix-heading {
+  margin: 0 0 0.85rem;
+  color: var(--ink);
+  font-size: clamp(1.35rem, 1.15rem + 0.6vw, 1.75rem);
+}
+
+.quarto-document .references,
+.quarto-document .footnotes {
+  width: 100%;
+  color: var(--ink-soft);
+}
+
+.quarto-document .csl-entry + .csl-entry {
+  margin-top: 0.85rem;
+}
+
+.quarto-document .footnotes ol {
+  padding-left: 1.2rem;
+}
+
+.quarto-document table {
+  width: auto;
+  min-width: min(100%, 30rem);
+  margin-inline: auto;
   border-collapse: collapse;
   overflow: hidden;
-  border-radius: var(--radius-md);
+  border-radius: 0;
   border: 1px solid var(--edge);
+  background: transparent;
 }
 
 .quarto-document th,
@@ -1842,14 +2124,30 @@ input {
 .quarto-document p.page-columns,
 .quarto-document p.page-full {
   width: 100%;
-  max-width: var(--quarto-figure-width);
+  max-width: 100%;
+}
+
+.quarto-document #quarto-document-content .page-full,
+.quarto-document #quarto-document-content .column-page,
+.quarto-document #quarto-document-content .column-page-inset,
+.quarto-document #quarto-document-content .column-body-outset,
+.quarto-document #quarto-document-content .column-screen,
+.quarto-document #quarto-document-content .column-screen-inset {
+  grid-column: 1 / -1;
+}
+
+.quarto-document .figure-img.column-page-inset,
+.quarto-document img.column-page-inset {
+  width: 100%;
+  max-width: 100%;
   margin-inline: auto;
 }
 
-.quarto-document .column-page-inset {
+.quarto-document .math.display {
+  display: block;
   width: 100%;
-  max-width: var(--quarto-inset-width);
-  margin-inline: auto;
+  overflow-x: auto;
+  padding: 0.25rem 0;
 }
 
 .quarto-document figcaption {
@@ -2102,6 +2400,32 @@ body.lightbox-open {
 .notebook-content th {
   background: color-mix(in oklab, var(--paper-strong) 90%, transparent);
   color: var(--ink);
+}
+
+/* When .notebook-content is also .quarto-document, the Quarto table styles should govern.
+   The .notebook-content table rules above would otherwise win due to source order (same
+   specificity but later in file). This override restores the correct Quarto table appearance. */
+.notebook-content.quarto-document table {
+  display: table;
+  width: auto;
+  min-width: min(100%, 30rem);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.notebook-content.quarto-document th,
+.notebook-content.quarto-document td {
+  padding: 0.65rem 0.8rem;
+  border: none;
+  border-bottom: 1px solid var(--edge);
+  text-align: left;
+}
+
+.notebook-content.quarto-document th {
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--paper-strong) 72%, transparent);
 }
 
 .notebook-content figure {
@@ -2799,6 +3123,35 @@ body.lightbox-open {
 }
 
 @media (max-width: 1080px) {
+  .quarto-article {
+    width: 100%;
+    max-width: none;
+  }
+
+  .quarto-post-layout {
+    gap: 1.75rem;
+  }
+
+  .quarto-document > #quarto-content,
+  .quarto-document #quarto-document-content.page-columns,
+  .quarto-document #quarto-document-content .page-columns {
+    display: block;
+    width: 100%;
+  }
+
+  .quarto-document #quarto-margin-sidebar {
+    display: none;
+  }
+
+  .quarto-comments-shell {
+    display: block;
+    width: 100%;
+  }
+
+  .quarto-comments-shell > .comments-panel {
+    grid-column: auto;
+  }
+
   .hero-grid,
   .split-layout,
   .page-intro--split,
@@ -2995,10 +3348,23 @@ body.lightbox-open {
   }
 
   .cv-controls-bar,
-  .cv-disclosure-toggle,
   .cv-education-row header,
   .cv-language-row {
     grid-template-columns: 1fr;
+  }
+
+  /* On mobile the heading should span the full card width. The aside is pushed onto a second
+     row and reflowed as a flex row: chevron on the left, date/location on the right. */
+  .cv-experience-disclosure .cv-disclosure-toggle {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-disclosure-aside--experience {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 
   .project-feature {
@@ -3038,7 +3404,9 @@ body.lightbox-open {
     text-align: left;
   }
 
-  .cv-experience-disclosure .cv-disclosure-action {
+  /* Keep the chevron indicator visible on mobile — just hide the verbose text labels.
+     The ::before pseudo-element (chevron arrow) is still shown so users see the item is expandable. */
+  .cv-experience-disclosure .cv-disclosure-action span {
     display: none;
   }
 

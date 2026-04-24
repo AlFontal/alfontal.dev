@@ -1,6 +1,5 @@
 import type { ImageMetadata } from 'astro';
 
-import firstPostFeatured from '../assets/posts/first-post/featured.png';
 import aqiStationsScraperImage from '../assets/projects/aqi_stations_scraper.png';
 import argosExtensionsImage from '../assets/projects/argos_extensions.png';
 import environmentalDataJapanImage from '../assets/projects/environmental_data_japan.png';
@@ -21,15 +20,6 @@ export type SocialLink = {
   href: string;
   short: string;
   icon: string;
-};
-
-export type BlogPost = {
-  title: string;
-  description: string;
-  date: string;
-  categories: string[];
-  image: ImageMetadata;
-  href: string;
 };
 
 export type Project = {
@@ -128,13 +118,6 @@ export type BlogPage = {
   kicker: string;
   title: string;
   intro: string;
-  stats: {
-    totalLabel: string;
-    notebookLabel: string;
-    manualLabel: string;
-  };
-  notebookLabel: string;
-  manualLabel: string;
 };
 
 export type CvEducationItem = {
@@ -298,30 +281,12 @@ export const interestTags = [
   'GIS & Geospatial Modeling',
 ];
 
-export const blogPosts: BlogPost[] = [
-  {
-    title: 'Publishing notebooks with Astro and Quarto',
-    description: 'How this site turns Jupyter notebooks into blog posts during the Astro build.',
-    date: '2023-02-20',
-    categories: ['Publishing', 'Blog'],
-    image: firstPostFeatured,
-    href: '/blog/first-post',
-  },
-];
-
 export const blogPage: BlogPage = {
   seoTitle: 'Blog',
   description: 'Research notes, coding experiments, and long-form technical posts.',
   kicker: 'Writing / coding / technical notes',
   title: 'Blog',
   intro: 'A mix of technical and non-technical writing, sometimes sharing reproducible code blocks.',
-  stats: {
-    totalLabel: 'published posts',
-    notebookLabel: 'built from notebooks',
-    manualLabel: 'written directly in Astro',
-  },
-  notebookLabel: 'Notebook post',
-  manualLabel: 'Astro article',
 };
 
 export const projects: Project[] = [

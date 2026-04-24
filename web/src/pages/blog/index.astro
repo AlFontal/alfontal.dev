@@ -2,7 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { blogPage, blogPosts } from '../../data/content';
+import { blogPage } from '../../data/content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 type BlogListingItem = {
@@ -12,7 +12,6 @@ type BlogListingItem = {
   categories: string[];
   image: ImageMetadata | string;
   href: string;
-  origin: 'manual' | 'notebook';
 };
 
 const notebookPosts: BlogListingItem[] = (await getCollection('notebooks')).map((entry) => ({
@@ -22,20 +21,9 @@ const notebookPosts: BlogListingItem[] = (await getCollection('notebooks')).map(
   categories: entry.data.categories,
   image: entry.data.image,
   href: entry.data.routePath,
-  origin: 'notebook',
 }));
 
-const manualPosts: BlogListingItem[] = blogPosts.map((post) => ({
-  title: post.title,
-  description: post.description,
-  date: post.date,
-  categories: post.categories,
-  image: post.image,
-  href: post.href,
-  origin: 'manual',
-}));
-
-const sortedPosts = [...manualPosts, ...notebookPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
+const sortedPosts = notebookPosts.sort((a, b) => (a.date < b.date ? 1 : -1));
 const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetadata => typeof image !== 'string';
 ---
 

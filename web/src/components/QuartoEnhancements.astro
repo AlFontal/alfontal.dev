@@ -128,6 +128,95 @@ const { assetBasePath } = Astro.props;
       });
     };
 
+    const enhanceToc = () => {
+      const tocLinks = Array.from(document.querySelectorAll('.quarto-document #TOC a[data-scroll-target]'));
+      if (!tocLinks.length) return;
+
+      const targets = tocLinks
+        .map((link) => {
+          if (!(link instanceof HTMLAnchorElement)) return null;
+          const selector = link.dataset.scrollTarget || link.hash;
+          if (!selector) return null;
+
+          const target = document.querySelector(selector);
+          return target instanceof HTMLElement ? { link, target } : null;
+        })
+        .filter(Boolean);
+
+      if (!targets.length) return;
+
+      const setActiveLink = (activeLink) => {
+        targets.forEach(({ link }) => {
+          link.classList.toggle('active', link === activeLink);
+        });
+      };
+
+      if (!('IntersectionObserver' in window)) {
+        setActiveLink(targets[0].link);
+        return;
+      }
+
+      const visibleTargets = new Map();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!(entry.target instanceof HTMLElement)) return;
+
+            if (entry.isIntersecting) {
+              visibleTargets.set(entry.target.id, entry.boundingClientRect.top);
+            } else {
+              visibleTargets.delete(entry.target.id);
+            }
+          });
+
+          const visibleTarget = Array.from(visibleTargets.entries()).sort((a, b) => a[1] - b[1])[0];
+          const nextTarget = visibleTarget
+            ? targets.find(({ target }) => target.id === visibleTarget[0])
+            : targets.find(({ target }) => target.getBoundingClientRect().top > 0) || targets[targets.length - 1];
+
+          if (nextTarget) {
+            setActiveLink(nextTarget.link);
+          }
+        },
+        {
+          rootMargin: `-${Math.max(80, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-offset'), 10) || 0)}px 0px -68% 0px`,
+          threshold: 0,
+        },
+      );
+
+      targets.forEach(({ target }) => observer.observe(target));
+    };
+
+    const enhanceCitations = () => {
+      const citationLinks = Array.from(document.querySelectorAll('.quarto-document a[role="doc-biblioref"]'));
+      if (!citationLinks.length) return;
+
+      citationLinks.forEach((link) => {
+        if (!(link instanceof HTMLAnchorElement)) return;
+        const refId = link.getAttribute('href')?.replace(/^#/, '');
+        if (!refId) return;
+
+        const ref = document.getElementById(refId);
+        if (!(ref instanceof HTMLElement)) return;
+
+        const tooltip = ref.textContent?.replace(/\s+/g, ' ').trim();
+        if (!tooltip) return;
+
+        link.title = tooltip;
+
+        if (typeof window.tippy === 'function') {
+          window.tippy(link, {
+            content: ref.innerHTML,
+            allowHTML: true,
+            interactive: true,
+            maxWidth: 420,
+            placement: 'bottom-start',
+            theme: 'quarto-citations',
+          });
+        }
+      });
+    };
+
     const loadNotebookRuntime = () => {
       if (!assetBasePath) return;
 
@@ -139,8 +228,11 @@ const { assetBasePath } = Astro.props;
 
     const init = () => {
       loadNotebookRuntime();
+      window.Quarto?.typesetMath?.(document.querySelector('.quarto-document') || document.body);
       enhanceAnchors();
+      enhanceCitations();
       enhanceTabsets();
+      enhanceToc();
     };
 
     if (document.readyState === 'loading') {

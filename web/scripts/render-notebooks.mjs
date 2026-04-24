@@ -217,8 +217,23 @@ async function listNotebookSources() {
 async function renderNotebook(notebookPath, notebookName, format, outputName) {
   const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'astro-notebook-'));
   const tempNotebookPath = path.join(tmpDir, `${notebookName}.ipynb`);
+  const sourceDir = path.dirname(notebookPath);
 
   await fs.copyFile(notebookPath, tempNotebookPath);
+
+  const siblingEntries = await fs.readdir(sourceDir, { withFileTypes: true });
+  siblingEntries.sort((a, b) => a.name.localeCompare(b.name));
+
+  for (const entry of siblingEntries) {
+    if (entry.name.startsWith('.')) {
+      continue;
+    }
+    if (entry.name === `${notebookName}.ipynb`) {
+      continue;
+    }
+
+    await copyRecursive(path.join(sourceDir, entry.name), path.join(tmpDir, entry.name));
+  }
 
   try {
     await execFileAsync(
@@ -292,7 +307,23 @@ function extractHeadAssets(html) {
     .join('\n')
     .trim();
 
-  return [styles, stylesheetLinks].filter(Boolean).join('\n').trim();
+  const headScripts = Array.from(head.matchAll(/<script[\s\S]*?<\/script>/g))
+    .map((match) => match[0])
+    .filter((tag) => {
+      const lower = tag.toLowerCase();
+      return (
+        lower.includes('popper') ||
+        lower.includes('tippy') ||
+        lower.includes('mathjax') ||
+        lower.includes('polyfill') ||
+        lower.includes('typesetmath') ||
+        lower.includes('window.quarto')
+      );
+    })
+    .join('\n')
+    .trim();
+
+  return [styles, stylesheetLinks, headScripts].filter(Boolean).join('\n').trim();
 }
 
 function extractMainInnerHtml(html) {
@@ -308,6 +339,22 @@ function extractMainInnerHtml(html) {
   }
 
   return html.slice(mainTagEnd + 1, mainEnd).trim();
+}
+
+function extractQuartoContentHtml(html) {
+  const contentStart = html.indexOf('<div id="quarto-content"');
+  const contentEndMarker = '</div> <!-- /content -->';
+
+  if (contentStart === -1) {
+    return extractMainInnerHtml(html);
+  }
+
+  const contentEnd = html.indexOf(contentEndMarker, contentStart);
+  if (contentEnd === -1 || contentEnd <= contentStart) {
+    throw new Error('Unable to parse Quarto content shell.');
+  }
+
+  return html.slice(contentStart, contentEnd + contentEndMarker.length).trim();
 }
 
 function buildGeneratedFrontMatter(metadata, context) {
@@ -386,7 +433,7 @@ async function main() {
     const assetBasePath = `/assets/notebooks/${notebookContext.section}/${notebookContext.notebook}`;
     const strippedMarkdown = stripQuartoPrelude(markdown, generatedFrontMatter);
     const rewrittenMarkdown = rewriteRelativeReferences(strippedMarkdown, assetBasePath);
-    const rewrittenQuartoHtml = rewriteRelativeReferences(extractMainInnerHtml(rawHtml), assetBasePath);
+    const rewrittenQuartoHtml = rewriteRelativeReferences(extractQuartoContentHtml(rawHtml), assetBasePath);
     const quartoStyles = rewriteRelativeReferences(extractHeadAssets(rawHtml), assetBasePath);
 
     const frontMatterYaml = YAML.stringify(generatedFrontMatter).trimEnd();

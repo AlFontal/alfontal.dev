@@ -40,10 +40,24 @@ const sortedProjects = [...projects].sort((a, b) => (a.date < b.date ? 1 : -1));
             <ul class="chip-list compact">
               {project.categories.map((category) => <li>{category}</li>)}
             </ul>
-            <a href={project.href} class="cta-link is-secondary cta-link--repo" target="_blank" rel="noopener noreferrer">
-              <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
-              <span>{projectsPage.ctaLabel}</span>
-            </a>
+            <div class="project-feature-actions">
+              {
+                project.siteUrl && (
+                  <a href={project.siteUrl} class="cta-link is-secondary cta-link--site" target="_blank" rel="noopener noreferrer">
+                    <iconify-icon icon="fa6-solid:link" aria-hidden="true"></iconify-icon>
+                    <span>{projectsPage.siteCtaLabel}</span>
+                  </a>
+                )
+              }
+              {
+                project.repoUrl && (
+                  <a href={project.repoUrl} class="cta-link is-secondary cta-link--repo" target="_blank" rel="noopener noreferrer">
+                    <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+                    <span>{projectsPage.repoCtaLabel}</span>
+                  </a>
+                )
+              }
+            </div>
           </div>
         </article>
       ))

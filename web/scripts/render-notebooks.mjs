@@ -158,6 +158,34 @@ function extractFrontMatterFromNotebook(notebookJson, sourcePath) {
   return parsed;
 }
 
+function validateFrontMatter(parsed, sourcePath) {
+  if (!parsed || typeof parsed !== 'object') {
+    throw new Error(`Invalid YAML front matter in ${sourcePath}`);
+  }
+
+  for (const field of REQUIRED_FIELDS) {
+    if (!(field in parsed)) {
+      throw new Error(`Missing required metadata field '${field}' in ${sourcePath}`);
+    }
+  }
+
+  if (!Array.isArray(parsed.categories)) {
+    throw new Error(`Metadata field 'categories' must be an array in ${sourcePath}`);
+  }
+
+  return parsed;
+}
+
+function extractFrontMatterFromQuarto(markdown, sourcePath) {
+  const match = markdown.match(/^---\n([\s\S]*?)\n---\s*/);
+
+  if (!match) {
+    throw new Error(`Missing YAML front matter in ${sourcePath}`);
+  }
+
+  return validateFrontMatter(YAML.parse(match[1]), sourcePath);
+}
+
 async function exists(pathLike) {
   try {
     await fs.access(pathLike);
@@ -205,13 +233,15 @@ async function listNotebookSources() {
     const entries = await fs.readdir(sectionDir, { withFileTypes: true });
 
     for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
-      if (!entry.isFile() || !entry.name.endsWith('.ipynb')) {
+      const extension = path.extname(entry.name);
+      if (!entry.isFile() || !['.ipynb', '.qmd'].includes(extension)) {
         continue;
       }
 
       notebooks.push({
         section: sectionEntry.name,
-        notebook: path.basename(entry.name, '.ipynb'),
+        notebook: path.basename(entry.name, extension),
+        sourceFileName: entry.name,
         sourcePath: path.join(sectionDir, entry.name),
         sourceDir: sectionDir,
       });
@@ -221,9 +251,9 @@ async function listNotebookSources() {
   return notebooks;
 }
 
-async function renderNotebook(notebookPath, notebookName, format, outputName) {
+async function renderNotebook(notebookPath, notebookName, sourceFileName, format, outputName) {
   const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'astro-notebook-'));
-  const tempNotebookPath = path.join(tmpDir, `${notebookName}.ipynb`);
+  const tempNotebookPath = path.join(tmpDir, sourceFileName);
   const sourceDir = path.dirname(notebookPath);
 
   await fs.copyFile(notebookPath, tempNotebookPath);
@@ -235,7 +265,7 @@ async function renderNotebook(notebookPath, notebookName, format, outputName) {
     if (entry.name.startsWith('.')) {
       continue;
     }
-    if (entry.name === `${notebookName}.ipynb`) {
+    if (entry.name === sourceFileName) {
       continue;
     }
 
@@ -255,7 +285,7 @@ async function renderNotebook(notebookPath, notebookName, format, outputName) {
   try {
     await execFileAsync(
       'quarto',
-      ['render', `${notebookName}.ipynb`, '--to', format, '--no-execute', '--output', outputName],
+      ['render', sourceFileName, '--to', format, '--no-execute', '--output', outputName],
       {
         cwd: tmpDir,
         maxBuffer: 10 * 1024 * 1024,
@@ -271,7 +301,7 @@ async function renderNotebook(notebookPath, notebookName, format, outputName) {
 }
 
 async function copyNotebookAssets(context, tmpRenderDirs) {
-  const { sourceDir, section, notebook } = context;
+  const { sourceDir, section, notebook, sourceFileName } = context;
   const destinationRoot = path.join(generatedPublicAssetsRoot, section, notebook);
 
   await fs.mkdir(destinationRoot, { recursive: true });
@@ -283,7 +313,7 @@ async function copyNotebookAssets(context, tmpRenderDirs) {
     if (entry.name.startsWith('.')) {
       continue;
     }
-    if (entry.name === `${notebook}.ipynb`) {
+    if (entry.name === sourceFileName) {
       continue;
     }
 
@@ -351,8 +381,10 @@ async function main() {
   const manifest = [];
 
   for (const notebookContext of notebooks) {
-    const rawNotebook = JSON.parse(await fs.readFile(notebookContext.sourcePath, 'utf8'));
-    const metadata = extractFrontMatterFromNotebook(rawNotebook, notebookContext.sourcePath);
+    const rawSource = await fs.readFile(notebookContext.sourcePath, 'utf8');
+    const metadata = notebookContext.sourceFileName.endsWith('.ipynb')
+      ? extractFrontMatterFromNotebook(JSON.parse(rawSource), notebookContext.sourcePath)
+      : extractFrontMatterFromQuarto(rawSource, notebookContext.sourcePath);
     const generatedFrontMatter = buildGeneratedFrontMatter(metadata, notebookContext);
 
     if (seenRoutePaths.has(generatedFrontMatter.routePath)) {
@@ -366,6 +398,7 @@ async function main() {
     const { output: markdown, tmpDir: markdownTmpDir } = await renderNotebook(
       notebookContext.sourcePath,
       notebookContext.notebook,
+      notebookContext.sourceFileName,
       'gfm',
       markdownOutputName,
     );
@@ -373,6 +406,7 @@ async function main() {
     const { output: rawHtml, tmpDir: htmlTmpDir } = await renderNotebook(
       notebookContext.sourcePath,
       notebookContext.notebook,
+      notebookContext.sourceFileName,
       'html',
       htmlOutputName,
     );

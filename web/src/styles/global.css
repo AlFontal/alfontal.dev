@@ -592,11 +592,19 @@ body:has(main.page-content--quarto) .site-footer-inner {
   color: var(--ink);
 }
 
-.cta-link--repo {
+.project-feature-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.cta-link--repo,
+.cta-link--site {
   gap: 0.55rem;
 }
 
-.cta-link--repo iconify-icon {
+.cta-link--repo iconify-icon,
+.cta-link--site iconify-icon {
   font-size: 1.05rem;
   transition:
     transform 180ms ease,
@@ -618,7 +626,9 @@ body:has(main.page-content--quarto) .site-footer-inner {
 }
 
 .cta-link--repo:hover iconify-icon,
-.cta-link--repo:focus-visible iconify-icon {
+.cta-link--repo:focus-visible iconify-icon,
+.cta-link--site:hover iconify-icon,
+.cta-link--site:focus-visible iconify-icon {
   color: var(--accent);
   transform: translateX(-1px) scale(1.04);
 }

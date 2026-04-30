@@ -6,6 +6,7 @@ format:
     respect-user-color-scheme: true
     toc: true
     toc-location: right
+    lightbox: true
     include-in-header: _includes/head.html
     include-before-body: _includes/header.html
     include-after-body: _includes/footer.html

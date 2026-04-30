@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alejandro Fontal">
+<meta name="dcterms.date" content="2022-04-03">
+<meta name="description" content="Conference report on Kawasaki disease incidence in Tokyo and differential HYSPLIT back-trajectory source regions.">
+
+<title>Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/clipboard/clipboard.min.js"></script>
+<script src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/popper.min.js"></script>
+<script src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/anchor.min.js"></script>
+<link href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/bootstrap/bootstrap-edcd12c3eba23ba1c70847d0cc8d6409.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/bootstrap/bootstrap-dark-534f9e6eb4fde8fa3495dc6c45b1673d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/bootstrap/bootstrap-edcd12c3eba23ba1c70847d0cc8d6409.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="icon" type="image/svg+xml" href="/assets/media/logo_alejandro.svg">
+<link rel="stylesheet" href="/assets/quarto/af-quarto.css">
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js" defer=""></script>
+<script src="https://app.rybbit.io/api/script.js" data-site-id="152655938162" defer=""></script>
+<script src="/assets/quarto/af-quarto.js" defer=""></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#table-of-contents" id="toc-table-of-contents" class="nav-link active" data-scroll-target="#table-of-contents">Table of contents</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#kawasaki-disease" id="toc-kawasaki-disease" class="nav-link" data-scroll-target="#kawasaki-disease">Kawasaki Disease</a></li>
+  <li><a href="#trajectory-generation" id="toc-trajectory-generation" class="nav-link" data-scroll-target="#trajectory-generation">Trajectory Generation</a></li>
+  <li><a href="#differential-trajectory-analysis" id="toc-differential-trajectory-analysis" class="nav-link" data-scroll-target="#differential-trajectory-analysis">Differential Trajectory Analysis</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a>
+  <ul class="collapse">
+  <li><a href="#temporal-association-study" id="toc-temporal-association-study" class="nav-link" data-scroll-target="#temporal-association-study">Temporal association study</a></li>
+  <li><a href="#choice-of-temporal-variability" id="toc-choice-of-temporal-variability" class="nav-link" data-scroll-target="#choice-of-temporal-variability">Choice of temporal variability</a></li>
+  <li><a href="#backtrajectory-modelling" id="toc-backtrajectory-modelling" class="nav-link" data-scroll-target="#backtrajectory-modelling">Backtrajectory modelling</a></li>
+  </ul></li>
+  <li><a href="#conclusions-and-outlook" id="toc-conclusions-and-outlook" class="nav-link" data-scroll-target="#conclusions-and-outlook">Conclusions and outlook</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<a class="skip-link" href="#quarto-document-content">Skip to content</a>
+
+<header class="site-header">
+  <div class="shell site-header-inner">
+    <a class="site-brand" href="/">
+      <img src="/assets/media/logo_alejandro.svg" width="44" height="44" alt="Alejandro Fontal logo">
+      <span>
+        <strong>Alejandro Fontal</strong>
+        <em>Portfolio · Blog · CV</em>
+      </span>
+    </a>
+
+    <div class="header-controls">
+      <button type="button" class="theme-toggle quarto-color-scheme-toggle quarto-site-theme-toggle" aria-label="Toggle dark theme" aria-pressed="false">
+        <iconify-icon data-theme-icon="" icon="fa6-solid:sun" aria-hidden="true"></iconify-icon>
+        <span data-theme-label="">Light theme</span>
+      </button>
+      <button type="button" class="menu-toggle quarto-site-menu-toggle" aria-expanded="false" aria-controls="quarto-site-menu" aria-label="Toggle navigation menu">
+        <iconify-icon icon="fa6-solid:bars" aria-hidden="true"></iconify-icon>
+      </button>
+    </div>
+
+    <div class="header-actions" id="quarto-site-menu" data-site-menu="">
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="/" data-nav-link="">About</a></li>
+          <li><a href="/cv" data-nav-link="">CV</a></li>
+          <li><a href="/blog" data-nav-link="">Blog</a></li>
+          <li><a href="/projects" data-nav-link="">Projects</a></li>
+          <li><a href="/publications" data-nav-link="">Publications</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Kawasaki Disease</div>
+    <div class="quarto-category">Epidemiology</div>
+    <div class="quarto-category">Atmospheric Transport</div>
+    <div class="quarto-category">HYSPLIT</div>
+    <div class="quarto-category">Python</div>
+    <div class="quarto-category">Reproducibility</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Conference report on Kawasaki disease incidence in Tokyo and differential HYSPLIT back-trajectory source regions.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alejandro Fontal </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 3, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><img src="https://i.postimg.cc/6qtTr6cM/vasc22logo.png" width="350"></p>
+<p>This document intends to expand, provide context and reproducible analysis code on the study presented in a <a href="https://github.com/helical-itn/anca2022-posters/raw/main/posters/ESR6.%20Alejandro%20Fontal/alejandro_poster_vasculitis_2022.pdf">poster</a> for the <a href="https://vasculitis2022.org/">20th International Vasculitis and ANCA Workshop</a>, which takes place in Dublin, Ireland, from the 3rd to the 6th of April 2022.</p>
+<p>The original code and analysis notebook is available in the <a href="https://github.com/AlFontal/vasculitis2022-conference">source repository</a>.</p>
+<section id="table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="table-of-contents">Table of contents</h2>
+<ul>
+<li><a href="#background">Background</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#results">Results</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#conclusions-and-outlook">Conclusions</a></li>
+<li><a href="#references">References</a></li>
+<li><a href="#comments">Leave a comment!</a></li>
+</ul>
+</section>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p><strong>Kawasaki Disease (KD)</strong> is a systemic vasculitis that mainly affects children <strong>younger than 5 years old</strong>. Although KD cases have been registered in over 60 countries across several continents, its incidence is <strong>highest in East Easia</strong>, particularly in <strong>Japan</strong>, where the highest annual incidence rate was recorded in 2018: <strong>359 per 100 000 children aged 0-4 years</strong> <span class="citation" data-cites="AE202023">(<a href="#ref-AE202023" role="doc-biblioref">Ae et al. 2020</a>)</span>. After more than five decades since its discovery and active research, the etiology of KD is <strong>yet to be elucidated</strong>. Recent studies have analyzed the association between KD and diverse environmental factors, with some advances pointing towards a <strong>relevant role of the atmospheric transport of a wind-borne agent triggering the disease</strong> <span class="citation" data-cites="rodo_association_2011 rodo_tropospheric_2014">(<a href="#ref-rodo_association_2011" role="doc-biblioref">Rodó et al. 2011</a>, <a href="#ref-rodo_tropospheric_2014" role="doc-biblioref">2014</a>)</span>. The specific nature of this agent(s) is still unknown, with biological (bacterial, fungal or viral) and chemical (pollution) elements being the strongest candidates to initiate the autoimmune cascade which leads to the disease.</p>
+<p>One of the most striking features of the epidemiological dynamics of Kawasaki Disease is the defined <strong>seasonal structure</strong> across multiple countries, with broad coherence in fluctuations of cases across the Northern Hemisphere extra-tropical latitudes <span class="citation" data-cites="burns_seasonality_2013">(<a href="#ref-burns_seasonality_2013" role="doc-biblioref">Burns et al. 2013</a>)</span>.</p>
+<p>In the case of Japan, the number of admissions has been recorded in the epidemiological records since 1970, and show the following pattern:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/kd_records_japan.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="KD Records Japan"><img src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/kd_records_japan.png" class="img-fluid figure-img" alt="KD Records Japan"></a></p>
+<figcaption>KD Records Japan</figcaption>
+</figure>
+</div>
+<p>Three main features are notable:</p>
+<ul>
+<li>The epidemic peaks of <strong>1979</strong>, <strong>1982</strong> and <strong>1986</strong> (and to a lesser degree, <strong>1984</strong>).</li>
+<li>The <strong>increasing trend</strong> starting around <strong>1995</strong> until today.</li>
+<li>The marked <strong>seasonality</strong> from <strong>2000</strong> onwards.</li>
+</ul>
+<p>All of this prompts several questions towards the nature of the drivers of these changes in incidence for a disease that is non-communicable in nature.</p>
+<p>In this work, we focus on the period from <strong>2011 to 2018</strong> for the prefecture of <strong>Tokyo</strong>, and try to associate the <strong>seasonal maxima</strong> and <strong>minima</strong> to <strong>atmospheric transport patterns</strong>.</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<section id="kawasaki-disease" class="level3">
+<h3 class="anchored" data-anchor-id="kawasaki-disease">Kawasaki Disease</h3>
+<section id="source" class="level4">
+<h4 class="anchored" data-anchor-id="source">Source</h4>
+<p>We collected data on <strong>date of admission</strong> and <strong>reported date of symptoms onset</strong> for a total of <strong>13970 KD cases</strong> in hospitals belonging to the <strong>Tokyo</strong> prefecture from <strong>2011</strong> to <strong>2018</strong>. This data was originally collected by the (22nd to 25th) nationwide epidemiological surveys of Kawasaki disease in Japan <span class="citation" data-cites="makino2015descriptive makino2018epidemiological makino2019nationwide AE202023">(<a href="#ref-makino2015descriptive" role="doc-biblioref">Makino et al. 2015</a>, <a href="#ref-makino2018epidemiological" role="doc-biblioref">2018</a>, <a href="#ref-makino2019nationwide" role="doc-biblioref">2019</a>; <a href="#ref-AE202023" role="doc-biblioref">Ae et al. 2020</a>)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>kd_japan <span class="op">=</span> (pd.read_csv(<span class="st">'../data/kawasaki_disease/japan_ts.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>            .reset_index()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>            .rename(columns<span class="op">=</span>{<span class="st">'index'</span>: <span class="st">'date'</span>})</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            .assign(date<span class="op">=</span><span class="kw">lambda</span> dd: pd.to_datetime(dd.date))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="computation-of-kd-maxima-and-minima" class="level4">
+<h4 class="anchored" data-anchor-id="computation-of-kd-maxima-and-minima">Computation of KD maxima and minima</h4>
+<p>The data was aggregated to generate <strong>daily counts</strong> of hospital admissions and <strong>registered onsets</strong>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>kd_tokyo <span class="op">=</span> pd.read_csv(<span class="st">'../data/kawasaki_disease/tokyo_ts.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>(kd_tokyo</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> .assign(rolling_7<span class="op">=</span><span class="kw">lambda</span> dd: dd.cases.rolling(<span class="dv">7</span>, center<span class="op">=</span><span class="va">True</span>).mean())</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> .assign(rolling_56<span class="op">=</span><span class="kw">lambda</span> dd: dd.cases.rolling(<span class="dv">7</span> <span class="op">*</span> <span class="dv">8</span>, center<span class="op">=</span><span class="va">True</span>).mean())</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> .rename(columns<span class="op">=</span>{<span class="st">'cases'</span>: <span class="st">'Daily cases'</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'rolling_7'</span>: <span class="st">'7 Days MA'</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'rolling_56'</span>: <span class="st">'8 Weeks MA'</span>})</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> .melt([<span class="st">'date'</span>, <span class="st">'year'</span>])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a> .dropna()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a> .pipe(<span class="kw">lambda</span> dd: p9.ggplot(dd)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.aes(<span class="st">'date'</span>, <span class="st">'value'</span>, color<span class="op">=</span><span class="st">'variable'</span>, group<span class="op">=</span><span class="st">'variable'</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.geom_line(p9.aes(alpha<span class="op">=</span><span class="st">'variable'</span>))</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.scale_alpha_manual([<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">.2</span>])</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.scale_color_manual([<span class="st">'black'</span>, <span class="st">'red'</span>, <span class="st">'black'</span>])</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.scale_x_datetime(labels<span class="op">=</span>date_format(<span class="st">'%Y-%m'</span>),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                             breaks<span class="op">=</span>date_breaks(<span class="st">'20 months'</span>))</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.theme(figure_size<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">2</span>), title<span class="op">=</span>p9.element_text(size<span class="op">=</span><span class="dv">11</span>))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.labs(x<span class="op">=</span><span class="st">''</span>, y<span class="op">=</span><span class="st">'Registered KD cases'</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Daily KD cases in Tokyo'</span>, color<span class="op">=</span><span class="st">''</span>, alpha<span class="op">=</span><span class="st">''</span>))</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/daily_cases_tokyo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Daily counts"><img src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/daily_cases_tokyo.png" class="img-fluid figure-img" alt="Daily counts"></a></p>
+<figcaption>Daily counts</figcaption>
+</figure>
+</div>
+<p>The daily counts were then aggregated by week to obtain a weekly estimate of <strong>case onsets per day</strong> (that is, the daily average for each consecutive week in a year).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>kd_weekly_tokyo <span class="op">=</span> (kd_tokyo</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    .assign(date<span class="op">=</span><span class="kw">lambda</span> dd: pd.to_datetime(dd.date))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    .assign(week<span class="op">=</span><span class="kw">lambda</span> dd: (((dd.date.dt.dayofyear <span class="op">-</span> <span class="dv">1</span>) <span class="op">//</span> <span class="dv">7</span>) <span class="op">+</span> <span class="dv">1</span>).clip(<span class="va">None</span>, <span class="dv">52</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">'year'</span>, <span class="st">'week'</span>], as_index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    .cases.mean()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To generate the <strong>yearly maxima</strong> and <strong>minima</strong>, we selected the <strong>5 weeks</strong> with the <strong>most daily cases</strong> and the <strong>5 weeks</strong> with the <strong>least daily cases</strong> for <strong>each year</strong>, respectively, and are shown in the following figure:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>kd_weekly_tokyo_minmax <span class="op">=</span> (kd_weekly_tokyo</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a> .groupby([<span class="st">'year'</span>])</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> .<span class="bu">apply</span>(<span class="kw">lambda</span> dd: pd.concat([</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>     dd.sort_values(<span class="st">'cases'</span>).iloc[:<span class="dv">5</span>].assign(label<span class="op">=</span><span class="st">'KD Minima'</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>     dd.sort_values(<span class="st">'cases'</span>).iloc[<span class="op">-</span><span class="dv">5</span>:].assign(label<span class="op">=</span><span class="st">'KD Maxima'</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> ]))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a> .reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>min_max_weekly_dates <span class="op">=</span> (kd_weekly_tokyo_minmax</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a> .merge((pd.DataFrame(<span class="bu">dict</span>(date<span class="op">=</span>pd.date_range(<span class="st">'2011'</span>, <span class="st">'2018-12-31'</span>)))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>         .assign(year<span class="op">=</span><span class="kw">lambda</span> dd: dd.date.dt.year)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>         .assign(week<span class="op">=</span><span class="kw">lambda</span> dd: (((dd.date.dt.dayofyear <span class="op">-</span> <span class="dv">1</span>) <span class="op">//</span> <span class="dv">7</span>) <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>         .clip(<span class="va">None</span>, <span class="dv">52</span>))))</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a> .drop(columns<span class="op">=</span><span class="st">'cases'</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>min_max_weekly_dates.to_csv(<span class="st">'../data/kawasaki_disease/kd_min_max_dates.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/weekly_kd_tokyo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Weekly counts"><img src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/weekly_kd_tokyo.png" class="img-fluid figure-img" alt="Weekly counts"></a></p>
+<figcaption>Weekly counts</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="trajectory-generation" class="level3">
+<h3 class="anchored" data-anchor-id="trajectory-generation">Trajectory Generation</h3>
+<p>To model <strong>air mass back-trajectories</strong>, we used the Hybrid Single Particle Lagrangian Integrated Trajectory (<strong>HYSPLIT</strong>) model version 5.2 <span class="citation" data-cites="stein_noaas_2015">(<a href="#ref-stein_noaas_2015" role="doc-biblioref">Stein et al. 2015</a>)</span>, which we operated programmatically via the Python package <code>PySPLIT</code> <span class="citation" data-cites="warner_introduction_2018">(<a href="#ref-warner_introduction_2018" role="doc-biblioref">Warner 2018</a>)</span> to generate a high amount of trajectories.</p>
+<p>For each day of the period from the 1st of January 2011 to the 31st of December 2018, we generated 4 backtrajectories up to the previous 96h starting at 00:00, 6:00, 12:00 and 18:00, with the initial point 10 meters over sea surface in central Tokyo (139.65E, 35.68N).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>HYSPLIT_DIR <span class="op">=</span> <span class="st">'/home/afontal/utils/hysplit/exec/hyts_std'</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>HYSPLIT_WORKING <span class="op">=</span> <span class="st">'/home/afontal/utils/hysplit/working'</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>METEO_DIR <span class="op">=</span> <span class="st">'/home/afontal/utils/hysplit/meteo/gdas1'</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>OUT_DIR <span class="op">=</span> <span class="st">'/home/afontal/projects/vasculitis2022-conference/output/trajectories'</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year, month <span class="kw">in</span> product(<span class="bu">range</span>(<span class="dv">2011</span>, <span class="dv">2019</span>), <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>)):</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    pysplit.generate_bulktraj(<span class="st">'tokyo'</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                              hysplit_working<span class="op">=</span>HYSPLIT_WORKING,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                              hysplit<span class="op">=</span>HYSPLIT_DIR,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                              output_dir<span class="op">=</span>OUT_DIR,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                              meteo_dir<span class="op">=</span>METEO_DIR,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                              years<span class="op">=</span>[year],</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                              months<span class="op">=</span>[month],</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                              meteoyr_2digits<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                              hours<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">12</span>, <span class="dv">18</span>],</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                              altitudes<span class="op">=</span>[<span class="dv">10</span>],</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                              coordinates<span class="op">=</span>(<span class="fl">35.68</span>, <span class="fl">139.65</span>),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                              run<span class="op">=-</span><span class="dv">96</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                              meteo_bookends<span class="op">=</span>([<span class="dv">4</span>, <span class="dv">5</span>], []))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Below, an extract showing the individual trajectories generated at different points in time:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/trajectories_animation.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Weekly counts"><img src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/trajectories_animation.gif" class="img-fluid figure-img" alt="Weekly counts"></a></p>
+<figcaption>Weekly counts</figcaption>
+</figure>
+</div>
+<section id="meteorology-data" class="level4">
+<h4 class="anchored" data-anchor-id="meteorology-data">Meteorology data</h4>
+<p>To model the air trajectories, HYSPLIT requires a set of gridded meteorological data at all pressure levels. In this case, we downloaded the <a href="https://www.ready.noaa.gov/archives.php">GDAS</a> 1x1°, 3 hour resolution dataset for every week from December 2010 (to be able to generate backtrajectories starting on January 2011) to December 2018. These data can directly be accessed through <a href="https://www.ready.noaa.gov/archives.php">NOAA’S ARL FTP Server</a>.</p>
+</section>
+</section>
+<section id="differential-trajectory-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="differential-trajectory-analysis">Differential Trajectory Analysis</h3>
+<p>As a first step, we generated a grid of frequency of intersection between lat-lon grid cells and the trajectories associated to KD maxima and KD minima dates, which are a total of <strong>1120</strong> trajectories associated to each group.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>all_trajs <span class="op">=</span> pysplit.make_trajectorygroup(glob(<span class="st">'../output/trajectories/*'</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>all_trajectories_data <span class="op">=</span> (</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    pd.concat([t.data.assign(traj_id<span class="op">=</span>i) <span class="cf">for</span> i, t <span class="kw">in</span> <span class="bu">enumerate</span>(all_trajs)])</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    .drop(columns<span class="op">=</span>[<span class="st">'Temperature_C'</span>, <span class="st">'Temperature'</span>, <span class="st">'Mixing_Depth'</span>])</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    .assign(start_time<span class="op">=</span><span class="kw">lambda</span> dd: dd.DateTime <span class="op">-</span> pd.to_timedelta(dd.Timestep, unit<span class="op">=</span><span class="st">'h'</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>trajectory_lines <span class="op">=</span> (</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    all_trajectories_data</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">'traj_id'</span>, <span class="st">'start_time'</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'geometry'</span>]</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">apply</span>(<span class="kw">lambda</span> x: LineString([(i.x, i.y) <span class="cf">for</span> i <span class="kw">in</span> x.to_list()]))</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We first generate a grid of 200 by 200 cellsvbased on the boundaries of the generated trajectories, which ends up looking like a 0.8x0.8° resolution grid like the one displayed in the following image:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>margin <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>xmin, ymin, xmax, ymax <span class="op">=</span> all_trajectories_data.total_bounds.<span class="bu">round</span>() <span class="op">+</span> [<span class="dv">200</span>, <span class="op">-</span>margin, <span class="dv">0</span>, margin]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>n_cells <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>cell_size <span class="op">=</span> (xmax <span class="op">-</span> xmin) <span class="op">/</span> n_cells</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>grid_cells <span class="op">=</span> []</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x0 <span class="kw">in</span> np.arange(xmin, xmax <span class="op">+</span> cell_size, cell_size):</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> y0 <span class="kw">in</span> np.arange(ymin, ymax <span class="op">+</span> cell_size, cell_size):</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        x1 <span class="op">=</span> x0 <span class="op">-</span> cell_size</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        y1 <span class="op">=</span> y0 <span class="op">+</span> cell_size</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        grid_cells.append(shapely.geometry.box(x0, y0, x1, y1))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> (gpd.GeoDataFrame(grid_cells, columns<span class="op">=</span>[<span class="st">'geometry'</span>])</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        .assign(cell<span class="op">=</span><span class="kw">lambda</span> dd: dd.geometry)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        .assign(x<span class="op">=</span><span class="kw">lambda</span> dd: dd.cell.centroid.x, y<span class="op">=</span><span class="kw">lambda</span> dd: dd.cell.centroid.y))</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>x_y_poly <span class="op">=</span> grid[[<span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'cell'</span>]].drop_duplicates()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/map_grid.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Map Grid"><img src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/map_grid.png" class="img-fluid figure-img" alt="Map Grid"></a></p>
+<figcaption>Map Grid</figcaption>
+</figure>
+</div>
+<p>Then, we count the number of intersections of the trajectories of each KD group for each of the grid cells, which allows us to visualize longer term or aggregated patterns, like in this figure that displays the different sources associated to KD maxima and minima per calendar year:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>min_max_trajectories <span class="op">=</span> (</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    trajectory_lines</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    .assign(date<span class="op">=</span><span class="kw">lambda</span> dd: pd.to_datetime(dd.start_time.dt.date))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    .merge(min_max_weekly_dates)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>grid_intersections <span class="op">=</span> gpd.sjoin(min_max_trajectories, grid, op<span class="op">=</span><span class="st">'intersects'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/trajs_per_year.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Trajectories per year"><img src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/trajs_per_year.png" class="img-fluid figure-img" alt="Trajectories per year"></a></p>
+<figcaption>Trajectories per year</figcaption>
+</figure>
+</div>
+<p>By comparing, cell-wise, the ratio between KD maxima and KD minima intersections, we can obtain an overview of the source areas overrepresented in association with the timings of either phenomena.</p>
+<p>To generate a summarized figure, we use the <strong>Log2</strong> transformation of the ratios to generate the image, and colour each cell grid according to this. The transformation defined as:</p>
+<p><span class="math display">\[R = \text{Log}_2\cfrac{\text{Intersections}_{max}}{\text{Intersections}_{min}}\]</span></p>
+<p>This allows for a symmetric scale on both sides, generating negative values for areas overrepresented for KD minima, and positive values for areas overrepresented in KD maxima.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(grid_intersections</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a> .groupby([<span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'label'</span>])</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a> .size()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a> .rename(<span class="st">'n'</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a> .reset_index()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a> .pivot([<span class="st">'x'</span>, <span class="st">'y'</span>], <span class="st">'label'</span>, <span class="st">'n'</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> .fillna(<span class="dv">0</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a> .assign(diff<span class="op">=</span><span class="kw">lambda</span> dd: dd[<span class="st">'KD Maxima'</span>] <span class="op">-</span> dd[<span class="st">'KD Minima'</span>])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a> .assign(fc<span class="op">=</span><span class="kw">lambda</span> dd: np.log2(dd[<span class="st">'KD Maxima'</span>] <span class="op">/</span> dd[<span class="st">'KD Minima'</span>]))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a> .sort_values(<span class="st">'diff'</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a> .reset_index()</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a> .merge(x_y_poly)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a> .assign(total_n<span class="op">=</span><span class="kw">lambda</span> dd: dd[<span class="st">'KD Maxima'</span>] <span class="op">+</span> dd[<span class="st">'KD Minima'</span>])</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a> .loc[<span class="kw">lambda</span> dd: dd.total_n <span class="op">&gt;=</span> <span class="dv">1120</span> <span class="op">*</span> <span class="fl">0.01</span>]</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a> .pipe(<span class="kw">lambda</span> dd: p9.ggplot(dd)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.geom_map(p9.aes(fill<span class="op">=</span><span class="st">'fc'</span>, geometry<span class="op">=</span><span class="st">'cell'</span>), size<span class="op">=</span><span class="fl">.0</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.geom_map(data<span class="op">=</span>world, size<span class="op">=</span><span class="fl">.1</span>, alpha<span class="op">=</span><span class="fl">.1</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.scale_fill_continuous(<span class="st">'RdBu_r'</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.scale_alpha_continuous(trans<span class="op">=</span><span class="st">'log10'</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.theme(dpi<span class="op">=</span><span class="dv">300</span>, panel_grid<span class="op">=</span>p9.element_blank(),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                  plot_background<span class="op">=</span>p9.element_blank(),</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                  legend_background<span class="op">=</span>p9.element_blank(),</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>                  legend_key_size<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>                  legend_text<span class="op">=</span>p9.element_text(size<span class="op">=</span><span class="dv">6</span>),</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>                  legend_title_align<span class="op">=</span><span class="st">'center'</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>                  legend_title<span class="op">=</span>p9.element_text(size<span class="op">=</span><span class="dv">7</span>))</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.labs(fill<span class="op">=</span><span class="st">'Log$_2$ FC'</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.scale_x_continuous(labels<span class="op">=</span>custom_format(<span class="st">'</span><span class="sc">{:0g}</span><span class="st">°E'</span>), limits<span class="op">=</span>(<span class="dv">90</span>, <span class="dv">160</span>))</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>       <span class="op">+</span> p9.scale_y_continuous(labels<span class="op">=</span>custom_format(<span class="st">'</span><span class="sc">{:0g}</span><span class="st">°N'</span>), limits<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">65</span>)))</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The main findings support the hypothesis that winds from <strong>Northeastern Asia</strong> are associated and synchronized with <strong>periods of high KD Maxima</strong> in <strong>Tokyo</strong>, as the main figure portrays:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/main_figure.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Main Figure"><img src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/images/main_figure.png" class="img-fluid figure-img" alt="Main Figure"></a></p>
+<figcaption>Main Figure</figcaption>
+</figure>
+</div>
+<p>Red values represent those areas of more common occurence during weeks of KD maxima with respect to those of KD minima, with blue values representing the opposite.</p>
+<p>All in all, there seem to be two main different routes associated to periods of</p>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<section id="temporal-association-study" class="level3">
+<h3 class="anchored" data-anchor-id="temporal-association-study">Temporal association study</h3>
+<p>There are several limitations when trying to relate studies to connect temporal changes between different processes, as finding associations doesn’t necessarily imply a causal link between both phenomena, and external drivers connecting both might be the reason of the link.</p>
+</section>
+<section id="choice-of-temporal-variability" class="level3">
+<h3 class="anchored" data-anchor-id="choice-of-temporal-variability">Choice of temporal variability</h3>
+<p>Taking this into account, the <strong>temporal changes</strong> in KD incidence in Tokyo has <strong>three main sources of variability</strong>:</p>
+<ul>
+<li>The increasing trend.</li>
+<li>The seasonal variation (mainly, of yearly frequence).</li>
+<li>The anomalies once removed of trend and seasonal variability.</li>
+</ul>
+<p>The methods employed here, given the selection of the yearly maxima and minima, only allow us to associate or identify the phenomena related to yearly variation, and would fail to identify the processes that drive the general increase in cases for the last 20 years and the anomalies unrelated to the seasonal variability.</p>
+</section>
+<section id="backtrajectory-modelling" class="level3">
+<h3 class="anchored" data-anchor-id="backtrajectory-modelling">Backtrajectory modelling</h3>
+<p>The use of HYSPLIT for modelling the trajectories implies that there is a certain degree of error in the estimation of the trajectories, and the magnitude of these is known to increase as the trajectories surpass the planet boundary layer. By not using single trajectories to assess any of the effects but aggregates of many of them, we attempted to mitigate these issues. The use of higher resolution meteorology data might also allow us to improve the accuracy of the modelling.</p>
+<p>In this study, we’ve also just considered the 2D intersections of the trajectories with the latitudinal-longitudinal plane, without regard for the actual altitude of the trajectories. To be more thorough, we should include the altitude of the trajectories in each point in time, paired with calculations of moisture uptake rates in order to able to actually pinpoint with better accuracy the areas where the air masses that arrive to the destination are <em>collecting</em> matter.</p>
+</section>
+</section>
+<section id="conclusions-and-outlook" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions-and-outlook">Conclusions and outlook</h2>
+<p>This study further confirms, with updated data, the hypothesis connecting the tropospheric winds from NE Asia with higher Kawasaki Disesase incidence periods which was discussed in <span class="citation" data-cites="rodo_tropospheric_2014">Rodó et al. (<a href="#ref-rodo_tropospheric_2014" role="doc-biblioref">2014</a>)</span>, allowing us now to pinpoint with higher accuracy the specific locations that might source the (or one of) the etiologic agents of the disease.</p>
+<p>Further studies should (and are being done) on the characterization of these air masses to understand the potential immune-triggering compounds carried in them.</p>
+<p>Stay posted for more updated on the issue and feel free to comment below with any doubts or comments.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-AE202023" class="csl-entry" role="listitem">
+Ae, Ryusuke, Nobuko Makino, Koki Kosami, Masanari Kuwabara, Yuri Matsubara, and Yosikazu Nakamura. 2020. <span>“Epidemiology, Treatments, and Cardiac Complications in Patients with Kawasaki Disease: The Nationwide Survey in Japan, 2017-2018.”</span> <em>The Journal of Pediatrics</em> 225: 23–29.e2. https://doi.org/<a href="https://doi.org/10.1016/j.jpeds.2020.05.034">https://doi.org/10.1016/j.jpeds.2020.05.034</a>.
+</div>
+<div id="ref-burns_seasonality_2013" class="csl-entry" role="listitem">
+Burns, Jane C., Lauren Herzog, Olivia Fabri, Adriana H. Tremoulet, Xavier Rodó, Ritei Uehara, David Burgner, et al. 2013. <span>“Seasonality of <span>Kawasaki</span> <span>Disease</span>: <span>A</span> <span>Global</span> <span>Perspective</span>.”</span> <em>PLOS ONE</em> 8 (9): e74529. <a href="https://doi.org/10.1371/journal.pone.0074529">https://doi.org/10.1371/journal.pone.0074529</a>.
+</div>
+<div id="ref-makino2015descriptive" class="csl-entry" role="listitem">
+Makino, Nobuko, Yosikazu Nakamura, Mayumi Yashiro, Ryusuke Ae, Satoshi Tsuboi, Yasuko Aoyama, Takao Kojo, Ritei Uehara, Kazuhiko Kotani, and Hiroshi Yanagawa. 2015. <span>“Descriptive Epidemiology of Kawasaki Disease in Japan, 2011–2012: From the Results of the 22nd Nationwide Survey.”</span> <em>Journal of Epidemiology</em>, JE20140089.
+</div>
+<div id="ref-makino2019nationwide" class="csl-entry" role="listitem">
+Makino, Nobuko, Yosikazu Nakamura, Mayumi Yashiro, Koki Kosami, Yuri Matsubara, Ryusuke Ae, Yasuko Aoyama, and Hiroshi Yanagawa. 2019. <span>“Nationwide Epidemiologic Survey of Kawasaki Disease in Japan, 2015–2016.”</span> <em>Pediatrics International</em> 61 (4): 397–403.
+</div>
+<div id="ref-makino2018epidemiological" class="csl-entry" role="listitem">
+Makino, Nobuko, Yosikazu Nakamura, Mayumi Yashiro, Takashi Sano, Ryusuke Ae, Koki Kosami, Takao Kojo, Yasuko Aoyama, Kazuhiko Kotani, and Hiroshi Yanagawa. 2018. <span>“Epidemiological Observations of Kawasaki Disease in Japan, 2013–2014.”</span> <em>Pediatrics International</em> 60 (6): 581–87.
+</div>
+<div id="ref-rodo_association_2011" class="csl-entry" role="listitem">
+Rodó, Xavier, Joan Ballester, Dan Cayan, Marian E. Melish, Yoshikazu Nakamura, Ritei Uehara, and Jane C. Burns. 2011. <span>“Association of <span>Kawasaki</span> Disease with Tropospheric Wind Patterns.”</span> <em>Sci Rep</em> 1 (1): 152. <a href="https://doi.org/10.1038/srep00152">https://doi.org/10.1038/srep00152</a>.
+</div>
+<div id="ref-rodo_tropospheric_2014" class="csl-entry" role="listitem">
+Rodó, Xavier, Roger Curcoll, Marguerite Robinson, Joan Ballester, Jane C. Burns, Daniel R. Cayan, W. Ian Lipkin, et al. 2014. <span>“Tropospheric Winds from Northeastern <span>China</span> Carry the Etiologic Agent of <span>Kawasaki</span> Disease from Its Source to <span>Japan</span>.”</span> <em>Proceedings of the National Academy of Sciences</em> 111 (22): 7952–57. <a href="https://doi.org/10.1073/pnas.1400380111">https://doi.org/10.1073/pnas.1400380111</a>.
+</div>
+<div id="ref-stein_noaas_2015" class="csl-entry" role="listitem">
+Stein, A. F., R. R. Draxler, G. D. Rolph, B. J. B. Stunder, M. D. Cohen, and F. Ngan. 2015. <span>“<span>NOAA</span>’s <span>HYSPLIT</span> <span>Atmospheric</span> <span>Transport</span> and <span>Dispersion</span> <span>Modeling</span> <span>System</span>.”</span> <em>Bulletin of the American Meteorological Society</em> 96 (12): 2059–77. <a href="https://doi.org/10.1175/BAMS-D-14-00110.1">https://doi.org/10.1175/BAMS-D-14-00110.1</a>.
+</div>
+<div id="ref-warner_introduction_2018" class="csl-entry" role="listitem">
+Warner, Mellissa S. C. 2018. <span>“Introduction to <span>PySPLIT</span>: <span>A</span> <span>Python</span> <span>Toolkit</span> for <span>NOAA</span> <span>ARL</span>’s <span>HYSPLIT</span> <span>Model</span>.”</span> <em>Computing in Science Engineering</em> 20 (5): 47–62. <a href="https://doi.org/10.1109/MCSE.2017.3301549">https://doi.org/10.1109/MCSE.2017.3301549</a>.
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<section id="comments" class="comments-panel reveal-in" aria-label="Comments">
+  <div class="comments-panel-head">
+    <h2>Comments</h2>
+    <p>Replies are powered by GitHub Discussions.</p>
+  </div>
+  <div class="comments-panel-embed"></div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell site-footer-inner">
+    <div class="footer-identity">
+      <p class="footer-kicker">Portfolio · Blog · CV</p>
+      <div class="footer-links">
+        <a href="mailto:alejandro.fontal.92@gmail.com">
+          <iconify-icon icon="fa6-solid:envelope" aria-hidden="true"></iconify-icon>
+          <span>Get in touch</span>
+        </a>
+        <a href="https://github.com/AlFontal/alfontal.dev" target="_blank" rel="noopener noreferrer">
+          <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+          <span>View source code</span>
+        </a>
+      </div>
+    </div>
+
+    <ul class="social-list" aria-label="Social links">
+
+      <li>
+        <a href="https://github.com/AlFontal" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+          <iconify-icon icon="fa6-brands:github" aria-hidden="true"></iconify-icon>
+        </a>
+      </li>
+      <li>
+        <a href="https://gitlab.com/AlFontal" target="_blank" rel="noopener noreferrer" aria-label="GitLab" title="GitLab">
+          <iconify-icon icon="fa6-brands:gitlab" aria-hidden="true"></iconify-icon>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/alfontal" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+          <iconify-icon icon="fa6-brands:linkedin" aria-hidden="true"></iconify-icon>
+        </a>
+      </li>
+      <li>
+        <a href="https://orcid.org/0000-0003-1138-2158" target="_blank" rel="noopener noreferrer" aria-label="ORCID" title="ORCID">
+          <iconify-icon icon="fa6-brands:orcid" aria-hidden="true"></iconify-icon>
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "AlFontal/alfontal.dev";
+    script.dataset.repoId = "R_kgDOI8y_Yg";
+    script.dataset.category = "Comments";
+    script.dataset.categoryId = "DIC_kwDOI8y_Ys4C7Wha";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "0";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+<script src="/assets/notebooks/kd-tokyo-air-sources/kd_tokyo_air_sources/kd_tokyo_air_sources_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

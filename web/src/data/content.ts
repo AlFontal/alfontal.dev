@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
 import aqiStationsScraperImage from '../assets/projects/aqi_stations_scraper.png';
+import arbresBcnImage from '../assets/projects/arbres-bcn.png';
 import argosExtensionsImage from '../assets/projects/argos_extensions.png';
 import environmentalDataJapanImage from '../assets/projects/environmental_data_japan.png';
 import japanIdwrDbImage from '../assets/projects/jp_idwr_db.png';
@@ -28,7 +29,8 @@ export type Project = {
   date: string;
   categories: string[];
   image: ImageMetadata;
-  href: string;
+  siteUrl?: string;
+  repoUrl?: string;
 };
 
 export type HeroCard = {
@@ -91,7 +93,8 @@ export type ProjectsPage = {
     stackValue: string;
     stackLabel: string;
   };
-  ctaLabel: string;
+  siteCtaLabel: string;
+  repoCtaLabel: string;
 };
 
 export type PublicationsPage = {
@@ -286,17 +289,28 @@ export const blogPage: BlogPage = {
   description: 'Research notes, coding experiments, and long-form technical posts.',
   kicker: 'Writing / coding / technical notes',
   title: 'Blog',
-  intro: 'A mix of technical and non-technical writing, sometimes sharing reproducible code blocks.',
+  intro: 'A mix of technical and non-technical writing, or whatever comes to mind lately.',
 };
 
 export const projects: Project[] = [
+
+  {
+    title: 'Barcelona Trees Map Dashboard',
+    description: 'Interactive dashboard for exploring Barcelona’s urban tree inventory with filtering and spatial visualization.',
+    date: '2026-04-25',
+    categories: ['Open Data', 'deck.gl', 'GIS', 'Dashboard'],
+    image: arbresBcnImage,
+    siteUrl: 'https://alfontal.github.io/arbres-bcn',
+    repoUrl: 'https://github.com/AlFontal/arbres-bcn',
+  },
+
   {
     title: 'RMD Notebooks VS Code',
     description: 'Extension for working with `.rmd` and `.qmd` with VS Code (and forks) via the notebook API.',
     date: '2026-03-22',
     categories: ['TypeScript', 'VS Code', 'Quarto', 'RMarkdown', 'Extension'],
     image: rmdVscodeImage,
-    href: 'https://github.com/AlFontal/rmd-notebooks-vscode',
+    repoUrl: 'https://github.com/AlFontal/rmd-notebooks-vscode',
   },
   {
     title: 'SDCpy Studio',
@@ -304,7 +318,7 @@ export const projects: Project[] = [
     date: '2026-02-11',
     categories: ['Python', 'FastAPI', 'Time-Series Analysis', 'Dashboard', 'Spatial Analysis', 'Plotly'],
     image: sdcpyStudioImage,
-    href: 'https://github.com/AlFontal/sdcpy-studio',
+    repoUrl: 'https://github.com/AlFontal/sdcpy-studio',
   },
   {
     title: 'Japan IDWR DB',
@@ -312,7 +326,7 @@ export const projects: Project[] = [
     date: '2026-02-03',
     categories: ['Python', 'Epidemiology', 'Database', 'Japan', 'Data Engineering', 'Scraping'],
     image: japanIdwrDbImage,
-    href: 'https://github.com/AlFontal/jp-idwr-db',
+    repoUrl: 'https://github.com/AlFontal/jp-idwr-db',
   },
   {
     title: 'LIF-based Bacterial Bioaerosol ML Classifier',
@@ -320,7 +334,7 @@ export const projects: Project[] = [
     date: '2025-05-21',
     categories: ['Jupyter', 'Machine Learning', 'Aerosols', 'Microbiology', 'Python'],
     image: lifMlImage,
-    href: 'https://github.com/AlFontal/lif-bacteria-aerosols-ms',
+    repoUrl: 'https://github.com/AlFontal/lif-bacteria-aerosols-ms',
   },
   {
     title: 'Environmental Data Japan',
@@ -328,7 +342,7 @@ export const projects: Project[] = [
     date: '2022-09-01',
     categories: ['Python', 'GIS', 'Data Mining'],
     image: environmentalDataJapanImage,
-    href: 'https://github.com/AlFontal/environmental-data-japan',
+    repoUrl: 'https://github.com/AlFontal/environmental-data-japan',
   },
   {
     title: 'Argos Extensions',
@@ -336,7 +350,7 @@ export const projects: Project[] = [
     date: '2022-06-01',
     categories: ['Python', 'Argos', 'xbar', 'API', 'Linux', 'MacOS'],
     image: argosExtensionsImage,
-    href: 'https://github.com/AlFontal/argos-extensions',
+    repoUrl: 'https://github.com/AlFontal/argos-extensions',
   },
   {
     title: 'Sugarboard',
@@ -344,7 +358,7 @@ export const projects: Project[] = [
     date: '2022-03-01',
     categories: ['Python', 'NiceGUI', 'API', 'Data Visualisation', 'Nightscout', 'T1D'],
     image: sugarboardImage,
-    href: 'https://github.com/AlFontal/sugarboard',
+    repoUrl: 'https://github.com/AlFontal/sugarboard',
   },
   {
     title: 'AQI Stations Scraper',
@@ -352,7 +366,7 @@ export const projects: Project[] = [
     date: '2021-07-01',
     categories: ['Python', 'Selenium', 'Scraping', 'Data Mining'],
     image: aqiStationsScraperImage,
-    href: 'https://github.com/AlFontal/aqi-stations-scraper',
+    repoUrl: 'https://github.com/AlFontal/aqi-stations-scraper',
   },
   {
     title: 'SDCpy',
@@ -360,7 +374,7 @@ export const projects: Project[] = [
     date: '2021-04-01',
     categories: ['Python', 'Time-Series Analysis'],
     image: sdcpyImage,
-    href: 'https://github.com/AlFontal/sdcpy',
+    repoUrl: 'https://github.com/AlFontal/sdcpy',
   },
 ];
 
@@ -376,7 +390,8 @@ export const projectsPage: ProjectsPage = {
     stackValue: 'Python-first',
     stackLabel: 'with dashboards, GIS, scraping, and automation',
   },
-  ctaLabel: 'View repository',
+  siteCtaLabel: 'Open site',
+  repoCtaLabel: 'View repository',
 };
 
 export const publications: Publication[] = [

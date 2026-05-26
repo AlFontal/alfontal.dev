@@ -509,7 +509,7 @@ export const cvPage: CvPage = {
   seoTitle: 'Alejandro Fontal, PhD',
   description: 'Experience, skills, and education for Alejandro Fontal.',
   summary:
-    'Computational scientist working at the intersection of bioinformatics, epidemiology, and scientific software. I analyse complex biological and public health data, develop reproducible methods, and build tools that support research in practice.',
+    'Computational scientist and research software engineer working across computational biology, data science, applied machine learning, and scientific software. I build robust analytical pipelines, health data workflows, andresearch tools for real-world biological and public health problems.',
   skillsHeading: 'Development Skills',
   experienceHeading: 'Experience',
   detailsHeading: 'Education & Languages',
@@ -526,7 +526,7 @@ export const cvPage: CvPage = {
 
 export const cvHeader = {
   name: 'Alejandro Fontal, PhD',
-  title: 'Data Science · Bioinformatics · Scientific Software',
+  title: 'Data Science · Machine Learning · Bioinformatics · Scientific Software',
   location: 'Barcelona, ES',
   email: 'alejandro.fontal.92@gmail.com',
   phone: '+34 623 107 939',
@@ -580,7 +580,7 @@ export const cvExperience: CvExperienceItem[] = [
     highlights: [
       'Lead software and data engineering for the group, building internal packages, web tools, and GitHub-based workflows for reproducible research.',
       'Build reproducible pipelines for long-read aerobiome metagenomics and link results to health outcomes.',
-      'Repurpose a laser-based pollen detector for bacterial discrimination using fluorescence, light scattering, and supervised machine learning.',
+      'Repurposed a laser-based pollen detector for bacterial discrimination using fluorescence, light scattering, and supervised machine learning.',
     ],
     tags: ['Python', 'Dash', 'Metagenomics', 'Machine Learning', 'Data Engineering'],
   },

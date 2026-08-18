@@ -176,10 +176,9 @@ export type CvPage = {
 export const siteMeta = {
   name: 'Alejandro Fontal',
   masthead: 'Portfolio · Blog · CV',
-  tagline: 'Data science · Bioinformatics · Health Analytics',
+  tagline: 'Computational science · Machine learning · Health & life sciences',
   description:
-    'Personal site for notebooks, projects, publications, and CV material spanning data science, bioinformatics, and scientific software.',
-  siteUrl: 'https://alfontal.dev',
+  'Personal site for projects, publications, writing, and CV material spanning computational science, machine learning, bioinformatics, and scientific software.',  siteUrl: 'https://alfontal.dev',
   repoUrl: 'https://github.com/AlFontal/alfontal.dev',
   email: 'alejandro.fontal.92@gmail.com',
 };
@@ -205,18 +204,28 @@ export const socialLinks: SocialLink[] = [
 
 export const homeHero: HomeHero = {
   name: 'Alejandro Fontal',
-  availability: 'I’m a data scientist based in Barcelona, working mostly on health-adjacent, environmental, and omics data.\n See my CV for full professional background.',
+  availability:
+    'I’m a computational scientist and Senior Machine Learning Engineer based in Barcelona, working mostly on problems in health and life sciences.',
   tagline:
     'I use this site as a sort of public portfolio, a place to share projects, writing, publications, and whatever I’m building or thinking about lately.',
   cards: [
-    { title: 'Data Science', subtitle: 'Applied ML/AI, time series, spatial analysis, statistics, and data visualization' },
-    { title: 'Bioinformatics', subtitle: 'Metagenomics, sequence analysis, reproducible pipelines' },
-    { title: 'Software', subtitle: 'Packages, web tools, APIs, research workflows, data engineering' },
+    {
+      title: 'Data Science & ML',
+      subtitle: 'Statistical modelling, applied ML, time series, biomedical signals and data viz.',
+    },
+    {
+      title: 'Computational Biology',
+      subtitle: 'Bioinformatics, epidemiology, omics, and health data',
+    },
+    {
+      title: 'Scientific Software',
+      subtitle: 'Python and R packages, data pipelines, APIs, and research workflows',
+    },
   ],
 };
 
 export const homePage: HomePage = {
-  eyebrow: 'Data science · Bioinformatics · Scientific software',
+  eyebrow: 'Data science · Machine learning · Health & life sciences',
   academicBackgroundHeading: 'Academic Background',
   academicBackgroundIntro: 'A quick overview of my educational journey.',
   interestsHeading: 'Interests',
@@ -509,8 +518,7 @@ export const cvPage: CvPage = {
   seoTitle: 'Alejandro Fontal, PhD',
   description: 'Experience, skills, and education for Alejandro Fontal.',
   summary:
-    'Computational scientist and research software engineer working across computational biology, data science, applied machine learning, and scientific software. I build robust analytical pipelines, health data workflows, andresearch tools for real-world biological and public health problems.',
-  skillsHeading: 'Development Skills',
+  'Computational scientist and Senior Machine Learning Engineer working across health and life sciences, with experience in statistical modelling, machine learning, bioinformatics, epidemiology, biomedical signals, and scientific software.',  skillsHeading: 'Development Skills',
   experienceHeading: 'Experience',
   detailsHeading: 'Education & Languages',
   searchPlaceholder: 'Search roles, organizations, highlights...',
@@ -526,7 +534,7 @@ export const cvPage: CvPage = {
 
 export const cvHeader = {
   name: 'Alejandro Fontal, PhD',
-  title: 'Data Science · Machine Learning · Bioinformatics · Scientific Software',
+  title: 'Data Science · Machine Learning · Health & Life Sciences',
   location: 'Barcelona, ES',
   email: 'alejandro.fontal.92@gmail.com',
   phone: '+34 623 107 939',
@@ -572,18 +580,42 @@ export const cvEducation: CvEducationItem[] = [
 
 export const cvExperience: CvExperienceItem[] = [
   {
-    role: 'Postdoctoral Researcher · Data and Software Lead',
-    organization: 'Climate & Health Program @ ISGlobal',
-    date: 'Oct 2024 - Present',
-    location: 'Barcelona, ES',
-    summary: 'Leading software, data, and reproducibility infrastructure for climate-health and aerobiome research.',
-    highlights: [
-      'Lead software and data engineering for the group, building internal packages, web tools, and GitHub-based workflows for reproducible research.',
-      'Build reproducible pipelines for long-read aerobiome metagenomics and link results to health outcomes.',
-      'Repurposed a laser-based pollen detector for bacterial discrimination using fluorescence, light scattering, and supervised machine learning.',
-    ],
-    tags: ['Python', 'Dash', 'Metagenomics', 'Machine Learning', 'Data Engineering'],
-  },
+  role: 'Senior Machine Learning Engineer',
+  organization: 'NIMBLE Diagnostics',
+  date: 'Jul 2026 - Present',
+  location: 'Barcelona, ES',
+  summary:
+    'Leading the machine learning strategy for a MedTech R&D program based on complex biomedical signals.',
+  highlights: [
+    'Develop statistical and machine learning approaches to extract clinically relevant information from experimental and clinical biomedical measurements.',
+    'Define the modelling workflow from understanding the measurements and developing useful representations through model development, validation, and performance assessment.',
+    'Work with signal-processing, clinical, and R&D teams to connect measurement behaviour and model outputs with clinically meaningful endpoints.',
+    'Build reproducible Python workflows for exploratory analysis, model development, and validation.',
+  ],
+  tags: [
+    'Machine Learning',
+    'Biomedical Signals',
+    'MedTech',
+    'Python',
+    'Statistics',
+    'Clinical Research',
+    'R&D',
+  ],
+},
+  {
+  role: 'Postdoctoral Researcher · Data and Software Lead',
+  organization: 'Climate & Health Program @ ISGlobal',
+  date: 'Oct 2024 - Jul 2026',
+  location: 'Barcelona, ES',
+  summary:
+    'Combined postdoctoral research with responsibility for software, data workflows, and reproducibility across climate-health and aerobiome projects.',
+  highlights: [
+    'Led software and data engineering for the group, building internal packages, web tools, and GitHub-based workflows for reproducible research.',
+    'Built reproducible pipelines for long-read aerobiome metagenomics and linked results to health outcomes.',
+    'Developed machine learning models for bacterial discrimination from laser-induced fluorescence and light-scattering measurements, enabling near-real-time identification.',
+  ],
+  tags: ['Python', 'Metagenomics', 'Machine Learning', 'Scientific Software', 'Biomedical Signals'],
+},
   {
     role: 'PhD Fellow · Early-Stage Researcher',
     organization: 'Climate & Health Program @ ISGlobal (HELICAL ITN)',
@@ -691,19 +723,24 @@ export const cvLanguages: CvLanguage[] = [
 ];
 
 export const cvTagOrder = [
-  'Python',
   'Machine Learning',
-  'Metagenomics',
-  'Time-Series',
-  'GIS',
+  'Python',
+  'Statistics',
+  'Biomedical Signals',
+  'MedTech',
+  'Bioinformatics',
   'Epidemiology',
+  'Time-Series',
+  'Clinical Research',
+  'Scientific Software',
+  'Metagenomics',
+  'GIS',
+  'R&D',
   'Data Engineering',
   'Docker',
   'Nextflow',
   'Quarto',
-  'Web-dev',
   'GitHub Actions',
-  'Bioinformatics',
-  'R&D',
+  'Web-dev',
   'Education',
 ];

@@ -181,7 +181,7 @@ export const siteMeta = {
     'Personal site for projects, publications, writing, and CV material spanning computational science, machine learning, bioinformatics, and scientific software.',
   siteUrl: 'https://alfontal.dev',
   repoUrl: 'https://github.com/AlFontal/alfontal.dev',
-  email: 'alejandro.fontal.92@gmail.com',
+  email: 'alfontal.dev@gmail.com',
 };
 
 export const navLinks: NavLink[] = [
@@ -193,7 +193,7 @@ export const navLinks: NavLink[] = [
 ];
 
 export const socialLinks: SocialLink[] = [
-  { label: 'Email', href: 'mailto:alejandro.fontal.92@gmail.com', short: 'Mail', icon: 'fa6-solid:envelope' },
+  { label: 'Email', href: 'mailto:alfontal.dev@gmail.com', short: 'Mail', icon: 'fa6-solid:envelope' },
   { label: 'GitHub', href: 'https://github.com/AlFontal', short: 'GH', icon: 'fa6-brands:github' },
   { label: 'GitLab', href: 'https://gitlab.com/AlFontal', short: 'GL', icon: 'fa6-brands:gitlab' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/alfontal', short: 'IN', icon: 'fa6-brands:linkedin' },
@@ -215,8 +215,8 @@ export const homeHero: HomeHero = {
       subtitle: 'Statistical modelling, applied ML, time series, biomedical signals and data viz.',
     },
     {
-      title: 'Computational Biology',
-      subtitle: 'Bioinformatics, epidemiology, omics, and health data',
+      title: 'Health Data & Epidemiology',
+      subtitle: 'Observational health data, registries, surveillance, and population-level analysis.',
     },
     {
       title: 'Scientific Software',
@@ -239,7 +239,7 @@ export const homeAnchorCards: HomeAnchorCard[] = [
     description:
       'Email is the simplest route for collaborations, research questions, or anything you might want to reach out about.',
     linkLabel: 'Send an email',
-    linkHref: 'mailto:alejandro.fontal.92@gmail.com',
+    linkHref: 'mailto:alfontal.dev@gmail.com',
     icon: 'fa6-solid:envelope',
   },
   {
@@ -538,7 +538,7 @@ export const cvHeader = {
   name: 'Alejandro Fontal, PhD',
   title: 'Data Science · Machine Learning · Health & Life Sciences',
   location: 'Barcelona, ES',
-  email: 'alejandro.fontal.92@gmail.com',
+  email: 'alfontal.dev@gmail.com',
   phone: '+34 623 107 939',
   website: 'https://alfontal.dev',
   linkedin: 'https://www.linkedin.com/in/alfontal',
@@ -692,28 +692,36 @@ export const cvSkills: CvSkillGroup[] = [
     keywords: ['scikit-learn', 'PyTorch', 'TensorFlow'],
   },
   {
-    title: 'Python & R',
-    icon: 'fa6-solid:code',
-    summary: 'Primary analytical and scientific computing stack',
+    title: 'Python',
+    icon: 'fa6-brands:python',
+    summary: 'Primary language · 9+ years',
     details:
-      'Python is my primary language (9+ years) for data analysis, statistics, ML, and package development, using pandas, polars, statsmodels, scikit-learn, PyTorch, TensorFlow, plotnine, and FastAPI. Proficient in R with tidyverse and Bioconductor.',
-    keywords: ['Python', 'R', 'Packages'],
+      'Primary language for data analysis, statistical modelling, machine learning, package development, APIs, and data tooling. Regularly use pandas, polars, statsmodels, scikit-learn, PyTorch, TensorFlow, plotnine, and FastAPI.',
+    keywords: ['pandas', 'scikit-learn', 'PyTorch'],
+  },
+  {
+    title: 'R',
+    icon: 'simple-icons:r',
+    summary: 'Statistics and bioinformatics workflows',
+    details:
+      'Proficient with R for statistical analysis and bioinformatics, particularly tidyverse and Bioconductor, with regular R/Python interoperability in analytical workflows.',
+    keywords: ['tidyverse', 'Bioconductor', 'interop'],
   },
   {
     title: 'Scientific Software & Reproducibility',
     icon: 'fa6-solid:gears',
     summary: 'Packages, pipelines, testing, and collaborative workflows',
     details:
-      'Build reproducible analytical software and data pipelines with package development, testing, code review, GitHub and GitLab workflows, CI/CD, containers, APIs, Jupyter, and Quarto.',
-    keywords: ['Git', 'CI/CD', 'Containers'],
+      'Build and maintain packages, reproducible data pipelines, tests, code-review workflows, CI/CD, research-facing APIs, and analytical tools using GitHub, GitLab, Jupyter, and Quarto.',
+    keywords: ['Git', 'CI/CD', 'Packages'],
   },
   {
-    title: 'Linux & HPC',
+    title: 'Linux, HPC & Infrastructure',
     icon: 'material-symbols:terminal-rounded',
-    summary: 'Daily shell, remote systems, and clusters',
+    summary: 'Linux systems, clusters, containers, and deployment',
     details:
-      'Daily Linux user with scripting, remote systems, and HPC workflows using SLURM, Nextflow, and reproducible command-line pipelines.',
-    keywords: ['SLURM', 'Nextflow', 'CLI'],
+      'Daily Linux user across local, remote, and HPC systems. Work includes shell scripting, SLURM and Nextflow workflows, Docker and containerized deployment, service automation, secure remote access, and lightweight server infrastructure.',
+    keywords: ['Linux', 'Docker', 'SLURM'],
   },
 ];
 

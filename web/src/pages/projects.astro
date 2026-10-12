@@ -24,7 +24,6 @@ const sortedProjects = [...projects].sort((a, b) => (a.date < b.date ? 1 : -1));
               src={project.image}
               alt={project.title}
               width={1200}
-              height={630}
               loading={index === 0 ? 'eager' : 'lazy'}
               fetchpriority={index === 0 ? 'high' : 'auto'}
             />

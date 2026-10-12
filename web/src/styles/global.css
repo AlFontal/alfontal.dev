@@ -1236,9 +1236,9 @@ body:has(main.page-content--quarto) .site-footer-inner {
 
 .project-feature-media img {
   width: 100%;
-  min-height: 9.5rem;
-  max-height: 9.5rem;
-  object-fit: cover;
+  min-height: 0;
+  height: auto;
+  object-fit: contain;
   border-radius: calc(var(--radius-lg) - 4px);
 }
 
@@ -3501,14 +3501,6 @@ body.lightbox-open {
 
   .project-feature-media {
     width: 100%;
-  }
-
-  .project-feature-media img {
-    min-height: 0;
-    max-height: none;
-    height: auto;
-    aspect-ratio: auto;
-    object-fit: contain;
   }
 
   .cv-education-row header {

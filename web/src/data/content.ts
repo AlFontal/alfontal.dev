@@ -3,6 +3,7 @@ import type { ImageMetadata } from 'astro';
 import aqiStationsScraperImage from '../assets/projects/aqi_stations_scraper.png';
 import arbresBcnImage from '../assets/projects/arbres-bcn.png';
 import argosExtensionsImage from '../assets/projects/argos_extensions.png';
+import dotscoutGarminImage from '../assets/projects/dotscout_garmin.png';
 import environmentalDataJapanImage from '../assets/projects/environmental_data_japan.png';
 import japanIdwrDbImage from '../assets/projects/jp_idwr_db.png';
 import lifMlImage from '../assets/projects/lif_ml.png';
@@ -303,6 +304,16 @@ export const blogPage: BlogPage = {
 };
 
 export const projects: Project[] = [
+
+  {
+    title: 'Dotscout',
+    description: 'Garmin Connect IQ watch face showing Nightscout, xDrip+ or AndroidAPS glucose with trend, a 3-hour graph and a dot-matrix time.',
+    date: '2026-10-09',
+    categories: ['Monkey C', 'Connect IQ', 'Garmin', 'Wearables', 'Nightscout', 'T1D'],
+    image: dotscoutGarminImage,
+    siteUrl: 'https://apps.garmin.com/apps/838d7c3f-df37-4d58-80c7-28e9404f1c11',
+    repoUrl: 'https://github.com/AlFontal/dotscout-garmin',
+  },
 
   {
     title: 'Barcelona Trees Map Dashboard',

@@ -13,6 +13,7 @@ web/.astro
 web/.git.disabled
 web/src/content/notebooks-generated
 web/public/assets/notebooks
+web/public/posts
 web/src/generated
 .playwright-cli/
 notebooks/**/*.html

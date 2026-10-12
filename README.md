@@ -56,7 +56,7 @@ That setup keeps Astro focused on the main site while letting Quarto own noteboo
 
 To build the site locally you need:
 
-- Node.js 20+
+- Node.js 22.12+ (required by Astro 7)
 - npm
 - [Quarto](https://quarto.org/)
 

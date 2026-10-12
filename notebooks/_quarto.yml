@@ -1,3 +1,7 @@
+filters:
+  - _includes/root-links.lua
+  - path: _includes/root-links-cleanup.lua
+    at: post-quarto
 format:
   html:
     theme:

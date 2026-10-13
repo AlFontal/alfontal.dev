@@ -3385,6 +3385,10 @@ body.lightbox-open {
     grid-template-columns: 1fr;
   }
 
+  .editorial-entry-media {
+    order: -1;
+  }
+
   .site-footer-inner {
     display: grid;
     border-radius: var(--radius-xl);
@@ -3604,7 +3608,8 @@ body.lightbox-open {
     min-height: 40px;
   }
 
-  .menu-toggle-label {
+  .menu-toggle-label,
+  .theme-toggle [data-theme-label] {
     display: none;
   }
 

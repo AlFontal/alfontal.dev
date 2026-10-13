@@ -2,7 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { cvEducation, cvExperience, cvHeader, cvLanguages, cvPage, cvSkills, cvTagOrder } from '../data/content';
 
-const allTags = Array.from(new Set(cvExperience.flatMap((item) => item.tags)));
+// Only offer filters for tags shared by two or more roles; one-off tags stay on their card and in search.
+const tagCounts = new Map<string, number>();
+cvExperience.flatMap((item) => item.tags).forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1));
+const allTags = [...tagCounts].filter(([, count]) => count > 1).map(([tag]) => tag);
 allTags.sort((a, b) => {
   const ai = cvTagOrder.indexOf(a);
   const bi = cvTagOrder.indexOf(b);
@@ -133,7 +136,7 @@ const visibleLabel = `${cvExperience.length} ${
 
     <div class="cv-experience-list" data-cv-list>
       {
-        cvExperience.map((item) => (
+        cvExperience.map((item, index) => (
           <article
             class="cv-experience-entry cv-row-surface"
             data-cv-item
@@ -142,7 +145,7 @@ const visibleLabel = `${cvExperience.length} ${
               .join(' ')
               .toLowerCase()}
           >
-            <details class="cv-disclosure cv-experience-disclosure" data-cv-expander>
+            <details class="cv-disclosure cv-experience-disclosure" data-cv-expander open={index === 0}>
               <summary class="cv-disclosure-toggle cv-experience-toggle">
                 <span class="cv-disclosure-heading cv-disclosure-heading--experience">
                   <span class="cv-disclosure-title-row cv-disclosure-title-row--stacked">
@@ -276,7 +279,7 @@ const visibleLabel = `${cvExperience.length} ${
 
         cards.forEach((card, index) => {
           const searchHaystack = String(card.getAttribute('data-search') || '');
-          const tags = String(card.getAttribute('data-tags') || '');
+          const tags = String(card.getAttribute('data-tags') || '').split('|');
           const matchesQuery = !query || searchHaystack.includes(query);
           const matchesFilter = !activeFilters.size || [...activeFilters].every((tag) => tags.includes(tag));
           const show = matchesQuery && matchesFilter;

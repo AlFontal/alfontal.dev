@@ -145,9 +145,7 @@ export type CvExperienceItem = {
 export type CvSkillGroup = {
   title: string;
   icon: string;
-  summary: string;
   details: string;
-  keywords: string[];
 };
 
 export type CvLanguage = {
@@ -264,20 +262,20 @@ export const homeAnchorCards: HomeAnchorCard[] = [
 export const educationTimeline: EducationTimelineItem[] = [
   {
     degree: 'PhD in Biotechnology',
-    institution: 'University of Barcelona',
+    institution: 'Universitat de Barcelona',
     years: '2019 - 2024',
     focus: 'Computational epidemiology, atmospheric drivers of Kawasaki disease, and reproducible data workflows.',
   },
   {
     degree: 'MSc in Bioinformatics',
-    subtitle: 'Data Science track',
+    subtitle: 'Data Science minor',
     institution: 'Wageningen University & Research',
     years: '2016 - 2018',
     focus: 'Machine learning and scientific computing for biological systems.',
   },
   {
-    degree: 'BSc in Molecular Biotechnology',
-    institution: 'University of Barcelona',
+    degree: 'BSc in Biotechnology',
+    institution: 'Universitat de Barcelona',
     years: '2011 - 2015',
     focus: 'Foundations in molecular biology, systems thinking, and quantitative analysis.',
   },
@@ -527,10 +525,10 @@ export const publicationsPage: PublicationsPage = {
 };
 
 export const cvPage: CvPage = {
-  seoTitle: 'Alejandro Fontal, PhD',
+  seoTitle: 'CV',
   description: 'Experience, skills, and education for Alejandro Fontal.',
   summary:
-    'Computational scientist and Senior Machine Learning Engineer working across health and life sciences. My background spans statistical modelling, machine learning, epidemiology, and bioinformatics, with experience analysing clinical, registry, surveillance, omics, and biomedical signal data and building reproducible software around those workflows.',
+    'Data scientist with a PhD and 8+ years of industry and research experience in health and life sciences, currently leading the data science strategy in a MedTech R&D team. I approach data as a scientist: starting from a clear question, designing the study and validation before trusting a result, and keeping every analysis reproducible. My work spans statistical modelling, machine learning, epidemiology, and bioinformatics, applied to clinical, registry, surveillance, omics, and biomedical signal data.',
   skillsHeading: 'Technical & Analytical Skills',
   experienceHeading: 'Experience',
   detailsHeading: 'Education & Languages',
@@ -551,15 +549,10 @@ export const cvHeader = {
   location: 'Barcelona, ES',
   email: 'alfontal.dev@gmail.com',
   phone: '+34 623 107 939',
-  website: 'https://alfontal.dev',
   linkedin: 'https://www.linkedin.com/in/alfontal',
-  linkedinHandle: 'alfontal',
   github: 'https://github.com/AlFontal',
-  githubHandle: 'AlFontal',
   gitlab: 'https://gitlab.com/AlFontal',
-  gitlabHandle: 'AlFontal',
   orcid: 'https://orcid.org/0000-0003-1138-2158',
-  orcidId: '0000-0003-1138-2158',
 };
 
 export const cvEducation: CvEducationItem[] = [
@@ -598,18 +591,18 @@ export const cvExperience: CvExperienceItem[] = [
     date: 'Jul 2026 - Present',
     location: 'Barcelona, ES',
     summary:
-      'Senior ML Engineer in MedTech R&D, developing statistical and machine learning methods to extract clinically relevant information from complex biomedical measurements.',
+      'Lead the data science strategy in a MedTech R&D team developing diagnostic methods from biomedical signals collected in experimental studies and clinical trials.',
     highlights: [
-      'Develop statistical and machine learning approaches for experimental and clinical biomedical signal data.',
-      'Define modelling, representation, validation, and performance-assessment workflows in an early-stage R&D setting.',
-      'Work with signal-processing, clinical, and engineering teams to connect model outputs with clinically meaningful endpoints.',
+      'Develop statistical and machine learning methods to extract diagnostic information from complex biomedical signals in experimental and clinical-trial data.',
+      'Define validation and performance-assessment strategies anchored to clinically meaningful endpoints.',
+      'Work with clinical, signal-processing, and engineering teams on how biomedical measurements are processed, represented, and modelled, and on how model outputs translate into clinical results.',
     ],
-    tags: ['Machine Learning', 'Biomedical Signals', 'MedTech', 'Python', 'Statistics', 'Clinical Research', 'R&D'],
+    tags: ['Machine Learning', 'Biomedical Signals', 'Clinical Trials', 'MedTech', 'Diagnostics', 'Python', 'Statistics', 'Clinical Research', 'R&D'],
   },
   {
     role: 'Postdoctoral Researcher · Data and Software Lead',
     organization: 'Climate & Health Program @ ISGlobal',
-    date: 'Oct 2024 - Jul 2026',
+    date: 'Oct 2024 - Apr 2026',
     location: 'Barcelona, ES',
     summary:
       'Combined postdoctoral research with responsibility for software, data workflows, and reproducibility across climate-health and aerobiome projects.',
@@ -621,7 +614,7 @@ export const cvExperience: CvExperienceItem[] = [
     tags: ['Python', 'Metagenomics', 'Machine Learning', 'Scientific Software', 'Biomedical Signals', 'Data Engineering', 'Health Data'],
   },
   {
-    role: 'PhD Fellow · Early-Stage Researcher',
+    role: 'PhD Fellow · Marie Skłodowska-Curie Early-Stage Researcher',
     organization: 'Climate & Health Program @ ISGlobal (HELICAL ITN)',
     date: 'Oct 2019 - Sep 2024',
     location: 'Barcelona, ES',
@@ -650,7 +643,7 @@ export const cvExperience: CvExperienceItem[] = [
   {
     role: 'Data Scientist',
     organization: 'Protein Engineering @ DuPont Industrial Biosciences',
-    date: 'Oct 2018 - Sep 2019',
+    date: 'Sep 2018 - Sep 2019',
     location: 'Leiden, NL',
     summary: 'Embedded machine learning and reproducible pipelines into protein engineering workflows with wet-lab partners.',
     highlights: [
@@ -658,7 +651,7 @@ export const cvExperience: CvExperienceItem[] = [
       'Built and maintained reproducible bioinformatics and data pipelines.',
       'Partnered with wet-lab teams to design experiments and close the model-experiment loop, accelerating workflow automation.',
     ],
-    tags: ['Machine Learning', 'Bioinformatics', 'Pipelines', 'R&D'],
+    tags: ['Machine Learning', 'Bioinformatics', 'Data Engineering', 'R&D'],
   },
   {
     role: 'Data Science Intern',
@@ -669,7 +662,7 @@ export const cvExperience: CvExperienceItem[] = [
     highlights: [
       'Built, trained, and benchmarked deep learning models to predict enzyme performance from sequence and structure.',
     ],
-    tags: ['PyTorch', 'TensorFlow', 'GANs', 'CNNs', 'LSTMs', 'GitLab CI/CD'],
+    tags: ['Machine Learning', 'Python', 'PyTorch', 'TensorFlow', 'GANs', 'CNNs', 'LSTMs', 'GitLab CI/CD'],
   },
   {
     role: 'Assistant in MOOCs Development',
@@ -689,50 +682,38 @@ export const cvSkills: CvSkillGroup[] = [
   {
     title: 'Statistical & Health Data Analysis',
     icon: 'fa6-solid:chart-line',
-    summary: 'Observational, longitudinal, and population health data',
     details:
       'Experience with clinical, registry, surveillance, biobank, and other observational health data. Statistical work includes incidence and subgroup analyses, time-series and spatiotemporal modelling, heterogeneous data integration, and data-quality assessment.',
-    keywords: ['Health data', 'Statistics', 'Epidemiology'],
   },
   {
     title: 'Machine Learning',
     icon: 'fa6-solid:brain',
-    summary: 'Applied ML across biological and biomedical data',
     details:
       'Supervised and deep learning across tabular, sequential, biological, and biomedical signal data, covering model development, benchmarking, validation, and performance assessment.',
-    keywords: ['scikit-learn', 'PyTorch', 'TensorFlow'],
   },
   {
     title: 'Python',
     icon: 'fa6-brands:python',
-    summary: 'Primary language · 9+ years',
     details:
       'Primary language for data analysis, statistical modelling, machine learning, package development, APIs, and data tooling. Regularly use pandas, polars, statsmodels, scikit-learn, PyTorch, TensorFlow, plotnine, and FastAPI.',
-    keywords: ['pandas', 'scikit-learn', 'PyTorch'],
   },
   {
     title: 'R',
     icon: 'simple-icons:r',
-    summary: 'Statistics and bioinformatics workflows',
     details:
       'Proficient with R for statistical analysis and bioinformatics, particularly tidyverse and Bioconductor, with regular R/Python interoperability in analytical workflows.',
-    keywords: ['tidyverse', 'Bioconductor', 'interop'],
   },
   {
     title: 'Scientific Software & Reproducibility',
     icon: 'fa6-solid:gears',
-    summary: 'Packages, pipelines, testing, and collaborative workflows',
     details:
       'Build and maintain packages, reproducible data pipelines, tests, code-review workflows, CI/CD, research-facing APIs, and analytical tools using GitHub, GitLab, Jupyter, and Quarto.',
-    keywords: ['Git', 'CI/CD', 'Packages'],
   },
   {
     title: 'Linux, HPC & Infrastructure',
     icon: 'material-symbols:terminal-rounded',
-    summary: 'Linux systems, clusters, containers, and deployment',
     details:
       'Daily Linux user across local, remote, and HPC systems. Work includes shell scripting, SLURM and Nextflow workflows, Docker and containerized deployment, service automation, secure remote access, and lightweight server infrastructure.',
-    keywords: ['Linux', 'Docker', 'SLURM'],
   },
 ];
 
@@ -765,10 +746,6 @@ export const cvTagOrder = [
   'Metagenomics',
   'Data Engineering',
   'R&D',
-  'Docker',
-  'Nextflow',
-  'Quarto',
-  'GitHub Actions',
   'Web-dev',
   'Education',
 ];

@@ -11,6 +11,7 @@
     "dev:notebooks": "node scripts/dev-with-notebooks.mjs",
     "build": "astro build",
     "check": "node scripts/check-content-source.mjs",
+    "cv:pdf": "node scripts/sync-cv-pdf.mjs",
     "test": "npm run check",
     "preview": "astro preview",
     "astro": "astro"

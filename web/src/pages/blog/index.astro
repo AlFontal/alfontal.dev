@@ -33,6 +33,10 @@ const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetada
       <p class="section-kicker">{blogPage.kicker}</p>
       <h1>{blogPage.title}</h1>
       <p>{blogPage.intro}</p>
+      <a href="/rss.xml" class="inline-link">
+        <iconify-icon icon="fa6-solid:square-rss" aria-hidden="true"></iconify-icon>
+        <span>{blogPage.rssLabel}</span>
+      </a>
     </div>
 
   </section>

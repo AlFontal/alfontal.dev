@@ -26,6 +26,9 @@ const generatedPublicPostsRoot = path.join(frameworkRoot, 'public', 'posts');
 
 const REQUIRED_FIELDS = ['title', 'description', 'date', 'categories', 'author', 'image'];
 
+// Mirrors siteMeta.siteUrl in src/data/content.ts (this script cannot import TypeScript).
+const SITE_URL = 'https://alfontal.dev';
+
 function fail(message) {
   console.error(`\n[notebooks:render] ${message}`);
   process.exit(1);
@@ -350,6 +353,49 @@ function buildGeneratedFrontMatter(metadata, context) {
   };
 }
 
+function escapeAttr(value) {
+  return String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+}
+
+// Quarto is rendered as a standalone document, so it emits no canonical, Open Graph, or
+// structured-data tags. Inject them so shared post links get preview cards.
+function injectPostMeta(html, frontMatter) {
+  const url = `${SITE_URL}${frontMatter.routePath}/`;
+  const image = /^https?:/.test(frontMatter.image) ? frontMatter.image : `${SITE_URL}${frontMatter.image}`;
+  const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: frontMatter.title,
+    description: frontMatter.description,
+    datePublished: frontMatter.date,
+    image,
+    url,
+    keywords: frontMatter.categories.join(', '),
+    author: { '@type': 'Person', name: frontMatter.author, url: SITE_URL },
+  }).replace(/</g, '\\u003c');
+
+  const tags = [
+    `<link rel="canonical" href="${escapeAttr(url)}">`,
+    `<meta property="og:type" content="article">`,
+    `<meta property="og:site_name" content="Alejandro Fontal">`,
+    `<meta property="og:title" content="${escapeAttr(frontMatter.title)}">`,
+    `<meta property="og:description" content="${escapeAttr(frontMatter.description)}">`,
+    `<meta property="og:url" content="${escapeAttr(url)}">`,
+    `<meta property="og:image" content="${escapeAttr(image)}">`,
+    `<meta property="article:published_time" content="${escapeAttr(frontMatter.date)}">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
+    `<meta name="twitter:title" content="${escapeAttr(frontMatter.title)}">`,
+    `<meta name="twitter:description" content="${escapeAttr(frontMatter.description)}">`,
+    `<meta name="twitter:image" content="${escapeAttr(image)}">`,
+    `<script type="application/ld+json">${jsonLd}</script>`,
+  ].join('\n');
+
+  if (!html.includes('</head>')) {
+    throw new Error(`No </head> found in rendered HTML for ${frontMatter.routePath}`);
+  }
+  return html.replace('</head>', `${tags}\n</head>`);
+}
+
 async function cleanGeneratedOutputs() {
   await fs.rm(generatedContentRoot, { recursive: true, force: true });
   await fs.rm(generatedPublicAssetsRoot, { recursive: true, force: true });
@@ -416,7 +462,7 @@ async function main() {
     const assetBasePath = `/assets/notebooks/${notebookContext.section}/${notebookContext.notebook}`;
     const strippedMarkdown = stripQuartoPrelude(markdown, generatedFrontMatter);
     const rewrittenMarkdown = rewriteRelativeReferences(strippedMarkdown, assetBasePath);
-    const rewrittenHtml = rewriteRelativeReferences(rawHtml, assetBasePath);
+    const rewrittenHtml = injectPostMeta(rewriteRelativeReferences(rawHtml, assetBasePath), generatedFrontMatter);
 
     const frontMatterYaml = YAML.stringify(generatedFrontMatter).trimEnd();
     const finalMarkdown = `---\n${frontMatterYaml}\n---\n\n${rewrittenMarkdown.trimStart()}\n`;

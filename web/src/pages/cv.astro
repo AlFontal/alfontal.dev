@@ -1,6 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { cvEducation, cvExperience, cvHeader, cvLanguages, cvPage, cvSkills, cvTagOrder } from '../data/content';
+import {
+  cvEducation,
+  cvExperience,
+  cvHeader,
+  cvLanguages,
+  cvPage,
+  cvSkills,
+  cvTagOrder,
+  personJsonLd,
+  publications,
+} from '../data/content';
+
+const featuredPublications = publications.filter((item) => item.featured);
 
 // Only offer filters for tags shared by two or more roles; one-off tags stay on their card and in search.
 const tagCounts = new Map<string, number>();
@@ -21,7 +33,7 @@ const visibleLabel = `${cvExperience.length} ${
 
 ---
 
-<BaseLayout title={cvPage.seoTitle} description={cvPage.description}>
+<BaseLayout title={cvPage.seoTitle} description={cvPage.description} jsonLd={personJsonLd}>
   <section class="cv-hero reveal-in">
     <div class="cv-hero-main">
       <h1>{cvHeader.name}</h1>
@@ -188,6 +200,30 @@ const visibleLabel = `${cvExperience.length} ${
     </div>
   </section>
 
+  <section class="block reveal-in" aria-labelledby="cv-publications-heading">
+    <div class="section-head">
+      <h2 id="cv-publications-heading">{cvPage.publicationsHeading}</h2>
+    </div>
+    <div class="cv-publication-list">
+      {
+        featuredPublications.map((item) => (
+          <article class="cv-publication-row cv-row-surface">
+            <h3>
+              <a href={item.doi ?? item.pdf} target="_blank" rel="noopener noreferrer">{item.title}</a>
+            </h3>
+            <p class="cv-publication-meta">
+              <span>{item.publication}</span>
+              <span>{item.year}</span>
+            </p>
+          </article>
+        ))
+      }
+    </div>
+    <p class="cv-publications-more">
+      <a href="/publications" class="inline-link">{cvPage.publicationsLinkLabel}</a>
+    </p>
+  </section>
+
   <section class="block reveal-in" aria-labelledby="cv-details-heading">
     <div class="section-head">
       <h2 id="cv-details-heading">{cvPage.detailsHeading}</h2>
@@ -268,6 +304,17 @@ const visibleLabel = `${cvExperience.length} ${
         });
       });
 
+      // Mirror search and filters in the URL (?q=...&tag=...) so a filtered view can be shared.
+      const syncUrl = () => {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('q');
+        url.searchParams.delete('tag');
+        const query = String(input.value || '').trim();
+        if (query) url.searchParams.set('q', query);
+        activeFilters.forEach((tag) => url.searchParams.append('tag', tag));
+        history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+      };
+
       const update = () => {
         const query = String(input.value || '').trim().toLowerCase();
         const hasActiveQuery = query.length > 0 || activeFilters.size > 0;
@@ -302,6 +349,12 @@ const visibleLabel = `${cvExperience.length} ${
         const singular = result.getAttribute('data-singular') || 'role visible';
         const plural = result.getAttribute('data-plural') || 'roles visible';
         result.textContent = `${visible} ${visible === 1 ? singular : plural}`;
+        syncUrl();
+      };
+
+      const setFilterButton = (button, active) => {
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        button.classList.toggle('is-active', active);
       };
 
       filterButtons.forEach((button) => {
@@ -311,12 +364,10 @@ const visibleLabel = `${cvExperience.length} ${
 
           if (activeFilters.has(value)) {
             activeFilters.delete(value);
-            button.setAttribute('aria-pressed', 'false');
-            button.classList.remove('is-active');
+            setFilterButton(button, false);
           } else {
             activeFilters.add(value);
-            button.setAttribute('aria-pressed', 'true');
-            button.classList.add('is-active');
+            setFilterButton(button, true);
             if (filterPanel) filterPanel.open = true;
           }
 
@@ -326,14 +377,23 @@ const visibleLabel = `${cvExperience.length} ${
 
       clearButton?.addEventListener('click', () => {
         activeFilters.clear();
-        filterButtons.forEach((button) => {
-          button.setAttribute('aria-pressed', 'false');
-          button.classList.remove('is-active');
-        });
+        filterButtons.forEach((button) => setFilterButton(button, false));
         if (filterPanel) filterPanel.open = false;
         input.value = '';
         update();
       });
+
+      const params = new URLSearchParams(window.location.search);
+      input.value = params.get('q') ?? '';
+      const requestedTags = params.getAll('tag').map((tag) => tag.toLowerCase());
+      filterButtons.forEach((button) => {
+        const value = String(button.getAttribute('data-filter') || '').toLowerCase();
+        if (value && requestedTags.includes(value)) {
+          activeFilters.add(value);
+          setFilterButton(button, true);
+        }
+      });
+      if (activeFilters.size && filterPanel) filterPanel.open = true;
 
       input.addEventListener('input', update);
       update();

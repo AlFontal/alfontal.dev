@@ -413,7 +413,8 @@ body:has(main.page-content--quarto) .site-footer-inner {
 .meta-row,
 .editorial-entry-meta span,
 .cv-meta,
-.cv-timeplace {
+.cv-timeplace,
+.cv-publication-meta {
   font-family: 'IBM Plex Mono', 'Consolas', monospace;
   font-size: 0.78rem;
   letter-spacing: 0.06em;
@@ -2758,7 +2759,8 @@ body.lightbox-open {
 
 .cv-experience-list,
 .cv-education-list,
-.cv-languages-list {
+.cv-languages-list,
+.cv-publication-list {
   display: grid;
   gap: 0.7rem;
 }
@@ -3100,8 +3102,33 @@ body.lightbox-open {
 }
 
 .cv-education-row,
-.cv-language-row {
+.cv-language-row,
+.cv-publication-row {
   padding: 1rem;
+}
+
+.cv-publication-row h3 {
+  font-size: 1rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.cv-publication-row h3 a:hover,
+.cv-publication-row h3 a:focus-visible {
+  color: var(--accent);
+}
+
+.cv-publication-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+  margin-top: 0.4rem;
+  color: var(--ink-soft);
+}
+
+.cv-publications-more {
+  margin-top: 0.4rem;
 }
 
 .cv-education-row header {

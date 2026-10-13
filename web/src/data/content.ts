@@ -80,6 +80,7 @@ export type Publication = {
   doi?: string;
   pdf?: string;
   code?: string;
+  featured?: boolean;
 };
 
 export type ProjectsPage = {
@@ -122,6 +123,7 @@ export type BlogPage = {
   kicker: string;
   title: string;
   intro: string;
+  rssLabel: string;
 };
 
 export type CvEducationItem = {
@@ -161,6 +163,8 @@ export type CvPage = {
   skillsHeading: string;
   experienceHeading: string;
   detailsHeading: string;
+  publicationsHeading: string;
+  publicationsLinkLabel: string;
   searchPlaceholder: string;
   skillsToggleLabel: {
     expand: string;
@@ -299,6 +303,7 @@ export const blogPage: BlogPage = {
   kicker: 'Writing / coding / technical notes',
   title: 'Blog',
   intro: 'A mix of technical and non-technical writing, or whatever comes to mind lately.',
+  rssLabel: 'Subscribe via RSS',
 };
 
 export const projects: Project[] = [
@@ -434,6 +439,7 @@ export const publications: Publication[] = [
     year: 2025,
     publishedOn: '2025-12-02',
     categories: ['Microbiology', 'Machine Learning', 'Laser-Induced Fluorescence', 'Aerobiology'],
+    featured: true,
     doi: 'https://doi.org/10.5194/amt-18-7297-2025',
     pdf: 'https://amt.copernicus.org/articles/18/7297/2025/amt-18-7297-2025.pdf',
     code: 'https://github.com/AlFontal/lif-bacteria-aerosols-ms',
@@ -447,6 +453,7 @@ export const publications: Publication[] = [
     year: 2024,
     publishedOn: '2024-09-17',
     categories: ['Microbiology', 'Metagenomics', 'Aerobiology', 'Infectious Diseases'],
+    featured: true,
     doi: 'https://doi.org/10.1073/pnas.2404191121',
     pdf: 'https://www.pnas.org/doi/pdf/10.1073/pnas.2404191121',
     code: 'https://github.com/AlFontal/microbial-richness-troposphere',
@@ -460,6 +467,7 @@ export const publications: Publication[] = [
     year: 2023,
     publishedOn: '2023-07-01',
     categories: ['Kawasaki Disease', 'Time Series Analysis', 'Air Pollution & Health'],
+    featured: true,
     doi: 'https://doi.org/10.1088/1748-9326/acd798',
     pdf: 'https://iopscience.iop.org/article/10.1088/1748-9326/acd798/pdf',
     code: 'https://github.com/AlFontal/kd-metals-swc',
@@ -492,6 +500,7 @@ export const publications: Publication[] = [
     year: 2021,
     publishedOn: '2021-10-21',
     categories: ['COVID-19', 'Time Series Analysis', 'Climate & Health', 'Infectious Diseases'],
+    featured: true,
     doi: 'https://doi.org/10.1038/s43588-021-00136-6',
     pdf: 'https://www.nature.com/articles/s43588-021-00136-6.pdf',
     code: 'https://github.com/AlFontal/covid-climate-signatures',
@@ -526,12 +535,15 @@ export const publicationsPage: PublicationsPage = {
 
 export const cvPage: CvPage = {
   seoTitle: 'CV',
-  description: 'Experience, skills, and education for Alejandro Fontal.',
+  description:
+    'CV of Alejandro Fontal, PhD: Barcelona-based data scientist in health and life sciences, working on biomedical signals, epidemiology, and machine learning.',
   summary:
     'Data scientist with a PhD and 8+ years of industry and research experience in health and life sciences, currently leading the data science strategy in a MedTech R&D team. I approach data as a scientist: starting from a clear question, designing the study and validation before trusting a result, and keeping every analysis reproducible. My work spans statistical modelling, machine learning, epidemiology, and bioinformatics, applied to clinical, registry, surveillance, omics, and biomedical signal data.',
   skillsHeading: 'Technical & Analytical Skills',
   experienceHeading: 'Experience',
   detailsHeading: 'Education & Languages',
+  publicationsHeading: 'Selected Publications',
+  publicationsLinkLabel: 'All publications',
   searchPlaceholder: 'Search roles, organizations, highlights...',
   skillsToggleLabel: {
     expand: 'Expand all',
@@ -724,6 +736,25 @@ export const cvLanguages: CvLanguage[] = [
   { name: 'Italian', level: 'Conversational - B1' },
   { name: 'French', level: 'Limited working proficiency - A2' },
 ];
+
+// schema.org Person for search engines, built from the CV data above. Contact details are left out on purpose.
+export const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Alejandro Fontal',
+  honorificSuffix: 'PhD',
+  url: siteMeta.siteUrl,
+  image: `${siteMeta.siteUrl}/assets/media/alejandro_square.jpg`,
+  jobTitle: cvExperience[0].role,
+  worksFor: { '@type': 'Organization', name: cvExperience[0].organization },
+  alumniOf: [...new Set(cvEducation.map((item) => item.institution))].map((name) => ({
+    '@type': 'CollegeOrUniversity',
+    name,
+  })),
+  address: { '@type': 'PostalAddress', addressLocality: 'Barcelona', addressCountry: 'ES' },
+  knowsAbout: ['Data science', 'Machine learning', 'Statistics', 'Epidemiology', 'Bioinformatics', 'Biomedical signals', 'Health data'],
+  sameAs: [cvHeader.github, cvHeader.gitlab, cvHeader.linkedin, cvHeader.orcid],
+};
 
 export const cvTagOrder = [
   'Machine Learning',

@@ -7,6 +7,7 @@ import {
   homeHero,
   homePage,
   interestTags,
+  personJsonLd,
   socialLinks,
   siteMeta,
 } from '../data/content';
@@ -15,7 +16,7 @@ import portraitImage from '../assets/media/alejandro_hike_profile.jpg';
 const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
 ---
 
-<BaseLayout>
+<BaseLayout jsonLd={personJsonLd}>
   <section class="hero-grid reveal-in">
     <article class="hero-card hero-stack">
       <p class="eyebrow">{homePage.eyebrow}</p>

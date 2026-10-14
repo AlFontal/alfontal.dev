@@ -1279,37 +1279,6 @@ body:has(main.page-content--quarto) .site-footer-inner {
   line-height: 1.48;
 }
 
-.publication-year-grid {
-  display: grid;
-  gap: 1.4rem;
-}
-
-.publication-year-group {
-  display: grid;
-  grid-template-columns: 6.5rem minmax(0, 1fr);
-  gap: 1rem;
-  align-items: start;
-}
-
-.publication-year-label {
-  position: sticky;
-  top: 7rem;
-}
-
-.publication-year-label span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 5rem;
-  padding: 0.65rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid var(--edge);
-  background: color-mix(in oklab, var(--paper-strong) 90%, transparent);
-  color: var(--accent);
-  font-family: 'IBM Plex Mono', 'Consolas', monospace;
-  font-weight: 600;
-}
-
 .publication-year-list {
   display: grid;
   gap: 0.9rem;
@@ -1335,6 +1304,22 @@ body:has(main.page-content--quarto) .site-footer-inner {
 .publication-authors strong {
   color: var(--ink);
   font-weight: 700;
+}
+
+/* Secondary records below the publication list: presentations, projects, supervision. */
+.record-section {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: clamp(2rem, 1.5rem + 2vw, 3.2rem);
+  padding-top: clamp(1.4rem, 1rem + 1vw, 2rem);
+  border-top: 1px solid var(--edge);
+}
+
+.record-meta {
+  margin-top: 0.4rem;
+  color: var(--ink-soft);
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-size: 0.78rem;
 }
 
 .link-row {
@@ -3318,14 +3303,6 @@ body.lightbox-open {
   .cv-hero,
   .cv-detail-grid {
     grid-template-columns: 1fr;
-  }
-
-  .publication-year-group {
-    grid-template-columns: 1fr;
-  }
-
-  .publication-year-label {
-    position: static;
   }
 
   .cv-hero h1 {

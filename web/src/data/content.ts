@@ -83,6 +83,31 @@ export type Publication = {
   featured?: boolean;
 };
 
+export type Presentation = {
+  title: string;
+  authors: string;
+  format: 'Oral presentation' | 'Poster' | 'Virtual poster';
+  event: string;
+  location: string;
+  date: string;
+  link?: string;
+};
+
+export type ResearchProject = {
+  name: string;
+  title: string;
+  funder: string;
+  period: string;
+  role: string;
+  link?: string;
+};
+
+export type SupervisionItem = {
+  title: string;
+  detail: string;
+  period: string;
+};
+
 export type ProjectsPage = {
   seoTitle: string;
   description: string;
@@ -114,6 +139,13 @@ export type PublicationsPage = {
     journal: string;
     pdf: string;
     code: string;
+    presentation: string;
+    project: string;
+  };
+  sections: {
+    presentations: { kicker: string; title: string; intro: string };
+    projects: { kicker: string; title: string; intro: string };
+    supervision: { kicker: string; title: string; intro: string };
   };
 };
 
@@ -420,6 +452,16 @@ export const projectsPage: ProjectsPage = {
 
 export const publications: Publication[] = [
   {
+    title:
+      'Climatic Influence on COVID-19: Investigating the Role of Temperature and Humidity in the Spread of the Omicron Variant',
+    authors: 'Leonardo López, Alejandro Fontal, Brandon Alfaro, Xavier Rodó',
+    publication: 'GeoHealth',
+    year: 2026,
+    publishedOn: '2026-05-01',
+    categories: ['COVID-19', 'Climate & Health', 'Time Series Analysis', 'Infectious Diseases'],
+    doi: 'https://doi.org/10.1029/2025GH001750',
+  },
+  {
     title: 'Integrating air microbiome for comprehensive air quality analysis',
     authors:
       'Sofya Pozdniakova, Akira Uchida, Alejandro Fontal, Lidia Cañas, Samuel Santamaría, Lim Yee Hui, Irvan Luhung, Stephan C. Schuster, Xavier Rodó, Sílvia Borràs',
@@ -434,7 +476,7 @@ export const publications: Publication[] = [
   {
     title:
       'Laser-Induced Fluorescence coupled with Machine Learning as an effective approach for real-time identification of bacteria in bioaerosols',
-    authors: 'Alejandro Fontal, Sílvia Borràs, Sofya Pozdniakova, Lidia Cañas, Xavier Rodó',
+    authors: 'Alejandro Fontal, Sílvia Borràs, Lidia Cañas, Sofya Pozdniakova, Xavier Rodó',
     publication: 'Atmospheric Measurement Techniques',
     year: 2025,
     publishedOn: '2025-12-02',
@@ -448,7 +490,7 @@ export const publications: Publication[] = [
     title:
       'Microbial richness and air chemistry in aerosols above the PBL confirm 2,000-km long-distance transport of potential human pathogens',
     authors:
-      'Xavier Rodó, Sofya Pozdniakova, Sílvia Borràs, Atsushi Matsuki, Hiroshi Tanimoto, Maria-Pilar Armengol, Irina Pey, Laura Muñoz, Samuel Santamaría, Lidia Cañas, Josep-Anton Morguí, Alejandro Fontal, Roger Curcoll',
+      'Xavier Rodó, Sofya Pozdniakova, Sílvia Borràs, Atsushi Matsuki, Hiroshi Tanimoto, Maria-Pilar Armengol, Irina Pey, Jordi Vila, Laura Muñoz, Samuel Santamaría, Lidia Cañas, Josep-Anton Morguí, Alejandro Fontal, Roger Curcoll',
     publication: 'Proceedings of the National Academy of Sciences',
     year: 2024,
     publishedOn: '2024-09-17',
@@ -473,16 +515,6 @@ export const publications: Publication[] = [
     code: 'https://github.com/AlFontal/kd-metals-swc',
   },
   {
-    title: 'Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers',
-    authors:
-      'Alejandro Fontal, Sofya Pozdniakova, Sílvia Borràs, Lídia Cañas, Roger Curcoll, Josep-Anton Morguí, Atsushi Matsuki, Xavier Rodó',
-    publication: 'International Vasculitis and ANCA Workshop',
-    year: 2022,
-    categories: ['Kawasaki Disease', 'Time Series Analysis', 'Atmospheric Processes', 'Conference'],
-    doi: 'https://alfontal.github.io/vasculitis2022-conference/summary.html',
-    code: 'https://alfontal.github.io/vasculitis2022-conference/kd_tokyo_air_sources.html',
-  },
-  {
     title: 'COVID-19 Pandemic Sets New Clues on the Transmission Pathways in Kawasaki Disease',
     authors: 'Xavier Rodó, Alejandro Fontal',
     publication: 'JAMA Network Open',
@@ -505,22 +537,118 @@ export const publications: Publication[] = [
     pdf: 'https://www.nature.com/articles/s43588-021-00136-6.pdf',
     code: 'https://github.com/AlFontal/covid-climate-signatures',
   },
+];
+
+export const presentations: Presentation[] = [
   {
-    title: 'Neural Networks for Subcellular Localization Prediction',
-    authors: 'Alejandro Fontal',
-    publication: 'Wageningen University & Research Thesis Repository',
-    year: 2017,
-    categories: ['Bioinformatics', 'Proteomics', 'Machine Learning'],
-    pdf: 'https://edepot.wur.nl/429151',
+    title: 'Seasonality changes may hold essential clues to KD etiology: An age-stratified spatiotemporal analysis in Japan',
+    authors: 'Alejandro Fontal, Yukako Yoshikane, Fumito Maruyama, Masaki Fujita, Yasuyuki Gondo, Xavier Rodó',
+    format: 'Oral presentation',
+    event: '2nd IKDR and EUROKiDs Joint Kawasaki Conference',
+    location: 'Amsterdam, The Netherlands',
+    date: 'March 2026',
+  },
+  {
+    title: 'Unravelling the environmental etiology of Kawasaki disease in Japan: Insights from spatiotemporal patterns',
+    authors: 'Alejandro Fontal, Sofya Pozdniakova, Sílvia Borràs, Jane C. Burns, Yosikazu Nakamura, Xavier Rodó',
+    format: 'Poster',
+    event: 'PReS 2023, 29th European Paediatric Rheumatology Congress',
+    location: 'Rotterdam, The Netherlands',
+    date: 'September 2023',
+  },
+  {
+    title: 'Laser Induced Fluorescence (LIF) for a benchmark near real-time characterization of the aerobiome',
+    authors: 'Alejandro Fontal, Sílvia Borràs, Lídia Cañas, Sofya Pozdniakova, Xavier Rodó',
+    format: 'Poster',
+    event: 'European Aerosol Conference (EAC 2023)',
+    location: 'Málaga, Spain',
+    date: 'September 2023',
+  },
+  {
+    title:
+      'Rich microbial diversity in tropospheric samples above the planetary boundary layer confirms long-distance transport of potential human pathogens',
+    authors:
+      'Xavier Rodó, Sofya Pozdniakova, Roger Curcoll, Alejandro Fontal, Atsushi Matsuki, Hiroshi Tanimoto, Maria Pilar Armengol, Irina Pey, Jordi Vila, Laura Muñoz, Lídia Cañas, Josep-Anton Morguí, Sílvia Borràs',
+    format: 'Virtual poster',
+    event: 'EGU General Assembly 2023',
+    location: 'Vienna, Austria',
+    date: 'April 2023',
+    link: 'https://doi.org/10.5194/egusphere-egu23-15891',
+  },
+  {
+    title: 'Tracing Tokyo’s air sources to identify Kawasaki Disease’s etiological triggers',
+    authors:
+      'Alejandro Fontal, Sofya Pozdniakova, Sílvia Borràs, Lídia Cañas, Roger Curcoll, Josep-Anton Morguí, Atsushi Matsuki, Xavier Rodó',
+    format: 'Poster',
+    event: '20th International Vasculitis and ANCA Workshop',
+    location: 'Dublin, Ireland',
+    date: 'April 2022',
+    link: 'https://alfontal.github.io/vasculitis2022-conference/summary.html',
+  },
+  {
+    title: 'Teasing out the role of temperature and humidity in the evolution of COVID-19 pandemic worldwide',
+    authors: 'Alejandro Fontal, Adrià San José, Leonardo López, Xavier Rodó',
+    format: 'Poster',
+    event: 'AGU-WMO International Conference on the Meteorological, Climatological and Air Quality Factors on COVID-19',
+    location: 'Online',
+    date: 'August 2020',
+  },
+];
+
+export const researchProjects: ResearchProject[] = [
+  {
+    name: 'PREPARE-TID',
+    title: 'Pipeline for Rapid Diagnostics of Emergency Transboundary Infectious Diseases',
+    funder: 'European Commission, Horizon Europe',
+    period: '2024–2027',
+    role: 'Researcher at ISGlobal: machine learning for near real-time bioaerosol identification and data pipelines.',
+    link: 'https://cordis.europa.eu/project/id/101137132',
+  },
+  {
+    name: 'ARBOTHAI',
+    title: 'Multi-scale seamless prediction of arboviral outbreaks in Thailand',
+    funder: 'Wellcome Trust',
+    period: '2023–2027',
+    role: 'Data pipelines and infrastructure for the dengue forecasting platform, and scientific advice to the project.',
+    link: 'https://arbothai.org/',
+  },
+  {
+    name: 'COV20/00144',
+    title: 'Airborne transmission of SARS-CoV-2: detection in hospitals and innovative technologies',
+    funder: 'Instituto de Salud Carlos III, COVID-19 Fund',
+    period: '2020–2021',
+    role: 'Researcher: real-time optical detection of bioaerosols.',
+  },
+  {
+    name: 'HELICAL',
+    title: 'HEalth data LInkage for ClinicAL benefit',
+    funder: 'European Commission, H2020 Marie Skłodowska-Curie Innovative Training Network',
+    period: '2019–2023',
+    role: 'Marie Skłodowska-Curie Early Stage Researcher: time-series methods to quantify environmental signals in epidemics.',
+    link: 'https://cordis.europa.eu/project/id/813545',
+  },
+];
+
+export const supervision: SupervisionItem[] = [
+  {
+    title: "Master's thesis supervision",
+    detail: "Two Master's theses (TFM) in the MSc in Fundamentals of Data Science, Universitat de Barcelona.",
+    period: '2024, 2026',
+  },
+  {
+    title: 'Online course development',
+    detail: 'Assignments and course material for more than ten edX MOOCs, Wageningen University & Research.',
+    period: '2016–2017',
   },
 ];
 
 export const publicationsPage: PublicationsPage = {
   seoTitle: 'Publications',
-  description: 'Peer-reviewed articles, conference proceedings, and thesis work.',
+  description:
+    'Peer-reviewed articles by Alejandro Fontal, plus conference presentations, research projects, and supervision.',
   kicker: 'Peer-reviewed work',
   title: 'Publications',
-  intro: 'Peer-reviewed articles, conference proceedings, and thesis work.',
+  intro: 'Peer-reviewed articles, followed by conference presentations, research projects, and supervision.',
   stats: {
     totalLabel: 'listed publications',
     latestYearLabel: 'latest publication year',
@@ -530,6 +658,25 @@ export const publicationsPage: PublicationsPage = {
     journal: 'Link to journal',
     pdf: 'Open PDF',
     code: 'Code repository',
+    presentation: 'Abstract or summary',
+    project: 'Project page',
+  },
+  sections: {
+    presentations: {
+      kicker: 'Conferences',
+      title: 'Presentations',
+      intro: 'Talks and posters at international meetings.',
+    },
+    projects: {
+      kicker: 'Funded research',
+      title: 'Research projects',
+      intro: 'Competitive projects I have worked on, with my role in each.',
+    },
+    supervision: {
+      kicker: 'Training',
+      title: 'Supervision & teaching',
+      intro: 'Student supervision and course development.',
+    },
   },
 };
 

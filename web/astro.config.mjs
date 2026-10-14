@@ -39,6 +39,10 @@ function notebookDevRouteRewrite() {
 
 // https://astro.build/config
 export default defineConfig({
+	// The Publications page was renamed to Research; keep old links working.
+	redirects: {
+		'/publications': '/research',
+	},
 	// Astro 7 defaults to 'jsx', which drops whitespace between inline elements.
 	compressHTML: true,
 	vite: {

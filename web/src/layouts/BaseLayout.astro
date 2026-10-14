@@ -144,6 +144,10 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       </div>
     </footer>
 
+    <button type="button" class="back-to-top" data-back-to-top aria-label="Back to top" title="Back to top">
+      <iconify-icon icon="fa6-solid:arrow-up" aria-hidden="true"></iconify-icon>
+    </button>
+
     <script is:inline>
       (() => {
         const root = document.documentElement;
@@ -280,6 +284,35 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
         } else {
           desktopQuery.addListener(onViewportChange);
         }
+      })();
+    </script>
+    <script is:inline>
+      (() => {
+        const button = document.querySelector('[data-back-to-top]');
+        if (!(button instanceof HTMLButtonElement)) return;
+
+        let ticking = false;
+        const update = () => {
+          button.classList.toggle('is-visible', window.scrollY > window.innerHeight * 1.5);
+          ticking = false;
+        };
+
+        window.addEventListener(
+          'scroll',
+          () => {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(update);
+          },
+          { passive: true },
+        );
+
+        button.addEventListener('click', () => {
+          const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+        });
+
+        update();
       })();
     </script>
     <script is:inline>

@@ -124,7 +124,13 @@ export type ProjectsPage = {
   repoCtaLabel: string;
 };
 
-export type PublicationsPage = {
+/** In-page section links shown at the top of long pages on narrow screens. */
+export type PageJumpLink = {
+  label: string;
+  href: string;
+};
+
+export type ResearchPage = {
   seoTitle: string;
   description: string;
   kicker: string;
@@ -143,10 +149,12 @@ export type PublicationsPage = {
     project: string;
   };
   sections: {
+    articles: { kicker: string; title: string; intro: string };
     presentations: { kicker: string; title: string; intro: string };
     projects: { kicker: string; title: string; intro: string };
     supervision: { kicker: string; title: string; intro: string };
   };
+  jumpLinks: PageJumpLink[];
 };
 
 export type BlogPage = {
@@ -197,14 +205,10 @@ export type CvPage = {
   detailsHeading: string;
   publicationsHeading: string;
   publicationsLinkLabel: string;
-  searchPlaceholder: string;
+  jumpLinks: PageJumpLink[];
   skillsToggleLabel: {
     expand: string;
     collapse: string;
-  };
-  experienceVisibleLabel: {
-    singular: string;
-    plural: string;
   };
 };
 
@@ -224,7 +228,7 @@ export const navLinks: NavLink[] = [
   { label: 'CV', href: '/cv' },
   { label: 'Blog', href: '/blog' },
   { label: 'Projects', href: '/projects' },
-  { label: 'Publications', href: '/publications' },
+  { label: 'Research', href: '/research' },
 ];
 
 export const socialLinks: SocialLink[] = [
@@ -624,7 +628,7 @@ export const researchProjects: ResearchProject[] = [
     title: 'HEalth data LInkage for ClinicAL benefit',
     funder: 'European Commission, H2020 Marie Skłodowska-Curie Innovative Training Network',
     period: '2019–2023',
-    role: 'Marie Skłodowska-Curie Early Stage Researcher: time-series methods to quantify environmental signals in epidemics.',
+    role: 'Marie Skłodowska-Curie Early Stage Researcher in a network on vasculitis, including ANCA-associated vasculitis and Kawasaki disease: time-series and spatial methods to quantify environmental signals in disease onset.',
     link: 'https://cordis.europa.eu/project/id/813545',
   },
 ];
@@ -642,26 +646,31 @@ export const supervision: SupervisionItem[] = [
   },
 ];
 
-export const publicationsPage: PublicationsPage = {
-  seoTitle: 'Publications',
+export const researchPage: ResearchPage = {
+  seoTitle: 'Research',
   description:
-    'Peer-reviewed articles by Alejandro Fontal, plus conference presentations, research projects, and supervision.',
-  kicker: 'Peer-reviewed work',
-  title: 'Publications',
-  intro: 'Peer-reviewed articles, followed by conference presentations, research projects, and supervision.',
+    'Research by Alejandro Fontal: peer-reviewed articles, conference presentations, funded research projects, and supervision.',
+  kicker: 'Academic work',
+  title: 'Research',
+  intro: 'Peer-reviewed articles, conference presentations, funded research projects, and supervision.',
   stats: {
     totalLabel: 'listed publications',
     latestYearLabel: 'latest publication year',
     codeLabel: 'records with public code',
   },
   links: {
-    journal: 'Link to journal',
-    pdf: 'Open PDF',
-    code: 'Code repository',
+    journal: 'Journal',
+    pdf: 'PDF',
+    code: 'Code',
     presentation: 'Abstract or summary',
     project: 'Project page',
   },
   sections: {
+    articles: {
+      kicker: 'Peer-reviewed',
+      title: 'Articles',
+      intro: 'Journal articles, most recent first.',
+    },
     presentations: {
       kicker: 'Conferences',
       title: 'Presentations',
@@ -678,6 +687,12 @@ export const publicationsPage: PublicationsPage = {
       intro: 'Student supervision and course development.',
     },
   },
+  jumpLinks: [
+    { label: 'Articles', href: '#articles-heading' },
+    { label: 'Presentations', href: '#presentations-heading' },
+    { label: 'Projects', href: '#projects-heading' },
+    { label: 'Supervision', href: '#supervision-heading' },
+  ],
 };
 
 export const cvPage: CvPage = {
@@ -691,14 +706,15 @@ export const cvPage: CvPage = {
   detailsHeading: 'Education & Languages',
   publicationsHeading: 'Selected Publications',
   publicationsLinkLabel: 'All publications',
-  searchPlaceholder: 'Search roles, organizations, highlights...',
+  jumpLinks: [
+    { label: 'Experience', href: '#cv-experience-heading' },
+    { label: 'Education', href: '#cv-details-heading' },
+    { label: 'Skills', href: '#cv-skills-heading' },
+    { label: 'Publications', href: '#cv-publications-heading' },
+  ],
   skillsToggleLabel: {
     expand: 'Expand all',
     collapse: 'Collapse all',
-  },
-  experienceVisibleLabel: {
-    singular: 'role visible',
-    plural: 'roles visible',
   },
 };
 
@@ -902,28 +918,3 @@ export const personJsonLd = {
   knowsAbout: ['Data science', 'Machine learning', 'Statistics', 'Epidemiology', 'Bioinformatics', 'Biomedical signals', 'Health data'],
   sameAs: [cvHeader.github, cvHeader.gitlab, cvHeader.linkedin, cvHeader.orcid],
 };
-
-export const cvTagOrder = [
-  'Machine Learning',
-  'Statistics',
-  'Health Data',
-  'Observational Studies',
-  'Registries',
-  'Surveillance Data',
-  'Longitudinal Data',
-  'Data Harmonization',
-  'Epidemiology',
-  'Clinical Research',
-  'Biomedical Signals',
-  'Python',
-  'Bioinformatics',
-  'Time-Series',
-  'GIS',
-  'MedTech',
-  'Scientific Software',
-  'Metagenomics',
-  'Data Engineering',
-  'R&D',
-  'Web-dev',
-  'Education',
-];

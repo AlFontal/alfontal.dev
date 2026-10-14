@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageJump from '../components/PageJump.astro';
+import { presentations, publications, researchPage, researchProjects, supervision } from '../data/content';
+
+const publicationSortValue = (value?: string, year?: number) => {
+  if (value) return new Date(value).getTime();
+  return new Date(`${year ?? 0}-01-01`).getTime();
+};
+
+const sortedPublications = [...publications].sort((a, b) => {
+  const byYear = b.year - a.year;
+  if (byYear !== 0) return byYear;
+
+  const byDate = publicationSortValue(b.publishedOn, b.year) - publicationSortValue(a.publishedOn, a.year);
+  if (byDate !== 0) return byDate;
+
+  return a.title.localeCompare(b.title);
+});
+const normalizeAuthors = (authors: string) => authors.replace(/alejandro\s+fontal/gi, 'Alejandro Fontal');
+const highlightAuthors = (authors: string) => normalizeAuthors(authors).split(/(Alejandro Fontal)/g);
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const formatPublicationDate = (item: (typeof publications)[number]) => {
+  if (!item.publishedOn) return String(item.year);
+  const date = new Date(item.publishedOn);
+  return `${monthNames[date.getUTCMonth()]} ${date.getUTCFullYear()}`;
+};
+const { sections } = researchPage;
+---
+
+<BaseLayout title={researchPage.seoTitle} description={researchPage.description}>
+  <section class="page-intro reveal-in">
+    <div class="section-head">
+      <p class="section-kicker">{researchPage.kicker}</p>
+      <h1>{researchPage.title}</h1>
+      <p>{researchPage.intro}</p>
+    </div>
+  </section>
+
+  <PageJump links={researchPage.jumpLinks} />
+
+  <section class="record-section record-section--lead reveal-in" aria-labelledby="articles-heading">
+    <div class="section-head">
+      <p class="section-kicker">{sections.articles.kicker}</p>
+      <h2 id="articles-heading">{sections.articles.title}</h2>
+      <p>{sections.articles.intro}</p>
+    </div>
+    <div class="entry-list publication-list">
+      {sortedPublications.map((item) => (
+        <article class="entry">
+          <div class="entry-grid">
+            <p class="entry-meta">
+              <span>{formatPublicationDate(item)}</span>
+              <span>{item.publication}</span>
+            </p>
+            <div class="entry-body">
+              <h2 class="entry-title">{item.title}</h2>
+              <p class="publication-authors">
+                {
+                  highlightAuthors(item.authors).map((segment) =>
+                    segment === 'Alejandro Fontal' ? <strong>{segment}</strong> : segment
+                  )
+                }
+              </p>
+              <p class="entry-tags">{item.categories.join(' · ')}</p>
+              <div class="link-row">
+                {item.doi && (
+                  <a href={item.doi} class="publication-link publication-link--journal" target="_blank" rel="noopener noreferrer">
+                    <iconify-icon icon="fa6-solid:link" aria-hidden="true"></iconify-icon>
+                    <span>{researchPage.links.journal}</span>
+                  </a>
+                )}
+                {item.pdf && (
+                  <a href={item.pdf} class="publication-link publication-link--pdf" target="_blank" rel="noopener noreferrer">
+                    <iconify-icon icon="fa6-solid:file-pdf" aria-hidden="true"></iconify-icon>
+                    <span>{researchPage.links.pdf}</span>
+                  </a>
+                )}
+                {item.code && (
+                  <a href={item.code} class="publication-link publication-link--code" target="_blank" rel="noopener noreferrer">
+                    <iconify-icon icon={item.code.includes('github.com') ? 'fa6-brands:github' : 'fa6-solid:code'} aria-hidden="true"></iconify-icon>
+                    <span>{researchPage.links.code}</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="record-section reveal-in" aria-labelledby="presentations-heading">
+    <div class="section-head">
+      <p class="section-kicker">{sections.presentations.kicker}</p>
+      <h2 id="presentations-heading">{sections.presentations.title}</h2>
+      <p>{sections.presentations.intro}</p>
+    </div>
+    <div class="entry-list publication-list">
+      {presentations.map((item) => (
+        <article class="entry">
+          <div class="entry-grid">
+            <p class="entry-meta">
+              <span>{item.date}</span>
+              <span>{item.format}</span>
+            </p>
+            <div class="entry-body">
+              <h3 class="entry-title">{item.title}</h3>
+              <p class="entry-subtitle">{item.event} · {item.location}</p>
+              <p class="publication-authors">
+                {
+                  highlightAuthors(item.authors).map((segment) =>
+                    segment === 'Alejandro Fontal' ? <strong>{segment}</strong> : segment
+                  )
+                }
+              </p>
+              {item.link && (
+                <div class="link-row">
+                  <a href={item.link} class="publication-link publication-link--journal" target="_blank" rel="noopener noreferrer">
+                    <iconify-icon icon="fa6-solid:link" aria-hidden="true"></iconify-icon>
+                    <span>{researchPage.links.presentation}</span>
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="record-section reveal-in" aria-labelledby="projects-heading">
+    <div class="section-head">
+      <p class="section-kicker">{sections.projects.kicker}</p>
+      <h2 id="projects-heading">{sections.projects.title}</h2>
+      <p>{sections.projects.intro}</p>
+    </div>
+    <div class="entry-list publication-list">
+      {researchProjects.map((item) => (
+        <article class="entry">
+          <div class="entry-grid">
+            <p class="entry-meta">
+              <span>{item.period}</span>
+              <span>{item.funder}</span>
+            </p>
+            <div class="entry-body">
+              <h3 class="entry-title">{item.name}: {item.title}</h3>
+              <p class="publication-authors">{item.role}</p>
+              {item.link && (
+                <div class="link-row">
+                  <a href={item.link} class="publication-link publication-link--journal" target="_blank" rel="noopener noreferrer">
+                    <iconify-icon icon="fa6-solid:link" aria-hidden="true"></iconify-icon>
+                    <span>{researchPage.links.project}</span>
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="record-section reveal-in" aria-labelledby="supervision-heading">
+    <div class="section-head">
+      <p class="section-kicker">{sections.supervision.kicker}</p>
+      <h2 id="supervision-heading">{sections.supervision.title}</h2>
+      <p>{sections.supervision.intro}</p>
+    </div>
+    <div class="entry-list publication-list">
+      {supervision.map((item) => (
+        <article class="entry">
+          <div class="entry-grid">
+            <p class="entry-meta">
+              <span>{item.period}</span>
+            </p>
+            <div class="entry-body">
+              <h3 class="entry-title">{item.title}</h3>
+              <p class="publication-authors">{item.detail}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

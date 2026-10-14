@@ -35,7 +35,7 @@ Most of the site is built from normal Astro pages and shared data files:
 
 - `web/src/pages/index.astro`
 - `web/src/pages/projects.astro`
-- `web/src/pages/publications.astro`
+- `web/src/pages/research.astro`
 - `web/src/pages/cv.astro`
 - `web/src/data/content.ts`
 

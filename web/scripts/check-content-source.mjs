@@ -7,7 +7,7 @@ const targets = [
   'src/pages/index.astro',
   'src/pages/cv.astro',
   'src/pages/projects.astro',
-  'src/pages/publications.astro',
+  'src/pages/research.astro',
   'src/pages/blog/index.astro',
 ];
 

@@ -4,6 +4,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { projects, projectsPage } from '../data/content';
 
 const sortedProjects = [...projects].sort((a, b) => (a.date < b.date ? 1 : -1));
+// Descriptions may use `backticks` for file names and identifiers; odd segments become <code>.
+const splitInlineCode = (text: string) => text.split(/`([^`]+)`/g);
 ---
 
 <BaseLayout title={projectsPage.seoTitle} description={projectsPage.description}>
@@ -35,7 +37,9 @@ const sortedProjects = [...projects].sort((a, b) => (a.date < b.date ? 1 : -1));
               <span>Repository</span>
             </p>
             <h2>{project.title}</h2>
-            <p>{project.description}</p>
+            <p>
+              {splitInlineCode(project.description).map((segment, i) => (i % 2 === 1 ? <code>{segment}</code> : segment))}
+            </p>
             <ul class="chip-list compact">
               {project.categories.map((category) => <li>{category}</li>)}
             </ul>

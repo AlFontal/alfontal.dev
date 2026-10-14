@@ -625,6 +625,43 @@ figure.figure {
   margin-top: 0.25rem;
 }
 
+/* Narrow-screen aids injected by af-quarto.js: an "On this page" box and a back-to-top button. */
+.af-mobile-toc,
+.af-back-to-top {
+  display: none;
+}
+
+.af-back-to-top {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  z-index: 40;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid var(--af-edge);
+  background: var(--af-surface);
+  color: var(--af-ink);
+  box-shadow: var(--af-shadow);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 0s linear 180ms;
+}
+
+.af-back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
 @media (max-width: 1300px) {
   #quarto-margin-sidebar,
   #quarto-sidebar-toc-left,
@@ -636,11 +673,113 @@ figure.figure {
     border-left: 0;
     padding-left: 0;
   }
+
+  .af-mobile-toc {
+    display: block;
+    margin: -0.5rem 0 2rem;
+    border: 1px solid var(--af-edge);
+    border-radius: 14px;
+    background: var(--af-surface);
+    font-family: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+    font-size: 0.82rem;
+  }
+
+  .af-mobile-toc summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.6rem 1rem;
+    color: var(--af-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .af-mobile-toc summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .af-mobile-toc summary::after {
+    content: '+';
+    font-size: 1.1rem;
+  }
+
+  .af-mobile-toc[open] summary::after {
+    content: '\2212';
+  }
+
+  .af-mobile-toc ul {
+    margin: 0;
+    padding: 0 1rem 0.8rem;
+    list-style: none;
+  }
+
+  .af-mobile-toc ul ul {
+    padding: 0 0 0 0.9rem;
+  }
+
+  .af-mobile-toc a {
+    display: block;
+    padding: 0.3rem 0;
+    color: var(--af-muted);
+    text-decoration: none;
+  }
+
+  .af-mobile-toc a:hover,
+  .af-mobile-toc a:focus-visible {
+    color: var(--af-accent);
+  }
 }
 
 @media (max-width: 980px) {
+  .af-back-to-top {
+    display: inline-grid;
+  }
+}
+
+/* On touch screens, badge lightbox figures so it is clear they open full size. */
+@media (hover: none) {
+  a.lightbox {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  a.lightbox::before,
+  a.lightbox::after {
+    content: '';
+    position: absolute;
+    right: 0.45rem;
+    bottom: 0.45rem;
+    width: 2rem;
+    height: 2rem;
+    pointer-events: none;
+  }
+
+  a.lightbox::before {
+    border: 1px solid var(--af-edge);
+    border-radius: 999px;
+    background: var(--af-surface);
+    box-shadow: var(--af-shadow);
+  }
+
+  a.lightbox::after {
+    background: var(--af-accent);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6'/%3E%3Cpath d='M15 15l5 5M10.5 7.8v5.4M7.8 10.5h5.4'/%3E%3C/svg%3E") center / 1rem no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6'/%3E%3Cpath d='M15 15l5 5M10.5 7.8v5.4M7.8 10.5h5.4'/%3E%3C/svg%3E") center / 1rem no-repeat;
+  }
+}
+
+@media (max-width: 980px) {
+  /* Match the Astro pages, where the static header sits 0.75rem (12px) below the viewport top. */
   #quarto-content {
-    padding-top: 1rem;
+    padding-top: 12px;
+  }
+
+  #quarto-content > main.content {
+    margin-top: 0;
   }
 
   .site-header {
@@ -663,10 +802,10 @@ figure.figure {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     width: 100%;
-    border-radius: 28px;
   }
 
   .site-header-inner {
+    border-radius: 28px;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 0.75rem;

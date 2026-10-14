@@ -118,6 +118,54 @@
       }
     }
 
+    // The margin ToC is hidden below 1300px, so mirror it as a collapsible box under the title.
+    const tocList = document.querySelector('#TOC > ul');
+    const titleBlock = document.getElementById('title-block-header');
+    if (tocList instanceof HTMLElement && titleBlock instanceof HTMLElement) {
+      const mobileToc = document.createElement('details');
+      mobileToc.className = 'af-mobile-toc';
+      const summary = document.createElement('summary');
+      summary.textContent = 'On this page';
+      const list = tocList.cloneNode(true);
+      list.querySelectorAll('[id]').forEach((node) => node.removeAttribute('id'));
+      list.querySelectorAll('a').forEach((link) => {
+        link.classList.remove('active');
+        link.addEventListener('click', () => {
+          mobileToc.open = false;
+        });
+      });
+      mobileToc.append(summary, list);
+      titleBlock.insertAdjacentElement('afterend', mobileToc);
+    }
+
+    const backToTop = document.createElement('button');
+    backToTop.type = 'button';
+    backToTop.className = 'af-back-to-top';
+    backToTop.setAttribute('aria-label', 'Back to top');
+    backToTop.title = 'Back to top';
+    backToTop.innerHTML = '<iconify-icon icon="fa6-solid:arrow-up" aria-hidden="true"></iconify-icon>';
+    backToTop.addEventListener('click', () => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+    body.appendChild(backToTop);
+
+    let backToTopTicking = false;
+    const syncBackToTop = () => {
+      backToTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 1.5);
+      backToTopTicking = false;
+    };
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (backToTopTicking) return;
+        backToTopTicking = true;
+        window.requestAnimationFrame(syncBackToTop);
+      },
+      { passive: true },
+    );
+    syncBackToTop();
+
     if (!(header instanceof HTMLElement)) return;
 
     const getScrollY = () => window.scrollY || root.scrollTop || body.scrollTop || 0;

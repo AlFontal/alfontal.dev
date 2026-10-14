@@ -279,7 +279,6 @@ body:has(main.page-content--quarto) .site-footer-inner {
 .theme-toggle,
 .menu-toggle,
 .pill-toggle,
-.cv-filter-chip,
 .cv-contact-pill,
 .portrait-socials a,
 .social-list a {
@@ -413,7 +412,6 @@ body:has(main.page-content--quarto) .site-footer-inner {
 .meta-row,
 .editorial-entry-meta span,
 .cv-meta,
-.cv-timeplace,
 .cv-publication-meta {
   font-family: 'IBM Plex Mono', 'Consolas', monospace;
   font-size: 0.78rem;
@@ -1279,31 +1277,116 @@ body:has(main.page-content--quarto) .site-footer-inner {
   line-height: 1.48;
 }
 
-.publication-year-list {
-  display: grid;
-  gap: 0.9rem;
+.project-feature-body code {
+  padding: 0.1rem 0.32rem;
+  border-radius: 0.4rem;
+  background: color-mix(in oklab, var(--paper-strong) 82%, transparent);
+  color: var(--ink);
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-size: 0.88em;
 }
 
-.publication-record {
-  padding: 1rem 1.1rem;
-  border-left: 3px solid color-mix(in oklab, var(--accent) 42%, transparent);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  background: color-mix(in oklab, var(--paper) 94%, var(--paper-strong) 6%);
+:root[data-theme='dark'] .project-feature-body code {
+  background: color-mix(in oklab, var(--paper-strong) 78%, black 22%);
 }
 
-.publication-record header {
-  display: grid;
-  gap: 0.3rem;
+/* Publications, presentations, projects and supervision reuse the flat .entry rows from the CV. */
+.publication-list .entry-title {
+  font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.3rem);
+  line-height: 1.3;
+}
+
+.entry-subtitle {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.95rem;
 }
 
 .publication-authors {
-  margin-top: 0.6rem;
+  margin: 0.1rem 0 0;
   color: var(--ink-soft);
 }
 
 .publication-authors strong {
   color: var(--ink);
   font-weight: 700;
+}
+
+.publication-list .entry-tags {
+  margin-top: 0.2rem;
+}
+
+.publication-list .link-row {
+  margin-top: 0.5rem;
+}
+
+/* Narrow-screen page aids (section jump links, back-to-top); enabled in the 980px breakpoint. */
+.page-jump,
+.back-to-top {
+  display: none;
+}
+
+.page-jump ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-jump a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--edge);
+  background: color-mix(in oklab, var(--paper) 92%, transparent);
+  color: var(--ink);
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-size: 0.76rem;
+}
+
+.page-jump a:hover,
+.page-jump a:focus-visible {
+  border-color: color-mix(in oklab, var(--accent) 44%, transparent);
+  background: var(--accent-soft);
+}
+
+/* Leave room for the kicker line that sits above section headings. */
+[id$='-heading'] {
+  scroll-margin-top: 2.5rem;
+}
+
+.back-to-top {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  z-index: 40;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--edge-strong);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 0s linear 180ms;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
 }
 
 /* Secondary records below the publication list: presentations, projects, supervision. */
@@ -1315,11 +1398,11 @@ body:has(main.page-content--quarto) .site-footer-inner {
   border-top: 1px solid var(--edge);
 }
 
-.record-meta {
-  margin-top: 0.4rem;
-  color: var(--ink-soft);
-  font-family: 'IBM Plex Mono', 'Consolas', monospace;
-  font-size: 0.78rem;
+/* The first section follows the page intro directly, so it needs no separator above it. */
+.record-section--lead {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .link-row {
@@ -2627,7 +2710,6 @@ body.lightbox-open {
 }
 
 .cv-meta iconify-icon,
-.cv-location iconify-icon,
 .cv-org iconify-icon {
   color: var(--accent);
 }
@@ -2714,14 +2796,15 @@ body.lightbox-open {
 .cv-skill-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
+  gap: 0 2rem;
 }
 
 .cv-skill-card {
   display: grid;
   align-content: start;
-  gap: 0.9rem;
-  padding: 1rem;
+  gap: 0.5rem;
+  padding: 1rem 0 1.1rem;
+  border-top: 1px solid var(--edge);
 }
 
 .cv-skill-card h3 {
@@ -2742,50 +2825,9 @@ body.lightbox-open {
   line-height: 1.55;
 }
 
-.cv-experience-list,
-.cv-education-list,
 .cv-languages-list,
 .cv-publication-list {
   display: grid;
-  gap: 0.7rem;
-}
-
-.cv-row-surface {
-  position: relative;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--edge);
-  background: color-mix(in oklab, var(--paper-strong) 84%, transparent);
-  overflow: hidden;
-  transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    background-color 180ms ease;
-}
-
-.cv-row-surface::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 2px solid color-mix(in oklab, var(--accent) 88%, white 12%);
-  box-shadow:
-    0 0 0 1px color-mix(in oklab, var(--accent) 52%, transparent),
-    0 0 18px color-mix(in oklab, var(--accent) 12%, transparent);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 180ms ease;
-}
-
-.cv-row-surface:hover {
-  border-color: color-mix(in oklab, var(--accent) 28%, var(--edge));
-  background: color-mix(in oklab, var(--paper-strong) 90%, transparent);
-  box-shadow:
-    0 10px 26px color-mix(in oklab, var(--accent) 8%, transparent),
-    inset 0 1px 0 color-mix(in oklab, white 14%, transparent);
-}
-
-.cv-row-surface:hover::after {
-  opacity: 1;
 }
 
 .cv-disclosure {
@@ -2807,82 +2849,105 @@ body.lightbox-open {
   outline-offset: -2px;
 }
 
-.cv-disclosure-toggle {
+/* Experience and education entries: flat rows separated by dividers, with date and place in a
+   left-hand column on wider screens and stacked above the title on phones. */
+.entry-list {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.85rem;
-  align-items: start;
-  padding: 1rem 1rem 0.95rem;
+}
+
+.entry {
+  border-top: 1px solid var(--edge);
+}
+
+.entry-grid {
+  display: grid;
+  grid-template-columns: 10.5rem minmax(0, 1fr);
+  gap: 0.35rem 1.5rem;
+  padding: 1.1rem 0;
+}
+
+summary.entry-grid {
   cursor: pointer;
 }
 
-.cv-disclosure-heading {
+.entry-meta {
   display: grid;
-  gap: 0.35rem;
-  min-width: 0;
+  align-content: start;
+  gap: 0.2rem;
+  margin: 0;
+  padding-top: 0.15rem;
+  color: var(--ink-soft);
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
 }
 
-.cv-disclosure-heading--experience {
-  gap: 0.55rem;
+.entry-body {
+  display: grid;
+  align-content: start;
+  gap: 0.3rem;
+  min-width: 0;
+  max-width: 78ch;
 }
 
-.cv-disclosure-title-row {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-width: 0;
+.entry-title {
   color: var(--ink);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.cv-disclosure-title-row iconify-icon {
-  color: var(--accent);
-  transition: transform 180ms ease, color 180ms ease;
-}
-
-.cv-disclosure-title-row--stacked {
-  display: grid;
-  gap: 0.28rem;
-}
-
-.cv-disclosure-title {
   font-size: clamp(1rem, 0.98rem + 0.1vw, 1.08rem);
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
   transition: color 180ms ease;
 }
 
+summary.entry-grid:hover .entry-title {
+  color: var(--accent);
+}
+
+.entry-points {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0.2rem 0 0;
+  padding-left: 1.15rem;
+  color: var(--ink-soft);
+}
+
+.entry-tags {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
 .cv-disclosure-preview {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  margin-top: 0.2rem;
   color: var(--ink-soft);
   line-height: 1.55;
-  max-height: 4.5rem;
   overflow: hidden;
-  transition:
-    color 180ms ease,
-    opacity 180ms ease,
-    max-height 220ms ease;
+}
+
+/* Collapsed roles show a three-line teaser; expanded roles show the full summary. */
+.cv-disclosure[open] .cv-disclosure-preview {
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: none;
 }
 
 .cv-disclosure-action {
   display: inline-flex;
   align-items: center;
   gap: 0.48rem;
-  color: var(--ink-soft);
+  width: fit-content;
+  margin-top: 0.3rem;
+  color: var(--accent);
   font-family: 'IBM Plex Mono', 'Consolas', monospace;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-}
-
-.cv-disclosure-aside {
-  display: grid;
-  justify-items: end;
-  align-content: start;
-  gap: 0.35rem;
-}
-
-.cv-disclosure-aside--experience {
-  gap: 0.55rem;
 }
 
 .cv-disclosure-state--open {
@@ -2899,13 +2964,13 @@ body.lightbox-open {
 
 .cv-disclosure-action::before {
   content: '';
-  width: 0.66rem;
-  height: 0.66rem;
+  width: 0.5rem;
+  height: 0.5rem;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
   transform: rotate(45deg) translateY(-2px);
   transform-origin: center;
-  transition: transform 220ms ease, color 220ms ease;
+  transition: transform 220ms ease;
 }
 
 .cv-disclosure[open] .cv-disclosure-action::before {
@@ -2924,139 +2989,20 @@ body.lightbox-open {
 
 .cv-disclosure-panel-inner {
   overflow: hidden;
+}
+
+.entry-panel {
   display: grid;
   gap: 0.75rem;
-  padding: 0 1rem 1rem;
-  border-top: 1px solid color-mix(in oklab, var(--edge) 82%, transparent);
+  padding: 0 0 1.2rem calc(10.5rem + 1.5rem);
 }
 
-.cv-disclosure-panel-inner p {
-  color: var(--ink-soft);
+.entry-panel > * {
+  max-width: 78ch;
 }
 
-.cv-row-surface:hover .cv-disclosure-title,
-.cv-row-surface:hover h4 {
-  color: color-mix(in oklab, var(--ink) 88%, var(--accent) 12%);
-}
-
-.cv-row-surface:hover .cv-disclosure-preview {
-  color: color-mix(in oklab, var(--ink-soft) 82%, var(--ink) 18%);
-}
-
-.cv-row-surface:hover .cv-disclosure-title-row iconify-icon {
-  transform: translateX(1px);
-  color: color-mix(in oklab, var(--accent) 86%, white 14%);
-}
-
-.cv-controls {
-  display: grid;
-  gap: 0.8rem;
-}
-
-.cv-controls-bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem 1rem;
-}
-
-.cv-search {
-  display: grid;
-  gap: 0.35rem;
-  flex: 1 1 20rem;
-}
-
-.cv-search input {
-  width: min(30rem, 100%);
-  min-height: 48px;
-  padding: 0.7rem 0.85rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--edge-strong);
-  background: color-mix(in oklab, var(--paper) 96%, transparent);
-  color: var(--ink);
-}
-
-.cv-filter-panel {
-  min-width: min(100%, 16rem);
-}
-
-.cv-filter-panel summary {
-  list-style: none;
-}
-
-.cv-filter-panel summary::-webkit-details-marker {
-  display: none;
-}
-
-.cv-filter-summary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  min-height: 2.7rem;
-  padding: 0.55rem 0.85rem;
-  border-radius: 999px;
-  border: 1px solid var(--edge);
-  background: color-mix(in oklab, var(--paper) 94%, transparent);
-  color: var(--ink);
-  font-family: 'IBM Plex Mono', 'Consolas', monospace;
-  font-size: 0.75rem;
-  cursor: pointer;
-}
-
-.cv-filter-count {
-  color: var(--ink-soft);
-}
-
-.cv-filter-panel-body {
-  padding-top: 0.8rem;
-}
-
-.cv-filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  max-width: 100%;
-}
-
-.cv-filter-chip {
-  appearance: none;
-  padding: 0.55rem 0.8rem;
-  border-radius: 999px;
-  border: 1px solid var(--edge);
-  background: color-mix(in oklab, var(--paper) 92%, transparent);
-  color: var(--ink-soft);
-  font-family: 'IBM Plex Mono', 'Consolas', monospace;
-  font-size: 0.78rem;
-  cursor: pointer;
-  transition:
-    border-color 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.cv-filter-chip:hover,
-.cv-filter-chip:focus-visible {
-  transform: translateY(-1px);
-  border-color: color-mix(in oklab, var(--accent) 42%, transparent);
-}
-
-.cv-filter-chip.is-active {
-  color: var(--ink);
-  border-color: color-mix(in oklab, var(--accent) 48%, transparent);
-  background: color-mix(in oklab, var(--paper-strong) 72%, var(--accent-soft) 28%);
-}
-
-.cv-filter-chip.is-clear {
-  border-style: dashed;
-}
-
-.cv-result {
-  color: var(--ink-soft);
-  font-family: 'IBM Plex Mono', 'Consolas', monospace;
-  font-size: 0.78rem;
-  white-space: nowrap;
+.entry-panel .entry-points {
+  margin-top: 0;
 }
 
 .cv-detail-grid {
@@ -3071,7 +3017,7 @@ body.lightbox-open {
 }
 
 .cv-languages-panel {
-  align-content: center;
+  align-content: start;
 }
 
 .cv-subsection-heading {
@@ -3082,14 +3028,15 @@ body.lightbox-open {
   color: var(--accent);
 }
 
-.cv-experience-entry[hidden] {
-  display: none !important;
-}
-
-.cv-education-row,
 .cv-language-row,
 .cv-publication-row {
-  padding: 1rem;
+  padding: 0.8rem 0;
+  border-top: 1px solid var(--edge);
+}
+
+.cv-language-row:first-child,
+.cv-publication-row:first-child {
+  border-top: 0;
 }
 
 .cv-publication-row h3 {
@@ -3116,22 +3063,10 @@ body.lightbox-open {
   margin-top: 0.4rem;
 }
 
-.cv-education-row header {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.8rem;
-}
-
-.cv-education-row h4,
 .cv-language-row h4 {
   font-size: 1rem;
   line-height: 1.2;
   letter-spacing: -0.01em;
-  transition: color 180ms ease;
-}
-
-.cv-experience-disclosure .cv-disclosure-toggle {
-  align-items: start;
 }
 
 .cv-org {
@@ -3143,52 +3078,8 @@ body.lightbox-open {
   font-weight: 600;
 }
 
-.cv-timeplace {
-  display: grid;
-  gap: 0.18rem;
-  justify-items: end;
-  text-align: right;
-  color: var(--ink-soft);
-}
-
-.cv-location {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
 .cv-summary {
   color: var(--ink-soft);
-}
-
-.cv-experience-panel {
-  gap: 0.9rem;
-  max-width: 82ch;
-}
-
-.cv-experience-panel ul,
-.cv-education-row ul {
-  display: grid;
-  gap: 0.28rem;
-  padding-left: 1.15rem;
-  color: var(--ink-soft);
-}
-
-.cv-tag-list {
-  display: flex !important;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  padding-left: 0 !important;
-}
-
-.cv-tag-list li {
-  list-style: none;
-}
-
-.cv-tag-list--muted li {
-  border-style: dashed;
-  border-color: color-mix(in oklab, var(--edge-strong) 88%, var(--accent) 12%);
-  background: color-mix(in oklab, var(--paper) 96%, transparent);
 }
 
 .cv-language-row {
@@ -3368,7 +3259,6 @@ body.lightbox-open {
 
   .site-footer-inner {
     display: grid;
-    border-radius: var(--radius-xl);
   }
 
   .site-header {
@@ -3483,26 +3373,6 @@ body.lightbox-open {
     grid-template-columns: 1fr;
   }
 
-  .cv-controls-bar,
-  .cv-education-row header,
-  .cv-language-row {
-    grid-template-columns: 1fr;
-  }
-
-  /* On mobile the heading should span the full card width. The aside is pushed onto a second
-     row and reflowed as a flex row: chevron on the left, date/location on the right. */
-  .cv-experience-disclosure .cv-disclosure-toggle {
-    grid-template-columns: 1fr;
-  }
-
-  .cv-disclosure-aside--experience {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
   .project-feature {
     grid-template-columns: 1fr;
   }
@@ -3511,43 +3381,49 @@ body.lightbox-open {
     width: 100%;
   }
 
-  .cv-education-row header {
-    display: grid;
-  }
-
-  .cv-controls-bar {
-    display: grid;
-    justify-content: stretch;
-  }
-
   .cv-skill-keywords {
     text-align: left;
   }
 
   .cv-language-row {
-    display: grid;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
   }
 
-  .cv-language-row p {
-    text-align: left;
+  .page-jump {
+    display: block;
   }
 
-  /* Keep the chevron indicator visible on mobile — just hide the verbose text labels.
-     The ::before pseudo-element (chevron arrow) is still shown so users see the item is expandable. */
-  .cv-experience-disclosure .cv-disclosure-action span {
-    display: none;
+  .back-to-top {
+    display: inline-grid;
   }
-
-  .cv-timeplace {
-    justify-items: start;
-    text-align: left;
-  }
-
 }
 
 @media (max-width: 640px) {
   .shell {
     width: min(1180px, 94vw);
+  }
+
+  .entry-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .entry-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.45rem;
+    padding-top: 0;
+    text-transform: uppercase;
+  }
+
+  /* Hang the separator off the preceding item so a wrapped line never starts with it. */
+  .entry-meta span:not(:last-child)::after {
+    content: '·';
+    margin-left: 0.45rem;
+  }
+
+  .entry-panel {
+    padding-left: 0;
   }
 
   body:has(main.page-content--quarto) .site-header-inner,

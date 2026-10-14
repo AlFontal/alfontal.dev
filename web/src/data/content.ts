@@ -39,10 +39,17 @@ export type HeroCard = {
   subtitle: string;
 };
 
+export type HeroTextSegment = {
+  text: string;
+  href?: string;
+  external?: boolean;
+};
+
 export type HomeHero = {
   name: string;
-  availability: string;
+  intro: string;
   tagline: string;
+  moreInfo: HeroTextSegment[];
   cards: HeroCard[];
 };
 
@@ -244,10 +251,17 @@ export const socialLinks: SocialLink[] = [
 
 export const homeHero: HomeHero = {
   name: 'Alejandro Fontal',
-  availability:
-    'I’m a computational scientist and Senior Machine Learning Engineer based in Barcelona, working mostly on problems in health and life sciences.',
+  intro:
+    'I’m a (computational) Scientist and Senior Machine Learning Engineer based in Barcelona, working on problems in health and life sciences. My background spans bioinformatics, epidemiology, biomedical signals, and scientific software.',
   tagline:
     'I use this site as a sort of public portfolio, a place to share projects, writing, publications, and whatever I’m building or thinking about lately.',
+  moreInfo: [
+    { text: 'Check out my ' },
+    { text: 'web CV', href: '/cv' },
+    { text: ' or my ' },
+    { text: 'LinkedIn profile', href: 'https://www.linkedin.com/in/alfontal/', external: true },
+    { text: ' for a full professional background.' },
+  ],
   cards: [
     {
       title: 'Data Science & ML',

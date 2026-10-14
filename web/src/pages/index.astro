@@ -23,17 +23,41 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
 
       <h1>{homeHero.name}</h1>
 
-      <p class="hero-note">
-        I'm a (computational) Scientist and Senior Machine Learning Engineer based in Barcelona, working on problems in health and life sciences.
-        My background spans bioinformatics, epidemiology, biomedical signals, and scientific software.
-        <br /> 
-        
-      </p>
+      <ul class="portrait-socials hero-socials" aria-label="Contact and social links">
+        {
+          socialLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+                rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                aria-label={link.label}
+                title={link.label}
+              >
+                <iconify-icon icon={link.icon} aria-hidden="true"></iconify-icon>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="hero-note">{homeHero.intro}</p>
+      <p class="hero-tagline">{homeHero.tagline}</p>
       <p>
-        I use this site as a sort of public portfolio, a place to share projects, writing, publications, and whatever I’m building or thinking about lately.
-      </p> <p>
-        Check out my{' '}
-        <a href="/cv" class="hero-note-link">web CV</a>  or my <a href="https://www.linkedin.com/in/alfontal/" class="hero-note-link" target="_blank" rel="noopener noreferrer">LinkedIn profile</a> for a full professional background.
+        {
+          homeHero.moreInfo.map((segment) =>
+            segment.href ? (
+              <a
+                href={segment.href}
+                class="hero-note-link"
+                target={segment.external ? '_blank' : undefined}
+                rel={segment.external ? 'noopener noreferrer' : undefined}
+              >{segment.text}</a>
+            ) : (
+              segment.text
+            )
+          )
+        }
       </p>
 
       <div class="fact-grid" aria-label="Core focus areas">
@@ -51,11 +75,15 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
     <aside class="portrait-panel">
       <div class="portrait-stack">
         <div class="portrait-image">
+          {/* Square crop of a 3:4 photo. The panel is hidden once the layout stacks (≤1080px);
+              the 1px slot there makes the browser fetch only the smallest file. */}
           <Image
             src={portraitImage}
-            alt="Alejandro Fontal hiking in front of a mountain"
-            width={720}
-            height={720}
+            alt="Alejandro Fontal hiking in front of Fitz Roy"
+            widths={[480, 640, 960, 1280]}
+            sizes="(max-width: 1080px) 1px, 320px"
+            format="webp"
+            quality={75}
             loading="eager"
             fetchpriority="high"
             decoding="async"

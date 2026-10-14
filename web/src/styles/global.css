@@ -696,20 +696,6 @@ body:has(main.page-content--quarto) .site-footer-inner {
   transition: opacity 180ms ease;
 }
 
-.fact-card:hover,
-.fact-card:focus-within {
-  border-color: color-mix(in oklab, var(--accent) 28%, var(--edge));
-  background: color-mix(in oklab, var(--paper) 90%, var(--paper-strong) 10%);
-  box-shadow:
-    0 10px 26px color-mix(in oklab, var(--accent) 8%, transparent),
-    inset 0 1px 0 color-mix(in oklab, white 14%, transparent);
-}
-
-.fact-card:hover::after,
-.fact-card:focus-within::after {
-  opacity: 1;
-}
-
 .fact-card h2 {
   font-family: 'IBM Plex Mono', 'Consolas', monospace;
   font-size: 1rem;
@@ -722,11 +708,6 @@ body:has(main.page-content--quarto) .site-footer-inner {
   color: var(--accent);
 }
 
-.fact-card:hover h2,
-.fact-card:focus-within h2 {
-  color: color-mix(in oklab, var(--ink) 88%, var(--accent) 12%);
-}
-
 .fact-card p {
   color: var(--ink-soft);
   font-size: 0.94rem;
@@ -735,9 +716,31 @@ body:has(main.page-content--quarto) .site-footer-inner {
   transition: color 180ms ease;
 }
 
-.fact-card:hover p,
-.fact-card:focus-within p {
-  color: color-mix(in oklab, var(--ink-soft) 82%, var(--ink) 18%);
+/* Touch leaves :hover stuck after a tap, so the glow is for mouse users on wider screens only. */
+@media (hover: hover) and (min-width: 641px) {
+  .fact-card:hover,
+  .fact-card:focus-within {
+    border-color: color-mix(in oklab, var(--accent) 28%, var(--edge));
+    background: color-mix(in oklab, var(--paper) 90%, var(--paper-strong) 10%);
+    box-shadow:
+      0 10px 26px color-mix(in oklab, var(--accent) 8%, transparent),
+      inset 0 1px 0 color-mix(in oklab, white 14%, transparent);
+  }
+
+  .fact-card:hover::after,
+  .fact-card:focus-within::after {
+    opacity: 1;
+  }
+
+  .fact-card:hover h2,
+  .fact-card:focus-within h2 {
+    color: color-mix(in oklab, var(--ink) 88%, var(--accent) 12%);
+  }
+
+  .fact-card:hover p,
+  .fact-card:focus-within p {
+    color: color-mix(in oklab, var(--ink-soft) 82%, var(--ink) 18%);
+  }
 }
 
 .portrait-panel {
@@ -787,7 +790,7 @@ body:has(main.page-content--quarto) .site-footer-inner {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  object-position: center;
+  object-position: 50% 40%;
   border-radius: inherit;
   border: 1px solid var(--edge);
   box-shadow: var(--shadow-soft);
@@ -947,6 +950,11 @@ body:has(main.page-content--quarto) .site-footer-inner {
   color: #00d735;
   border-color: #00d735;
   filter: drop-shadow(0 2px 6px rgba(0, 215, 53, 0.4));
+}
+
+/* Duplicate of the portrait socials, shown inside the hero card once the layout stacks. */
+.hero-socials {
+  display: none;
 }
 
 .split-layout {
@@ -3204,9 +3212,30 @@ summary.entry-grid:hover .entry-title {
     justify-items: center;
   }
 
-  .portrait-stack {
-    width: min(100%, 22rem);
-    margin-inline: auto;
+  /* Once stacked, the page starts with the name card; its socials row replaces the portrait panel. */
+  .hero-grid .portrait-panel {
+    display: none;
+  }
+
+  .hero-socials {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .pathway-card {
+    position: relative;
+  }
+
+  .pathway-card .inline-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  /* A transform would make the link the overlay's containing block and shrink it. */
+  .pathway-card .inline-link:hover,
+  .pathway-card .inline-link:focus-visible {
+    transform: none;
   }
 
   .site-brand em {
@@ -3350,15 +3379,6 @@ summary.entry-grid:hover .entry-title {
     justify-items: center;
   }
 
-  .portrait-stack {
-    width: min(100%, 22rem);
-  }
-
-  .portrait-meta-cloud {
-    width: 100%;
-    margin-top: 0;
-  }
-
   .page-intro-stats,
   .fact-grid {
     grid-template-columns: 1fr;
@@ -3474,6 +3494,83 @@ summary.entry-grid:hover .entry-title {
   .hero-actions {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .hero-note-link {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent);
+  }
+
+  .hero-note-link:hover,
+  .hero-note-link:focus-visible {
+    background: none;
+    box-shadow: none;
+  }
+
+  .hero-card .eyebrow,
+  .hero-tagline {
+    display: none;
+  }
+
+  .hero-stack p {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .hero-note {
+    font-weight: 500;
+  }
+
+  .fact-grid {
+    gap: 0.85rem;
+  }
+
+  .fact-card {
+    gap: 0.2rem;
+    padding: 0 0 0 0.85rem;
+    border: 0;
+    border-left: 2px solid color-mix(in oklab, var(--accent) 45%, var(--edge));
+    border-radius: 0;
+    background: none;
+  }
+
+  .fact-card::after {
+    display: none;
+  }
+
+  .fact-card h2 {
+    font-size: 0.92rem;
+  }
+
+  .fact-card p {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .pathway-card {
+    align-items: center;
+    padding: 0.6rem 0;
+  }
+
+  .pathway-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .pathway-card p {
+    display: none;
+  }
+
+  .pathway-card .inline-link {
+    min-height: 0;
+    font-size: 0.9rem;
   }
 
   .timeline {

@@ -81,7 +81,7 @@
     const path = window.location.pathname;
     document.querySelectorAll('[data-nav-link]').forEach((link) => {
       if (!(link instanceof HTMLAnchorElement)) return;
-      const href = link.getAttribute('href') || '';
+      const href = (link.getAttribute('href') || '').replace(/(.)\/$/, '$1');
       const isActive =
         href === '/'
           ? path === '/'

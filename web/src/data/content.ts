@@ -232,10 +232,10 @@ export const siteMeta = {
 
 export const navLinks: NavLink[] = [
   { label: 'About', href: '/' },
-  { label: 'CV', href: '/cv' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Research', href: '/research' },
+  { label: 'CV', href: '/cv/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'Projects', href: '/projects/' },
+  { label: 'Research', href: '/research/' },
 ];
 
 export const socialLinks: SocialLink[] = [
@@ -257,7 +257,7 @@ export const homeHero: HomeHero = {
     'I use this site as a sort of public portfolio, a place to share projects, writing, publications, and whatever I’m building or thinking about lately.',
   moreInfo: [
     { text: 'Check out my ' },
-    { text: 'web CV', href: '/cv' },
+    { text: 'web CV', href: '/cv/' },
     { text: ' or my ' },
     { text: 'LinkedIn profile', href: 'https://www.linkedin.com/in/alfontal/', external: true },
     { text: ' for a full professional background.' },
@@ -300,7 +300,7 @@ export const homeAnchorCards: HomeAnchorCard[] = [
     title: 'Projects & Code',
     description: 'A collection of mostly open-source software projects, repositories, and code snippets that I have built over the years.',
     linkLabel: 'Browse selected work',
-    linkHref: '/projects',
+    linkHref: '/projects/',
     icon: 'fa6-solid:terminal',
   },
   {
@@ -308,7 +308,7 @@ export const homeAnchorCards: HomeAnchorCard[] = [
     title: 'Blog & Writing',
     description: 'Published blog posts with a mix of technical and non-technical content, from research notes to coding experiments and reproducible notebooks.',
     linkLabel: 'Read the blog',
-    linkHref: '/blog',
+    linkHref: '/blog/',
     icon: 'fa6-solid:book-open',
   },
 ];

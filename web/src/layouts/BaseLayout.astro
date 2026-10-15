@@ -15,7 +15,7 @@ const { title, description = siteMeta.description, mainClass, jsonLd } = Astro.p
 const path = Astro.url.pathname;
 const pageTitle = title ? `${title} | ${siteMeta.name}` : siteMeta.name;
 const canonical = new URL(path, siteMeta.siteUrl).toString();
-const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href.replace(/\/$/, '')));
 ---
 
 <!doctype html>

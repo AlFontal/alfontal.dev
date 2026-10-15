@@ -20,7 +20,7 @@ const notebookPosts: BlogListingItem[] = (await getCollection('notebooks')).map(
   date: entry.data.date.toISOString().slice(0, 10),
   categories: entry.data.categories,
   image: entry.data.image,
-  href: entry.data.routePath,
+  href: `${entry.data.routePath}/`,
 }));
 
 const sortedPosts = notebookPosts.sort((a, b) => (a.date < b.date ? 1 : -1));

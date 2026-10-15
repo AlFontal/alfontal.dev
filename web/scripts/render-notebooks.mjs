@@ -349,7 +349,8 @@ function buildGeneratedFrontMatter(metadata, context) {
     renderer: 'quarto',
     section,
     notebook,
-    routePath: `/posts/${section}/${notebook}`,
+    // One notebook per folder, so the folder name alone is the post's URL slug.
+    routePath: `/posts/${section}`,
   };
 }
 
@@ -409,12 +410,6 @@ async function cleanGeneratedOutputs() {
   await fs.mkdir(path.dirname(generatedManifestPath), { recursive: true });
 }
 
-async function ensureSectionListingsFile(section) {
-  const sectionDir = path.join(generatedPublicPostsRoot, section);
-  await fs.mkdir(sectionDir, { recursive: true });
-  await fs.writeFile(path.join(sectionDir, 'listings.json'), '[]\n', 'utf8');
-}
-
 async function main() {
   const notebooks = await listNotebookSources();
   if (!notebooks.length) {
@@ -434,7 +429,9 @@ async function main() {
     const generatedFrontMatter = buildGeneratedFrontMatter(metadata, notebookContext);
 
     if (seenRoutePaths.has(generatedFrontMatter.routePath)) {
-      throw new Error(`Duplicate notebook route path detected: ${generatedFrontMatter.routePath}`);
+      throw new Error(
+        `Duplicate notebook route path detected: ${generatedFrontMatter.routePath} (each notebooks/ folder may hold only one notebook)`,
+      );
     }
     seenRoutePaths.add(generatedFrontMatter.routePath);
 
@@ -475,17 +472,11 @@ async function main() {
     await fs.mkdir(path.dirname(targetFile), { recursive: true });
     await fs.writeFile(targetFile, finalMarkdown, 'utf8');
 
-    const publishedPostFile = path.join(
-      generatedPublicPostsRoot,
-      notebookContext.section,
-      notebookContext.notebook,
-      'index.html',
-    );
+    const publishedPostFile = path.join(generatedPublicPostsRoot, notebookContext.section, 'index.html');
     const publishedPostDir = path.dirname(publishedPostFile);
     await fs.mkdir(publishedPostDir, { recursive: true });
     await fs.writeFile(publishedPostFile, rewrittenHtml, 'utf8');
     await fs.writeFile(path.join(publishedPostDir, 'listings.json'), '[]\n', 'utf8');
-    await ensureSectionListingsFile(notebookContext.section);
 
     manifest.push({
       section: notebookContext.section,

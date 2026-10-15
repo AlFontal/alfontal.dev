@@ -48,7 +48,7 @@ Notebook posts take a different path:
    - once to `gfm` for a generated Astro content entry
   - once to `html` for a published Quarto-authored post page
 4. Companion assets are copied into `web/public/assets/notebooks/...`.
-5. The published Quarto page is written to `web/public/posts/<section>/<name>/index.html` and served directly at `/posts/<section>/<name>/`.
+5. The published Quarto page is written to `web/public/posts/<section>/index.html` and served directly at `/posts/<section>/`. Each `notebooks/<section>/` folder holds exactly one notebook.
 
 That setup keeps Astro focused on the main site while letting Quarto own notebook layout, ToC behavior, and wide-content rendering directly.
 

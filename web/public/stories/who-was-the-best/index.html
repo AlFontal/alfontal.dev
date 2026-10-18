@@ -62,6 +62,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap">
 <link rel="icon" type="image/svg+xml" href="./_file/assets/logo.6e631436.svg">
+<script src="https://ry.alfontal.dev/api/script.js" data-site-id="0d10d28ab34a" defer=""></script>
 <meta name="author" content="Alejandro Fontal">
 <meta name="description" content="An interactive story: a Bayesian model of every ATP tour-level match since 1980 reconstructs how strong each player was, on hard courts, clay and grass, with uncertainty.">
 <link rel="canonical" href="https://alfontal.dev/stories/who-was-the-best/">
@@ -174,7 +175,7 @@ const size = Generators.observe((notify) => {
 return {logo,toggleTheme,dots,prev,next,count,titleEl,noteEl,stageEl,deck,onKey,touch,size};
 }});
 
-define({id: "5f90135e", inputs: ["PHASES","phase","titleEl","noteEl","data","deck","count","prev","next","dots","history","location"], outputs: ["ph"], body: (PHASES,phase,titleEl,noteEl,data,deck,count,prev,next,dots,history,location) => {
+define({id: "27293f46", inputs: ["PHASES","phase","titleEl","noteEl","data","deck","count","prev","next","dots","location","history"], outputs: ["ph","url"], body: (PHASES,phase,titleEl,noteEl,data,deck,count,prev,next,dots,location,history) => {
 // Text and controls for the current slide.
 const ph = PHASES[phase];
 titleEl.textContent = ph.title;
@@ -184,8 +185,10 @@ count.textContent = `${phase + 1} / ${PHASES.length}`;
 prev.disabled = phase === 0;
 next.disabled = phase === PHASES.length - 1;
 dots.forEach((d, i) => d.classList.toggle("on", i === phase));
-history.replaceState(null, "", phase ? `?phase=${phase + 1}` : location.pathname);
-return {ph};
+// Only touch the URL when it changes: Rybbit logs a page view (with ?phase) on every replaceState.
+const url = phase ? `?phase=${phase + 1}` : location.pathname;
+if (location.search !== (phase ? url : "")) history.replaceState(null, "", url);
+return {ph,url};
 }});
 
 define({id: "21714091", inputs: ["theme","getComputedStyle","createStory","d3","data","size","stageEl","currentPhase"], outputs: ["css","v","palette","colors","story"], body: (theme,getComputedStyle,createStory,d3,data,size,stageEl,currentPhase) => {
@@ -217,7 +220,7 @@ story.go(phase, true);
 <main id="observablehq-main" class="observablehq">
 <div class="observablehq observablehq--block"><!--:ac2ccc6d:--></div>
 <div class="observablehq observablehq--block"><!--:232ce398:--></div>
-<div class="observablehq observablehq--block"><!--:5f90135e:--></div>
+<div class="observablehq observablehq--block"><!--:27293f46:--></div>
 <div class="observablehq observablehq--block"><!--:21714091:--></div>
 <div class="observablehq observablehq--block"><!--:d8dade84:--></div>
 </main>

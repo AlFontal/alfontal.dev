@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.4">
+<title>Who was the best tennis player?</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_import/theme.d545cff2.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_import/theme.d545cff2.css">
+<link rel="modulepreload" href="./_observablehq/client.ff3ac5ef.js">
+<link rel="modulepreload" href="./_observablehq/runtime.fa9f71c0.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.c4209144.js">
+<link rel="modulepreload" href="./_import/components/story.d887d060.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/080cf928.js">
+<link rel="modulepreload" href="./_npm/htl@1.0.0/11521f02.js">
+<link rel="modulepreload" href="./_import/components/simplex.0fa8659c.js">
+<link rel="modulepreload" href="./_import/components/common.9b492e00.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/b8e751b6.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/c662ea05.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/d162d8c6.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/5cedd0be.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/65d51007.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/c576a91a.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/8b43826d.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/3fb06f14.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/20b76948.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/097745a2.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/8683b012.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/5c319046.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/33924f3e.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.2/8d67a1ae.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/8037bd0b.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/a9ba0229.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/e0a47f97.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/f9e9e0ab.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/2da8eb3b.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/09002e01.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/5108797c.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/c9f2571b.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/f3c78e0d.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/28717d05.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/7c6e2a50.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/3d1d57c6.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/643581a8.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/e99232db.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/bd07fd9a.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/d09f7cc9.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/af036d7e.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.1.0/7b06abe7.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.3/b42f30a7.js">
+<script>(() => {
+  // Dark by default. The story keeps its own saved choice ("ttm-theme"): alfontal.dev writes
+  // "af-theme" on every page load, so sharing that key would override the default.
+  let s = null;
+  try { s = localStorage.getItem("ttm-theme"); } catch {}
+  document.documentElement.dataset.theme = s === "light" ? "light" : "dark";
+})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap">
+<link rel="icon" type="image/svg+xml" href="./_file/assets/logo.6e631436.svg">
+<meta name="author" content="Alejandro Fontal">
+<meta name="description" content="An interactive story: a Bayesian model of every ATP tour-level match since 1980 reconstructs how strong each player was, on hard courts, clay and grass, with uncertainty.">
+<link rel="canonical" href="https://alfontal.dev/stories/who-was-the-best/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Who was the best tennis player?">
+<meta property="og:description" content="An interactive story: a Bayesian model of every ATP tour-level match since 1980 reconstructs how strong each player was, on hard courts, clay and grass, with uncertainty.">
+<meta property="og:url" content="https://alfontal.dev/stories/who-was-the-best/">
+<meta property="og:image" content="https://alfontal.dev/assets/stories/who-was-the-best/featured-triangle.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="module">
+
+import {define} from "./_observablehq/client.ff3ac5ef.js";
+import {registerFile} from "./_observablehq/stdlib.c4209144.js";
+
+registerFile("./assets/logo.svg", {"name":"./assets/logo.svg","mimeType":"image/svg+xml","path":"./_file/assets/logo.6e631436.svg","lastModified":1792268834913,"size":39830});
+registerFile("./data/story.json", {"name":"./data/story.json","mimeType":"application/json","path":"./_file/data/story.21a1bec1.json","lastModified":1792347112785,"size":386409});
+
+define({id: "ac2ccc6d", inputs: ["FileAttachment","Generators","MutationObserver","Mutable","URLSearchParams","location"], outputs: ["createStory","PHASES","data","theme","phase","setPhase","step","currentPhase"], body: async (FileAttachment,Generators,MutationObserver,Mutable,URLSearchParams,location) => {
+const {createStory, PHASES} = await import("./_import/components/story.d887d060.js");
+
+const data = FileAttachment("./data/story.json").json();
+
+// Follow the site's light/dark switch (html[data-theme]).
+const theme = Generators.observe((notify) => {
+  const read = () => notify(document.documentElement.dataset.theme ?? "light");
+  read();
+  const mo = new MutationObserver(read);
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  return () => mo.disconnect();
+});
+
+// Current slide (0-based). Only this cell may set it, so it also exports the setters.
+// ?phase=N (1-based) opens a given slide.
+const phase = Mutable(Math.min(PHASES.length, Math.max(1,
+  Number(new URLSearchParams(location.search).get("phase")) || 1)) - 1);
+const setPhase = (i) => { phase.value = Math.max(0, Math.min(PHASES.length - 1, i)); };
+const step = (d) => setPhase(phase.value + d);
+const currentPhase = () => phase.value;
+return {createStory,PHASES,data,theme,phase,setPhase,step,currentPhase};
+}});
+
+define({id: "232ce398", inputs: ["FileAttachment","localStorage","PHASES","html","setPhase","step","display","addEventListener","invalidation","removeEventListener","Generators","ResizeObserver"], outputs: ["logo","toggleTheme","dots","prev","next","count","titleEl","noteEl","stageEl","deck","onKey","touch","size"], body: async (FileAttachment,localStorage,PHASES,html,setPhase,step,display,addEventListener,invalidation,removeEventListener,Generators,ResizeObserver) => {
+// The deck: fixed to the window. Built once; later cells update it in place.
+const logo = await FileAttachment("./assets/logo.svg").url();
+const toggleTheme = () => {
+  const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = t;
+  try { localStorage.setItem("ttm-theme", t); } catch {}
+};
+const dots = PHASES.map((p, i) => html`<button type="button" class="dot" title=${p.label}
+  aria-label=${p.label} onclick=${() => setPhase(i)}></button>`);
+const prev = html`<button type="button" class="nav" aria-label="Previous" onclick=${() => step(-1)}>←<span> Previous</span></button>`;
+const next = html`<button type="button" class="nav" aria-label="Next" onclick=${() => step(1)}><span>Next </span>→</button>`;
+const count = html`<span class="count"></span>`;
+const titleEl = html`<h2 class="deck-title"></h2>`;
+const noteEl = html`<p class="deck-note"></p>`;
+const stageEl = html`<div class="deck-stage"></div>`;
+const deck = html`<div class="deck">
+  <header class="deck-text">${titleEl}${noteEl}</header>
+  ${stageEl}
+  <nav class="deck-bar">
+    <a class="home" href="https://alfontal.dev/"><img src=${logo} alt="" width="22" height="22"><span>alfontal.dev</span></a>
+    <span class="controls">${prev}${count}${next}</span>
+    <span class="dots">${dots}</span>
+    <span class="credit"><span class="by">Analysis and visualization by Alejandro Fontal</span><span>Data: Jeff Sackmann / Tennis Abstract,
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></span></span>
+    <button type="button" class="theme" aria-label="Toggle dark mode" onclick=${toggleTheme}>◐</button>
+  </nav>
+</div>`;
+display(deck);
+
+// Keyboard: arrows and space step, Home/End jump.
+const onKey = (e) => {
+  if (e.target.closest?.("input, textarea")) return;
+  if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); step(1); }
+  else if (e.key === "ArrowLeft") step(-1);
+  else if (e.key === "Home") setPhase(0);
+  else if (e.key === "End") setPhase(PHASES.length - 1);
+};
+addEventListener("keydown", onKey);
+invalidation.then(() => removeEventListener("keydown", onKey));
+
+// Touch: swipe left/right on the chart to step (mostly horizontal swipes only).
+let touch = null;
+stageEl.addEventListener("touchstart", (e) => {
+  const p = e.touches[0];
+  touch = { x: p.clientX, y: p.clientY };
+}, { passive: true });
+stageEl.addEventListener("touchend", (e) => {
+  if (!touch) return;
+  const p = e.changedTouches[0], dx = p.clientX - touch.x, dy = p.clientY - touch.y;
+  touch = null;
+  if (Math.abs(dx) > 45 && Math.abs(dx) > 1.5 * Math.abs(dy)) step(dx < 0 ? 1 : -1);
+}, { passive: true });
+
+// Stage size, debounced: the story is rebuilt only when this changes.
+const size = Generators.observe((notify) => {
+  let timer, last = "";
+  const ro = new ResizeObserver(([e]) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const { width: w, height: h } = e.contentRect;
+      const key = `${Math.round(w)}x${Math.round(h)}`;
+      if (w > 0 && h > 0 && key !== last) { last = key; notify({ w, h }); }
+    }, 120);
+  });
+  ro.observe(stageEl);
+  return () => ro.disconnect();
+});
+return {logo,toggleTheme,dots,prev,next,count,titleEl,noteEl,stageEl,deck,onKey,touch,size};
+}});
+
+define({id: "5f90135e", inputs: ["PHASES","phase","titleEl","noteEl","data","deck","count","prev","next","dots","history","location"], outputs: ["ph"], body: (PHASES,phase,titleEl,noteEl,data,deck,count,prev,next,dots,history,location) => {
+// Text and controls for the current slide.
+const ph = PHASES[phase];
+titleEl.textContent = ph.title;
+noteEl.textContent = typeof ph.note === "function" ? ph.note(data) : ph.note;   // some notes quote the run
+deck.classList.toggle("is-title", ph.view === "title");
+count.textContent = `${phase + 1} / ${PHASES.length}`;
+prev.disabled = phase === 0;
+next.disabled = phase === PHASES.length - 1;
+dots.forEach((d, i) => d.classList.toggle("on", i === phase));
+history.replaceState(null, "", phase ? `?phase=${phase + 1}` : location.pathname);
+return {ph};
+}});
+
+define({id: "21714091", inputs: ["theme","getComputedStyle","createStory","d3","data","size","stageEl","currentPhase"], outputs: ["css","v","palette","colors","story"], body: (theme,getComputedStyle,createStory,d3,data,size,stageEl,currentPhase) => {
+// Build the stage for this size and theme, at the current slide (no animation).
+const css = (theme, getComputedStyle(document.documentElement));
+const v = (name) => css.getPropertyValue(name).trim();
+const palette = { bg: v("--bg"), paper: v("--paper"), ink: v("--ink"), inkSecondary: v("--ink-soft"),
+  inkMuted: v("--ink-muted"), grid: v("--grid"), accent: v("--accent") };
+const colors = Object.fromEntries([
+  ["Novak Djokovic", "--djokovic"], ["Rafael Nadal", "--nadal"], ["Roger Federer", "--federer"],
+  ["Pete Sampras", "--sampras"], ["Jannik Sinner", "--sinner"], ["Carlos Alcaraz", "--alcaraz"],
+  ["Andre Agassi", "--agassi"], ["hard", "--hard"], ["clay", "--clay"], ["grass", "--grass"],
+].map(([k, name]) => [k, v(name)]));
+const story = createStory(d3, data, { width: size.w, height: size.h, palette, colors,
+  font: "Space Grotesk" });
+stageEl.replaceChildren(story.node);
+story.go(currentPhase(), false);
+return {css,v,palette,colors,story};
+}});
+
+define({id: "d8dade84", inputs: ["story","phase"], body: (story,phase) => {
+story.go(phase, true);
+}});
+
+</script>
+</head>
+<body>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<div class="observablehq observablehq--block"><!--:ac2ccc6d:--></div>
+<div class="observablehq observablehq--block"><!--:232ce398:--></div>
+<div class="observablehq observablehq--block"><!--:5f90135e:--></div>
+<div class="observablehq observablehq--block"><!--:21714091:--></div>
+<div class="observablehq observablehq--block"><!--:d8dade84:--></div>
+</main>
+</div>
+</body>
+</html>

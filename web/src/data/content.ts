@@ -173,6 +173,18 @@ export type BlogPage = {
   rssLabel: string;
 };
 
+// Posts served as standalone pages from web/public (e.g. interactive stories built elsewhere), listed in
+// the blog index, RSS and sitemap next to the notebook posts.
+export type ExternalPost = {
+  title: string;
+  description: string;
+  date: string;
+  categories: string[];
+  image: string;
+  href: string;
+  cta: string;
+};
+
 export type CvEducationItem = {
   degree: string;
   institution: string;
@@ -355,6 +367,19 @@ export const blogPage: BlogPage = {
   intro: 'A mix of technical and non-technical writing, or whatever comes to mind lately.',
   rssLabel: 'Subscribe via RSS',
 };
+
+export const externalPosts: ExternalPost[] = [
+  {
+    title: 'Who was the best tennis player?',
+    description:
+      'An interactive story. A Bayesian model of every ATP tour-level match since 1980 reconstructs how strong each player was, on hard courts, clay and grass, with honest uncertainty.',
+    date: '2026-10-18',
+    categories: ['Data Visualization', 'Bayesian Statistics', 'Tennis', 'D3', 'Interactive'],
+    image: '/assets/stories/who-was-the-best/featured-triangle.png',
+    href: '/stories/who-was-the-best/',
+    cta: 'Open story',
+  },
+];
 
 export const projects: Project[] = [
 

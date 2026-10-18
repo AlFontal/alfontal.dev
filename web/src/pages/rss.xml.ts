@@ -1,25 +1,28 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
-import { blogPage, siteMeta } from '../data/content';
+import { blogPage, externalPosts, siteMeta } from '../data/content';
 
 const escapeXml = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 export const GET: APIRoute = async () => {
-  const posts = (await getCollection('notebooks')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  const posts = [
+    ...(await getCollection('notebooks')).map((post) => ({ ...post.data, path: `${post.data.routePath}/` })),
+    ...externalPosts.map((post) => ({ ...post, date: new Date(post.date), path: post.href })),
+  ].sort((a, b) => b.date.getTime() - a.date.getTime());
   const feedUrl = new URL('/rss.xml', siteMeta.siteUrl).toString();
   const blogUrl = new URL('/blog/', siteMeta.siteUrl).toString();
 
   const items = posts.map((post) => {
-    const link = new URL(`${post.data.routePath}/`, siteMeta.siteUrl).toString();
+    const link = new URL(post.path, siteMeta.siteUrl).toString();
     return [
       '    <item>',
-      `      <title>${escapeXml(post.data.title)}</title>`,
+      `      <title>${escapeXml(post.title)}</title>`,
       `      <link>${link}</link>`,
       `      <guid isPermaLink="true">${link}</guid>`,
-      `      <pubDate>${post.data.date.toUTCString()}</pubDate>`,
-      `      <description>${escapeXml(post.data.description)}</description>`,
-      ...post.data.categories.map((category) => `      <category>${escapeXml(category)}</category>`),
+      `      <pubDate>${post.date.toUTCString()}</pubDate>`,
+      `      <description>${escapeXml(post.description)}</description>`,
+      ...post.categories.map((category) => `      <category>${escapeXml(category)}</category>`),
       '    </item>',
     ].join('\n');
   });

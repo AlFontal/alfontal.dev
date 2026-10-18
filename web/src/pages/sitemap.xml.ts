@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
-import { navLinks, siteMeta } from '../data/content';
+import { externalPosts, navLinks, siteMeta } from '../data/content';
 
 // Pages and posts are served as directories, so every URL ends in a slash to match the canonical tags.
 const absoluteUrl = (pathname: string) => new URL(pathname.endsWith('/') ? pathname : `${pathname}/`, siteMeta.siteUrl).toString();
@@ -10,6 +10,7 @@ export const GET: APIRoute = async () => {
   const entries = [
     ...navLinks.map((link) => ({ loc: absoluteUrl(link.href) })),
     ...posts.map((post) => ({ loc: absoluteUrl(post.data.routePath), lastmod: post.data.date.toISOString().slice(0, 10) })),
+    ...externalPosts.map((post) => ({ loc: absoluteUrl(post.href), lastmod: post.date })),
   ];
 
   const body = [

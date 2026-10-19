@@ -372,7 +372,7 @@ export const externalPosts: ExternalPost[] = [
   {
     title: 'Who was the best tennis player?',
     description:
-      'An interactive story. A Bayesian model of every ATP tour-level match since 1980 reconstructs how strong each player was, on hard courts, clay and grass, with honest uncertainty.',
+      'An interactive story showing the analysis of every ATP-tour (tennis) level match since 1980 using a bayesian model that tries to reconstruct a dynamic latent strength for every player.',
     date: '2026-10-18',
     categories: ['Data Visualization', 'Bayesian Statistics', 'Tennis', 'D3', 'Interactive'],
     image: '/assets/stories/who-was-the-best/featured-triangle.png',

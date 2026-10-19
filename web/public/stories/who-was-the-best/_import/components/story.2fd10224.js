@@ -10,7 +10,7 @@ const SURF = ["Hard", "Clay", "Grass"];
 export const PHASES = [
   { label: "Start", view: "title", title: "", note: "" },
   { label: "A match", view: "winprob", bo5: false,
-    title: "A match is a weighted coin flip",
+    title: "Each match can be modelled as a weighted coin flip",
     note: "The bigger the strength gap, the more likely the stronger player is to win. This is a "
       + "Bradley–Terry model, using the same win-probability formula as Elo. On the usual Elo "
       + "scale, a 100-point edge wins about 64% of the time, and a 550-point edge about 96%." },
@@ -18,11 +18,11 @@ export const PHASES = [
     title: "Best of five makes the gap count more",
     note: (d) => "Longer matches give the better player more chances. In best of five the model multiplies "
       + `the strength gap by a learned ${d.model.kappa5.toFixed(2)} before turning it into a win probability: `
-      + "a 100-point edge wins about 69% instead of 64%." },
+      + "a 100-point edge wins about 69% instead of 64%. Upsets in Grand Slam matches are therefore less likely and generate stronger signals when they occur." },
   { label: "Elo", view: "elo",
     title: "The usual way: Elo",
     note: "Elo nudges a player's rating after every match by K × (result − expected). Beating a weaker "
-      + "player earns little; an upset moves both ratings a lot. Illustration with K = 32; the tuned Elo "
+      + "player earns little, but an upset moves both ratings a lot. Illustration with K = 32; the tuned Elo "
       + "benchmark used later lets K shrink with experience, adds surface ratings and scales best of five." },
   { label: "Versus Elo", view: "versus",
     title: "From Elo ratings to reconstructed careers",
@@ -31,21 +31,21 @@ export const PHASES = [
   { label: "Hidden strength", view: "lines", player: "Novak Djokovic", series: ["Overall"], draw: true,
     title: "We observe results and estimate strength",
     note: "Here is Djokovic's estimated strength, using his matches before and after each date. The line is "
-      + "the posterior median; the shaded band contains the middle 50% of the model's estimates. Zero is "
+      + "the posterior median, with the shaded band containing the middle 50% of the model's estimates. Zero is "
       + "the average strength of active players ranked 10th–100th by the model in that two-week period." },
   { label: "Aging", view: "aging",
     title: "A shared aging curve",
     note: "The model learns one average age pattern for all players, relative to the field; each career "
       + "then deviates from it. The fitted curve peaks around 23, then drops about 75 rating points from "
-      + "26 to 30 and about 200 by 34. It describes the typical pattern, not what causes it." },
+      + "26 to 30 and about 200 by 34. This is the typical pattern, but individual careers may vary, and in fact elite players often deviate significantly." },
   { label: "Drift", view: "drift",
     title: "How quickly can strength change?",
-    note: (d) => "On top of the aging curve, strength drifts a little every two weeks: a random walk. The "
+    note: (d) => "On top of the aging curve, strength drifts a little every two weeks modelled as a random walk. The "
       + `model learns one drift size for all players, about ${Math.round(d.model.tau_points)} rating points `
       + `per two weeks (about ${Math.round(d.model.tau_points * Math.sqrt(26) / 10) * 10} a year). Slow `
       + "drift links nearby periods, so later results say more about earlier strength." },
   { label: "Future", view: "revision",
-    title: "Can future matches change the past?",
+    title: "Can future matches change the past? Alcaraz's example.",
     note: "At the end of 2022 we had seen only part of Alcaraz's career. His later results are more "
       + "evidence about how strong he already was. The model uses them to revisit its earlier estimate, "
       + "while still allowing for real improvement in between." },
@@ -80,65 +80,66 @@ export const PHASES = [
       + "Djokovic's in 2014–2016." },
   { label: "Big Three", view: "timeline", domain: ["2007-06-01", "2024-01-01"],
     focus: ["Roger Federer", "Rafael Nadal", "Novak Djokovic"],
-    title: "2008–2023: a three-way contest",
+    title: "2008–2023: The Big Three era.",
     note: "Djokovic leads for most of 2011–2016 and 2019–2023. Nadal moves in and out of the lead, and "
       + "Federer returns to it in 2017. When several rows have similar shading, the model is less sure "
       + "who was strongest." },
   { label: "Sinner", view: "timeline", domain: ["2019-01-01", "2026-07-01"],
     focus: ["Jannik Sinner", "Carlos Alcaraz"],
-    title: "2024 to June 2026: Sinner, with Alcaraz close",
+    title: "2024 to June 2026: Sinner and Alcaraz",
     note: "Sinner and Alcaraz lead the recent period. Their newest estimates have no later results to "
-      + "learn from, so they can change as more matches arrive. The data stops at Roland Garros 2026." },
+      + "learn from, so they can change as more matches arrive. The data stops at Roland Garros 2026."
+      + " The model favors consistency over higher peaks of form, so Sinner's favored most of the time."
+    },
   { label: "By year", view: "mountains", panels: ["Overall"], x: "year",
-    title: "Career mountains: the Big Three by year",
+    title: "Career trajectories: the Big Three by year",
     note: "Their careers on the same calendar. Federer gets an early start, but Nadal and Djokovic arrive later."
       + " Lines show posterior medians; bands contain the middle 50% of estimates. Next, align them by "
       + "age to compare where each player was at the same stage of his career." },
   { label: "By age", view: "mountains", panels: ["Overall"], x: "age",
-    title: "Career mountains: the Big Three by age",
+    title: "Career trajectories: the Big Three by age",
     note: "The same curves but now aligned by age. Nadal's rise was the earliest, Federer peaks around 24–25, and "
       + "Djokovic reaches the highest summit, at "
-      + "around 27–28. All three stay strong well into their thirties, which is remarkable for professional tennis. Lines show posterior medians; "
-      + "bands contain the middle 50% of estimates." },
+      + "around 27–28. All three stay strong well into their thirties, which is remarkable for professional tennis." },
   // One surface at a time: the single panel keeps its curves, so they morph from surface to surface.
   { label: "Hard", view: "mountains", panels: ["Hard"], x: "age", duration: 1400,
     title: "On hard courts, Djokovic leads",
     note: "The same curves, but now using only each player's hard-court strength instead of the "
-      + "calendar-weighted overall. Lines show posterior medians; bands contain the middle 50% of estimates." },
+      + "calendar-weighted overall." },
   { label: "Grass", view: "mountains", panels: ["Grass"], x: "age", duration: 1400,
-    title: "On grass, Federer edges Djokovic",
-    note: "Now each player's grass-court strength. Federer edges Djokovic at the top, and Nadal's grass "
+    title: "On grass, Federer takes the edge over Djokovic",
+    note: "Now each player's grass-court strength. Federer takes the edge over Djokovic at the top, and Nadal's grass "
       + "curve sits well below both." },
   { label: "Clay", view: "mountains", panels: ["Clay"], x: "age", duration: 1400,
-    title: "On clay, Nadal is clearly above everyone",
+    title: "On clay, there is no contest: Nadal is king.",
     note: "Nadal's clay peak is the highest rating on any surface in the data, about 120 points clear of "
-      + "the next-best clay player (Djokovic). Next, the peaks side by side." },
+      + "the next-best clay player (Djokovic). During a period in their late twenties, however, Novak and Rafa were extremely close." },
   { label: "Peaks", view: "peaks",
-    title: "A different peak leader on each surface",
+    title: "Each player's peak is on different surfaces, and each surface's peak is led by a different player",
     note: "Peak strength on each surface and overall (posterior median and 90% credible interval). Djokovic leads on hard, "
       + "Nadal on clay, Federer on grass, and Djokovic has the highest calendar-weighted overall peak." },
   { label: "Certainty", view: "certainty",
     title: "How certain are we?",
-    note: (d) => "Past strength is never known exactly. The model gives many plausible careers, so a distribution of outcomes instead of a single rating"
-      + ". In about ${Math.round(d.certainty.p_first_higher * 100)}% of them, Djokovic's overall "
+    note: (d) => "Past strength is never known exactly. The models don't give a single rating but many plausible careers: a distribution of outcomes. "
+      + `In about ${Math.round(d.certainty.p_first_higher * 100)}% of them, Djokovic's overall `
       + "peak is higher than Federer's." },
   { label: "Weights", view: "simplex", highlight: null,
-    title: "But “overall” depends on how you weigh the surfaces",
+    title: "But “overall strength” depends on how you weigh the surfaces",
     note: "Here, each hexagon is a different mix of hard, clay and grass. Its colour shows the most likely peak "
       + "leader, with fainter colours meaning less certainty. Djokovic is most likely to lead using the tour's "
       + "surface mix (79%), the Grand Slam mix (74%) or equal weights (68%)." },
   { label: "Where it flips", view: "simplex", highlight: ["Rafael Nadal", "Roger Federer"],
     title: "Where Nadal and Federer take over",
     note: "Nadal leads once clay counts for around >50% of the weight, and on clay alone he is almost "
-      + "certain (99%). Federer leads in mixes with at least 60% grass; the threshold depends on the "
+      + "certain (99.3%, 298/300 draws). Federer leads in mixes with at least 60% grass; the threshold depends on the "
       + "remaining mix. Even on grass alone, his probability of the highest peak is 57%." },
   { label: "Sinner & Alcaraz", view: "mountains", panels: ["Overall"],
     players: ["Roger Federer", "Rafael Nadal", "Novak Djokovic", "Jannik Sinner", "Carlos Alcaraz"],
     focus: ["Jannik Sinner", "Carlos Alcaraz"],
     title: "Sinner and Alcaraz, so far",
     note: "Their careers so far, against the Big Three at the same ages. Strength is relative to each "
-      + "player's field. Lines show posterior medians; bands contain the middle 50% of estimates. Data "
-      + "runs through Roland Garros 2026; curves end at each player's last match period." },
+      + "player's field. Data "
+      + "runs until Roland Garros 2026, with the curves ending at each player's last match period." },
   { label: "Slams", view: "slams",
     title: "The most unlikely Grand Slam champions",
     note: (d) => (d.slams ? "Some champions looked inevitable, but many others had almost no chance when play began. "
@@ -146,9 +147,6 @@ export const PHASES = [
       + `The median champion had a ${Math.round(d.slams.median * 100)}% chance; Kuerten at Roland Garros 1997 had `
       + `about 1 in ${(Math.round(1 / d.slams.rows[0].p_title / 1000) * 1000).toLocaleString("en-US")}.`
       : "TODO: pre-tournament title probabilities not computed yet.") },
-  { label: "Trust", view: "trust",
-    title: "How far to trust this",
-    note: "The model forecasts somewhat better than a tuned Elo, but it is imperfect and overconfident." },
   { label: "Limits", view: "limits",
     title: "What the model takes into account, and what it misses",
     note: "A reconstruction of match-winning ability, within the limits of the observations and the "
@@ -478,7 +476,7 @@ export function createStory(d3, data, opts) {
     const g = views.drift;
     g.selectAll("*").remove();
     const tau = data.model.tau_points, n = 78, z90 = 1.645;
-    const fb = footnote(g, "Illustration: simulated random walks, not player data. θ[t+1] = θ[t] + ε[t], "
+    const fb = footnote(g, "Illustration: simulated random walks. θ[t+1] = θ[t] + ε[t], "
       + "ε ~ Normal(0, τ²), for the part of strength the aging curve does not explain. One τ for all "
       + "players (shared across surfaces in the surface model). Uncertainty also grows during long breaks "
       + "without matches.", t.duration() ? 1800 : 0);
@@ -555,9 +553,9 @@ export function createStory(d3, data, opts) {
     }
     const then = revSeries("cut_2022"), now = revSeries("smoothed");
     const late = t.duration() ? 1 : 0;
-    const fb = footnote(g, "Both curves: the same surface model, fitted settings and procedure; only the matches "
-      + "differ. Overall strength (surface-weighted); lines are posterior medians, bands the middle 50%. "
-      + "Rebuilding the past may use later matches; forecast tests may not.", late * 3200);
+    const fb = footnote(g, "Both curves: the same surface model, fitted settings and procedure but "
+      + "only the number of future matches differ.",
+       late * 3200);
     const col = color("Carlos Alcaraz");
     const m = { l: 72, r: wide ? 24 : 12, t: fs * 5.6, b: fb + 30 };
     const x = d3.scaleUtc([parseDate("2020-01-01"), now.at(-1).x], [m.l, W - m.r]);
@@ -1023,10 +1021,8 @@ export function createStory(d3, data, opts) {
     g.selectAll("*").remove();
     const c = data.certainty, [na, nb] = c.pair;
     const late = t.duration() ? 1 : 0;
-    const fb = footnote(g, "Overall peak with the tour's surface mix, as on the previous slide; "
-      + `${c.draws} posterior draws. Each player's draws are sampled separately, so comparisons between `
-      + "players are approximate. In simulations the model's intervals were somewhat too narrow and its "
-      + "peaks somewhat low.", late * 1600);
+    const fb = footnote(g, "Overall peak with the tour's surface mix, as on the previous slide"
+      + ` with ${c.draws} posterior draws.`, late * 1600);
     const m = { l: wide ? 40 : 16, r: wide ? 40 : 16, t: fs * 6.2, b: fb + fs * 3.4 };
     const x = d3.scaleLinear(d3.extent(c.edges), [m.l, W - m.r]);
     const ymax = d3.max(c.counts.flat());
@@ -1104,7 +1100,7 @@ export function createStory(d3, data, opts) {
     const late = t.duration() ? 1 : 0;
     const fb = footnote(g, `Pre-tournament title probability: simulated tournaments from the draw as it stood `
       + "when play began (rebuilt from the played matches), with strengths from matches before each Slam "
-      + "and settings fitted only on earlier seasons. Estimated under this model and not the odds of the day. "
+      + "and settings fitted only on earlier seasons. "
       + "This is the chance of winning from the start, not of the exact path taken, which would be an interesting but different quantity depending on the draws.",
     late * 900);
     const rows = S.rows.slice(0, wide ? S.rows.length : 10);
@@ -1168,9 +1164,9 @@ export function createStory(d3, data, opts) {
       + "The newest estimates (Sinner, Alcaraz) have no later matches to learn from yet.", late(4));
     const models = [
       { lab: "Tuned Elo benchmark", sub: "updates after every match", v: V.elo.log_loss, col: P.inkMuted },
-      { lab: "One-strength model", sub: "pre-registered test, procedure fixed in advance",
+      { lab: "One-strength model", sub: "Doesn't take into account surface differences",
         v: V.m2.log_loss, col: P.ink },
-      { lab: "Surface model (this story)", sub: "tested after the test seasons were seen",
+      { lab: "Surface model (this story)", sub: "Accounts for surface differences",
         v: V.m2s.log_loss, col: P.accent },
     ];
     const head = (k, x0, y0, str) => k.append("text").attr("x", x0).attr("y", y0).attr("font-size", fs * 1.05)
@@ -1264,8 +1260,7 @@ export function createStory(d3, data, opts) {
         ["Stronger checks", "cross-validated calibration, selection sensitivity, explicit cross-era "
           + "scenarios."]] },
     ];
-    const fb = footnote(g, "Next steps are hypotheses to test against held-out matches, not guaranteed "
-      + "improvements.", late(3));
+    const fb = 0;
     let bottom = 0;
     if (wide) {
       const gap = fs * 1.6, cw = (W - 2 * gap) / 3;
@@ -1313,7 +1308,7 @@ export function createStory(d3, data, opts) {
     const take = g.append("text").attr("x", 0).attr("y", Math.min(bottom + fs * 1.6, H - fb - fs * 3))
       .attr("font-size", fs * (wide ? 1.15 : 0.9)).attr("font-weight", 600).attr("fill", P.ink).attr("opacity", 0);
     wrap(take, "The model estimates what a player's results imply about competitive strength. "
-      + "It cannot recover everything that produced those results.", W, fs * 1.45);
+      + " but it cannot recover everything that produced those results, like for instance injuries (which one could argue are part of the player's overall strength).", W, fs * 1.45);
     take.transition().delay(late(3)).duration(400).attr("opacity", 1);
   }
 

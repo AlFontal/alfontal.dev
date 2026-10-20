@@ -15,8 +15,8 @@ export function simplex(d3, spec) {
     const binOf = (p) => d3.bisectRight(bins, p) - 1;
     const tint = (color, i) => d3.interpolateLab(P.bg, color)(spec.tints[i]);
 
-    // Layout: key to the right in landscape, below in portrait.
-    const landscape = spec.width > spec.height;
+    // Layout: key to the right in landscape, below in portrait (spec.landscape overrides the shape).
+    const landscape = spec.landscape ?? spec.width > spec.height;
     const keyRight = landscape && !spec.keyBelow;          // the story puts the key underneath
     const keyW = keyRight ? 17 * u : 0, keyH = keyRight ? 0 : (spec.compact ? 15 : 11.7) * u;
     const side = landscape ? 5.6 * u : 3 * u;

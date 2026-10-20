@@ -2,7 +2,7 @@
 // network, mountains, peaks, certainty, simplex, slams, trust, limits, thanks) and its parameters; go(n) transitions the stage there.
 // Titles and notes are page text, set by the caller from PHASES; a note may be a function of
 // the data payload when it quotes the run.
-import { simplex } from "./simplex.0fa8659c.js";
+import { simplex } from "./simplex.131ada0f.js";
 import { wrap } from "./common.9b492e00.js";
 
 const SURF = ["Hard", "Clay", "Grass"];
@@ -123,7 +123,7 @@ export const PHASES = [
     note: (d) => "Past strength is never known exactly. The models don't give a single rating but many plausible careers: a distribution of outcomes. "
       + `In about ${Math.round(d.certainty.p_first_higher * 100)}% of them, Djokovic's overall `
       + "peak is higher than Federer's." },
-  { label: "Weights", view: "simplex", highlight: null,
+  { label: "Weights", view: "simplex", highlight: null, build: true, duration: 600,
     title: "But “overall strength” depends on how you weigh the surfaces",
     note: "Here, each hexagon is a different mix of hard, clay and grass. Its colour shows the most likely peak "
       + "leader, with fainter colours meaning less certainty. Djokovic is most likely to lead using the tour's "
@@ -162,7 +162,8 @@ export function createStory(d3, data, opts) {
   const wide = opts.wide ?? (W >= 760 && W / H >= 1.15);   // record.mjs forces it for portrait video
   const P = opts.palette, C = opts.colors;
   // Base font, px. textScale > 1 enlarges text for video renders (record.mjs; simplexScale sets the
-  // triangle's, whose layout grows with its text); the deck uses 1.
+  // triangle's, whose layout grows with its text; simplexLandscape fixes its layout for a near-square
+  // video stage); the deck uses 1.
   const textScale = opts.textScale ?? 1;
   const fs = textScale * Math.max(12, Math.min(17, Math.min(W / 75, H / 38)));
   const color = (name) => C[name] ?? P.inkSecondary;
@@ -1070,15 +1071,67 @@ export function createStory(d3, data, opts) {
       // Text scales with the stage so the triangle keeps most of the space on small screens.
       const base = (opts.simplexScale ?? textScale) * (wide ? 11.5 : Math.max(7.5, Math.min(10, Math.min(W, H) / 46)));
       const spec = { ...data.simplex, width: W, height: H, base, font: opts.font,
-        palette: P, frame: false, keyBelow: !wide, compact: !wide,
+        palette: P, frame: false, keyBelow: !wide, compact: !wide, landscape: opts.simplexLandscape,
         players: data.simplex.players.map((p) => ({ ...p, color: color(p.name) })) };
       simplexNode = simplex(d3, spec);
       g.node().appendChild(simplexNode);
     }
+    // The staged entrance runs only when arriving animated from another slide (not on load, resize or
+    // a theme change) and not for readers who ask for reduced motion.
+    const reduced = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (ph.build && t.duration() > 0 && current !== "simplex" && !reduced) return buildSimplex();
+    settleSimplex();
     d3.select(simplexNode).selectAll("polygon[data-leader]").transition(t)
       .attr("opacity", function () {
         return !ph.highlight || ph.highlight.includes(this.dataset.leader) ? 1 : 0.18;
       });
+  }
+  // Staged entrance (phase field `build`): the outline draws, then the cells
+  // fill in three waves from the single-surface corners (hard, grass, clay, the order the surface
+  // slides come in), each corner's label appearing as its wave starts; the named mixes and the key
+  // come last. About 4.2 s.
+  function buildSimplex() {
+    const s = d3.select(simplexNode);
+    const ease = d3.easeCubicOut;
+    const fadeIn = (sel, delay, duration = 500) => sel.interrupt().attr("opacity", 0).transition().delay(delay)
+      .duration(duration).ease(ease).attr("opacity", 1);
+    const outline = s.select("#outline polygon");
+    const tri = outline.attr("points").split(" ").map((p) => p.split(",").map(Number));
+    const perimeter = d3.pairs([...tri, tri[0]]).reduce((a, [p, q]) => a + Math.hypot(p[0] - q[0], p[1] - q[1]), 0);
+    const side = Math.hypot(tri[0][0] - tri[1][0], tri[0][1] - tri[1][1]);
+    outline.interrupt().attr("stroke-dasharray", perimeter).attr("stroke-dashoffset", perimeter)
+      .transition().delay(450).duration(800).ease(d3.easeCubicInOut).attr("stroke-dashoffset", 0)
+      .on("end", function () { d3.select(this).attr("stroke-dasharray", null).attr("stroke-dashoffset", null); });
+    fadeIn(s.select("#grid"), 650, 700);
+    fadeIn(s.select("#axes"), 650, 700);
+    // tri is [hard, clay, grass]; waves start in the order hard, grass, clay.
+    const start = [1150, 1950, 1550], sweep = 1500;
+    s.selectAll("#corners text").each(function (_, i) {
+      const el = d3.select(this);
+      el.interrupt().attr("opacity", 0).attr("transform", "translate(0,8)").transition().delay(start[i] - 150)
+        .duration(500).ease(ease).attr("opacity", 1).attr("transform", "translate(0,0)");
+    });
+    s.selectAll("polygon[data-leader]").each(function () {
+      const b = this.getBBox(), cx = b.x + b.width / 2, cy = b.y + b.height / 2;
+      const delay = d3.min(tri, (c, i) => start[i] + Math.hypot(cx - c[0], cy - c[1]) / side * sweep);
+      const from = `translate(${cx * 0.7},${cy * 0.7}) scale(0.3)`;
+      d3.select(this).interrupt().attr("opacity", 0).attr("transform", from).transition().delay(delay).duration(450)
+        .ease(d3.easeBackOut.overshoot(1.4)).attr("opacity", 1).attr("transform", "translate(0,0) scale(1)")
+        .on("end", function () { d3.select(this).attr("transform", null); });
+    });
+    s.selectAll("#named > *").each(function (_, i) {
+      fadeIn(d3.select(this), 3300 + Math.floor(i / 2) * 250, 400);
+    });
+    fadeIn(s.select("#key"), 3000, 700);
+  }
+  // Leaving a build half-way (a click during it, or coming back later): jump everything to its final
+  // state, except the cells' opacity, which the caller's transition sets.
+  function settleSimplex() {
+    const s = d3.select(simplexNode);
+    s.selectAll("#grid, #axes, #key, #named > *").interrupt().attr("opacity", 1);
+    s.selectAll("#corners text").interrupt().attr("opacity", 1).attr("transform", null);
+    s.select("#outline polygon").interrupt().attr("stroke-dasharray", null).attr("stroke-dashoffset", null);
+    s.selectAll("polygon[data-leader]").interrupt().attr("transform", null);
   }
 
   // -------------------------------------------------------------------- slams

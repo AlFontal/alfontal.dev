@@ -3,7 +3,8 @@ title: "Tracing Tokyo's air sources to identify Kawasaki Disease's etiological t
 description: "Conference report on Kawasaki disease incidence in Tokyo and differential HYSPLIT back-trajectory source regions."
 date: "2022-04-03"
 categories: [Kawasaki Disease, Epidemiology, Atmospheric Transport, HYSPLIT, Python, Reproducibility]
-image: featured.png
+image: featured_winds.png
+card: featured_winds.webp
 author: Alejandro Fontal
 bibliography: references.bib
 format:

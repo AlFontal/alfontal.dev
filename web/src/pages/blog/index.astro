@@ -20,7 +20,7 @@ const notebookPosts: BlogListingItem[] = (await getCollection('notebooks')).map(
   description: entry.data.description,
   date: entry.data.date.toISOString().slice(0, 10),
   categories: entry.data.categories,
-  image: entry.data.image,
+  image: entry.data.card ?? entry.data.image,
   href: `${entry.data.routePath}/`,
   cta: 'Open post',
 }));

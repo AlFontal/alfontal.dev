@@ -335,9 +335,8 @@ async function copyNotebookAssets(context, tmpRenderDirs) {
 function buildGeneratedFrontMatter(metadata, context) {
   const { section, notebook } = context;
   const assetBasePath = `/assets/notebooks/${section}/${notebook}`;
-  const imageValue = isRelativeUrl(String(metadata.image))
-    ? rewriteUrl(String(metadata.image), assetBasePath)
-    : String(metadata.image);
+  const localUrl = (value) => (isRelativeUrl(String(value)) ? rewriteUrl(String(value), assetBasePath) : String(value));
+  const imageValue = localUrl(metadata.image);
 
   return {
     title: String(metadata.title),
@@ -346,6 +345,8 @@ function buildGeneratedFrontMatter(metadata, context) {
     categories: metadata.categories.map((value) => String(value)),
     author: String(metadata.author),
     image: imageValue,
+    // Optional blog-list image (e.g. an animated WebP); `image` stays the static share image.
+    ...(metadata.card ? { card: localUrl(metadata.card) } : {}),
     renderer: 'quarto',
     section,
     notebook,

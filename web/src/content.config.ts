@@ -11,6 +11,7 @@ const notebooks = defineCollection({
     categories: z.array(z.string()),
     author: z.string(),
     image: z.string(),
+    card: z.string().optional(),
     renderer: z.string().optional(),
     section: z.string(),
     notebook: z.string(),

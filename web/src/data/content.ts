@@ -375,7 +375,7 @@ export const externalPosts: ExternalPost[] = [
       'An interactive story showing the analysis of every ATP-tour (tennis) level match since 1980 using a bayesian model that tries to reconstruct a dynamic latent strength for every player.',
     date: '2026-10-18',
     categories: ['Data Visualization', 'Bayesian Statistics', 'Tennis', 'D3', 'Interactive'],
-    image: '/assets/stories/who-was-the-best/featured-triangle.png',
+    image: '/assets/stories/who-was-the-best/featured-card.gif',
     href: '/stories/who-was-the-best/',
     cta: 'Open story',
   },

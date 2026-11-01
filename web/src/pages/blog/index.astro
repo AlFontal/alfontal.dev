@@ -51,14 +51,18 @@ const isOptimizedImage = (image: BlogListingItem['image']): image is ImageMetada
             <div class="editorial-entry-meta">
               <span>{post.date}</span>
             </div>
-            <h2>{post.title}</h2>
+            <h2>
+              <a href={post.href} class="editorial-entry-link">
+                {post.title}
+              </a>
+            </h2>
             <p>{post.description}</p>
             <ul class="chip-list compact">
               {post.categories.map((category) => <li>{category}</li>)}
             </ul>
-            <a href={post.href} class="cta-link is-secondary">
+            <span class="cta-link is-secondary" aria-hidden="true">
               {post.cta}
-            </a>
+            </span>
           </div>
 
           <div class="editorial-entry-media">

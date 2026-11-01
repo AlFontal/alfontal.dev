@@ -1191,6 +1191,46 @@ body:has(main.page-content--quarto) .site-footer-inner {
   border-radius: var(--radius-xl);
   background: var(--paper);
   box-shadow: var(--shadow-soft);
+  position: relative;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+/* The title link covers the whole card, so image, text and chips all open the post. */
+.editorial-entry-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.editorial-entry-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.editorial-entry-link:focus-visible {
+  outline: none;
+}
+
+.editorial-entry:hover,
+.editorial-entry:has(.editorial-entry-link:focus-visible) {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--accent) 44%, transparent);
+  box-shadow: 0 14px 30px color-mix(in oklab, var(--accent) 12%, transparent);
+}
+
+.editorial-entry:has(.editorial-entry-link:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.editorial-entry:hover .cta-link,
+.editorial-entry:has(.editorial-entry-link:focus-visible) .cta-link {
+  border-color: color-mix(in oklab, var(--accent) 44%, transparent);
+  background: color-mix(in oklab, var(--accent-soft) 42%, var(--paper) 58%);
 }
 
 .editorial-entry-media {

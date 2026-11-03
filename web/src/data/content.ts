@@ -372,7 +372,7 @@ export const externalPosts: ExternalPost[] = [
   {
     title: 'Bicing a Barcelona',
     description:
-      "An interactive notebook (Catalan and English) on Barcelona's bike-share from seven years of five-minute station counts: use keeps growing while bikes and van restocking don't, where bikes run out in the morning, and what would help.",
+      'Seven years of Bicing station data: more trips, about the same number of bikes, and fewer van restocks per trip. In Catalan and English.',
     date: '2026-11-03',
     categories: ['Data Visualization', 'Urban Mobility', 'Barcelona', 'Observable', 'Interactive'],
     image: '/assets/stories/bicing/featured-anim.gif',

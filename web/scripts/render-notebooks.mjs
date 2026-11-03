@@ -23,6 +23,8 @@ const generatedManifestPath = path.join(frameworkRoot, 'src', 'generated', 'note
 const generatedFragmentsRoot = path.join(frameworkRoot, 'src', 'generated', 'quarto-fragments');
 const generatedPublicAssetsRoot = path.join(frameworkRoot, 'public', 'assets', 'notebooks');
 const generatedPublicPostsRoot = path.join(frameworkRoot, 'public', 'posts');
+// Posts built elsewhere (one folder each, already HTML), copied into public/posts/ as they are on every render.
+const staticPostsRoot = path.join(frameworkRoot, 'static-posts');
 
 const REQUIRED_FIELDS = ['title', 'description', 'date', 'categories', 'author', 'image'];
 
@@ -411,6 +413,18 @@ async function cleanGeneratedOutputs() {
   await fs.mkdir(path.dirname(generatedManifestPath), { recursive: true });
 }
 
+async function copyStaticPosts(seenRoutePaths) {
+  const entries = await fs.readdir(staticPostsRoot, { withFileTypes: true }).catch(() => []);
+  for (const entry of entries.filter((e) => e.isDirectory())) {
+    const routePath = `/posts/${entry.name}`;
+    if (seenRoutePaths.has(routePath)) {
+      fail(`Static post ${entry.name} clashes with a notebook post at ${routePath}`);
+    }
+    seenRoutePaths.add(routePath);
+    await fs.cp(path.join(staticPostsRoot, entry.name), path.join(generatedPublicPostsRoot, entry.name), { recursive: true });
+  }
+}
+
 async function main() {
   const notebooks = await listNotebookSources();
   if (!notebooks.length) {
@@ -492,6 +506,7 @@ async function main() {
   }
 
   manifest.sort((a, b) => a.routePath.localeCompare(b.routePath));
+  await copyStaticPosts(seenRoutePaths);
   await fs.writeFile(generatedManifestPath, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
 
   console.log(`[notebooks:render] Rendered ${manifest.length} notebook(s).`);

@@ -370,6 +370,16 @@ export const blogPage: BlogPage = {
 
 export const externalPosts: ExternalPost[] = [
   {
+    title: 'Bicing a Barcelona',
+    description:
+      "An interactive notebook (Catalan and English) on Barcelona's bike-share from seven years of five-minute station counts: use keeps growing while bikes and van restocking don't, where bikes run out in the morning, and what would help.",
+    date: '2026-11-03',
+    categories: ['Data Visualization', 'Urban Mobility', 'Barcelona', 'Observable', 'Interactive'],
+    image: '/assets/stories/bicing/featured-anim.gif',
+    href: '/posts/bicing/',
+    cta: 'Open notebook',
+  },
+  {
     title: 'Who was the best tennis player?',
     description:
       'An interactive story showing the analysis of every ATP-tour (tennis) level match since 1980 using a bayesian model that tries to reconstruct a dynamic latent strength for every player.',

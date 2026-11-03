@@ -1,0 +1,66 @@
+{
+ "_note": "Built by data/method.py from Bicing station status, 2026_09 (Open Data BCN, CC BY 4.0). Changes labelled with the van rule of flows.py (5 bikes in 2 reports).",
+ "station": 200,
+ "name": "C/ JOAN GÜELL, 174",
+ "date": "2026-09-02",
+ "capacity": 24,
+ "out": 1,
+ "van_jump": 5,
+ "van_reports": 2,
+ "rows": [
+  {
+   "time": "11:05",
+   "mech": 4,
+   "ebike": 7,
+   "bikes": 11,
+   "docks": 12,
+   "change": null,
+   "kind": null
+  },
+  {
+   "time": "11:10",
+   "mech": 10,
+   "ebike": 9,
+   "bikes": 19,
+   "docks": 4,
+   "change": 8,
+   "kind": "van"
+  },
+  {
+   "time": "11:15",
+   "mech": 10,
+   "ebike": 8,
+   "bikes": 18,
+   "docks": 5,
+   "change": -1,
+   "kind": "dep"
+  },
+  {
+   "time": "11:20",
+   "mech": 10,
+   "ebike": 8,
+   "bikes": 18,
+   "docks": 5,
+   "change": 0,
+   "kind": "same"
+  },
+  {
+   "time": "11:25",
+   "mech": 10,
+   "ebike": 8,
+   "bikes": 18,
+   "docks": 5,
+   "change": 0,
+   "kind": "same"
+  },
+  {
+   "time": "11:30",
+   "mech": 10,
+   "ebike": 9,
+   "bikes": 19,
+   "docks": 4,
+   "change": 1,
+   "kind": "arr"
+  }
+ ]
+}

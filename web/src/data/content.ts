@@ -372,10 +372,10 @@ export const externalPosts: ExternalPost[] = [
   {
     title: 'Bicing a Barcelona',
     description:
-      'Seven years of Bicing station data: more trips, about the same number of bikes, and fewer van restocks per trip. In Catalan and English.',
+      'Seven years of Bicing station data. There are more trips with about the same number of docked bikes, stations spend more time empty, and the shortage is concentrated in the mornings. In Catalan and English.',
     date: '2026-11-03',
     categories: ['Data Visualization', 'Urban Mobility', 'Barcelona', 'Observable', 'Interactive'],
-    image: '/assets/stories/bicing/featured-anim.gif',
+    image: '/assets/stories/bicing/featured-anim.webp',
     href: '/posts/bicing/',
     cta: 'Open notebook',
   },

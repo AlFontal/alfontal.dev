@@ -57,6 +57,8 @@ export type HomePage = {
   eyebrow: string;
   academicBackgroundHeading: string;
   academicBackgroundIntro: string;
+  recentWritingHeading: string;
+  recentWritingLinkLabel: string;
   interestsHeading: string;
 };
 
@@ -233,8 +235,8 @@ export type CvPage = {
 
 export const siteMeta = {
   name: 'Alejandro Fontal',
-  masthead: 'Portfolio · Blog · CV',
-  tagline: 'Computational science · Machine learning · Health & life sciences',
+  masthead: 'Portfolio ~ Blog ~ CV',
+  tagline: 'Computational science × Machine learning × Health & life sciences',
   description:
     'Personal site for projects, publications, writing, and CV material spanning computational science, machine learning, bioinformatics, and scientific software.',
   siteUrl: 'https://alfontal.dev',
@@ -264,7 +266,7 @@ export const socialLinks: SocialLink[] = [
 export const homeHero: HomeHero = {
   name: 'Alejandro Fontal',
   intro:
-    'I’m a (computational) Scientist and Senior Machine Learning Engineer based in Barcelona, working on problems in health and life sciences. My background spans bioinformatics, epidemiology, biomedical signals, and scientific software.',
+    'I’m a (computational) Scientist and researcher based in Barcelona, working on problems adjacent to health and life sciences, but I tend to deviate into other areas quite often. ',
   tagline:
     'I use this site as a sort of public portfolio, a place to share projects, writing, publications, and whatever I’m building or thinking about lately.',
   moreInfo: [
@@ -291,9 +293,11 @@ export const homeHero: HomeHero = {
 };
 
 export const homePage: HomePage = {
-  eyebrow: 'Data science · Machine learning · Health & life sciences',
+  eyebrow: 'Data science × Machine learning × Health & life sciences',
   academicBackgroundHeading: 'Academic Background',
   academicBackgroundIntro: 'A quick overview of my educational journey.',
+  recentWritingHeading: 'Recent writing',
+  recentWritingLinkLabel: 'All posts',
   interestsHeading: 'Interests',
 };
 
@@ -302,7 +306,7 @@ export const homeAnchorCards: HomeAnchorCard[] = [
     id: 'contact',
     title: 'Get in touch',
     description:
-      'Email is the simplest route for collaborations, research questions, or anything you might want to reach out about.',
+      'Drop me an email for collaborations, research questions, or anything you might want to reach out about!',
     linkLabel: 'Send an email',
     linkHref: 'mailto:alfontal.dev@gmail.com',
     icon: 'fa6-solid:envelope',
@@ -318,7 +322,7 @@ export const homeAnchorCards: HomeAnchorCard[] = [
   {
     id: 'blog',
     title: 'Blog & Writing',
-    description: 'Published blog posts with a mix of technical and non-technical content, from research notes to coding experiments and reproducible notebooks.',
+    description: 'Posts with a mix of technical and not-so-technical content, from research notes to coding experiments and interactive notebooks.',
     linkLabel: 'Read the blog',
     linkHref: '/blog/',
     icon: 'fa6-solid:book-open',
@@ -361,18 +365,18 @@ export const interestTags = [
 
 export const blogPage: BlogPage = {
   seoTitle: 'Blog',
-  description: 'Research notes, coding experiments, and long-form technical posts.',
+  description: 'Research notes, coding experiments, and technical or not-so-technical posts.',
   kicker: 'Writing / coding / technical notes',
   title: 'Blog',
-  intro: 'A mix of technical and non-technical writing, or whatever comes to mind lately.',
+  intro: 'A mix of technical and not-so-technical writing, from research notes to experiments and interactive stories.',
   rssLabel: 'Subscribe via RSS',
 };
 
 export const externalPosts: ExternalPost[] = [
   {
-    title: 'Bicing a Barcelona',
+    title: 'Bicing in Barcelona: an analysis of seven years of data',
     description:
-      'Seven years of Bicing station data. There are more trips with about the same number of docked bikes, stations spend more time empty, and the shortage is concentrated in the mornings. In Catalan, Spanish and English.',
+      'An Observable notebook analyzing trends and patterns in seven years of Bicing station data.',
     date: '2026-11-03',
     categories: ['Data Visualization', 'Urban Mobility', 'Barcelona', 'Observable', 'Interactive'],
     image: '/assets/stories/bicing/featured-anim.webp',
@@ -749,7 +753,7 @@ export const cvPage: CvPage = {
   description:
     'CV of Alejandro Fontal, PhD: Barcelona-based data scientist in health and life sciences, working on biomedical signals, epidemiology, and machine learning.',
   summary:
-    'Data scientist with a PhD and 8+ years of industry and research experience in health and life sciences, currently leading the data science strategy in a MedTech R&D team. I approach data as a scientist: starting from a clear question, designing the study and validation before trusting a result, and keeping every analysis reproducible. My work spans statistical modelling, machine learning, epidemiology, and bioinformatics, applied to clinical, registry, surveillance, omics, and biomedical signal data.',
+    'Data scientist with a PhD and 8+ years of industry and research experience in health and life sciences, currently leading the data science strategy in a MedTech R&D team. I try to approach all problems as a scientist: starting from a clear question, designing the study and validation before trusting a result, and keeping every analysis reproducible. My work spans statistical modelling, machine learning, epidemiology, and bioinformatics, and I have worked across multiple domains including clinical, registry, surveillance, omics, and biomedical signal data.',
   skillsHeading: 'Technical & Analytical Skills',
   experienceHeading: 'Experience',
   detailsHeading: 'Education & Languages',
@@ -769,7 +773,7 @@ export const cvPage: CvPage = {
 
 export const cvHeader = {
   name: 'Alejandro Fontal, PhD',
-  title: 'Data Science · Machine Learning · Health & Life Sciences',
+  title: 'Data Science ~ Machine Learning ~ Health & Life Sciences',
   location: 'Barcelona, ES',
   email: 'alfontal.dev@gmail.com',
   phone: '+34 623 107 939',
@@ -787,6 +791,7 @@ export const cvEducation: CvEducationItem[] = [
     location: 'Barcelona, ES',
     details: [
       'PhD focused on environmental determinants of disease onset, spatiotemporal modeling, and long-read aerobiome metagenomics.',
+      'Cum laude distinction.',
     ],
   },
   {
@@ -795,8 +800,8 @@ export const cvEducation: CvEducationItem[] = [
     date: '2016 - 2018',
     location: 'Wageningen, NL',
     details: [
-      'Data Science minor with cum laude distinction.',
       'Thesis on interpretable deep learning for protein subcellular location prediction.',
+      'Data Science minor with cum laude distinction.',
     ],
   },
   {
@@ -815,16 +820,16 @@ export const cvExperience: CvExperienceItem[] = [
     date: 'Jul 2026 - Present',
     location: 'Barcelona, ES',
     summary:
-      'Lead the data science strategy in a MedTech R&D team developing diagnostic methods from biomedical signals collected in experimental studies and clinical trials.',
+      'Lead the data science strategy in a MedTech R&D team developing diagnostic methods from biomedical signals collected both from experimental studies and clinical trials.',
     highlights: [
       'Develop statistical and machine learning methods to extract diagnostic information from complex biomedical signals in experimental and clinical-trial data.',
-      'Define validation and performance-assessment strategies anchored to clinically meaningful endpoints.',
+      'Define validation and performance-assessment strategies anchored to clinically relevant endpoints.',
       'Work with clinical, signal-processing, and engineering teams on how biomedical measurements are processed, represented, and modelled, and on how model outputs translate into clinical results.',
     ],
     tags: ['Machine Learning', 'Biomedical Signals', 'Clinical Trials', 'MedTech', 'Diagnostics', 'Python', 'Statistics', 'Clinical Research', 'R&D'],
   },
   {
-    role: 'Postdoctoral Researcher · Data and Software Lead',
+    role: 'Postdoctoral Researcher, Data Science and Software Lead',
     organization: 'Climate & Health Program @ ISGlobal',
     date: 'Oct 2024 - Apr 2026',
     location: 'Barcelona, ES',
@@ -832,6 +837,7 @@ export const cvExperience: CvExperienceItem[] = [
       'Combined postdoctoral research with responsibility for software, data workflows, and reproducibility across climate-health and aerobiome projects.',
     highlights: [
       'Led software and data engineering for the group, building internal packages, web tools, and GitHub-based workflows for reproducible research.',
+      'Studied the dynamics of Kawasaki Disease incidence in Japan from national registry data paired with environmental exposures and clinical factors.',
       'Built reproducible pipelines for long-read aerobiome metagenomics and linked results to health outcomes.',
       'Developed machine learning models for bacterial discrimination from laser-induced fluorescence and light-scattering measurements, enabling near-real-time identification.',
     ],
@@ -869,9 +875,9 @@ export const cvExperience: CvExperienceItem[] = [
     organization: 'Protein Engineering @ DuPont Industrial Biosciences',
     date: 'Sep 2018 - Sep 2019',
     location: 'Leiden, NL',
-    summary: 'Embedded machine learning and reproducible pipelines into protein engineering workflows with wet-lab partners.',
+    summary: 'Applied machine learning and bioinformatics to the protein engineering process, bridging computational modeling and wet-lab experimentation.',
     highlights: [
-      'Integrated data-driven and machine-learning solutions into protein engineering workflows.',
+      'Integrated data-driven machine-learning solutions into protein engineering workflows.',
       'Built and maintained reproducible bioinformatics and data pipelines.',
       'Partnered with wet-lab teams to design experiments and close the model-experiment loop, accelerating workflow automation.',
     ],
@@ -893,7 +899,7 @@ export const cvExperience: CvExperienceItem[] = [
     organization: 'Educational Staff Development @ Wageningen University',
     date: 'Sep 2016 - Dec 2017',
     location: 'Wageningen, NL',
-    summary: 'Produced assignments and technical support materials for large-scale online course delivery.',
+    summary: 'Produced assignments and technical support materials for large-scale online courses.',
     highlights: [
       'Developed assignments and technical content for 10+ edX MOOCs.',
       'Provided technical support across course development workflows.',

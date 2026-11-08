@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {
-  educationTimeline,
+  externalPosts,
   homeAnchorCards,
   homeHero,
   homePage,
@@ -14,6 +15,16 @@ import {
 import portraitImage from '../assets/media/alejandro_hike_profile.jpg';
 
 const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
+
+const notebookPosts = (await getCollection('notebooks')).map((entry) => ({
+  title: entry.data.title,
+  description: entry.data.description,
+  date: entry.data.date.toISOString().slice(0, 10),
+  href: `${entry.data.routePath}/`,
+}));
+const recentPosts = [...notebookPosts, ...externalPosts]
+  .sort((a, b) => (a.date < b.date ? 1 : -1))
+  .slice(0, 3);
 ---
 
 <BaseLayout jsonLd={personJsonLd}>
@@ -130,32 +141,30 @@ const profileSocialLinks = socialLinks.filter((link) => link.label !== 'Email');
       </div>
     </section>
 
-    <aside class="block" aria-labelledby="training-heading">
+    <aside class="block" aria-labelledby="writing-heading">
       <div class="section-head">
-        <h2 id="training-heading">{homePage.academicBackgroundHeading}</h2>
+        <h2 id="writing-heading">{homePage.recentWritingHeading}</h2>
       </div>
 
-      <ol class="timeline">
+      <ol class="timeline timeline--plain">
         {
-          educationTimeline.map((item) => (
+          recentPosts.map((post) => (
             <li>
-              <article class="timeline-card">
+              <article class="timeline-card recent-post">
                 <header>
-                  <div>
-                    <h3>{item.degree}</h3>
-                    {item.subtitle && <p class="timeline-subtitle">{item.subtitle}</p>}
-                  </div>
-                  <span>{item.years}</span>
+                  <h3>
+                    <a href={post.href} class="recent-post-link">{post.title}</a>
+                  </h3>
+                  <span>{post.date}</span>
                 </header>
-                <p class="timeline-meta timeline-meta--institution">
-                  <iconify-icon icon="fa6-solid:building-columns" aria-hidden="true"></iconify-icon>
-                  <span>{item.institution}</span>
-                </p>
+                <p>{post.description}</p>
               </article>
             </li>
           ))
         }
       </ol>
+
+      <a href="/blog/" class="inline-link recent-posts-all">{homePage.recentWritingLinkLabel}</a>
     </aside>
   </section>
 

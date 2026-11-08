@@ -7,29 +7,29 @@
 }
 
 body.quarto-light {
-  --af-bg: #f6f0e6;
-  --af-surface: rgba(252, 250, 245, 0.94);
-  --af-surface-strong: #efe4d4;
+  --af-bg: #eee8de;
+  --af-surface: rgba(244, 242, 237, 0.94);
+  --af-surface-strong: #e7dccc;
   --af-ink: #1f252c;
-  --af-muted: #5d645d;
+  --af-muted: #555c55;
   --af-edge: rgba(73, 63, 48, 0.14);
-  --af-accent: #1d6b78;
-  --af-accent-strong: #154d56;
-  --af-chip-bg: #eee5d7;
+  --af-accent: #94450a;
+  --af-accent-strong: #733504;
+  --af-chip-bg: #e6ddcf;
   --af-chip-text: #64553d;
   --af-shadow: 0 18px 48px rgba(45, 33, 21, 0.08);
 }
 
 body.quarto-dark {
-  --af-bg: #312f2e;
-  --af-surface: rgba(63, 61, 60, 0.96);
-  --af-surface-strong: #494644;
+  --af-bg: #393736;
+  --af-surface: rgba(71, 69, 68, 0.96);
+  --af-surface-strong: #514e4c;
   --af-ink: #f7dbc5;
-  --af-muted: #cab4a2;
+  --af-muted: #d7c1ae;
   --af-edge: rgba(247, 219, 197, 0.12);
-  --af-accent: #ff9029;
-  --af-accent-strong: #ffb35f;
-  --af-chip-bg: #474543;
+  --af-accent: #ff9d3b;
+  --af-accent-strong: #ffbd69;
+  --af-chip-bg: #4f4d4b;
   --af-chip-text: #f0d9c7;
   --af-shadow: 0 24px 70px rgba(12, 10, 9, 0.34);
 }
@@ -426,6 +426,16 @@ pre {
 #TOC a:focus-visible,
 #TOC a.active {
   color: var(--af-accent);
+}
+
+/* Quarto's theme colors the TOC borders and active link (the latter with !important); use site tokens. */
+#TOC ul > li > a {
+  border-left-color: var(--af-edge);
+}
+
+#TOC ul > li > a.active {
+  color: var(--af-accent) !important;
+  border-left-color: var(--af-accent) !important;
 }
 
 .quarto-color-scheme-toggle {

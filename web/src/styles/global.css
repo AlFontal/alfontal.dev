@@ -1,22 +1,22 @@
 :root {
-  --bg: #f6f0e6;
-  --bg-alt: #ece2d2;
-  --paper: #fcfaf5;
-  --paper-strong: #f2eadc;
+  --bg: #eee8de;
+  --bg-alt: #e4daca;
+  --paper: #f4f2ed;
+  --paper-strong: #eae2d4;
   --ink: #1f252c;
-  --ink-soft: #5d645d;
+  --ink-soft: #555c55;
   --edge: rgba(73, 63, 48, 0.16);
   --edge-strong: rgba(73, 63, 48, 0.3);
-  --accent: #1d6b78;
-  --accent-strong: #144952;
-  --accent-soft: rgba(29, 107, 120, 0.12);
-  --accent-2: #8e6a2e;
-  --accent-2-soft: rgba(142, 106, 46, 0.13);
-  --chip-bg: #ece3d3;
+  --accent: #94450a;
+  --accent-strong: #733504;
+  --accent-soft: color-mix(in oklab, var(--accent) 12%, transparent);
+  --accent-2: #006b5e;
+  --accent-2-soft: color-mix(in oklab, var(--accent-2) 13%, transparent);
+  --chip-bg: #e4dbcb;
   --chip-border: rgba(94, 79, 49, 0.24);
   --chip-text: #615339;
-  --selection-bg: rgba(29, 107, 120, 0.22);
-  --selection-ink: #16323a;
+  --selection-bg: color-mix(in oklab, var(--accent) 22%, transparent);
+  --selection-ink: #3a1c03;
   --shadow-soft: 0 18px 45px rgba(40, 31, 24, 0.08);
   --shadow-strong: 0 26px 60px rgba(40, 31, 24, 0.12);
   --radius-xl: 28px;
@@ -28,23 +28,23 @@
 }
 
 :root[data-theme='dark'] {
-  --bg: #312f2e;
-  --bg-alt: #393837;
-  --paper: #3f3d3c;
-  --paper-strong: #484543;
+  --bg: #393736;
+  --bg-alt: #41403f;
+  --paper: #474544;
+  --paper-strong: #504d4b;
   --ink: #f7dbc5;
-  --ink-soft: #c6b1a0;
+  --ink-soft: #d3beac;
   --edge: rgba(247, 219, 197, 0.14);
   --edge-strong: rgba(247, 219, 197, 0.22);
-  --accent: #ff9029;
-  --accent-strong: #ffb15b;
-  --accent-soft: rgba(255, 144, 41, 0.16);
-  --accent-2: #7fc0ad;
-  --accent-2-soft: rgba(127, 192, 173, 0.16);
-  --chip-bg: #464543;
+  --accent: #ff9d3b;
+  --accent-strong: #ffbb65;
+  --accent-soft: color-mix(in oklab, var(--accent) 16%, transparent);
+  --accent-2: #8ccdba;
+  --accent-2-soft: color-mix(in oklab, var(--accent-2) 16%, transparent);
+  --chip-bg: #4e4d4b;
   --chip-border: rgba(247, 219, 197, 0.18);
   --chip-text: #efd7c4;
-  --selection-bg: rgba(255, 144, 41, 0.24);
+  --selection-bg: color-mix(in oklab, var(--accent) 24%, transparent);
   --selection-ink: #fff2ec;
   --shadow-soft: 0 22px 55px rgba(15, 12, 10, 0.28);
   --shadow-strong: 0 30px 80px rgba(15, 12, 10, 0.38);
@@ -637,9 +637,20 @@ body:has(main.page-content--quarto) .site-footer-inner {
 }
 
 .inline-link::after {
-  content: '->';
-  font-family: 'IBM Plex Mono', 'Consolas', monospace;
-  font-size: 0.82rem;
+  content: '→';
+  font-weight: 500;
+  transition: transform 180ms ease;
+}
+
+.inline-link:hover::after,
+.inline-link:focus-visible::after {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inline-link::after {
+    transition: none;
+  }
 }
 
 .hero-proof,
@@ -663,44 +674,20 @@ body:has(main.page-content--quarto) .site-footer-inner {
 .fact-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: 1.75rem;
+  margin-top: 0.4rem;
 }
 
 .fact-card {
-  position: relative;
   display: grid;
   align-content: start;
-  gap: 0.55rem;
-  padding: 1rem 0.95rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--edge);
-  background: var(--paper);
-  overflow: hidden;
-  transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    background-color 180ms ease;
-}
-
-.fact-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 2px solid color-mix(in oklab, var(--accent) 88%, white 12%);
-  box-shadow:
-    0 0 0 1px color-mix(in oklab, var(--accent) 52%, transparent),
-    0 0 18px color-mix(in oklab, var(--accent) 12%, transparent);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 180ms ease;
+  gap: 0.45rem;
 }
 
 .fact-card h2 {
   font-family: 'IBM Plex Mono', 'Consolas', monospace;
   font-size: 1rem;
   letter-spacing: -0.01em;
-  transition: color 180ms ease;
 }
 
 .fact-card h2::before {
@@ -713,34 +700,6 @@ body:has(main.page-content--quarto) .site-footer-inner {
   font-size: 0.94rem;
   line-height: 1.5;
   max-width: 22ch;
-  transition: color 180ms ease;
-}
-
-/* Touch leaves :hover stuck after a tap, so the glow is for mouse users on wider screens only. */
-@media (hover: hover) and (min-width: 641px) {
-  .fact-card:hover,
-  .fact-card:focus-within {
-    border-color: color-mix(in oklab, var(--accent) 28%, var(--edge));
-    background: color-mix(in oklab, var(--paper) 90%, var(--paper-strong) 10%);
-    box-shadow:
-      0 10px 26px color-mix(in oklab, var(--accent) 8%, transparent),
-      inset 0 1px 0 color-mix(in oklab, white 14%, transparent);
-  }
-
-  .fact-card:hover::after,
-  .fact-card:focus-within::after {
-    opacity: 1;
-  }
-
-  .fact-card:hover h2,
-  .fact-card:focus-within h2 {
-    color: color-mix(in oklab, var(--ink) 88%, var(--accent) 12%);
-  }
-
-  .fact-card:hover p,
-  .fact-card:focus-within p {
-    color: color-mix(in oklab, var(--ink-soft) 82%, var(--ink) 18%);
-  }
 }
 
 .portrait-panel {
@@ -822,13 +781,7 @@ body:has(main.page-content--quarto) .site-footer-inner {
   justify-items: center;
   gap: 0.75rem;
   width: 100%;
-  margin-top: 0;
-  padding: 1.15rem 1rem 0.85rem;
-  border-radius: 1.5rem;
-  border: 1px solid var(--edge);
-  background: var(--paper);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(12px);
+  margin-top: 0.2rem;
 }
 
 .portrait-intro,
@@ -1094,6 +1047,65 @@ body:has(main.page-content--quarto) .site-footer-inner {
 
 .timeline-card p:last-child {
   color: var(--ink-soft);
+}
+
+.timeline.timeline--plain {
+  gap: 1.1rem;
+  padding-left: 0;
+  border-left: 0;
+}
+
+.timeline.timeline--plain > li {
+  padding-left: 1.25rem;
+}
+
+/* Same terminal-prompt marker as the hero fact columns. */
+.timeline.timeline--plain > li::before {
+  content: '>';
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--accent);
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.recent-post {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.recent-post header > span {
+  flex-shrink: 0;
+}
+
+.recent-post-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.recent-post-link:hover,
+.recent-post-link:focus-visible {
+  color: var(--accent);
+}
+
+.recent-post p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 0.92rem;
+}
+
+.recent-posts-all {
+  margin-top: 0.2rem;
 }
 
 .pill-row {
@@ -3575,15 +3587,6 @@ summary.entry-grid:hover .entry-title {
 
   .fact-card {
     gap: 0.2rem;
-    padding: 0 0 0 0.85rem;
-    border: 0;
-    border-left: 2px solid color-mix(in oklab, var(--accent) 45%, var(--edge));
-    border-radius: 0;
-    background: none;
-  }
-
-  .fact-card::after {
-    display: none;
   }
 
   .fact-card h2 {

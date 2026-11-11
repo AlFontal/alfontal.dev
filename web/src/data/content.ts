@@ -10,6 +10,7 @@ import lifMlImage from '../assets/projects/lif_ml.png';
 import rmdVscodeImage from '../assets/projects/rmd_vscode.png';
 import sdcpyImage from '../assets/projects/sdcpy.png';
 import sdcpyStudioImage from '../assets/projects/sdcpy_studio.png';
+import stravaHomeRunsImage from '../assets/projects/strava_home_runs.png';
 import sugarboardImage from '../assets/projects/sugarboard.png';
 
 export type NavLink = {
@@ -398,6 +399,15 @@ export const externalPosts: ExternalPost[] = [
 export const projects: Project[] = [
 
   {
+    title: 'Strava Home Runs',
+    description: 'Blender pipeline that turns GPX exports into a 3D video of every run that started from one point, each moving at its real pace over OpenStreetMap streets and terrain.',
+    date: '2026-11-10',
+    categories: ['Python', 'Blender', 'GIS', 'Data Visualisation', 'OpenStreetMap', 'Running'],
+    image: stravaHomeRunsImage,
+    repoUrl: 'https://github.com/AlFontal/strava-home-runs',
+  },
+
+  {
     title: 'Dotscout',
     description: 'Garmin Connect IQ watch face showing Nightscout, xDrip+ or AndroidAPS glucose with trend, a 3-hour graph and a dot-matrix time.',
     date: '2026-10-09',
@@ -494,7 +504,7 @@ export const projects: Project[] = [
 export const projectsPage: ProjectsPage = {
   seoTitle: 'Projects',
   description: 'Selected software and data projects.',
-  kicker: 'Selected builds',
+  kicker: 'Selected Software projects',
   title: 'Projects',
   intro: 'Open repositories and small systems spanning data workflows, automation, dashboards, and scientific interfaces.',
   stats: {

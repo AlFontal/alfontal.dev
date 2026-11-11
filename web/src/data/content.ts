@@ -506,7 +506,7 @@ export const projectsPage: ProjectsPage = {
   description: 'Selected software and data projects.',
   kicker: 'Selected Software projects',
   title: 'Projects',
-  intro: 'Open repositories and small systems spanning data workflows, automation, dashboards, and scientific interfaces.',
+  intro: 'Open repositories with code projects I\'ve built across various domains and technologies.',
   stats: {
     totalLabel: 'selected repositories',
     latestYearLabel: 'most recent project year',
